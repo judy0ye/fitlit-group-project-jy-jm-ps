@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { getUserById } from '../src/functions/get-user-by-id';
-// import { users } from '../src/data/users';
+import { users } from '../src/data/users';
 
 describe('getUserById function', () => {
   let users;
