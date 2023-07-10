@@ -30,5 +30,3 @@ import { getUserById } from './functions/get-user-by-id';
 exampleFunction1('Travis');
 exampleFunction2('Travis');
 getUserById()
-
-// import './data/functions/functionName.js'
