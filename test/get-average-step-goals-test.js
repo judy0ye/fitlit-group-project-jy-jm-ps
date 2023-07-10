@@ -2,8 +2,10 @@ import { expect } from 'chai';
 import { getAvgStepGoal } from '../src/functions/get-average-step-goals';
 
 describe('average step goal amongst users', function () {
-  it('should return average step goal of all users', function () {
-    const users = [
+  let users;
+
+  beforeEach(function () {
+    users = [
       {
         id: 2,
         name: 'Tyreek VonRueden',
@@ -32,9 +34,17 @@ describe('average step goal amongst users', function () {
         friends: [21, 32, 8]
       }
     ];
+  });
 
+  it('should return average step goal of all users', function () {
     const avgStepGoal = getAvgStepGoal(users);
 
     expect(avgStepGoal).to.deep.equal(5333);
+  });
+
+  it('should return undefined if no arguments are pass in', function () {
+    const avgStepGoal = getAvgStepGoal();
+
+    expect(avgStepGoal).to.be.undefined;
   });
 });
