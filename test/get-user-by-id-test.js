@@ -2,9 +2,11 @@ import { expect } from 'chai';
 import { getUserById } from '../src/functions/get-user-by-id';
 import { users } from '../src/data/users';
 
-describe('user id', () => {
-  it('should get user data based on user id', function () {
-    const userOneData = [
+describe('getUserById function', () => {
+  let users;
+
+  beforeEach(() => {
+    users = [
       {
         id: 1,
         name: 'Trystan Gorczany',
@@ -15,9 +17,25 @@ describe('user id', () => {
         friends: [5, 43, 46, 11]
       }
     ];
+  });
 
-    const userOne = getUserById(userOneData, 1);
+  it('should get user data based on user id', function () {
+    const user = getUserById(users, 1);
 
-    expect(userOne).to.deep.equal(userOneData[0]);
+    expect(user).to.deep.equal(users[0]);
+  });
+
+  it('should return undefined when user id does not exist', function () {
+    const user = getUserById(users, 2);
+
+    expect(user).to.be.undefined;
+  });
+
+  it('should return undefined when the users array is empty', function () {
+    users = [];
+
+    const user = getUserById(users, 1);
+
+    expect(user).to.be.undefined;
   });
 });
