@@ -1,8 +1,14 @@
-function getAvgFluidConsumed(hydrationData) {
-  let counter = 0;
-  hydrationData.forEach(user => counter += user.numOunces)
-  return Math.round(counter/hydrationData.length)
+function getAvgFluidConsumed(hydrationData, day, id) {
+  if (day && id) {
+   const specificUser = hydrationData.find(user => user.date === day && user.userID === id)
+   return specificUser ? specificUser.numOunces : undefined;
+  }
+
+  const fluidConsumed = hydrationData.reduce((fluidOunces, user) => {
+    return fluidOunces += user.numOunces
+  }, 0)
+
+  return Math.round(fluidConsumed/hydrationData.length) 
 }
 
 export { getAvgFluidConsumed };
-  
