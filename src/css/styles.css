@@ -6,8 +6,8 @@
 /* MODIFIERS */ /* like hidden */
 
 body, html {
-  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  background-repeat: no-repeat;
+  /* background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); */
+  /* background-repeat: no-repeat; */
   height: 100%;
   margin: 0;
   padding: 0;
@@ -19,6 +19,69 @@ body, html {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
-
+  grid-template-columns: 0.8fr 0.8fr 0.8fr 1.6fr;
+  grid-template-rows: 0.10fr 2fr 1.40fr 0.50fr;
+  grid-template-areas:
+    "logo logo logo logo"
+    "activity hydration sleep graphs"
+    "user-data user-data user-data graphs"
+    "user-data user-data user-data data-view";
 }
+
+.logo {
+  /* border: 3px solid #333333; */
+  /* border-radius: 3px; */
+  padding: .25em;
+  grid-area: logo;
+}
+
+/* .greeting {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: greeting;
+} */
+
+.activity {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: activity;
+}
+
+.hydration {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: hydration;
+}
+
+.sleep {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: sleep;
+}
+
+.graphs {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: graphs;
+}
+
+.user-data {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: user-data;
+}
+
+.data-view {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: data-view;
+}
+
+
