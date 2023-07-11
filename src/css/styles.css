@@ -28,19 +28,61 @@ body, html {
     "user-data goals community data-view";
 }
 
+.logo-container {
+  margin-bottom: 10px;
+}
+
 .logo {
   /* border: 3px solid #333333; */
   /* border-radius: 3px; */
-  padding: .25em;
-  grid-area: logo;
+  /* padding: .25em;
+  grid-area: logo; */
+  padding: 5px;
+  background-color: white;
 }
 
-/* .greeting {
+#gym-title {
+  font-family: 'Great Vibes', cursive;
+  letter-spacing: 1px; 
+  transition: transform 0.3s ease;
+  margin-bottom: 10px;
+  font-size: 36px;
+  color: #e90b0f;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#gym-title:hover {
+  transform: translateX(10px); 
+}
+
+.turing {
+  width: 50px;
+  height: 50px;
+  margin: 30px;
+  margin-top: -60px;
+  /* margin-bottom: 10px; */
+  cursor: pointer;
+  border: 3px solid rgb(11, 166, 52);
+  border-radius: 50%;
+  padding: 10px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  object-fit: contain;
+}
+
+.turing:hover {
+  transform: scale(1.2); 
+  background-color: #C0C0C0;
+}
+
+
+.greeting {
   border: 3px solid #333333;
   border-radius: 3px;
   padding: .25em;
   grid-area: greeting;
-} */
+  font-size: 18px;
+}
 
 .activity {
   border: 3px solid #333333;
