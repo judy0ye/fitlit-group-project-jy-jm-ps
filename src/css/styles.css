@@ -24,8 +24,8 @@ body, html {
   grid-template-areas:
     "logo logo logo logo"
     "activity hydration sleep graphs"
-    "user-data user-data user-data graphs"
-    "user-data user-data user-data data-view";
+    "user-data goals community graphs"
+    "user-data goals community data-view";
 }
 
 .logo {
@@ -75,6 +75,20 @@ body, html {
   border-radius: 3px;
   padding: .25em;
   grid-area: user-data;
+}
+
+.goals {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: goals;
+}
+
+.community {
+  border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em;
+  grid-area: community;
 }
 
 .data-view {
