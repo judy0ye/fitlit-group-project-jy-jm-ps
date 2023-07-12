@@ -6,7 +6,7 @@
 // IMPORTS //
 
 import { fetchApiData } from './apiCalls';
-import { displayRandomUser,  displaySleepData, displayHydrationData, displayActivityData } from './domUpdates';
+import { displayRandomUser,  displaySleepData, displayHydrationData, displayActivityData, displayUserData } from './domUpdates';
 
 // FETCHED DATA //
 
@@ -15,6 +15,7 @@ window.addEventListener('load', displayRandomUser)
 window.addEventListener('load', displaySleepData)
 window.addEventListener('load', displayHydrationData)
 window.addEventListener('load', displayActivityData)
+window.addEventListener('load', displayUserData)
 
 // EXPORTS //
 
