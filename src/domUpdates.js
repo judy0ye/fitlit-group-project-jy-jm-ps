@@ -6,8 +6,8 @@
 
 // IMPORTS //
 import userData from './data/users'
-import { getAvgStepGoal } from './functions/get-average-step-goals';
-import { getRandomUser } from './functions/get-random-user'
+import { getAvgStepGoal, getRandomUser  } from './utils';
+
 
 // QUERY SELECTORS //
 const personalData = document.querySelector('.user-data');
