@@ -1,4 +1,5 @@
-export default { users: [
+//export default 
+{ users: [
   {
     "id": 1,
     "name": "Trystan Gorczany",
