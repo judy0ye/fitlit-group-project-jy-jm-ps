@@ -6,16 +6,24 @@
 // IMPORTS //
 
 import { fetchApiData } from './apiCalls';
-import { displayRandomUser,  displaySleepData, displayHydrationData, displayActivityData, displayUserData } from './domUpdates';
+import { displayRandomUser, displaySleepData, displayHydrationData, displayActivityData, displayUserData } from './domUpdates';
 
 // FETCHED DATA //
 
 // EVENT LISTENERS //
-window.addEventListener('load', displayRandomUser)
-window.addEventListener('load', displaySleepData)
-window.addEventListener('load', displayHydrationData)
-window.addEventListener('load', displayActivityData)
-window.addEventListener('load', displayUserData)
+
+const initializeApp = () => {
+    displayRandomUser();
+    displaySleepData();
+    displayHydrationData();
+    displayActivityData();
+    displayUserData();
+  };
+  
+  window.addEventListener('load', initializeApp);
+  
+
+
 
 // EXPORTS //
 
