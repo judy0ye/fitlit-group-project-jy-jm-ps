@@ -11,6 +11,7 @@ import { getRandomUser } from './functions/get-random-user'
 // QUERY SELECTORS //
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals')
+const personalGreeting = document.querySelector('.greeting')
 
 // DATAMODEL //
 
@@ -30,6 +31,8 @@ const exampleFunction2 = (person) => {
 
 const displayRandomUser = () => {
   const randomUser = getRandomUser(userData.users)
+
+  personalGreeting.innerHTML = `<article><h3>Hey there homie:</h3>${randomUser.name}</article>`
   
   personalData.innerHTML = `<article><h3>Name:</h3>${randomUser.name}
   <h3>Address: </h3>${randomUser.address}
