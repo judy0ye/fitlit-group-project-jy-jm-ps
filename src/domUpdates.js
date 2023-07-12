@@ -6,6 +6,7 @@
 
 // IMPORTS //
 import userData from './data/users'
+import { getAvgStepGoal } from './functions/get-average-step-goals';
 import { getRandomUser } from './functions/get-random-user'
 
 // QUERY SELECTORS //
@@ -23,6 +24,7 @@ const personalGreeting = document.querySelector('.greeting')
 
 const displayRandomUser = () => {
   const randomUser = getRandomUser(userData.users)
+  const avgStepGoal = getAvgStepGoal(userData.users)
 
   personalGreeting.innerHTML = `<article><h3>Hey there homie:</h3>${randomUser.name}</article>`
   
@@ -32,7 +34,9 @@ const displayRandomUser = () => {
   <h3>Stride Length: </h3>${randomUser.strideLength}
   </article>`
 
-  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${randomUser.dailyStepGoal}</article>`
+  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${randomUser.dailyStepGoal}
+  <h3>Average of you and your friend's goals:</h3>${avgStepGoal}
+  </article>`
 }
 
 export {
