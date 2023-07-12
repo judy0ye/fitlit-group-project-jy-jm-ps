@@ -1,23 +1,3 @@
-// function getAvgFluidConsumed(hydrationData, day, id) {
-//   if (day && id) {
-//    const specificUser = hydrationData.find(user => user.date === day && user.userID === id)
-//    return specificUser ? specificUser.numOunces : undefined;
-//   }
-
-//   const fluidConsumed = hydrationData.reduce((fluidOunces, user) => {
-//     return fluidOunces += user.numOunces
-//   }, 0)
-
-//   return Math.round(fluidConsumed/hydrationData.length) 
-// }
-
-// function getAvgFluidConsumed(hydrationData, day, id) {
-//   hydrationData.find(user => {
-//     if (user.userID === id && user.date === day) {
-//       return user.numOunces
-//     }
-//   })
-// }
 function getAvgFluidConsumed(hydrationData, id) {
   const days = hydrationData.reduce((days, user) => {
     if (user.userID === id) {
@@ -56,7 +36,6 @@ function getAvgFluidConsumedOnSpecifcDay(hydrationData, day, id) {
       return Math.round(ouncesConsumed/ days.length)
     }
 }
-
 
 export { 
   getAvgFluidConsumed,

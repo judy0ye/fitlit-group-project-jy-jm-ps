@@ -24,6 +24,26 @@ describe('fluid consumed', function () {
         numOunces: 54
       },
       {
+        userID: 1,
+        date: '2023/03/24',
+        numOunces: 28
+      },
+      {
+        userID: 1,
+        date: '2023/03/27',
+        numOunces: 54
+      },
+      {
+        userID: 1,
+        date: '2023/03/27',
+        numOunces: 54
+      },
+      {
+        userID: 1,
+        date: '2023/03/25',
+        numOunces: 54
+      },
+      {
         userID: 2,
         date: '2023/03/25',
         numOunces: 35
@@ -39,7 +59,7 @@ describe('fluid consumed', function () {
     const id = 1
     const avgFluidConsumed = getAvgFluidConsumed(hydrationInfo, id);
 
-    expect(avgFluidConsumed).to.deep.equal(45);
+    expect(avgFluidConsumed).to.deep.equal(47);
   });
   it("should return a user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/25';
@@ -55,5 +75,8 @@ describe('fluid consumed', function () {
 
     expect(fluidOnSpecificDay).to.equal(95);
   });
- 
+  it('should return how many fluid ounces of water a user consumed each day over a course of 7 days', function () {
+
+    expect().to.equal()
+  })
 });
