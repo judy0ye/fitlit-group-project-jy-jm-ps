@@ -5,8 +5,14 @@
 // DOM MANIPULATION //
 
 // IMPORTS //
+import userData from './data/users'
+import { getAvgStepGoal } from './functions/get-average-step-goals';
+import { getRandomUser } from './functions/get-random-user'
 
 // QUERY SELECTORS //
+const personalData = document.querySelector('.user-data');
+const personalGoal = document.querySelector('.goals')
+const personalGreeting = document.querySelector('.greeting')
 
 // DATAMODEL //
 
@@ -16,18 +22,25 @@
 
 // EXPORTS //
 
-const exampleFunction1 = (person) => {
-  console.log(`oh hi there ${person}`)
-}
+const displayRandomUser = () => {
+  const randomUser = getRandomUser(userData.users)
+  const avgStepGoal = getAvgStepGoal(userData.users)
 
-const exampleFunction2 = (person) => {
-  console.log(`bye now ${person}`)
-}
+  personalGreeting.innerHTML = `<article><h3>Hey there homie:</h3>${randomUser.name}</article>`
+  
+  personalData.innerHTML = `<article><h3>Name:</h3>${randomUser.name}
+  <h3>Address: </h3>${randomUser.address}
+  <h3>E-mail: </h3>${randomUser.email}
+  <h3>Stride Length: </h3>${randomUser.strideLength}
+  </article>`
 
+  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${randomUser.dailyStepGoal}
+  <h3>Average of you and your friend's goals:</h3>${avgStepGoal}
+  </article>`
+}
 
 export {
-  exampleFunction1,
-  exampleFunction2,
+  displayRandomUser
 }
 
 
