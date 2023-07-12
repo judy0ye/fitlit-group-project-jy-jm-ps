@@ -22,12 +22,10 @@ import userData from './data/users';
 console.log("User Data:", userData);
 
 // Example of one way to import functions from the domUpdates file.  You will delete these examples.
-import { exampleFunction1, exampleFunction2, displayRandomUser } from './domUpdates';
+import { displayRandomUser } from './domUpdates';
 
 // import { getUserById } from './functions/get-user-by-id';
 
 
-exampleFunction1('Travis');
-exampleFunction2('Travis');
 // getUserById()
 displayRandomUser()

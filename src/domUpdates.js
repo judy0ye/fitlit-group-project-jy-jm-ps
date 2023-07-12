@@ -21,14 +21,6 @@ const personalGreeting = document.querySelector('.greeting')
 
 // EXPORTS //
 
-const exampleFunction1 = (person) => {
-  console.log(`oh hi there ${person}`)
-}
-
-const exampleFunction2 = (person) => {
-  console.log(`bye now ${person}`)
-}
-
 const displayRandomUser = () => {
   const randomUser = getRandomUser(userData.users)
 
@@ -44,8 +36,6 @@ const displayRandomUser = () => {
 }
 
 export {
-  exampleFunction1,
-  exampleFunction2,
   displayRandomUser
 }
 
