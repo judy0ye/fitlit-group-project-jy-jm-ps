@@ -41,4 +41,3 @@ export {
   getAvgFluidConsumed,
   getAvgFluidConsumedOnSpecifcDay 
 };
-

@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Fitlit</title>
-    <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
-  </head>
-  <body>
-    <main>
-      <div class="grid-layout">
-        <header class="logo">
-            <h1>TuringFitChicks</h1>
-            <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-          <div class="greeting">This is the personalized greeting</div>
-        </header>
-        <div class="activity">This is activity</div>
-        <div class="hydration">This is hydration</div>
-        <div class="sleep">This is sleep</div>
-        <div class="graphs">This is for graphs and charts</div>
-        <div class="user-data">This is the user's personal data</div>
-        <div class="goals">These are user goals</div>
-        <div class="community">This is where friends will be listed data</div>
-        <div class="data-view">
-          <button class="action">Activity</button>
-          <button class="water">Hydration</button>
-          <button class="zzz">Sleep</button>
-          <button class="print">Print</button>
-        </div>
-      </div>
-    </main>
-    
 
-<!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
-    <script src="bundle.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Fitlit</title>
+</head>
+
+<body>
+  <main>
+    <div class="grid-layout">
+      <header class="logo">
+        <h1 id="gym-title" class="gym-title">TuringFitChicks</h1>
+        <div class="logo-container">
+          <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px" class="turing">
+        </div>
+        <div class="greeting">This is the personalized greeting</div>
+      </header>
+      <div class="activity">This is activity</div>
+      <div class="hydration">This is hydration</div>
+      <div class="sleep">This is sleep</div>
+      <div class="graphs">This is for graphs and charts</div>
+      <div class="user-data">This is the user's personal data</div>
+      <div class="goals">These are user goals</div>
+      <div class="community">This is where friends will be listed data</div>
+      <div class="data-view">
+        <button class="action">Activity</button>
+        <button class="water">Hydration</button>
+        <button class="zzz">Sleep</button>
+        <button class="print">Print</button>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+  <script src="bundle.js"></script>
+</body>
+
 </html>
