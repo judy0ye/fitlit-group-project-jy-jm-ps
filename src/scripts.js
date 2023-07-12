@@ -8,6 +8,7 @@
 // FETCHED DATA //
 
 // EVENT LISTENERS //
+window.addEventListener('load', displayRandomUser)
 
 // EXPORTS //
 
@@ -28,4 +29,4 @@ import { displayRandomUser } from './domUpdates';
 
 
 // getUserById()
-displayRandomUser()
+

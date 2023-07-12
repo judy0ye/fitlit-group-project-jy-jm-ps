@@ -5,7 +5,7 @@
 // DOM MANIPULATION //
 
 // IMPORTS //
-import userData from '../src/data/users'
+import userData from './data/users'
 import { getRandomUser } from './functions/get-random-user'
 
 // QUERY SELECTORS //
