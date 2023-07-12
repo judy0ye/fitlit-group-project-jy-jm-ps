@@ -5,8 +5,11 @@
 // DOM MANIPULATION //
 
 // IMPORTS //
+import userData from '../src/data/users'
+import { getRandomUser } from './functions/get-random-user'
 
 // QUERY SELECTORS //
+const personalData = document.querySelector('.user-data')
 
 // DATAMODEL //
 
@@ -24,10 +27,15 @@ const exampleFunction2 = (person) => {
   console.log(`bye now ${person}`)
 }
 
+const displayRandomUser = () => {
+  const randomUser = getRandomUser(userData.users)
+  personalData.innerHTML = `<article>hello ${randomUser.name}</article>`
+}
 
 export {
   exampleFunction1,
   exampleFunction2,
+  displayRandomUser
 }
 
 
