@@ -4,29 +4,43 @@
 // SCRIPTS //
 
 // IMPORTS //
+import './css/normalize.css';
+import './css/styles.css';
+import './images/turing-logo.png';
+import { fetchApiData } from './apiCalls';
+import { displayRandomUser, displaySleepData, displayHydrationData, displayActivityData, displayUserData } from './domUpdates';
+
+// EXPORTS //
 
 // FETCHED DATA //
 
 // EVENT LISTENERS //
-window.addEventListener('load', displayRandomUser)
+// FETCHED DATA //
 
-// EXPORTS //
+// EVENT LISTENERS //
 
-// An example of how you tell webpack to use a CSS file
-import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png';
-
-// An example of how you tell webpack to use a JS file
-import userData from './data/users';
-console.log("User Data:", userData);
-
-// Example of one way to import functions from the domUpdates file.  You will delete these examples.
-import { displayRandomUser } from './domUpdates';
-
-// import { getUserById } from './functions/get-user-by-id';
+let date = new Date();
+let currentDate = date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
+let users, hydration, sleep, activity;
 
 
-// getUserById()
+window.addEventListener('load', function () {
+  Promise.all([fetchApiData('users'), fetchApiData('hydration'), fetchApiData('sleep'), fetchApiData('activity')])
+    .then(data => {
+      console.log(data)
+      users = data[0].users;
+      hydration = data[1].hydrationData;
+      sleep = data[2].sleepData;
+      activity = data[3].activityData;
+      initializeApp();
+    });
+});
+
+const initializeApp = () => {
+  displayRandomUser();
+  displaySleepData();
+  displayHydrationData();
+  displayActivityData();
+  displayUserData();
+};
 
