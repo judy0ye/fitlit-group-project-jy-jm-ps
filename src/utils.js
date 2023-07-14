@@ -60,27 +60,39 @@ function getAvgFluidConsumed(hydrationData, id) {
 }
 
 function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
-  const days = hydrationData.reduce((days, user) => {
-    if (user.userID === id && user.date === day) {
-      days.push(user.date);
-    }
-    return days;
-  }, []);
-
-  const ouncesConsumed = hydrationData.reduce((water, user) => {
-    if (user.userID === id && user.date === day) {
-      water = water + user.numOunces;
-    }
-    return water;
-  }, 0);
-
-  const user = hydrationData.find(
-    (user) => user.userID === id && user.date === day
+  const user = hydrationData.find(user => user.userID === id && user.date === day
   );
-  if (user.userID === id && user.date === day) {
-    return Math.round(ouncesConsumed / days.length);
+  
+  if (!user) {
+    return 0;
   }
+  return user.numOunces
+  
 }
+
+
+// function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
+//   const days = hydrationData.reduce((days, user) => {
+//     if (user.userID === id && user.date === day) {
+//       days.push(user.date);
+//     }
+//     return days;
+//   }, []);
+
+//   const ouncesConsumed = hydrationData.reduce((water, user) => {
+//     if (user.userID === id && user.date === day) {
+//       water = water + user.numOunces;
+//     }
+//     return water;
+//   }, 0);
+
+//   const user = hydrationData.find(
+//     (user) => user.userID === id && user.date === day
+//   );
+//   if (user.userID === id && user.date === day) {
+//     return Math.round(ouncesConsumed / days.length);
+//   }
+// }
 
 function getFluidOuncesPerDay(hydrationData, day, id) {
   // console.log('individual User:', hydrationData)

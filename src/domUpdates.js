@@ -93,17 +93,25 @@ const displayHydrationData = () => {
       //     return getAvgFluidConsumedOnSpecificDay(userWater, userWater.date, userWater.userID)
       //   }
       // })
+      // let current = userWater.find(user => {
+      //   if (user.userID === displayUser.id) {
+      //     return getFluidConsumedOnSpecificDay(userWater, displayUser.date, displayUser.userID)
+      //   }
+      // })
 
-let current = userWater.find(userWater => userWater.userID === displayUser.id);
-console.log('current:', current)
-if (current) {
-  const averageFluidConsumed = getFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
+      console.log('data.data from API:', userWater)
+      console.log('displayUser:', displayUser)// object
+      let current = userWater.find(user => user.userID === displayUser.id)
 
-  // Use the 'current' object and interpolate the data in the innerHTML
+console.log('current:', currentUser)
+// if (current) {
+  const fluidConsumed = getFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
+
+
   hydrationInfo.innerHTML = `<article>
-    <h3>Average Fluid Consumed:</h3> ${averageFluidConsumed}
+    <h3>Fluid Consumed:</h3> ${fluidConsumed} ounces of water was consumed on ${current.date}
   </article>`;
-} 
+// } 
 //else {
 //   hydrationInfo.innerHTML = "<article>No hydration data found for the current user.</article>";
 // }
