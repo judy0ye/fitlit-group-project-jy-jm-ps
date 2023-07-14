@@ -1,6 +1,4 @@
-const currentUser = {
-  
-}
+const currentUser = {}
 
 export {
   currentUser

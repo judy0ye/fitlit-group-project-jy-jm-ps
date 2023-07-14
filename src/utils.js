@@ -71,44 +71,14 @@ function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
 }
 
 
-// function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
-//   const days = hydrationData.reduce((days, user) => {
-//     if (user.userID === id && user.date === day) {
-//       days.push(user.date);
-//     }
-//     return days;
-//   }, []);
-
-//   const ouncesConsumed = hydrationData.reduce((water, user) => {
-//     if (user.userID === id && user.date === day) {
-//       water = water + user.numOunces;
-//     }
-//     return water;
-//   }, 0);
-
-//   const user = hydrationData.find(
-//     (user) => user.userID === id && user.date === day
-//   );
-//   if (user.userID === id && user.date === day) {
-//     return Math.round(ouncesConsumed / days.length);
-//   }
-// }
-
 function getFluidOuncesPerDay(hydrationData, day, id) {
-  // console.log('individual User:', hydrationData)
   let invidualUser = []
-  
-  // hydrationData.filter(user => {
-  // if (user.userID = id) {
-  // invidualUser.push(user)
-  // }
 
   hydrationData.filter(user => {
     if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
     invidualUser.push(user)
     }
 
-  // console.log('individual User:', invidualUser)
   })
   const days = hydrationData.reduce((allDays, user) => {
   if (!allDays[user.date]) {
@@ -123,6 +93,7 @@ function getFluidOuncesPerDay(hydrationData, day, id) {
   const sortedDays = Object.entries(days)
   // sortedDays = [['date', oz], ['date', oz]]
   // .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
+  // * the above works too but I'm more comfortable with the the lines below *
   .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
   .slice(0, 7)
   .reduce((sevenDays, [date, ounces]) => {
@@ -132,7 +103,7 @@ function getFluidOuncesPerDay(hydrationData, day, id) {
   console.log('sortedDays: ', sortedDays)
   return sortedDays
 }
-// get date object, parse it, sort it in ascending order and return
+
 
 
 

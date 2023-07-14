@@ -9,9 +9,10 @@
 import { currentUser } from './dataModel';
 // import userData from './data/users'
 //import { getAvgStepGoal, getRandomUser  } from './utils';
-import { getRandomUser, 
+import {
+  getRandomUser,
   getFluidConsumedOnSpecificDay
-  // getFluidOuncesPerDay 
+  // getFluidOuncesPerDay
 } from './utils';
 import { fetchApiData } from './apiCalls';
 // import { getRandomUser, getUserById, getAvgStepGoal, getAvgFluidConsumed,getAvgFluidConsumedOnSpecifcDay  } from './functions/get-random-user'
@@ -20,8 +21,8 @@ import { fetchApiData } from './apiCalls';
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
 const personalGreeting = document.querySelector('.greeting');
-const hydrationInfo = document.querySelector('.hydration')
-const hydrationButton = document.querySelector('.water')
+const hydrationInfo = document.querySelector('.hydration');
+const hydrationButton = document.querySelector('.water');
 
 // DATAMODEL //
 
@@ -48,12 +49,13 @@ const hydrationButton = document.querySelector('.water')
 //   </article>`
 // }
 
+// * added currentUser as global variable here *
 const displayRandomUser = () => {
   fetchApiData('users')
     .then((userData) => {
       const randomUser = getRandomUser(userData.users);
-      currentUser.user = randomUser
-      console.log('random user', randomUser)
+      currentUser.user = randomUser;
+
       personalGreeting.innerHTML = `<h3>Welcome, ${randomUser.name}</h3>`;
 
       personalData.innerHTML = `<article><h3>Name:</h3>${randomUser.name}
@@ -86,53 +88,36 @@ const displaySleepData = () => {
 const displayHydrationData = () => {
   fetchApiData('hydration')
     .then((hydrationEntries) => {
-      const userWater = hydrationEntries.hydrationData
-      const displayUser = currentUser.user
-      // let current = hydrationData.hydration.find(userWater => {
-      //   if (userWater.userID === currentUser.user.id) {
-      //     return getAvgFluidConsumedOnSpecificDay(userWater, userWater.date, userWater.userID)
-      //   }
-      // })
-      // let current = userWater.find(user => {
-      //   if (user.userID === displayUser.id) {
-      //     return getFluidConsumedOnSpecificDay(userWater, displayUser.date, displayUser.userID)
-      //   }
-      // })
+      const userWater = hydrationEntries.hydrationData;
+      const displayUser = currentUser.user;
 
-      console.log('data.data from API:', userWater)
-      console.log('displayUser:', displayUser)// object
-      let current = userWater.find(user => user.userID === displayUser.id)
+      console.log('data.data from API:', userWater);
+      console.log('displayUser:', displayUser); // object
+      let current = userWater.find((user) => user.userID === displayUser.id);
 
-console.log('current:', currentUser)
-// if (current) {
-  const fluidConsumed = getFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
+      console.log('current:', currentUser);
 
+      const fluidConsumed = getFluidConsumedOnSpecificDay(
+        userWater,
+        current.date,
+        current.userID
+      );
 
-  hydrationInfo.innerHTML = `<article>
+      hydrationInfo.innerHTML = `<article>
     <h3>Fluid Consumed:</h3> ${fluidConsumed} ounces of water was consumed on ${current.date}
   </article>`;
-// } 
-//else {
-//   hydrationInfo.innerHTML = "<article>No hydration data found for the current user.</article>";
-// }
-
-      
-      // console.log(hydrationData);
     })
     .catch((error) => console.error('Error:', error));
 };
-// const displayHydrationData = () => {
-//   fetchApiData('hydration')
-//     .then((hydrationData) => {
-//       let current = hydrationData.hydration.filter()
-//       // if (randomUser.id === id) {}
-//       const aWeekOfWater = getFluidOuncesPerDay(hydrationData.hydration, hydratonData.hydration)
-//       hydrationInfo.innerHTML = `<article></article>`
-//       console.log(hydrationEntries);
-//     })
-//     .catch((error) => console.error('Error:', error));
-// };
-//hydrationData.hydration. iterate though arrays
+
+const displayWeeklyHydrationData = () => {
+  fetchApiData('hydration')
+    .then((hydrationData) => {
+      console.log(hydrationEntries);
+    })
+    .catch((error) => console.error('Error:', error));
+};
+
 const displayActivityData = () => {
   fetchApiData('activity')
     .then((activityEntries) => {
@@ -146,7 +131,7 @@ export {
   displaySleepData,
   displayHydrationData,
   displayActivityData,
-  displayUserData,
+  displayUserData
   // getUserById,
   // getAvgStepGoal,
   // getAvgFluidConsumed,
