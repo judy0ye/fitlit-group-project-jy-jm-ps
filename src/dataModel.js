@@ -1,0 +1,5 @@
+const currentUser = {}
+
+export {
+  currentUser
+}

@@ -4,8 +4,8 @@
 const fetchApiData = data => {
 
   return fetch(`https://fitlit-api.herokuapp.com/api/v1/${data}`)
-    // .then(response => response.json())
-    .then(data => data.json())
+    .then(response => response.json())
+    // .then(data => data.json())
     .catch(error => console.error('Error:', error));
 
 }

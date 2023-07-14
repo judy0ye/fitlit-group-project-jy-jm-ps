@@ -8,7 +8,13 @@ import './css/normalize.css';
 import './css/styles.css';
 import './images/turing-logo.png';
 import { fetchApiData } from './apiCalls';
-import { displayRandomUser, displaySleepData, displayHydrationData, displayActivityData, displayUserData } from './domUpdates';
+import {
+  displayRandomUser,
+  displaySleepData,
+  displayHydrationData,
+  displayActivityData,
+  displayUserData
+} from './domUpdates';
 
 // EXPORTS //
 
@@ -19,22 +25,34 @@ import { displayRandomUser, displaySleepData, displayHydrationData, displayActiv
 
 // EVENT LISTENERS //
 
-let date = new Date();
-let currentDate = date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
-let users, hydration, sleep, activity;
+// let date = new Date();
+// let currentDate = date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
+// let users, hydration, sleep, activity;
 
-
+// * commented line 31-34 out because they were throwing errors on dev tools *
 window.addEventListener('load', function () {
-  Promise.all([fetchApiData('users'), fetchApiData('hydration'), fetchApiData('sleep'), fetchApiData('activity')])
-    .then(data => {
-      console.log(data)
-      users = data[0].users;
-      hydration = data[1].hydrationData;
-      sleep = data[2].sleepData;
-      activity = data[3].activityData;
-      initializeApp();
-    });
+  Promise.all([
+    fetchApiData('users'),
+    fetchApiData('hydration'),
+    fetchApiData('sleep'),
+    fetchApiData('activity')
+  ]).then((data) => {
+    console.log('data:', data);
+    // users = data[0].users;
+    // hydration = data[1].hydrationData;
+    // sleep = data[2].sleepData;
+    // activity = data[3].activityData;
+    initializeApp();
+  });
 });
+
+// * this will show a week's water consumption *
+// hydrationButton.addEventListener('click', function() {
+//   Promise.all([fetchApiData('users'),fetchApiData('hydration')])
+//     .then(data => {
+//       console.log(data)
+//     })
+// })
 
 const initializeApp = () => {
   displayRandomUser();
@@ -43,4 +61,3 @@ const initializeApp = () => {
   displayActivityData();
   displayUserData();
 };
-
