@@ -1,3 +1,40 @@
+/* ~~~~~ Days.js ~~~~~*/
+
+import dayjs from 'dayjs';
+import calendar from 'dayjs/plugin/calendar';
+
+dayjs.extend(calendar);
+
+// dayjs().format('YYYY/MM/DD');
+
+// const dayjs = require('dayjs');
+// require('dayjs/plugin/calendar');
+
+dayjs.extend(require('dayjs/plugin/utc'));
+
+// Convert the date string to a valid Day.js date object
+function convertToDate(dateString) {
+  return dayjs(dateString, 'YYYY/MM/DD');
+}
+
+// Calculate the total fluid ounces consumed by a user each day over a week
+
+function calculateFluidOuncesPerDay(userId, startDate) {
+  const endDate = convertToDate(startDate).add(6, 'day'); // Get the end date of the week
+  const fluidOuncesPerDay = {};
+  for (let i = 0; i < 7; i++) {
+    const currentDate = convertToDate(startDate)
+      .add(i, 'day')
+      .format('YYYY/MM/DD');
+    fluidOuncesPerDay[currentDate] = getAvgFluidConsumedOnSpecifcDay(
+      hydrationData,
+      currentDate,
+      userId
+    );
+  }
+  return fluidOuncesPerDay;
+}
+
 /* ~~~~~ Get Random User ~~~~~*/
 function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
@@ -76,4 +113,5 @@ export {
   getAvgStepGoal,
   getAvgFluidConsumed,
   getAvgFluidConsumedOnSpecifcDay,
+  calculateFluidOuncesPerDay,
 };
