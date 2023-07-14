@@ -19,22 +19,30 @@ import { displayRandomUser, displaySleepData, displayHydrationData, displayActiv
 
 // EVENT LISTENERS //
 
-let date = new Date();
-let currentDate = date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
-let users, hydration, sleep, activity;
+// let date = new Date();
+// let currentDate = date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
+// let users, hydration, sleep, activity;
 
 
 window.addEventListener('load', function () {
   Promise.all([fetchApiData('users'), fetchApiData('hydration'), fetchApiData('sleep'), fetchApiData('activity')])
     .then(data => {
-      console.log(data)
-      users = data[0].users;
-      hydration = data[1].hydrationData;
-      sleep = data[2].sleepData;
-      activity = data[3].activityData;
+      console.log('data:', data)
+      // users = data[0].users;
+      // hydration = data[1].hydrationData;
+      // sleep = data[2].sleepData;
+      // activity = data[3].activityData;
       initializeApp();
     });
 });
+
+  // hydrationButton.addEventListener('click', function() {
+  //   Promise.all([fetchApiData('users'),fetchApiData('hydration')])
+  //     .then(data => {
+  //       console.log(data)
+  //     })
+  // })
+
 
 const initializeApp = () => {
   displayRandomUser();

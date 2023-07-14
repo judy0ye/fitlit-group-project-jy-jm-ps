@@ -8,7 +8,9 @@
 
 // import userData from './data/users'
 //import { getAvgStepGoal, getRandomUser  } from './utils';
-import { getRandomUser } from './utils';
+import { getRandomUser, 
+  getFluidOuncesPerDay 
+} from './utils';
 import { fetchApiData } from './apiCalls';
 // import { getRandomUser, getUserById, getAvgStepGoal, getAvgFluidConsumed,getAvgFluidConsumedOnSpecifcDay  } from './functions/get-random-user'
 
@@ -16,6 +18,8 @@ import { fetchApiData } from './apiCalls';
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
 const personalGreeting = document.querySelector('.greeting');
+const hydrationInfo = document.querySelector('.hydration')
+const hydrationButton = document.querySelector('.water')
 
 // DATAMODEL //
 
@@ -46,7 +50,7 @@ const displayRandomUser = () => {
   fetchApiData('users')
     .then((userData) => {
       const randomUser = getRandomUser(userData.users);
-      // console.log(randomUser)
+      // console.log('random user', randomUser)
       personalGreeting.innerHTML = `<h3>Welcome, ${randomUser.name}</h3>`;
 
       personalData.innerHTML = `<article><h3>Name:</h3>${randomUser.name}
@@ -78,12 +82,15 @@ const displaySleepData = () => {
 
 const displayHydrationData = () => {
   fetchApiData('hydration')
-    .then((hydrationEntries) => {
+    .then((hydrationData) => {
+
+      const aWeekOfWater = getFluidOuncesPerDay(hydrationData.hydration, hydratonData.hydration)
+      hydrationInfo.innerHTML = `<article>${}</article>`
       console.log(hydrationEntries);
     })
     .catch((error) => console.error('Error:', error));
 };
-
+//hydrationData.hydration. iterate though arrays
 const displayActivityData = () => {
   fetchApiData('activity')
     .then((activityEntries) => {
