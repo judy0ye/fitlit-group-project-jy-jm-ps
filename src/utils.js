@@ -1,9 +1,15 @@
 /* ~~~~~ Days-JS ~~~~~*/
 
-import dayjs from 'dayjs';
-import calendar from 'dayjs/plugin/calendar';
+// import dayjs from 'dayjs';
+// import calendar from 'dayjs/plugin/calendar';
+// dayjs.extend(calendar);
+// dayjs.extend(require('dayjs/plugin/utc'));
+
+import  dayjs  from 'dayjs';
+import  calendar  from 'dayjs/plugin/calendar';
+
 dayjs.extend(calendar);
-dayjs.extend(require('dayjs/plugin/utc'));
+// dayjs.extend(utc)
 
 /* ~~~~~ Get Random User ~~~~~*/
 function getRandomUser(users) {
@@ -53,7 +59,7 @@ function getAvgFluidConsumed(hydrationData, id) {
   return Math.round(fluidConsumed / days.length);
 }
 
-function getAvgFluidConsumedOnSpecifcDay(hydrationData, day, id) {
+function getAvgFluidConsumedOnSpecificDay(hydrationData, day, id) {
   const days = hydrationData.reduce((days, user) => {
     if (user.userID === id && user.date === day) {
       days.push(user.date);
@@ -76,11 +82,55 @@ function getAvgFluidConsumedOnSpecifcDay(hydrationData, day, id) {
   }
 }
 
+function getFluidOuncesPerDay(hydrationData, day, id) {
+  // console.log('individual User:', hydrationData)
+  let invidualUser = []
+  
+  // hydrationData.filter(user => {
+  // if (user.userID = id) {
+  // invidualUser.push(user)
+  // }
+
+  hydrationData.filter(user => {
+    if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
+    invidualUser.push(user)
+    }
+
+  // console.log('individual User:', invidualUser)
+  })
+  const days = hydrationData.reduce((allDays, user) => {
+  if (!allDays[user.date]) {
+  allDays[user.date] = 0
+  }
+  allDays[user.date] += user.numOunces
+  return allDays;
+  }, {});
+
+  console.log(days)
+
+  const sortedDays = Object.entries(days)
+  // sortedDays = [['date', oz], ['date', oz]]
+  // .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
+  .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
+  .slice(0, 7)
+  .reduce((sevenDays, [date, ounces]) => {
+    sevenDays[date] = ounces;
+    return sevenDays;
+  }, {});
+  console.log('sortedDays: ', sortedDays)
+  return sortedDays
+}
+// get date object, parse it, sort it in ascending order and return
+
+
+
+
 /* ~~~~~ Exports ~~~~~*/
 export {
   getRandomUser,
   getUserById,
   getAvgStepGoal,
   getAvgFluidConsumed,
-  getAvgFluidConsumedOnSpecifcDay,
+  getAvgFluidConsumedOnSpecificDay,
+  getFluidOuncesPerDay
 };
