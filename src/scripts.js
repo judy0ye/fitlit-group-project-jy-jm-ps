@@ -36,6 +36,7 @@ window.addEventListener('load', function () {
     });
 });
 
+// this will show a week's water consumption
   // hydrationButton.addEventListener('click', function() {
   //   Promise.all([fetchApiData('users'),fetchApiData('hydration')])
   //     .then(data => {

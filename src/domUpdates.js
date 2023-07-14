@@ -10,7 +10,7 @@ import { currentUser } from './dataModel';
 // import userData from './data/users'
 //import { getAvgStepGoal, getRandomUser  } from './utils';
 import { getRandomUser, 
-  getAvgFluidConsumedOnSpecificDay
+  getFluidConsumedOnSpecificDay
   // getFluidOuncesPerDay 
 } from './utils';
 import { fetchApiData } from './apiCalls';
@@ -93,12 +93,11 @@ const displayHydrationData = () => {
       //     return getAvgFluidConsumedOnSpecificDay(userWater, userWater.date, userWater.userID)
       //   }
       // })
-// const currentUser = globalData.currentUser; // Access the random user object
-// console.log('hydrationData.hydration:', hydrationData)
+
 let current = userWater.find(userWater => userWater.userID === displayUser.id);
 console.log('current:', current)
 if (current) {
-  const averageFluidConsumed = getAvgFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
+  const averageFluidConsumed = getFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
 
   // Use the 'current' object and interpolate the data in the innerHTML
   hydrationInfo.innerHTML = `<article>

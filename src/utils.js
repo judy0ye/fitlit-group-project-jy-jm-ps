@@ -59,7 +59,7 @@ function getAvgFluidConsumed(hydrationData, id) {
   return Math.round(fluidConsumed / days.length);
 }
 
-function getAvgFluidConsumedOnSpecificDay(hydrationData, day, id) {
+function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
   const days = hydrationData.reduce((days, user) => {
     if (user.userID === id && user.date === day) {
       days.push(user.date);
@@ -131,6 +131,6 @@ export {
   getUserById,
   getAvgStepGoal,
   getAvgFluidConsumed,
-  getAvgFluidConsumedOnSpecificDay,
+  getFluidConsumedOnSpecificDay,
   getFluidOuncesPerDay
 };
