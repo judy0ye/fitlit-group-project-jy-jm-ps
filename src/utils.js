@@ -1,3 +1,10 @@
+/* ~~~~~ Days-JS ~~~~~*/
+
+import dayjs from 'dayjs';
+import calendar from 'dayjs/plugin/calendar';
+dayjs.extend(calendar);
+dayjs.extend(require('dayjs/plugin/utc'));
+
 /* ~~~~~ Get Random User ~~~~~*/
 function getRandomUser(users) {
   const randomIndex = Math.floor(Math.random() * users.length);
