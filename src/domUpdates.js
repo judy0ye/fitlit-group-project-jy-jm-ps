@@ -6,10 +6,12 @@
 
 // IMPORTS //
 
+import { currentUser } from './dataModel';
 // import userData from './data/users'
 //import { getAvgStepGoal, getRandomUser  } from './utils';
 import { getRandomUser, 
-  getFluidOuncesPerDay 
+  getAvgFluidConsumedOnSpecificDay
+  // getFluidOuncesPerDay 
 } from './utils';
 import { fetchApiData } from './apiCalls';
 // import { getRandomUser, getUserById, getAvgStepGoal, getAvgFluidConsumed,getAvgFluidConsumedOnSpecifcDay  } from './functions/get-random-user'
@@ -50,7 +52,8 @@ const displayRandomUser = () => {
   fetchApiData('users')
     .then((userData) => {
       const randomUser = getRandomUser(userData.users);
-      // console.log('random user', randomUser)
+      currentUser.user = randomUser
+      console.log('random user', randomUser)
       personalGreeting.innerHTML = `<h3>Welcome, ${randomUser.name}</h3>`;
 
       personalData.innerHTML = `<article><h3>Name:</h3>${randomUser.name}
@@ -82,14 +85,46 @@ const displaySleepData = () => {
 
 const displayHydrationData = () => {
   fetchApiData('hydration')
-    .then((hydrationData) => {
+    .then((hydrationEntries) => {
+      const userWater = hydrationEntries.hydrationData
+      const displayUser = currentUser.user
+      // let current = hydrationData.hydration.find(userWater => {
+      //   if (userWater.userID === currentUser.user.id) {
+      //     return getAvgFluidConsumedOnSpecificDay(userWater, userWater.date, userWater.userID)
+      //   }
+      // })
+// const currentUser = globalData.currentUser; // Access the random user object
+// console.log('hydrationData.hydration:', hydrationData)
+let current = userWater.find(userWater => userWater.userID === displayUser.id);
+console.log('current:', current)
+if (current) {
+  const averageFluidConsumed = getAvgFluidConsumedOnSpecificDay(userWater, current.date, current.userID);
 
-      const aWeekOfWater = getFluidOuncesPerDay(hydrationData.hydration, hydratonData.hydration)
-      hydrationInfo.innerHTML = `<article>${}</article>`
-      console.log(hydrationEntries);
+  // Use the 'current' object and interpolate the data in the innerHTML
+  hydrationInfo.innerHTML = `<article>
+    <h3>Average Fluid Consumed:</h3> ${averageFluidConsumed}
+  </article>`;
+} 
+//else {
+//   hydrationInfo.innerHTML = "<article>No hydration data found for the current user.</article>";
+// }
+
+      
+      // console.log(hydrationData);
     })
     .catch((error) => console.error('Error:', error));
 };
+// const displayHydrationData = () => {
+//   fetchApiData('hydration')
+//     .then((hydrationData) => {
+//       let current = hydrationData.hydration.filter()
+//       // if (randomUser.id === id) {}
+//       const aWeekOfWater = getFluidOuncesPerDay(hydrationData.hydration, hydratonData.hydration)
+//       hydrationInfo.innerHTML = `<article></article>`
+//       console.log(hydrationEntries);
+//     })
+//     .catch((error) => console.error('Error:', error));
+// };
 //hydrationData.hydration. iterate though arrays
 const displayActivityData = () => {
   fetchApiData('activity')
