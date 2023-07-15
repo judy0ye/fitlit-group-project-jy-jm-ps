@@ -2,12 +2,14 @@
 
 //import { currentUser } from './dataModel';
 //import { getAvgStepGoal, getRandomUser  } from './utils';
-import { getFluidPerWeek } from './utils';
+// import { getFluidPerWeek } from './utils';
 import {
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getWeekSleep,
+  // getAvgFluidForAllTime, DO WE EVEN NEED THIS
+  getFluidDrankForSpecificDay,
   getWeeklyFluid,
 } from './utils';
 //import { fetchApiData } from './apiCalls';
@@ -44,15 +46,37 @@ const displayUserData = (currentUser) => {
 };
 
 /* ~~~~~ Display Hydration Data Functions ~~~~~*/
+// function displayAverageFluidConsumed(hydration, currentUser) {
+//   const avgFluid = getAvgFluidForAllTime(hydration, currentUser.id)
+//   console.log('avgFluidFORALLTIME', avgFluid)
+//   // averageSleep.innerText += `You average ${getAvgSleep(
+//   //   sleep,
+//   //   currentUser.id
+//   // )} hours of sleep each night and a 
+//   // ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
+// }
+
+function displayFluidConsumedToday(hydration, currentUser, currentDate) {
+  const fluidToday = getFluidDrankForSpecificDay(hydration, currentUser.id, currentDate);
+  console.log('waterDrankToday:', fluidToday)
+  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`
+  // if (currentDayEntry) {
+  //   hydrationInfo.innerHTML = `You drank ${currentDayEntry} hours last night.`;
+  // } else {
+  //   dailySleep.innerText = 'You need to get more sleep!';
+  // }
+  // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
+  // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
+}
 
 function displayWeeklyHydrationData(hydration, currentUser) {
   console.log('CURRENT USER:', currentUser);
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
   console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
-  weeklyHydrationEntries.forEach((entry) => {
-    hydrationInfo.innerHTML += `<section> ${entry.date}: ${entry.numOunces} </section>
-   `;
-  });
+  // weeklyHydrationEntries.forEach((entry) => {
+  //   hydrationInfo.innerHTML += `<section> ${entry.date}: ${entry.numOunces} </section>
+  //  `;
+  // });
 }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
@@ -100,6 +124,8 @@ export {
   displayDailySleep,
   displayWeeklySleep,
   displayAverageSleep,
+  displayFluidConsumedToday,
+  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
   // displayHydrationData,
   // getUserById,

@@ -10,6 +10,8 @@ import {
   displayUserData,
   displayDailySleep,
   displayAverageSleep,
+  displayFluidConsumedToday,
+  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
 } from './domUpdates';
 import { getRandomUser } from './utils';
@@ -41,12 +43,14 @@ window.addEventListener('load', function () {
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
-  console.log('initializeApp:', users, hydration, activity, sleep);
+  // console.log('initializeApp:', users, hydration, activity, sleep);
   currentUser = getRandomUser(users);
   displayRandomUser(currentUser);
   // displaySleepData(sleep, currentUser);
   // displayHydrationData();
   //displayHydrationData(hydration, currentUser);
+  // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
+  displayFluidConsumedToday(hydration, currentUser, currentDate)
   displayWeeklyHydrationData(hydration, currentUser);
   // displayActivityData(activity, currentUser);
   displayUserData();
