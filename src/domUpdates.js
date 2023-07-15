@@ -31,7 +31,7 @@ let averageSleep = document.querySelector("#averageSleep");
 // EXPORTS //
 
 const displayRandomUser = (newUser) => {
-
+  console.log('PARVIN1 displayRandomUser:', newUser)
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${newUser.name}</article>`;
 
   personalData.innerHTML = `<article><h3>Name:</h3>${newUser.name}
@@ -44,7 +44,7 @@ const displayRandomUser = (newUser) => {
 };
 
 const displayUserData = (newUser) => {
-  console.log('displayUserData:', newUser)
+  console.log('PARVIN displayUserData:', newUser)
 };
 
 // const displayHydrationData = (hydration, newUser) => {

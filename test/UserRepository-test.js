@@ -250,3 +250,66 @@ describe('fluid consumed', function () {
     );
   });
 });
+
+
+/* ~~~~~ Sleep ~~~~~*/
+
+describe('Sleep Functions', function() {
+
+  let sleepData;
+  
+  beforeEach(() => {
+    sleepData = [...sleepTestData];
+  })
+
+  it.only('should take in a user ID', function() {
+    expect(sleepData[0].userID).to.equal(1);
+  });
+
+  it.only('should take in a date', function() {
+    expect(sleepData[0].date).to.equal("2023/03/24");
+  });
+
+  it.only('should take in a user hours slept', function() {
+    expect(sleepData[0].hoursSlept).to.equal(9.6);
+  });
+
+  it.only('should take in a user sleep quality', function() {
+    expect(sleepData[0].sleepQuality).to.equal(4.3);
+  });
+
+  it.only('should be able to average user\'s sleep', function() {
+    expect(getAvgSleep(sleepData, 1)).to.equal(6.6);
+    expect(getAvgSleep(sleepData, 2)).to.equal(8.1);
+  });
+
+  it.only('should be able to average user\'s sleep quality', function() {
+    expect(getAvgQuality(sleepData, 1)).to.equal(3.6);
+    expect(getAvgQuality(sleepData, 2)).to.equal(3.3);
+  });
+
+  it.only('should be able to get user\'s hours slept by day', function() {
+    expect(getHoursByDay(sleepData, 1, '2023/03/24')).to.equal(9.6);
+    expect(getHoursByDay(sleepData, 1, '2023/03/29')).to.equal(5.6);
+    expect(getHoursByDay(sleepData, 2, '2023/03/25')).to.equal(8.1);
+    expect(getHoursByDay(sleepData, 2, '2023/03/28')).to.equal(5.1);
+  });
+
+  it.only('should be able to get user\'s sleep quality by day', function() {
+    expect(getQualityByDay(sleepData, 1, '2023/03/24')).to.equal(4.3);
+    expect(getQualityByDay(sleepData, 1, '2023/03/29')).to.equal(2.1);
+    expect(getQualityByDay(sleepData, 2, '2023/03/25')).to.equal(4.7);
+    expect(getQualityByDay(sleepData, 2, '2023/03/28')).to.equal(2.1);
+  });
+  
+  it.only('should be able to get user\'s weekly sleep data', function() {
+    expect(getWeekSleep(sleepData, 1, '2023/03/30')).to.deep.equal([
+    {'date': '2023/03/30', 'hoursSlept': '6.2 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.3'},
+    {'date': '2023/03/29', 'hoursSlept': '5.6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '2.1'}, 
+    {'date': '2023/03/28', 'hoursSlept': '6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.6'},
+    {'date': '2023/03/27', 'hoursSlept': '7.1 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.7'},
+    {'date': '2023/03/26', 'hoursSlept': '5.4 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.1'},
+    {'date': '2023/03/25', 'hoursSlept': '6.3 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.3'},
+    {'date': '2023/03/24', 'hoursSlept': '9.6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.3'}
+  ])});
+});

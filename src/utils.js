@@ -126,7 +126,6 @@ function getAvgSleep(sleepData, userID) {
   return Math.round(avgSleep / sleepEntries.length * 10) / 10;
 };
 
-// sleep quality all time - water for all time
 function getAvgQuality(sleepData, userID) {
   const sleepEntries = sleepData.filter(entry => entry.userID === userID);
   const avgQuality = sleepEntries.reduce((acc, user) => {
@@ -135,7 +134,7 @@ function getAvgQuality(sleepData, userID) {
   return Math.round(avgQuality / sleepEntries.length * 10) / 10;
 };
 
-//hours per day - oz per day
+
 function getHoursByDay(sleepData, id, date) {
   console.log('getHoursByDay:', sleepData, id, date)
   const sleepEntries = sleepData.filter(entry => entry.userID === id);
@@ -153,7 +152,6 @@ function getQualityByDay(sleepData, userID, date) {
 };
 
 
-//wekly sleep - weekly oz
 function getWeekSleep(sleepData, userID, startDate) {
   const sleepEntries = sleepData.filter(entry => entry.userID === userID);
   const indexOfCurrentDayEntry = sleepEntries.findIndex(entry => entry.date === startDate);
