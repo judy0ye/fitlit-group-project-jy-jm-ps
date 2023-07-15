@@ -71,49 +71,118 @@ function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
 }
 
 
-function getFluidOuncesPerDay(hydrationData, day, id) {
-  let invidualUser = []
+// function getFluidOuncesPerDay(hydrationData, day, id) {
+//   let invidualUser = []
 
-  hydrationData.filter(user => {
-    if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
-    invidualUser.push(user)
-    }
+//   hydrationData.filter(user => {
+//     if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
+//     invidualUser.push(user)
+//     }
 
-  })
-  const days = hydrationData.reduce((allDays, user) => {
-  if (!allDays[user.date]) {
-  allDays[user.date] = 0
-  }
-  allDays[user.date] += user.numOunces
-  return allDays;
-  }, {});
+//   })
+//   const days = hydrationData.reduce((allDays, user) => {
+//   if (!allDays[user.date]) {
+//   allDays[user.date] = 0
+//   }
+//   allDays[user.date] += user.numOunces
+//   return allDays;
+//   }, {});
 
-  console.log(days)
+//  // console.log(days)
 
-  const sortedDays = Object.entries(days)
-  // sortedDays = [['date', oz], ['date', oz]]
-  // .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
-  // * the above works too but I'm more comfortable with the the lines below *
-  .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
-  .slice(0, 7)
-  .reduce((sevenDays, [date, ounces]) => {
-    sevenDays[date] = ounces;
-    return sevenDays;
-  }, {});
-  console.log('sortedDays: ', sortedDays)
-  return sortedDays
-}
+//   const sortedDays = Object.entries(days)
+//   // sortedDays = [['date', oz], ['date', oz]]
+//   // .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
+//   // * the above works too but I'm more comfortable with the the lines below *
+//   .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
+//   .slice(0, 7)
+//   .reduce((sevenDays, [date, ounces]) => {
+//     sevenDays[date] = ounces;
+//     return sevenDays;
+//   }, {});
+//  // console.log('sortedDays: ', sortedDays)
+//   return sortedDays
+// }
+
+function getFluidPerWeek(hydrationData, userID, startDate) {
+  const fluidEntries = hydrationData.filter(entry => entry.userID === userID);
+  const indexOfCurrentDayEntry = fluidEntries.findIndex(entry => entry.date === startDate);
+  const weeklyFluid = fluidEntries.slice(indexOfCurrentDayEntry, indexOfCurrentDayEntry - 7).reverse();
+  const weeklyHydrationData = weeklyFluid.map(entry => ({
+    date: entry.date,
+    numOunces: entry.numOunces + 'ounces consumed',
+  }));
+  return weeklyHydrationData;
+};
 
 
+/* ~~~~~ Sleep ~~~~~*/
 
+
+function getAvgSleep(sleepData, userID) {
+  const sleepEntries = sleepData.filter(entry => entry.userID === userID);
+  const avgSleep = sleepEntries.reduce((acc, user) => {
+    return acc += user.hoursSlept;
+  }, 0);
+  return Math.round(avgSleep / sleepEntries.length * 10) / 10;
+};
+
+// sleep quality all time - water for all time
+function getAvgQuality(sleepData, userID) {
+  const sleepEntries = sleepData.filter(entry => entry.userID === userID);
+  const avgQuality = sleepEntries.reduce((acc, user) => {
+    return acc += user.sleepQuality;
+  }, 0);
+  return Math.round(avgQuality / sleepEntries.length * 10) / 10;
+};
+
+//hours per day - oz per day
+function getHoursByDay(sleepData, id, date) {
+console.log('Judy', sleepData, id, date)
+  const sleepEntries = sleepData.filter(entry => entry.userID === id);
+ console.log(sleepEntries)
+ const dailyEntry = sleepEntries.find(entry => entry.date === date);
+ console.log(dailyEntry)
+  return dailyEntry.hoursSlept;
+};
+
+function getQualityByDay(sleepData, userID, date) {
+ // console.log('Jan', userID)
+  const sleepEntries = sleepData.filter(entry => entry.userID === userID);
+  const dailyEntry = sleepEntries.find(entry => entry.date === date);
+  return dailyEntry.sleepQuality;
+};
+
+
+//wekly sleep - weekly oz
+function getWeekSleep(sleepData, userID, startDate) {
+  const sleepEntries = sleepData.filter(entry => entry.userID === userID);
+  const indexOfCurrentDayEntry = sleepEntries.findIndex(entry => entry.date === startDate);
+  const weeklySleep = sleepEntries.slice(indexOfCurrentDayEntry, indexOfCurrentDayEntry - 7).reverse();
+  const weeklySleepData = weeklySleep.map(entry => ({
+    date: entry.date,
+    hoursSlept: entry.hoursSlept + ' hours slept',
+    sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality
+  }));
+  return weeklySleepData;
+};
 
 
 /* ~~~~~ Exports ~~~~~*/
+
 export {
   getRandomUser,
   getUserById,
   getAvgStepGoal,
+  getFluidPerWeek,
+ // getFluidOuncesPerDay,
   getAvgFluidConsumed,
   getFluidConsumedOnSpecificDay,
-  getFluidOuncesPerDay
+  getAvgSleep, 
+  getAvgQuality, 
+  getHoursByDay, 
+  getQualityByDay, 
+  //getSleepDataByDate,
+  getWeekSleep
 };
+
