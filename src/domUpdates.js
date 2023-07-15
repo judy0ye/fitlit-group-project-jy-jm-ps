@@ -8,6 +8,7 @@ import {
   getAvgQuality,
   getHoursByDay,
   getWeekSleep,
+  getWeeklyFluid,
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
@@ -39,60 +40,20 @@ const displayRandomUser = (currentUser) => {
 };
 
 const displayUserData = (currentUser) => {
-  console.log('displayUserData:', currentUser);
+  console.log('DISPLAY CURRENT USER:', currentUser);
 };
 
 /* ~~~~~ Display Hydration Data Functions ~~~~~*/
 
-// const displayHydrationData = (hydration, currentUser) => {
-//   // fetchApiData('hydration')
-//   // .then((hydrationEntries) => {
-//   const userWater = hydration.hydrationData;
-//   const displayUser = currentUser.user;
-
-//   // console.log('data.data from API:', userWater);
-//   // console.log('displayUser:', displayUser); // object
-//   let current = userWater.find((user) => user.userID === displayUser.id);
-
-//   // console.log('current:', currentUser);
-
-//   const fluidConsumed = getFluidConsumedOnSpecificDay(
-//     userWater,
-//     current.date,
-//     current.userID
-//   );
-
-//   hydrationInfo.innerHTML = `<article>
-//     <h3>Fluid Consumed:</h3> ${fluidConsumed} ounces of water was consumed on ${current.date}
-//   </article>`;
-//   // })
-//   // .catch((error) => console.error('Error:', error));
-// };
-
-function displayWeeklyHydrationData(hydration, currentUser, currentDate) {
-  console.log('displayWeeklyHydrationData:', currentUser);
-  const weeklyHydrationEntries = getFluidPerWeek(
-    hydration,
-    currentUser.userID,
-    currentDate
-  );
-  console.log('weeklyHydrationEntries:', weeklyHydrationEntries);
-  hydrationInfo.innerText = `<p>This is TatBobo</p>`;
-  //weeklyHydrationEntries.forEach(entry => {
-  // //   hydrationInfo.innerHTML = `<section> ${entry.date}: ${entry.numOunces} </section>
-  // //  `
-  // weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
-  // `;
-  // });
+function displayWeeklyHydrationData(hydration, currentUser) {
+  console.log('CURRENT USER:', currentUser);
+  const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
+  console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
+  weeklyHydrationEntries.forEach((entry) => {
+    hydrationInfo.innerHTML += `<section> ${entry.date}: ${entry.numOunces} </section>
+   `;
+  });
 }
-
-// const displayWeeklyHydrationData = () => {
-//   fetchApiData('hydration')
-//     .then((hydrationData) => {
-//       console.log(hydrationEntries);
-//     })
-//     .catch((error) => console.error('Error:', error));
-// };
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 

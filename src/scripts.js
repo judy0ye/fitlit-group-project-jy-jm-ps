@@ -47,7 +47,7 @@ const initializeApp = () => {
   // displaySleepData(sleep, currentUser);
   // displayHydrationData();
   //displayHydrationData(hydration, currentUser);
-  displayWeeklyHydrationData(hydration, currentUser, currentDate);
+  displayWeeklyHydrationData(hydration, currentUser);
   // displayActivityData(activity, currentUser);
   displayUserData();
   displayDailySleep(sleep, currentUser, currentDate);
