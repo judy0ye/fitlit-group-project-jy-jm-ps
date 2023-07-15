@@ -14,6 +14,7 @@ import {
   // getFluidConsumedOnSpecificDay
   getFluidPerWeek } from './utils';
 //import { fetchApiData } from './apiCalls';
+
 import { getAvgSleep, getAvgQuality, getHoursByDay, getWeekSleep } from './utils';;
 
 // QUERY SELECTORS //
