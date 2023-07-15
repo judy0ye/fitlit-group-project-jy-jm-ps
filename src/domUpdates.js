@@ -1,63 +1,60 @@
-//NOTE: Your DOM manipulation will occur in this file
+/* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
 
-//Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
-
-// DOM MANIPULATION //
-
-// IMPORTS //
-
-//import { newUser } from './dataModel';
+//import { currentUser } from './dataModel';
 //import { getAvgStepGoal, getRandomUser  } from './utils';
 import { getFluidPerWeek } from './utils';
-import { getAvgSleep, getAvgQuality, getHoursByDay, getWeekSleep } from './utils';;
+import {
+  getAvgSleep,
+  getAvgQuality,
+  getHoursByDay,
+  getWeekSleep,
+} from './utils';
 //import { fetchApiData } from './apiCalls';
 
-// QUERY SELECTORS //
+/* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
+
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
 const personalGreeting = document.querySelector('.greeting');
 const hydrationInfo = document.querySelector('.hydration');
 //const hydrationButton = document.querySelector('.water');
-let dailySleep = document.querySelector("#dailySleep");
-let weeklySleep = document.querySelector("#weeklySleepHours");
-let averageSleep = document.querySelector("#averageSleep");
+let dailySleep = document.querySelector('#dailySleep');
+let weeklySleep = document.querySelector('#weeklySleepHours');
+let averageSleep = document.querySelector('#averageSleep');
 
-// DATAMODEL //
+/* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
-// MODIFIERS //
+/* ~~~~~ Display Random User Data Functions ~~~~~*/
 
-// ADD/REMOVE RECIPES //
+const displayRandomUser = (currentUser) => {
+  personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
-// EXPORTS //
-
-const displayRandomUser = (newUser) => {
-
-  personalGreeting.innerHTML = `<article><h3>Welcome</h3>${newUser.name}</article>`;
-
-  personalData.innerHTML = `<article><h3>Name:</h3>${newUser.name}
-  <h3>Address: </h3>${newUser.address}
-  <h3>E-mail: </h3>${newUser.email}
-  <h3>Stride Length: </h3>${newUser.strideLength}
+  personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
+  <h3>Address: </h3>${currentUser.address}
+  <h3>E-mail: </h3>${currentUser.email}
+  <h3>Stride Length: </h3>${currentUser.strideLength}
   </article>`;
 
-  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${newUser.dailyStepGoal}</article>`;
+  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}</article>`;
 };
 
-const displayUserData = (newUser) => {
-  console.log('displayUserData:', newUser)
+const displayUserData = (currentUser) => {
+  console.log('displayUserData:', currentUser);
 };
 
-// const displayHydrationData = (hydration, newUser) => {
+/* ~~~~~ Display Hydration Data Functions ~~~~~*/
+
+// const displayHydrationData = (hydration, currentUser) => {
 //   // fetchApiData('hydration')
 //   // .then((hydrationEntries) => {
 //   const userWater = hydration.hydrationData;
-//   const displayUser = newUser.user;
+//   const displayUser = currentUser.user;
 
 //   // console.log('data.data from API:', userWater);
 //   // console.log('displayUser:', displayUser); // object
 //   let current = userWater.find((user) => user.userID === displayUser.id);
 
-//   // console.log('current:', newUser);
+//   // console.log('current:', currentUser);
 
 //   const fluidConsumed = getFluidConsumedOnSpecificDay(
 //     userWater,
@@ -72,19 +69,22 @@ const displayUserData = (newUser) => {
 //   // .catch((error) => console.error('Error:', error));
 // };
 
-
-function displayWeeklyHydrationData(hydration, newUser, currentDate) {
-  console.log('displayWeeklyHydrationData:', newUser)
-  const weeklyHydrationEntries = getFluidPerWeek(hydration, newUser.userID, currentDate);
-  console.log('weeklyHydrationEntries:', weeklyHydrationEntries)
-  hydrationInfo.innerText = `<p>This is TatBobo</p>`
+function displayWeeklyHydrationData(hydration, currentUser, currentDate) {
+  console.log('displayWeeklyHydrationData:', currentUser);
+  const weeklyHydrationEntries = getFluidPerWeek(
+    hydration,
+    currentUser.userID,
+    currentDate
+  );
+  console.log('weeklyHydrationEntries:', weeklyHydrationEntries);
+  hydrationInfo.innerText = `<p>This is TatBobo</p>`;
   //weeklyHydrationEntries.forEach(entry => {
   // //   hydrationInfo.innerHTML = `<section> ${entry.date}: ${entry.numOunces} </section>
   // //  `
   // weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
   // `;
- // });
-};
+  // });
+}
 
 // const displayWeeklyHydrationData = () => {
 //   fetchApiData('hydration')
@@ -94,6 +94,35 @@ function displayWeeklyHydrationData(hydration, newUser, currentDate) {
 //     .catch((error) => console.error('Error:', error));
 // };
 
+/* ~~~~~ Display Sleep Data Functions ~~~~~*/
+
+function displayDailySleep(sleep, currentUser, currentDate) {
+  const currentDayEntry = getHoursByDay(sleep, currentUser.id, currentDate);
+  if (currentDayEntry) {
+    dailySleep.innerText = `You slept ${currentDayEntry} hours last night.`;
+  } else {
+    dailySleep.innerText = 'You need to get more sleep!';
+  }
+}
+
+function displayWeeklySleep(sleep, currentUser, currentDate) {
+  const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
+  weeklySleepEntries.forEach((entry) => {
+    weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
+   `;
+  });
+}
+
+function displayAverageSleep(sleep, currentUser) {
+  averageSleep.innerText += `You average ${getAvgSleep(
+    sleep,
+    currentUser.id
+  )} hours of sleep each night and a 
+  ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
+}
+
+/* ~~~~~ Display Activity Data Functions ~~~~~*/
+
 // const displayActivityData = () => {
 //   fetchApiData('activity')
 //     .then((activityEntries) => {
@@ -102,30 +131,7 @@ function displayWeeklyHydrationData(hydration, newUser, currentDate) {
 //     .catch((error) => console.error('Error:', error));
 // };
 
-/* ~~~~~ Sleep ~~~~~*/
-
-function displayDailySleep(sleep, newUser, currentDate) {
-  const currentDayEntry = getHoursByDay(sleep, newUser.id, currentDate);
-  if (currentDayEntry) {
-    dailySleep.innerText = `You slept ${currentDayEntry} hours last night.`;
-  } else {
-    dailySleep.innerText = 'You need to get more sleep!';
-  };
-};
-
-function displayWeeklySleep(sleep, newUser, currentDate) {
-  const weeklySleepEntries = getWeekSleep(sleep, newUser.id, currentDate);
-  weeklySleepEntries.forEach(entry => {
-    weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
-   `;
-  });
-};
-
-function displayAverageSleep(sleep, newUser) {
-  averageSleep.innerText += `You average ${getAvgSleep(sleep, newUser.id)} hours of sleep each night and a 
-  ${getAvgQuality(sleep, newUser.id)} sleep quality rating!`;
-};
-
+/* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
   displayRandomUser,

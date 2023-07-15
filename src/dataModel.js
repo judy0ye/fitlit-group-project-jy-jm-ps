@@ -1,6 +1,7 @@
-const newUser = {}
+let currentUser;
+let currentDate; 
 
 export {
-  //currentUser
-  newUser
+  currentUser,
+  currentDate
 }

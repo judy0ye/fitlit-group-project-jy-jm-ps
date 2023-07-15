@@ -1,51 +1,58 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+/* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
 
-// SCRIPTS //
-
-// IMPORTS //
 import './css/normalize.css';
 import './css/styles.css';
 import './images/turing-logo.png';
 import { fetchApiData } from './apiCalls';
-import { displayRandomUser, displayWeeklySleep, displayUserData, displayDailySleep, displayAverageSleep, displayWeeklyHydrationData } from './domUpdates';
+import {
+  displayRandomUser,
+  displayWeeklySleep,
+  displayUserData,
+  displayDailySleep,
+  displayAverageSleep,
+  displayWeeklyHydrationData,
+} from './domUpdates';
 import { getRandomUser } from './utils';
 
-// EXPORTS //
+/* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-// FETCHED DATA //
-
-// EVENT LISTENERS //
-
-let currentDate = "2023/03/24"
+let currentDate = '2023/03/24';
 //date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
-let users, hydration, sleep, activity, newUser;
+let users, hydration, sleep, activity, currentUser;
+
+/* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
 window.addEventListener('load', function () {
-  Promise.all([fetchApiData('users'), fetchApiData('hydration'), fetchApiData('sleep'), fetchApiData('activity')])
-    .then(data => {
-      console.log('onload from fetch data:', data)
-      users = data[0].users;
-      hydration = data[1].hydrationData;
-      sleep = data[2].sleepData;
-      activity = data[3].activityData;
-      initializeApp();
-    });
+  Promise.all([
+    fetchApiData('users'),
+    fetchApiData('hydration'),
+    fetchApiData('sleep'),
+    fetchApiData('activity'),
+  ]).then((data) => {
+    console.log('onload from fetch data:', data);
+    users = data[0].users;
+    hydration = data[1].hydrationData;
+    sleep = data[2].sleepData;
+    activity = data[3].activityData;
+    initializeApp();
+  });
 });
 
+/* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
+
 const initializeApp = () => {
-  console.log('initializeApp:', users, hydration, activity, sleep)
-  newUser = getRandomUser(users);
-  displayRandomUser(newUser);
-  // displaySleepData(sleep, newUser);
+  console.log('initializeApp:', users, hydration, activity, sleep);
+  currentUser = getRandomUser(users);
+  displayRandomUser(currentUser);
+  // displaySleepData(sleep, currentUser);
   // displayHydrationData();
-  //displayHydrationData(hydration, newUser);
-  displayWeeklyHydrationData(hydration, newUser, currentDate)
-  // displayActivityData(activity, newUser);
+  //displayHydrationData(hydration, currentUser);
+  displayWeeklyHydrationData(hydration, currentUser, currentDate);
+  // displayActivityData(activity, currentUser);
   displayUserData();
-  displayDailySleep(sleep, newUser, currentDate);
-  displayWeeklySleep(sleep, newUser, currentDate);
-  displayAverageSleep(sleep, newUser, currentDate);
+  displayDailySleep(sleep, currentUser, currentDate);
+  displayWeeklySleep(sleep, currentUser, currentDate);
+  displayAverageSleep(sleep, currentUser, currentDate);
   // displayCalendar()
 };
 
