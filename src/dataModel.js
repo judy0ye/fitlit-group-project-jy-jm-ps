@@ -1,5 +1,6 @@
-const currentUser = {}
+const newUser = {}
 
 export {
-  currentUser
+  //currentUser
+  newUser
 }
