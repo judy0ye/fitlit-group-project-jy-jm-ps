@@ -48,7 +48,7 @@ const displayRandomUser = (newUser) => {
 };
 
 const displayUserData = (newUser) => {
-  console.log('Judy:', newUser)
+  console.log('displayUserData:', newUser)
 };
 
 // const displayHydrationData = (hydration, newUser) => {
