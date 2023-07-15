@@ -7,15 +7,10 @@
 // IMPORTS //
 
 //import { newUser } from './dataModel';
-//import userData from './data/users'
 //import { getAvgStepGoal, getRandomUser  } from './utils';
-import {
-  //getRandomUser,
-  // getFluidConsumedOnSpecificDay
-  getFluidPerWeek } from './utils';
-//import { fetchApiData } from './apiCalls';
-
+import { getFluidPerWeek } from './utils';
 import { getAvgSleep, getAvgQuality, getHoursByDay, getWeekSleep } from './utils';;
+//import { fetchApiData } from './apiCalls';
 
 // QUERY SELECTORS //
 const personalData = document.querySelector('.user-data');
@@ -79,10 +74,10 @@ const displayUserData = (newUser) => {
 
 
 function displayWeeklyHydrationData(hydration, newUser, currentDate) {
-//  console.log('Judyn', newUser)
+  console.log('displayWeeklyHydrationData:', newUser)
   const weeklyHydrationEntries = getFluidPerWeek(hydration, newUser.userID, currentDate);
-  console.log('Judyn', weeklyHydrationEntries)
-  hydrationInfo.innerText = `<p>This is BOB</p>`
+  console.log('weeklyHydrationEntries:', weeklyHydrationEntries)
+  hydrationInfo.innerText = `<p>This is TatBobo</p>`
   //weeklyHydrationEntries.forEach(entry => {
   // //   hydrationInfo.innerHTML = `<section> ${entry.date}: ${entry.numOunces} </section>
   // //  `
@@ -138,8 +133,8 @@ export {
   displayDailySleep,
   displayWeeklySleep,
   displayAverageSleep,
- // displayHydrationData,
-  displayWeeklyHydrationData
+  displayWeeklyHydrationData,
+  // displayHydrationData,
   // getUserById,
   // getAvgStepGoal,
   // getAvgFluidConsumed,

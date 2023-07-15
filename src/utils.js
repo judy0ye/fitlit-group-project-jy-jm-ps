@@ -68,8 +68,7 @@ function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
   }
   return user.numOunces
   
-}
-
+};
 
 // function getFluidOuncesPerDay(hydrationData, day, id) {
 //   let invidualUser = []
@@ -138,16 +137,16 @@ function getAvgQuality(sleepData, userID) {
 
 //hours per day - oz per day
 function getHoursByDay(sleepData, id, date) {
-console.log('Judy', sleepData, id, date)
+  console.log('getHoursByDay:', sleepData, id, date)
   const sleepEntries = sleepData.filter(entry => entry.userID === id);
- console.log(sleepEntries)
+   console.log('sleepEntries:', sleepEntries)
  const dailyEntry = sleepEntries.find(entry => entry.date === date);
- console.log(dailyEntry)
+   console.log('dailyEntry:', dailyEntry)
   return dailyEntry.hoursSlept;
 };
 
 function getQualityByDay(sleepData, userID, date) {
- // console.log('Jan', userID)
+   console.log('getQualityByDay:', userID)
   const sleepEntries = sleepData.filter(entry => entry.userID === userID);
   const dailyEntry = sleepEntries.find(entry => entry.date === date);
   return dailyEntry.sleepQuality;
