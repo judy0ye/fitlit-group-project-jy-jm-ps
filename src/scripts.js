@@ -20,7 +20,7 @@ import {
   sleepButton,
   displaySleepGraphs,
   groupedHydration,
-  oneWeekChart,
+
   hideChickenImage,
   showChickenImage,
   hideSleepGraphs
@@ -206,7 +206,7 @@ window.addEventListener('load', function () {
 
 const onClickHydration = () => {
   hideChickenImage();
-  hideSleepGraphs();
+  hideSleepGraphs()
   displayHydrationGraphs();
 }
 
@@ -217,15 +217,7 @@ const onClickSleep = () => {
 }
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep)
-// sleepButton.addEventListener('click', function () {
-//   // if (weeklyHydrationButton.disabled) {
-//   //   sections.splice(0, sections.length)
-//   // }
-//   if (!oneWeekChart === '') {
-//     groupedHydration.splice(0, groupedHydration.length)
-//   }
-//   displaySleepGraphs()
-// })
+
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
