@@ -16,7 +16,7 @@ import {
 
 import { hydration, currentUser } from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
-let sections;
+let groupedHydration, groupedSleep
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -28,8 +28,10 @@ const hydrationInfo = document.querySelector('.hydration');
 let dailySleep = document.querySelector('#dailySleep');
 let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
-const oneWeekHydrationChart = document.querySelector('.graphs');
+const oneWeekChart = document.querySelector('.graphs');
 const weeklyHydrationButton = document.querySelector('.hydration-button');
+const sleepButton = document.querySelector('.sleep-button')
+const chickenImage = document.querySelector('.main-image')
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
@@ -50,6 +52,14 @@ const displayRandomUser = (currentUser) => {
 const displayUserData = (currentUser) => {
   console.log('DISPLAY CURRENT USER:', currentUser);
 };
+
+const hideChickenImage = () => {
+  chickenImage.classList.add('hidden')
+}
+
+const showChickenImage = () => {
+  chickenImage.classList.remove('hidden')
+}
 
 /* ~~~~~ Display Hydration Data Functions ~~~~~*/
 // function displayAverageFluidConsumed(hydration, currentUser) {
@@ -79,14 +89,14 @@ function displayWeeklyHydrationData(hydration, currentUser) {
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
   // console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
 
-  sections = [];
+  groupedHydration = [];
 
   weeklyHydrationEntries.forEach((entry) => {
     const section = document.createElement('section');
     section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`;
     section.classList.add('hidden');
-    sections.push(section);
-    oneWeekHydrationChart.appendChild(section);
+    groupedHydration.push(section);
+    oneWeekChart.appendChild(section);
   });
 }
 
@@ -95,20 +105,13 @@ function displayWeeklyHydrationData(hydration, currentUser) {
 //   show(sections)
 // }
 
-function displayGraphs() {
-  sections.forEach((section) => section.classList.toggle('hidden'));
+function displayHydrationGraphs() {
+  groupedHydration.forEach((hydration) => hydration.classList.remove('hidden'));
+  weeklyHydrationButton.disabled = true
 }
-
-function hide(section) {
-  section.forEach((individualSection) =>
-    individualSection.classList.add('hidden')
-  );
-}
-
-function show(section) {
-  section.forEach((individualSection) =>
-    individualSection.classList.remove('hidden')
-  );
+function hideHydrationGraphs() {
+  groupedHydration.forEach((hydration) => hydration.classList.add('hidden'));
+  weeklyHydrationButton.disabled = false
 }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
@@ -124,10 +127,30 @@ function displayDailySleep(sleep, currentUser, currentDate) {
 
 function displayWeeklySleep(sleep, currentUser, currentDate) {
   const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
-  weeklySleepEntries.forEach((entry) => {
-    weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
-   `;
+  // weeklySleepEntries.forEach((entry) => {
+  //   weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
+  //  `;
+
+   groupedSleep = []
+
+   weeklySleepEntries.forEach((entry) => {
+     const section = document.createElement('section')
+     section.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`
+     section.classList.add('hidden')
+     groupedSleep.push(section)
+     oneWeekChart.appendChild(section)
+console.log('groupedSleep', oneWeekChart)
   });
+}
+
+function displaySleepGraphs() {
+  groupedSleep.forEach(sleep => sleep.classList.remove('hidden'))
+  sleepButton.disabled = true
+}
+
+function hideSleepGraphs() {
+  groupedSleep.forEach(sleep => sleep.classList.add('hidden'))
+  sleepButton.disabled = false
 }
 
 function displayAverageSleep(sleep, currentUser) {
@@ -165,7 +188,13 @@ export {
   // getAvgStepGoal,
   // getAvgFluidConsumed,
   // getAvgFluidConsumedOnSpecifcDay
-  show,
-  hide,
-  displayGraphs,
+  displayHydrationGraphs,
+  hideHydrationGraphs,
+  sleepButton,
+  displaySleepGraphs,
+  hideSleepGraphs,
+  groupedHydration,
+  oneWeekChart,
+  hideChickenImage,
+  showChickenImage,
 };

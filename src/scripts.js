@@ -15,8 +15,15 @@ import {
   // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
   weeklyHydrationButton,
-  displayGraphs,
-  show,
+  displayHydrationGraphs,
+  hideHydrationGraphs,
+  sleepButton,
+  displaySleepGraphs,
+  groupedHydration,
+  oneWeekChart,
+  hideChickenImage,
+  showChickenImage,
+  hideSleepGraphs
 } from './domUpdates';
 import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
 
@@ -197,8 +204,28 @@ window.addEventListener('load', function () {
   });
 });
 
-weeklyHydrationButton.addEventListener('click', displayGraphs);
+const onClickHydration = () => {
+  hideChickenImage();
+  hideSleepGraphs();
+  displayHydrationGraphs();
+}
 
+const onClickSleep = () => {
+  hideChickenImage()
+  hideHydrationGraphs()
+  displaySleepGraphs()
+}
+weeklyHydrationButton.addEventListener('click', onClickHydration);
+sleepButton.addEventListener('click', onClickSleep)
+// sleepButton.addEventListener('click', function () {
+//   // if (weeklyHydrationButton.disabled) {
+//   //   sections.splice(0, sections.length)
+//   // }
+//   if (!oneWeekChart === '') {
+//     groupedHydration.splice(0, groupedHydration.length)
+//   }
+//   displaySleepGraphs()
+// })
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
@@ -221,4 +248,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { hydration, currentUser, displaySleepChart };
+export { hydration, currentUser, displaySleepChart, };
