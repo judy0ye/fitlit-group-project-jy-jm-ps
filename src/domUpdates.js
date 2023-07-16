@@ -148,6 +148,37 @@ function displayAverageSleep(sleep, currentUser) {
 //     .catch((error) => console.error('Error:', error));
 // };
 
+function displayActivity() {
+  dailySteps.innerText = `You took ${activity.returnDailySteps(
+    newUser.id,
+    currentDate
+  )} steps today!`;
+  dailyMiles.innerText = `You have walked ${activity.returnMiles(
+    newUser.id,
+    currentDate
+  )} miles today!`;
+  dailyMinutes.innerText = `You were active for ${activity.returnMinutesActive(
+    newUser.id,
+    currentDate
+  )} minutes today!`;
+}
+
+function displayWeeklyStepCount() {
+  const weeklyActivityEntries = activity.returnWeeklySteps(
+    newUser.id,
+    currentDate
+  );
+  weeklyActivityEntries.forEach((entry) => {
+    if (activity.returnMetStepGoal(newUser.id, entry.date)) {
+      weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You met your goal.  Take a nap!
+        `;
+    } else {
+      weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You have not met your goal.  STEP IT UP!
+        `;
+    }
+  });
+}
+
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
@@ -168,4 +199,6 @@ export {
   show,
   hide,
   displayGraphs,
+  displayActivity,
+  displayWeeklyStepCount,
 };
