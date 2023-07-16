@@ -54,12 +54,44 @@ body, html {
   grid-area: hydration;
 }
 
-.sleep {
+/* .sleep {
   border: 3px solid #333333;
   border-radius: 3px;
   padding: .25em;
   grid-area: sleep;
+} */
+
+.sleep {
+  padding: 1em;
+  background-color: white;
+  /* border-radius: 5px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  border: 3px solid #333333;
 }
+
+.intro-text {
+  font-size: 1.5em;
+  color: #0c0101;
+  margin-bottom: 1em;
+}
+
+.section-title {
+  color: #53d21c;
+  font-size: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+.info-title {
+  color: #090000;
+  font-size: 1.0em;
+  margin-bottom: 0.2em;
+}
+
+.info-text {
+  color: #999;
+  font-size: 1.2em;
+}
+
 
 .graphs {
   border: 3px solid #333333;

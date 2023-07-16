@@ -65,16 +65,16 @@ const displayUserData = (currentUser) => {
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(hydration, currentUser.id, currentDate);
-  console.log('waterDrankToday:', fluidToday)
+  // console.log('waterDrankToday:', fluidToday)
   hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`
   // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
   // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
 }
 
 function displayWeeklyHydrationData(hydration, currentUser) {
-  console.log('CURRENT USER:', currentUser);
+  // console.log('CURRENT USER:', currentUser);
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
-  console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
+  // console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
 
   sections = []
 

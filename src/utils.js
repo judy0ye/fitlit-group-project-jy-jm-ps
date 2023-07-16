@@ -62,7 +62,7 @@ const getAvgStepGoal = (users) => {
 // sleep quality all time - water for all time
 function getAvgFluidForAllTime(hydrationData, id) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
-  console.log('HYDRATIONENTREIS', hydrationEntries)
+  // console.log('HYDRATIONENTREIS', hydrationEntries)
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
   }, 0);
@@ -143,7 +143,7 @@ function getAvgSleep(sleepData, userID) {
     return (acc += user.hoursSlept);
   }, 0);
   return Math.round((avgSleep / sleepEntries.length) * 10) / 10;
-}
+};
 
 // sleep quality all time - water for all time
 function getAvgQuality(sleepData, userID) {
@@ -152,8 +152,7 @@ function getAvgQuality(sleepData, userID) {
     return (acc += user.sleepQuality);
   }, 0);
   return Math.round((avgQuality / sleepEntries.length) * 10) / 10;
-}
-
+};
 
 
 // // Create a new function to display the chart
@@ -198,11 +197,6 @@ function getAvgQuality(sleepData, userID) {
 
 
 
-
-
-
-
-//hours per day - oz per day
 function getHoursByDay(sleepData, id, date) {
   // console.log('getHoursByDay:', sleepData, id, date);
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
@@ -210,48 +204,33 @@ function getHoursByDay(sleepData, id, date) {
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
 
   return dailyEntry.hoursSlept;
-}
+};
 
 function getQualityByDay(sleepData, userID, date) {
-  console.log('getQualityByDay:', userID);
+  // console.log('getQualityByDay:', userID);
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
   return dailyEntry.sleepQuality;
-}
+};
 
-//wekly sleep - weekly oz - working function from Parvin:
-// function getWeekSleep(sleepData, userID, startDate) {
-//   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-//   console.log('SLEEP ENTRIES',sleepEntries);
-
-//   const indexOfCurrentDayEntry = sleepEntries.findIndex(
-//     (entry) => entry.date === startDate
-//   );
-//   const weeklySleep = sleepEntries
-//     .slice(indexOfCurrentDayEntry, indexOfCurrentDayEntry - 7)
-//     .reverse();
-//   const weeklySleepData = weeklySleep.map((entry) => ({
-//     date: entry.date,
-//     hoursSlept: entry.hoursSlept + ' hours slept',
-//     sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-//   }));
-//   return weeklySleepData;
-// }
-
-//Working Weekly Sleep Function for 7 most current days
-
-function getWeekSleep(sleepData, userID) {
+function getWeekSleep(sleepData, userID, startDate) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-  const lastIndex = sleepEntries.length - 1;
-  const weeklySleep = sleepEntries.slice(lastIndex - 6, lastIndex + 1);
-  const weeklySleepData = weeklySleep.map((entry) => ({
-    date: entry.date,
-    hoursSlept: entry.hoursSlept + ' hours slept',
-    sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-  }));
+  const indexOfCurrentDayEntry = sleepEntries.findIndex(entry => entry.date === startDate);
+  let weeklySleep = [];
+  for (let i = indexOfCurrentDayEntry; i > indexOfCurrentDayEntry - 7; i--) {
+    if (i >= 0 && sleepEntries[i]) {
+      weeklySleep.push(sleepEntries[i]);
+    }
+  };
+  const weeklySleepData = weeklySleep.map((entry) => {
+    return {
+      date: entry.date,
+      hoursSlept: entry.hoursSlept + ' hours slept',
+      sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
+    }
+  });
   return weeklySleepData;
-}
-
+};
 
 
 /* ~~~~~ Exports ~~~~~*/
