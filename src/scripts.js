@@ -2,7 +2,7 @@
 
 import './css/normalize.css';
 import './css/styles.css';
-import './images/turing-logo.png';
+import './images/FitChicks_title_blue.png';
 import { fetchApiData } from './apiCalls';
 import {
   displayRandomUser,
