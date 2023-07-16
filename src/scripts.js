@@ -3,10 +3,24 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/turing-logo.png';
+import { fetchApiData } from './apiCalls';
+import {
+  displayRandomUser,
+  displayWeeklySleep,
+  displayUserData,
+  displayDailySleep,
+  displayAverageSleep,
+  displayFluidConsumedToday,
+  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
+  displayWeeklyHydrationData,
+  weeklyHydrationButton,
+  displayGraphs,
+  show,
+} from './domUpdates';
+import { getRandomUser } from './utils';
 
+/* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-
-//Global
 let currentDate = '2023/03/24';
 //date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
 let users, hydration, sleep, activity, currentUser;
@@ -86,23 +100,10 @@ let myChart = new Chart(ctx, {
 // Remember to include this code in your main JavaScript file where the "currentUser" object and "sleepData" array are defined. Also, make sure you've correctly included the Chart.js library. You need to call the displaySleepChart function after your sleep data is fetched and available.
 
 
-import { fetchApiData } from './apiCalls';
-import {
-  displayRandomUser,
-  displayWeeklySleep,
-  displayUserData,
-  displayDailySleep,
-  displayAverageSleep,
-  displayFluidConsumedToday,
-  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
-  displayWeeklyHydrationData,
-  weeklyHydrationButton,
-  displayGraphs,
-  show,
-} from './domUpdates';
-import { getRandomUser } from './utils';
 
-/* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
+
+
+
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
@@ -142,13 +143,7 @@ const initializeApp = () => {
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
-  // displaySleepChart(sleep, currentUser);
   // displayCalendar()
 };
-
-// const displayCalendar = () => {
-//     calendar.innerHTML = `<input id="dateInput" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
-//     calendar2.innerHTML = `<input id="dateInput2" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
-//   };
 
 export{ hydration, currentUser }

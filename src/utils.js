@@ -138,7 +138,6 @@ function getWeeklyFluid(hydrationData, userID) {
 /* ~~~~~ Sleep ~~~~~*/
 
 function getAvgSleep(sleepData, userID) {
-  console.log('Show ME: getAvgSleep', sleepData)
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const avgSleep = sleepEntries.reduce((acc, user) => {
     return (acc += user.hoursSlept);
@@ -146,14 +145,16 @@ function getAvgSleep(sleepData, userID) {
   return Math.round((avgSleep / sleepEntries.length) * 10) / 10;
 }
 
+// sleep quality all time - water for all time
 function getAvgQuality(sleepData, userID) {
-  console.log('Show ME: getAvgQuality and userID', sleepData, userID)
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const avgQuality = sleepEntries.reduce((acc, user) => {
     return (acc += user.sleepQuality);
   }, 0);
   return Math.round((avgQuality / sleepEntries.length) * 10) / 10;
 }
+
+
 
 // // Create a new function to display the chart
 // function displaySleepChart(sleepData, currentUser) {
@@ -197,6 +198,11 @@ function getAvgQuality(sleepData, userID) {
 
 
 
+
+
+
+
+//hours per day - oz per day
 function getHoursByDay(sleepData, id, date) {
   // console.log('getHoursByDay:', sleepData, id, date);
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
