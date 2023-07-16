@@ -3,9 +3,11 @@
 /* CATEGORIES SECTION */
 /* RECIPES SECTION */
 /* USER SECTION */
-/* MODIFIERS */ /* like hidden */
+/* MODIFIERS */
+/* like hidden */
 
-body, html {
+body,
+html {
   /* background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); */
   /* background-repeat: no-repeat; */
   height: 100%;
@@ -43,7 +45,7 @@ body, html {
 
 #gym-title {
   font-family: 'Great Vibes', cursive;
-  letter-spacing: 1px; 
+  letter-spacing: 1px;
   transition: transform 0.3s ease;
   margin-bottom: 40px;
   font-size: 46px;
@@ -52,7 +54,7 @@ body, html {
 }
 
 #gym-title:hover {
-  transform: translateX(10px); 
+  transform: translateX(10px);
 }
 
 .turing {
@@ -71,7 +73,7 @@ body, html {
 }
 
 .turing:hover {
-  transform: scale(1.2); 
+  transform: scale(1.2);
   background-color: #C0C0C0;
 }
 
@@ -98,11 +100,23 @@ body, html {
   grid-area: hydration;
 }
 
+.widgetTitles {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.widgetData {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
 #sleepWidget {
   border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: sleep;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #57caf7e9;
 }
 
 .graphs {
@@ -111,6 +125,11 @@ body, html {
   padding: .25em;
   grid-area: graphs;
 }
+
+.graphs canvas {
+  width: 100% !important;
+  height: auto !important;
+};
 
 .user-data {
   border: 3px solid #333333;
@@ -139,4 +158,3 @@ body, html {
   padding: .25em;
   grid-area: data-view;
 }
-
