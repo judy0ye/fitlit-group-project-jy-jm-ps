@@ -93,7 +93,12 @@ import {
   displayUserData,
   displayDailySleep,
   displayAverageSleep,
+  displayFluidConsumedToday,
+  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
+  weeklyHydrationButton,
+  displayGraphs,
+  show,
 } from './domUpdates';
 import { getRandomUser } from './utils';
 
@@ -117,16 +122,21 @@ window.addEventListener('load', function () {
   });
 });
 
+weeklyHydrationButton.addEventListener('click', displayGraphs)
+
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
-  console.log('initializeApp:', users, hydration, activity, sleep);
+  // console.log('initializeApp:', users, hydration, activity, sleep);
   currentUser = getRandomUser(users);
   displayRandomUser(currentUser);
   // displaySleepData(sleep, currentUser);
   // displayHydrationData();
   //displayHydrationData(hydration, currentUser);
+  // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
+  displayFluidConsumedToday(hydration, currentUser, currentDate)
   displayWeeklyHydrationData(hydration, currentUser);
+  
   // displayActivityData(activity, currentUser);
   displayUserData();
   displayDailySleep(sleep, currentUser, currentDate);
@@ -136,7 +146,9 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
+// const displayCalendar = () => {
+//     calendar.innerHTML = `<input id="dateInput" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
+//     calendar2.innerHTML = `<input id="dateInput2" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
+//   };
 
-
-
-
+export{ hydration, currentUser }
