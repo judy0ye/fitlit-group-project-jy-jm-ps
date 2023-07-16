@@ -145,7 +145,6 @@ function getAvgSleep(sleepData, userID) {
   return Math.round((avgSleep / sleepEntries.length) * 10) / 10;
 };
 
-// sleep quality all time - water for all time
 function getAvgQuality(sleepData, userID) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const avgQuality = sleepEntries.reduce((acc, user) => {
@@ -153,49 +152,6 @@ function getAvgQuality(sleepData, userID) {
   }, 0);
   return Math.round((avgQuality / sleepEntries.length) * 10) / 10;
 };
-
-
-// // Create a new function to display the chart
-// function displaySleepChart(sleepData, currentUser) {
-//   let avgSleep = getAvgSleep(sleepData, currentUser.id);
-//   let avgQuality = getAvgQuality(sleepData, currentUser.id);
-
-// // Get a reference to the canvas element
-// let sleepChartContext = document.getElementById('myChart').getContext('2d');
-
-// // Create the chart
-// let sleepChart = new Chart(sleepChartContext, {
-//   type: 'bar',
-//   data: {
-//     labels: ['Avg Sleep', 'Avg Quality'],
-//     datasets: [{
-//       label: 'Hours / Rating',
-//       data: [avgSleep, avgQuality],
-//       backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-//       borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
-//       borderWidth: 1
-//     }]
-//   },
-//   options: {
-//     responsive: true,
-//     scales: {
-//       y: {
-//         beginAtZero: true
-//       }
-//     }
-//   }
-// });
-// }
-
-// Call the function when you want to display the chart
-// displaySleepChart(sleepData, currentUser);
-// This code should create a bar chart with two bars. One bar represents the average hours slept, and the other bar represents the average sleep quality.
-
-// The chart is created in the "myChart" canvas element, and the colors and layout of the chart can be customized to fit your needs.
-
-// Remember to include this code in your main JavaScript file where the "currentUser" object and "sleepData" array are defined. Also, make sure you've correctly included the Chart.js library. You need to call the displaySleepChart function after your sleep data is fetched and available.
-
-
 
 function getHoursByDay(sleepData, id, date) {
   // console.log('getHoursByDay:', sleepData, id, date);
@@ -231,6 +187,67 @@ function getWeekSleep(sleepData, userID, startDate) {
   });
   return weeklySleepData;
 };
+
+/* ~~~~~ Activity ~~~~~*/
+
+// Judy's functions
+// function getMilesWalked(userData, activityData, id, day) {
+  //   const user = userData.find((user) => user.id === id);
+  
+  //   const activity = activityData.find(
+  //     (activity) => activity.userID === id && activity.date === day
+
+const findUserActivityData = (activityData, userID) => activityData
+  .filter(entry => entry.userID === userID);
+
+const findUserDailyData = (activityEntries, date) => activityEntries
+  .find(entry => entry.date === date);
+
+const findUserData = (userData, userID) => userData
+  .find(user => user.id === userID);
+
+const returnDailySteps = (activityData, userID, date) => {
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+  return dailyData.numSteps;
+};
+
+const returnWeeklySteps = (activityData, userID, startDate) => {
+  const userActivityData = findUserActivityData(activityData, userID);
+  const startDataIndex = userActivityData
+  .findIndex(entry => entry.date === startDate);
+  const weeklyData = userActivityData
+  .slice(startDataIndex - 6, startDataIndex + 1).reverse();
+
+  return weeklyData.map(entry => ({
+    date: entry.date,
+    steps: entry.numSteps + ' steps taken',
+  }));
+};
+
+const returnMiles = (activityData, userData, userID, date) => {
+  const userInfo = findUserData(userData, userID);
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+
+  return Math.round(userInfo.strideLength * dailyData.numSteps / 5280);
+};
+
+const returnMinutesActive = (activityData, userID, date) => {
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+
+  return dailyData.minutesActive;
+};
+
+const returnMetStepGoal = (activityData, userData, userID, date) => {
+  const userInfo = findUserData(userData, userID);
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+
+  return dailyData.numSteps >= userInfo.dailyStepGoal;
+};
+
 
 
 /* ~~~~~ Exports ~~~~~*/

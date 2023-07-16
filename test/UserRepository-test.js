@@ -5,17 +5,18 @@ import {
   getRandomUser,
   getUserById,
   getAvgFluidConsumed,
-  getFluidConsumedOnSpecificDay, 
+  getFluidConsumedOnSpecificDay,
   getAvgStepGoal,
   getFluidOuncesPerDay,
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
-  getWeekSleep
+  getWeekSleep,
 } from '../src/utils';
 import userData from '../src/data/users';
-import sleepTestData from '../src/data/sleep-test-data'
+import sleepTestData from '../src/data/sleep-test-data';
+import activityTestData from '../src/data/activity-test-data';
 
 /* ~~~~~ Tests ~~~~~*/
 
@@ -239,83 +240,171 @@ describe('fluid consumed', function () {
     expect(fluidOnSpecificDay).to.equal(95);
   });
   it.skip('should return how many fluid ounces of water a user consumed each day over a course of 7 days', function () {
-    const id = 1
-    const startDate = '2023/03/01'
-    const ouncePerDay = getFluidOuncesPerDay(hydrationInfo.userWater, startDate, id)
-
-    expect(ouncePerDay).to.deep.equal(
-      {
-        '2023/03/01': 28,
-        '2023/03/02': 54,
-        '2023/03/03': 54,
-        '2023/03/04': 5,
-        '2023/03/15': 4,
-        '2023/03/24': 95,
-        '2023/03/25': 35
-      }
+    const id = 1;
+    const startDate = '2023/03/01';
+    const ouncePerDay = getFluidOuncesPerDay(
+      hydrationInfo.userWater,
+      startDate,
+      id
     );
+
+    expect(ouncePerDay).to.deep.equal({
+      '2023/03/01': 28,
+      '2023/03/02': 54,
+      '2023/03/03': 54,
+      '2023/03/04': 5,
+      '2023/03/15': 4,
+      '2023/03/24': 95,
+      '2023/03/25': 35,
+    });
   });
 });
 
-
 /* ~~~~~ Sleep ~~~~~*/
 
-describe('Sleep Functions', function() {
-
+describe('Sleep Functions', function () {
   let sleepData;
-  
+
   beforeEach(() => {
     sleepData = [...sleepTestData];
-  })
+  });
 
-  it('should take in a user ID', function() {
+  it('should take in a user ID', function () {
     expect(sleepData[0].userID).to.equal(1);
   });
 
-  it('should take in a date', function() {
-    expect(sleepData[0].date).to.equal("2023/03/24");
+  it('should take in a date', function () {
+    expect(sleepData[0].date).to.equal('2023/03/24');
   });
 
-  it('should take in a user hours slept', function() {
+  it('should take in a user hours slept', function () {
     expect(sleepData[0].hoursSlept).to.equal(9.6);
   });
 
-  it('should take in a user sleep quality', function() {
+  it('should take in a user sleep quality', function () {
     expect(sleepData[0].sleepQuality).to.equal(4.3);
   });
 
-  it('should be able to average user\'s sleep', function() {
+  it("should be able to average user's sleep", function () {
     expect(getAvgSleep(sleepData, 1)).to.equal(6.6);
     expect(getAvgSleep(sleepData, 2)).to.equal(8.1);
   });
 
-  it('should be able to average user\'s sleep quality', function() {
+  it("should be able to average user's sleep quality", function () {
     expect(getAvgQuality(sleepData, 1)).to.equal(3.6);
     expect(getAvgQuality(sleepData, 2)).to.equal(3.3);
   });
 
-  it('should be able to get user\'s hours slept by day', function() {
+  it("should be able to get user's hours slept by day", function () {
     expect(getHoursByDay(sleepData, 1, '2023/03/24')).to.equal(9.6);
     expect(getHoursByDay(sleepData, 1, '2023/03/29')).to.equal(5.6);
     expect(getHoursByDay(sleepData, 2, '2023/03/25')).to.equal(8.1);
     expect(getHoursByDay(sleepData, 2, '2023/03/28')).to.equal(5.1);
   });
 
-  it('should be able to get user\'s sleep quality by day', function() {
+  it("should be able to get user's sleep quality by day", function () {
     expect(getQualityByDay(sleepData, 1, '2023/03/24')).to.equal(4.3);
     expect(getQualityByDay(sleepData, 1, '2023/03/29')).to.equal(2.1);
     expect(getQualityByDay(sleepData, 2, '2023/03/25')).to.equal(4.7);
     expect(getQualityByDay(sleepData, 2, '2023/03/28')).to.equal(2.1);
   });
-  
-  it('should be able to get user\'s weekly sleep data', function() {
+
+  it("should be able to get user's weekly sleep data", function () {
     expect(getWeekSleep(sleepData, 1, '2023/03/30')).to.deep.equal([
-    {'date': '2023/03/30', 'hoursSlept': '6.2 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.3'},
-    {'date': '2023/03/29', 'hoursSlept': '5.6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '2.1'}, 
-    {'date': '2023/03/28', 'hoursSlept': '6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.6'},
-    {'date': '2023/03/27', 'hoursSlept': '7.1 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.7'},
-    {'date': '2023/03/26', 'hoursSlept': '5.4 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.1'},
-    {'date': '2023/03/25', 'hoursSlept': '6.3 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '3.3'},
-    {'date': '2023/03/24', 'hoursSlept': '9.6 hours slept', 'sleepQuality': ' a sleep quality rating of ' + '4.3'}
-  ])});
+      {
+        date: '2023/03/30',
+        hoursSlept: '6.2 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '3.3',
+      },
+      {
+        date: '2023/03/29',
+        hoursSlept: '5.6 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '2.1',
+      },
+      {
+        date: '2023/03/28',
+        hoursSlept: '6 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '4.6',
+      },
+      {
+        date: '2023/03/27',
+        hoursSlept: '7.1 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '4.7',
+      },
+      {
+        date: '2023/03/26',
+        hoursSlept: '5.4 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '3.1',
+      },
+      {
+        date: '2023/03/25',
+        hoursSlept: '6.3 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '3.3',
+      },
+      {
+        date: '2023/03/24',
+        hoursSlept: '9.6 hours slept',
+        sleepQuality: ' a sleep quality rating of ' + '4.3',
+      },
+    ]);
+  });
+});
+
+/* ~~~~~ Activity ~~~~~*/
+
+describe('Activity', function () {
+  it('returnDailySteps should be a function', function () {
+    expect(returnDailySteps).to.be.a('function');
+  });
+
+  it('returnWeeklySteps should be a function', function () {
+    expect(returnWeeklySteps).to.be.a('function');
+  });
+
+  it('returnMiles should be a function', function () {
+    expect(returnMiles).to.be.a('function');
+  });
+
+  it('returnMinutesActive should be a function', function () {
+    expect(returnMinutesActive).to.be.a('function');
+  });
+
+  it('returnMetStepGoal should be a function', function () {
+    expect(returnMetStepGoal).to.be.a('function');
+  });
+
+  it('should be able to calculate the number of miles walked in a day', function () {
+    expect(
+      returnMiles(activityTestData, userTestData, 1, '2023/03/24')
+    ).to.equal(6);
+  });
+
+  it('should be able to return how many minutes the user was active', function () {
+    expect(returnMinutesActive(activityTestData, 2, '2023/03/24')).to.equal(
+      125
+    );
+  });
+
+  it('should be able to return if the user reached their step goal', function () {
+    expect(
+      returnMetStepGoal(activityTestData, userTestData, 1, '2023/03/25')
+    ).to.equal(true);
+    expect(
+      returnMetStepGoal(activityTestData, userTestData, 2, '2023/03/24')
+    ).to.equal(false);
+  });
+
+  it('should return the number of steps for a specific day', function () {
+    expect(returnDailySteps(activityTestData, 1, '2023/03/24')).to.equal(7362);
+  });
+
+  it('should return the steps taken weekly starting from a specific date', function () {
+    const expectedWeeklyData = returnWeeklySteps(
+      activityTestData,
+      1,
+      '2023/03/31'
+    );
+    expect(expectedWeeklyData[0].date).to.equal('2023/03/31');
+    expect(expectedWeeklyData[6].date).to.equal('2023/03/25');
+  });
 });

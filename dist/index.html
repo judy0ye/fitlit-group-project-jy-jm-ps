@@ -15,8 +15,26 @@
         <div class="greeting"></div>
         <div class="data-view">
           <h2>View Weekly Averages</h2>
-          <label for="user-input">Please enter desired start date (YYYY/MM/DD): </label>
-          <input type="text" name="start-date" id="user-input"></br>
+  <!-- Input Label -->
+          <label for="start-date-input">Please enter the desired start date:</label>
+        <input type="date" name="start-date" id="start-date-input" required />
+        <br />
+<!-- Hydration Widget Code -->
+      <section id="hydrationWidget" class="widget">
+        <h1 class="widgetTitles">Hydration Data</h1>
+        <h2 id="dailyWater"></h2>
+        <h2>Weekly Water Consumption:</h2>
+        <h3 id="weeklyWater"></h3>
+        <form id="form">
+          <label for="date">Date:</label>
+          <div id="calendar"></div>
+          <label for="ounces">Ounces Drank:</label>
+          <input id="ouncesInput" type="number" min="0" name="ounces" required>
+          <input type="submit" value="Submit New Hydration Entry">
+        </form>
+        <h3 id="newEntry"></h3>
+      </section>
+<!-- Buttons -->
           <button class="activity-button">Activity</button>
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
@@ -36,6 +54,15 @@
           </section>
         </div>
         <div class="graphs">
+            <section class="weekly-hydration-data hidden">
+              <!-- weekly hydration data will populate here -->
+            </section>
+            <section class="weekly-activity-data hidden">
+              <!-- weekly activity data will populate here -->
+            </section>
+            <section class="weekly-sleep-data hidden">
+              <!-- weekly sleep data will populate here -->
+            </section>
           <section class="hydration-chart">
             <canvas id="myChart"></canvas>
           </section>
