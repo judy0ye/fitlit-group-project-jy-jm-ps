@@ -62,7 +62,7 @@ const getAvgStepGoal = (users) => {
 // sleep quality all time - water for all time
 function getAvgFluidForAllTime(hydrationData, id) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
-  console.log('HYDRATIONENTREIS', hydrationEntries)
+  // console.log('HYDRATIONENTREIS', hydrationEntries)
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
   }, 0);
@@ -143,7 +143,7 @@ function getAvgSleep(sleepData, userID) {
     return (acc += user.hoursSlept);
   }, 0);
   return Math.round((avgSleep / sleepEntries.length) * 10) / 10;
-}
+};
 
 // sleep quality all time - water for all time
 function getAvgQuality(sleepData, userID) {
@@ -152,9 +152,51 @@ function getAvgQuality(sleepData, userID) {
     return (acc += user.sleepQuality);
   }, 0);
   return Math.round((avgQuality / sleepEntries.length) * 10) / 10;
-}
+};
 
-//hours per day - oz per day
+
+// // Create a new function to display the chart
+// function displaySleepChart(sleepData, currentUser) {
+//   let avgSleep = getAvgSleep(sleepData, currentUser.id);
+//   let avgQuality = getAvgQuality(sleepData, currentUser.id);
+
+// // Get a reference to the canvas element
+// let sleepChartContext = document.getElementById('myChart').getContext('2d');
+
+// // Create the chart
+// let sleepChart = new Chart(sleepChartContext, {
+//   type: 'bar',
+//   data: {
+//     labels: ['Avg Sleep', 'Avg Quality'],
+//     datasets: [{
+//       label: 'Hours / Rating',
+//       data: [avgSleep, avgQuality],
+//       backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+//       borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
+//       borderWidth: 1
+//     }]
+//   },
+//   options: {
+//     responsive: true,
+//     scales: {
+//       y: {
+//         beginAtZero: true
+//       }
+//     }
+//   }
+// });
+// }
+
+// Call the function when you want to display the chart
+// displaySleepChart(sleepData, currentUser);
+// This code should create a bar chart with two bars. One bar represents the average hours slept, and the other bar represents the average sleep quality.
+
+// The chart is created in the "myChart" canvas element, and the colors and layout of the chart can be customized to fit your needs.
+
+// Remember to include this code in your main JavaScript file where the "currentUser" object and "sleepData" array are defined. Also, make sure you've correctly included the Chart.js library. You need to call the displaySleepChart function after your sleep data is fetched and available.
+
+
+
 function getHoursByDay(sleepData, id, date) {
   // console.log('getHoursByDay:', sleepData, id, date);
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
@@ -162,48 +204,33 @@ function getHoursByDay(sleepData, id, date) {
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
 
   return dailyEntry.hoursSlept;
-}
+};
 
 function getQualityByDay(sleepData, userID, date) {
-  console.log('getQualityByDay:', userID);
+  // console.log('getQualityByDay:', userID);
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
   return dailyEntry.sleepQuality;
-}
+};
 
-//wekly sleep - weekly oz - working function from Parvin:
-// function getWeekSleep(sleepData, userID, startDate) {
-//   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-//   console.log('SLEEP ENTRIES',sleepEntries);
-
-//   const indexOfCurrentDayEntry = sleepEntries.findIndex(
-//     (entry) => entry.date === startDate
-//   );
-//   const weeklySleep = sleepEntries
-//     .slice(indexOfCurrentDayEntry, indexOfCurrentDayEntry - 7)
-//     .reverse();
-//   const weeklySleepData = weeklySleep.map((entry) => ({
-//     date: entry.date,
-//     hoursSlept: entry.hoursSlept + ' hours slept',
-//     sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-//   }));
-//   return weeklySleepData;
-// }
-
-//Working Weekly Sleep Function for 7 most current days
-
-function getWeekSleep(sleepData, userID) {
+function getWeekSleep(sleepData, userID, startDate) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-  const lastIndex = sleepEntries.length - 1;
-  const weeklySleep = sleepEntries.slice(lastIndex - 6, lastIndex + 1);
-  const weeklySleepData = weeklySleep.map((entry) => ({
-    date: entry.date,
-    hoursSlept: entry.hoursSlept + ' hours slept',
-    sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-  }));
+  const indexOfCurrentDayEntry = sleepEntries.findIndex(entry => entry.date === startDate);
+  let weeklySleep = [];
+  for (let i = indexOfCurrentDayEntry; i > indexOfCurrentDayEntry - 7; i--) {
+    if (i >= 0 && sleepEntries[i]) {
+      weeklySleep.push(sleepEntries[i]);
+    }
+  };
+  const weeklySleepData = weeklySleep.map((entry) => {
+    return {
+      date: entry.date,
+      hoursSlept: entry.hoursSlept + ' hours slept',
+      sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
+    }
+  });
   return weeklySleepData;
-}
-
+};
 
 
 /* ~~~~~ Exports ~~~~~*/
