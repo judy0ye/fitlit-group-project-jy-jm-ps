@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>FitChicks</title>
-</head>
-<body>
-  <main>
-    <div class="grid-layout">
-      <header class="logo">
-        <h1 id="gym-title" class="gym-title">TuringFitChicks</h1>
-        <div class="logo-container">
-          <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px" class="turing">
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fitlit</title>
+  </head>
+  <body>
+    <main>
+      <div class="grid-layout">
+        <header class="logo">
+          <h1>TuringFitChicks</h1>
+          <!-- <img
+            src="./images/turing-logo.png"
+            alt="turing logo"
+            height="100px"
+            width="100px"
+          /> -->
+        </header>
         <div class="greeting">This is the personalized greeting</div>
-      </header>
-      <div class="activity">This is activity</div>
-      <div class="hydration"><p>This is hydration</p></div>
-    </section>
-    <section id="sleepWidget" class="widget">
-      <!-- <div class="sleep">This is sleep</div> -->
-      <h1 class="widgetTitles">Sleep Data</h1>
-      <h2 id="dailySleep"></h2>      
-      <h2 id="averageSleep"></h2>          
-      <h2>Weekly Sleep Info:</h2>
-      <h3 id="weeklySleepHours"></h3>
-    </section>
-      <div class="graphs">This is for graphs and charts</div>
-      <div class="user-data">This is the user's personal data</div>
-      <div class="goals">These are user goals</div>
-      <div class="community">This is where friends will be listed data</div>
-      <div class="data-view">
-        <button class="action">Activity</button>
-        <button class="water">Hydration</button>
-        <button class="zzz">Sleep</button>
-        <button class="print">Print</button>
+        <div class="data-view">
+          <h2>View Weekly Averages</h2>
+          <label for="user-input">Please enter desired start date (YYYY/MM/DD): </label>
+          <input type="text" name="start-date" id="user-input"></br>
+          <button class="action">Activity</button>
+          <button class="water">Hydration</button>
+          <button class="zzz">Sleep</button>
+          <button class="zzzQuality">Sleep Quality</button>
+        </div>
+        <div class="activity">
+          <p>This is for our single-day activity data</p>
+        </div>
+        <div class="hydration">
+          <p>This is for our single-day hydration data</p>
+        </div>
+        <div class="sleep">
+          <p>This is for our single-day sleep data</p>
+          <section>
+            <h2>Sleep Data</h2>
+            <p id="dailySleep"></p>
+            <p id="averageSleep"></p>
+            <p>Weekly Sleep Info:</p>
+            <p id="weeklySleepHours"></p3>
+          </section>
+        </div>
+        <div class="graphs">This is for graphs and charts</div>
+        <div class="user-data">This is the user's personal data</div>
+        <div class="goals">These are user goals</div>
+        <div class="community">This is where friends will be listed data</div>
       </div>
-    </div>
-  </main>
-  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
-  <script src="bundle.js"></script>
-</body>
-
+    </main>
+    <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
 </html>
