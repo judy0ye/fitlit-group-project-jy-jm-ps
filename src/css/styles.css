@@ -1,9 +1,3 @@
-/* STYLES */
-/* HOME SECTION */
-/* CATEGORIES SECTION */
-/* RECIPES SECTION */
-/* USER SECTION */
-/* MODIFIERS */ /* like hidden */
 
 body, html {
   /* background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); */
@@ -13,75 +7,37 @@ body, html {
   padding: 0;
 }
 
-/* ~~~~~ grid components ~~~~~ */
+/* ~~~~~ GRID COMPONENTS ~~~~~ */
 
 .grid-layout {
   display: grid;
   height: 100vh;
   width: 100vw;
   grid-template-columns: 0.8fr 0.8fr 0.8fr 1.6fr;
-  grid-template-rows: 0.10fr 2fr 1.40fr 0.50fr;
+  grid-template-rows: 0.04fr 1.59fr .50fr 1.87fr;
   grid-template-areas:
-    "logo logo logo logo"
+    "logo logo logo greeting"
+    "activity hydration sleep data-view"
     "activity hydration sleep graphs"
-    "user-data goals community graphs"
-    "user-data goals community data-view";
-}
-
-.logo-container {
-  margin-bottom: 10px;
+    "user-data goals community graphs";
 }
 
 .logo {
-  /* border: 3px solid #333333; */
-  /* border-radius: 3px; */
-  /* padding: .25em;
-  grid-area: logo; */
+  /* border: 3px solid #333333;
+  border-radius: 3px;
+  padding: .25em; */
+  grid-area: logo;
   padding: 5px;
-  background-color: white;
+  background-color: #25C1E3;
 }
-
-#gym-title {
-  font-family: 'Great Vibes', cursive;
-  letter-spacing: 1px; 
-  transition: transform 0.3s ease;
-  margin-bottom: 40px;
-  font-size: 46px;
-  color: #e90b0f;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-#gym-title:hover {
-  transform: translateX(10px); 
-}
-
-.turing {
-  width: 50px;
-  height: 50px;
-  margin: 30px;
-  margin-top: -60px;
-  /* margin-bottom: 10px; */
-  cursor: pointer;
-  border: 3px solid rgb(11, 166, 52);
-  border-radius: 50%;
-  padding: 10px;
-  display: inline-block;
-  transition: transform 0.3s ease;
-  object-fit: contain;
-}
-
-.turing:hover {
-  transform: scale(1.2); 
-  background-color: #C0C0C0;
-}
-
 
 .greeting {
-  border: 3px solid #333333;
+  /* border: 3px solid #333333;
   border-radius: 3px;
-  padding: .25em;
+  padding: .25em; */
   grid-area: greeting;
   font-size: 18px;
+  background-color: #25C1E3;
 }
 
 .activity {
@@ -98,7 +54,7 @@ body, html {
   grid-area: hydration;
 }
 
-#sleepWidget {
+.sleep {
   border: 3px solid #333333;
   border-radius: 3px;
   padding: .25em;
@@ -140,3 +96,13 @@ body, html {
   grid-area: data-view;
 }
 
+.button:disabled {
+  background-color: #EAEAF4;
+  cursor: default;
+}
+
+.hidden {
+  display: none!important;
+}
+
+/* ~~~~~ MEDIA QUERIES ~~~~~ */
