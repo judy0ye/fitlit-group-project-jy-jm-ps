@@ -24,7 +24,6 @@ const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
 const personalGreeting = document.querySelector('.greeting');
 const hydrationInfo = document.querySelector('.hydration');
-//const hydrationButton = document.querySelector('.water');
 let dailySleep = document.querySelector('#dailySleep');
 let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
