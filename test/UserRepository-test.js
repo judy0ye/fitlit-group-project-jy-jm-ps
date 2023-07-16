@@ -4,10 +4,13 @@ import { expect } from 'chai';
 import {
   getRandomUser,
   getUserById,
-  getAvgFluidConsumed,
-  getFluidConsumedOnSpecificDay, 
+  // getAvgFluidConsumed,
+  // getFluidConsumedOnSpecificDay, 
   getAvgStepGoal,
-  getFluidOuncesPerDay
+  // getFluidOuncesPerDay,
+  getAvgFluidForAllTime,
+  getFluidDrankForSpecificDay,
+  getWeeklyFluid
 } from '../src/utils';
 import userData from '../src/data/users';
 
@@ -206,17 +209,17 @@ describe('fluid consumed', function () {
   });
   it('should return average fluid ounces consumed per day for all time', function () {
     const id = 1;
-    const avgFluidConsumed = getAvgFluidConsumed(hydrationInfo.userWater, id);
+    const avgFluidConsumed = getAvgFluidForAllTime(hydrationInfo.userWater, id);
 
     expect(avgFluidConsumed).to.deep.equal(36);
   });
   it("should return a user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/25';
     const id = 2;
-    const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
+    const fluidOnSpecificDay = getFluidDrankForSpecificDay(
       hydrationInfo.userWater,
-      date,
-      id
+      id,
+      date
     );
 
     expect(fluidOnSpecificDay).to.equal(35);
@@ -224,29 +227,28 @@ describe('fluid consumed', function () {
   it("should return another user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/24';
     const id = 3;
-    const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
+    const fluidOnSpecificDay = getFluidDrankForSpecificDay(
       hydrationInfo.userWater,
-      date,
-      id
+      id,
+      date
     );
 
     expect(fluidOnSpecificDay).to.equal(95);
   });
   it('should return how many fluid ounces of water a user consumed each day over a course of 7 days', function () {
     const id = 1
-    const startDate = '2023/03/01'
-    const ouncePerDay = getFluidOuncesPerDay(hydrationInfo.userWater, startDate, id)
+    // const startDate = '2023/03/01'
+    const ouncePerDay = getWeeklyFluid(hydrationInfo.userWater, id)
 
     expect(ouncePerDay).to.deep.equal(
-      {
-        '2023/03/01': 28,
-        '2023/03/02': 54,
-        '2023/03/03': 54,
-        '2023/03/04': 5,
-        '2023/03/15': 4,
-        '2023/03/24': 95,
-        '2023/03/25': 35
-      }
+    [  {"date":'2023/03/02', "numOunces": '54 ounces drank'},
+        {"date":'2023/03/03', "numOunces": '54 ounces drank'},
+        {"date":'2023/03/04', "numOunces": '5 ounces drank'},
+        {"date":'2023/03/27', "numOunces": '54 ounces drank'},
+        {"date":'2023/03/28', "numOunces": '6 ounces drank'},
+        {"date":'2023/03/29', "numOunces": '84 ounces drank'},
+        {"date":'2023/03/15', "numOunces": '4 ounces drank'}
+      ]
     );
   });
 });

@@ -80,7 +80,7 @@ function displayWeeklyHydrationData(hydration, currentUser) {
 
   weeklyHydrationEntries.forEach((entry) => {
     const section = document.createElement('section')
-    section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`
+    section.innerHTML += `${entry.date}: ${entry.numOunces} ounces`
     section.classList.add('hidden')
     sections.push(section)
     oneWeekHydrationChart.appendChild(section)

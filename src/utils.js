@@ -62,7 +62,7 @@ const getAvgStepGoal = (users) => {
 // sleep quality all time - water for all time
 function getAvgFluidForAllTime(hydrationData, id) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
-  console.log('HYDRATIONENTREIS', hydrationEntries)
+  // console.log('HYDRATIONENTREIS', hydrationEntries)
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
   }, 0);
@@ -126,12 +126,23 @@ function getWeeklyFluid(hydrationData, userID) {
   const hydrationEntries = hydrationData.filter(
     (entry) => entry.userID === userID
   );
+  
+  console.log(hydrationData)
+
+  console.log('hydrationEntries', hydrationEntries)
+
   const lastIndex = hydrationEntries.length - 1;
   const weeklyHydration = hydrationEntries.slice(lastIndex - 6, lastIndex + 1);
+  
+  console.log('weeklyHydration Array', weeklyHydration)
+  
   const weeklyHydrationData = weeklyHydration.map((entry) => ({
     date: entry.date,
-    numOunces: entry.numOunces + ' ounces drank ',
+    numOunces: entry.numOunces + ' ounces drank',
   }));
+  
+  console.log('weeklyhydration', weeklyHydrationData)
+  
   return weeklyHydrationData;
 }
 
@@ -165,7 +176,7 @@ function getHoursByDay(sleepData, id, date) {
 }
 
 function getQualityByDay(sleepData, userID, date) {
-  console.log('getQualityByDay:', userID);
+  // console.log('getQualityByDay:', userID);
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
   return dailyEntry.sleepQuality;
@@ -215,6 +226,7 @@ export {
   // getAvgFluidForAllTime, DO WE EVEN NEED THIS
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
+  getAvgFluidForAllTime,
   // getFluidPerWeek,
   // getFluidOuncesPerDay,
   // getAvgFluidConsumed,
