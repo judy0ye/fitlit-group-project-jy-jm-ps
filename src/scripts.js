@@ -2,7 +2,8 @@
 
 import './css/normalize.css';
 import './css/styles.css';
-import './images/FitChicks_title_blue.png';
+import './images/FitChicks_title.png';
+import './images/FitChicks_scene_lg.png';
 import { fetchApiData } from './apiCalls';
 import {
   displayRandomUser,
@@ -32,29 +33,48 @@ let users, hydration, sleep, activity, currentUser;
 //   };
 
 //chart
-import { Chart, BarController, LinearScale, CategoryScale, BarElement, Tooltip, Title, Legend } from 'chart.js';
+import {
+  Chart,
+  BarController,
+  LinearScale,
+  CategoryScale,
+  BarElement,
+  Tooltip,
+  Title,
+  Legend,
+} from 'chart.js';
 
-Chart.register(BarController, LinearScale, CategoryScale, BarElement, Tooltip, Title, Legend);
+Chart.register(
+  BarController,
+  LinearScale,
+  CategoryScale,
+  BarElement,
+  Tooltip,
+  Title,
+  Legend
+);
 
 let ctx = document.getElementById('myChart').getContext('2d');
 
 let myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
-        }]
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
     },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
+  },
 });
 
 // Create a new function to display the chart
@@ -99,12 +119,6 @@ let myChart = new Chart(ctx, {
 
 // Remember to include this code in your main JavaScript file where the "currentUser" object and "sleepData" array are defined. Also, make sure you've correctly included the Chart.js library. You need to call the displaySleepChart function after your sleep data is fetched and available.
 
-
-
-
-
-
-
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
 window.addEventListener('load', function () {
@@ -123,7 +137,7 @@ window.addEventListener('load', function () {
   });
 });
 
-weeklyHydrationButton.addEventListener('click', displayGraphs)
+weeklyHydrationButton.addEventListener('click', displayGraphs);
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -135,9 +149,9 @@ const initializeApp = () => {
   // displayHydrationData();
   //displayHydrationData(hydration, currentUser);
   // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
-  displayFluidConsumedToday(hydration, currentUser, currentDate)
+  displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
-  
+
   // displayActivityData(activity, currentUser);
   displayUserData();
   displayDailySleep(sleep, currentUser, currentDate);
@@ -146,4 +160,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export{ hydration, currentUser }
+export { hydration, currentUser };
