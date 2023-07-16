@@ -14,6 +14,8 @@ import {
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
+import {hydration, currentUser} from './scripts'
+
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
@@ -24,6 +26,9 @@ const hydrationInfo = document.querySelector('.hydration');
 let dailySleep = document.querySelector('#dailySleep');
 let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
+const oneWeekHydrationChart = document.querySelector('.graphs')
+const weeklyHydrationButton = document.querySelector('.water')
+
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
@@ -68,15 +73,57 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
   // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
 }
-
+let sections
 function displayWeeklyHydrationData(hydration, currentUser) {
   console.log('CURRENT USER:', currentUser);
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
   console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
-  // weeklyHydrationEntries.forEach((entry) => {
-  //   hydrationInfo.innerHTML += `<section> ${entry.date}: ${entry.numOunces} </section>
+
+  sections = []
+
+  weeklyHydrationEntries.forEach((entry) => {
+    const section = document.createElement('section')
+    section.innerHTML += `${entry.date}: ${entry.numOunces} ounces`
+    section.classList.add('hidden')
+    sections.push(section)
+    oneWeekHydrationChart.appendChild(section)
+   
+  //  const eachEntry = oneWeekHydrationChart.innerHTML = `<section class='hidden'> ${entry.date}: ${entry.numOunces} </section>
   //  `;
-  // });
+  sections.push(section)
+ 
+//   console.log(section)
+//   // oneWeekHydrationChart.innerHTML = ''
+//   sections.forEach(section => oneWeekHydrationChart.appendChild(section))
+// console.log(sections)
+ 
+  });
+}
+// function backToMain() {
+//   hide([savedPostersPage, posterForm]);
+//   show([mainPoster]);
+// }
+
+
+function displayGraphs() {
+  show(sections)
+}
+// function hide(elements) {
+//   for (var i = 0; i < elements.length; i++) {
+//     elements[i].classList.add('hidden');
+//   }
+// }
+function hide(section) {
+  section.forEach(individualSection => individualSection.classList.add('hidden'))
+}
+
+// function show(elements) {
+//   for (var i = 0; i < elements.length; i++) {
+//     elements[i].classList.remove('hidden');
+//   }
+// }
+function show(section) {
+  section.forEach(individualSection => individualSection.classList.remove('hidden'))
 }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
@@ -127,9 +174,13 @@ export {
   displayFluidConsumedToday,
   // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
+  weeklyHydrationButton,
   // displayHydrationData,
   // getUserById,
   // getAvgStepGoal,
   // getAvgFluidConsumed,
   // getAvgFluidConsumedOnSpecifcDay
+  show, 
+  hide,
+  displayGraphs,
 };

@@ -140,3 +140,7 @@ body, html {
   grid-area: data-view;
 }
 
+/* TAKE THIS OUT WHEN YOU PUSH */
+.hidden {
+  display: none!important;
+}
