@@ -14,9 +14,9 @@ import {
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
-import {hydration, currentUser} from './scripts'
+import { hydration, currentUser } from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
-let sections
+let sections;
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -28,9 +28,8 @@ const hydrationInfo = document.querySelector('.hydration');
 let dailySleep = document.querySelector('#dailySleep');
 let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
-const oneWeekHydrationChart = document.querySelector('.graphs')
-const weeklyHydrationButton = document.querySelector('.water')
-
+const oneWeekHydrationChart = document.querySelector('.graphs');
+const weeklyHydrationButton = document.querySelector('.hydration-button');
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
@@ -59,15 +58,19 @@ const displayUserData = (currentUser) => {
 //   // averageSleep.innerText += `You average ${getAvgSleep(
 //   //   sleep,
 //   //   currentUser.id
-//   // )} hours of sleep each night and a 
+//   // )} hours of sleep each night and a
 //   // ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
 // }
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
-  const fluidToday = getFluidDrankForSpecificDay(hydration, currentUser.id, currentDate);
+  const fluidToday = getFluidDrankForSpecificDay(
+    hydration,
+    currentUser.id,
+    currentDate
+  );
   // console.log('waterDrankToday:', fluidToday)
-  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`
-  // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
+  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`;
+  // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY
   // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
 }
 
@@ -76,14 +79,14 @@ function displayWeeklyHydrationData(hydration, currentUser) {
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
   // console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
 
-  sections = []
+  sections = [];
 
   weeklyHydrationEntries.forEach((entry) => {
-    const section = document.createElement('section')
-    section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`
-    section.classList.add('hidden')
-    sections.push(section)
-    oneWeekHydrationChart.appendChild(section)
+    const section = document.createElement('section');
+    section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`;
+    section.classList.add('hidden');
+    sections.push(section);
+    oneWeekHydrationChart.appendChild(section);
   });
 }
 
@@ -91,17 +94,21 @@ function displayWeeklyHydrationData(hydration, currentUser) {
 // function displayGraphs() {
 //   show(sections)
 // }
- 
+
 function displayGraphs() {
-  sections.forEach(section => section.classList.toggle('hidden'))
+  sections.forEach((section) => section.classList.toggle('hidden'));
 }
 
 function hide(section) {
-  section.forEach(individualSection => individualSection.classList.add('hidden'))
+  section.forEach((individualSection) =>
+    individualSection.classList.add('hidden')
+  );
 }
 
 function show(section) {
-  section.forEach(individualSection => individualSection.classList.remove('hidden'))
+  section.forEach((individualSection) =>
+    individualSection.classList.remove('hidden')
+  );
 }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
@@ -158,7 +165,7 @@ export {
   // getAvgStepGoal,
   // getAvgFluidConsumed,
   // getAvgFluidConsumedOnSpecifcDay
-  show, 
+  show,
   hide,
   displayGraphs,
 };
