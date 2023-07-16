@@ -15,6 +15,8 @@ import {
 //import { fetchApiData } from './apiCalls';
 
 import {hydration, currentUser} from './scripts'
+/* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
+let sections
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -65,15 +67,10 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(hydration, currentUser.id, currentDate);
   console.log('waterDrankToday:', fluidToday)
   hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`
-  // if (currentDayEntry) {
-  //   hydrationInfo.innerHTML = `You drank ${currentDayEntry} hours last night.`;
-  // } else {
-  //   dailySleep.innerText = 'You need to get more sleep!';
-  // }
   // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
   // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
 }
-let sections
+
 function displayWeeklyHydrationData(hydration, currentUser) {
   console.log('CURRENT USER:', currentUser);
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
@@ -83,45 +80,26 @@ function displayWeeklyHydrationData(hydration, currentUser) {
 
   weeklyHydrationEntries.forEach((entry) => {
     const section = document.createElement('section')
-    section.innerHTML += `${entry.date}: ${entry.numOunces} ounces`
+    section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`
     section.classList.add('hidden')
     sections.push(section)
     oneWeekHydrationChart.appendChild(section)
-   
-  //  const eachEntry = oneWeekHydrationChart.innerHTML = `<section class='hidden'> ${entry.date}: ${entry.numOunces} </section>
-  //  `;
-  sections.push(section)
- 
-//   console.log(section)
-//   // oneWeekHydrationChart.innerHTML = ''
-//   sections.forEach(section => oneWeekHydrationChart.appendChild(section))
-// console.log(sections)
- 
   });
 }
-// function backToMain() {
-//   hide([savedPostersPage, posterForm]);
-//   show([mainPoster]);
+
+// WORKS FOR DISPLAYING AFTER CLICK
+// function displayGraphs() {
+//   show(sections)
 // }
-
-
+ 
 function displayGraphs() {
-  show(sections)
+  sections.forEach(section => section.classList.toggle('hidden'))
 }
-// function hide(elements) {
-//   for (var i = 0; i < elements.length; i++) {
-//     elements[i].classList.add('hidden');
-//   }
-// }
+
 function hide(section) {
   section.forEach(individualSection => individualSection.classList.add('hidden'))
 }
 
-// function show(elements) {
-//   for (var i = 0; i < elements.length; i++) {
-//     elements[i].classList.remove('hidden');
-//   }
-// }
 function show(section) {
   section.forEach(individualSection => individualSection.classList.remove('hidden'))
 }
