@@ -2,15 +2,21 @@
 
 //import { currentUser } from './dataModel';
 //import { getAvgStepGoal, getRandomUser  } from './utils';
-import { getFluidPerWeek } from './utils';
+// import { getFluidPerWeek } from './utils';
 import {
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getWeekSleep,
+  // getAvgFluidForAllTime, DO WE EVEN NEED THIS
+  getFluidDrankForSpecificDay,
   getWeeklyFluid,
 } from './utils';
 //import { fetchApiData } from './apiCalls';
+
+import {hydration, currentUser} from './scripts'
+/* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
+let sections
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -22,6 +28,9 @@ const hydrationInfo = document.querySelector('.hydration');
 let dailySleep = document.querySelector('#dailySleep');
 let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
+const oneWeekHydrationChart = document.querySelector('.graphs')
+const weeklyHydrationButton = document.querySelector('.water')
+
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
@@ -44,15 +53,55 @@ const displayUserData = (currentUser) => {
 };
 
 /* ~~~~~ Display Hydration Data Functions ~~~~~*/
+// function displayAverageFluidConsumed(hydration, currentUser) {
+//   const avgFluid = getAvgFluidForAllTime(hydration, currentUser.id)
+//   console.log('avgFluidFORALLTIME', avgFluid)
+//   // averageSleep.innerText += `You average ${getAvgSleep(
+//   //   sleep,
+//   //   currentUser.id
+//   // )} hours of sleep each night and a 
+//   // ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
+// }
+
+function displayFluidConsumedToday(hydration, currentUser, currentDate) {
+  const fluidToday = getFluidDrankForSpecificDay(hydration, currentUser.id, currentDate);
+  console.log('waterDrankToday:', fluidToday)
+  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`
+  // CURRENT DATE IS THE HARD CODED DATE RIGHT NOW SO THE DATE WE HAVE FOR WEEKLY DISPLAY 
+  // JUST HAS 7 DAYS FROM ARRAY COUNTING BACKWARDS
+}
 
 function displayWeeklyHydrationData(hydration, currentUser) {
   console.log('CURRENT USER:', currentUser);
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
   console.log('WEEKLY HYD ENTRIES:', weeklyHydrationEntries);
+
+  sections = []
+
   weeklyHydrationEntries.forEach((entry) => {
-    hydrationInfo.innerHTML += `<section> ${entry.date}: ${entry.numOunces} </section>
-   `;
+    const section = document.createElement('section')
+    section.innerHTML = `${entry.date}: ${entry.numOunces} ounces`
+    section.classList.add('hidden')
+    sections.push(section)
+    oneWeekHydrationChart.appendChild(section)
   });
+}
+
+// WORKS FOR DISPLAYING AFTER CLICK
+// function displayGraphs() {
+//   show(sections)
+// }
+ 
+function displayGraphs() {
+  sections.forEach(section => section.classList.toggle('hidden'))
+}
+
+function hide(section) {
+  section.forEach(individualSection => individualSection.classList.add('hidden'))
+}
+
+function show(section) {
+  section.forEach(individualSection => individualSection.classList.remove('hidden'))
 }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
@@ -100,10 +149,16 @@ export {
   displayDailySleep,
   displayWeeklySleep,
   displayAverageSleep,
+  displayFluidConsumedToday,
+  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
+  weeklyHydrationButton,
   // displayHydrationData,
   // getUserById,
   // getAvgStepGoal,
   // getAvgFluidConsumed,
   // getAvgFluidConsumedOnSpecifcDay
+  show, 
+  hide,
+  displayGraphs,
 };

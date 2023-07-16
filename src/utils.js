@@ -41,33 +41,51 @@ const getAvgStepGoal = (users) => {
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
 
-function getAvgFluidConsumed(hydrationData, id) {
-  const days = hydrationData.reduce((days, user) => {
-    if (user.userID === id) {
-      days.push(user.date);
-    }
-    return days;
-  }, []);
+// function getAvgFluidConsumed(hydrationData, id) {
+//   const days = hydrationData.reduce((days, user) => {
+//     if (user.userID === id) {
+//       days.push(user.date);
+//     }
+//     return days;
+//   }, []);
 
-  const fluidConsumed = hydrationData.reduce((fluidOunces, user) => {
-    if (user.userID === id) {
-      fluidOunces += user.numOunces;
-    }
-    return fluidOunces;
+//   const fluidConsumed = hydrationData.reduce((fluidOunces, user) => {
+//     if (user.userID === id) {
+//       fluidOunces += user.numOunces;
+//     }
+//     return fluidOunces;
+//   }, 0);
+
+//   return Math.round(fluidConsumed / days.length);
+// }
+
+// sleep quality all time - water for all time
+function getAvgFluidForAllTime(hydrationData, id) {
+  const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
+  console.log('HYDRATIONENTREIS', hydrationEntries)
+  const avgHydration = hydrationEntries.reduce((acc, user) => {
+    return (acc += user.numOunces);
   }, 0);
-
-  return Math.round(fluidConsumed / days.length);
+  return Math.round(avgHydration / hydrationEntries.length)
 }
 
-function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
-  const user = hydrationData.find(
-    (user) => user.userID === id && user.date === day
-  );
+// function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
+//   const user = hydrationData.find(
+//     (user) => user.userID === id && user.date === day
+//   );
 
-  if (!user) {
-    return 0;
-  }
-  return user.numOunces;
+//   if (!user) {
+//     return 0;
+//   }
+//   return user.numOunces;
+// }
+//DO THIS NEXT
+// hours per day - oz per day
+function getFluidDrankForSpecificDay(hydrationData, id, date) {
+  const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
+  const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
+
+  return dailyEntry.numOunces;
 }
 
 // function getFluidOuncesPerDay(hydrationData, day, id) {
@@ -103,17 +121,16 @@ function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
 //   return sortedDays
 // }
 
-function getFluidPerWeek(hydrationData, userID, startDate) {
-  const fluidEntries = hydrationData.filter((entry) => entry.userID === userID);
-  const indexOfCurrentDayEntry = fluidEntries.findIndex(
-    (entry) => entry.date === startDate
+// Weekly Sleep Function for 7 most current days
+function getWeeklyFluid(hydrationData, userID) {
+  const hydrationEntries = hydrationData.filter(
+    (entry) => entry.userID === userID
   );
-  const weeklyFluid = fluidEntries
-    .slice(indexOfCurrentDayEntry, indexOfCurrentDayEntry - 7)
-    .reverse();
-  const weeklyHydrationData = weeklyFluid.map((entry) => ({
+  const lastIndex = hydrationEntries.length - 1;
+  const weeklyHydration = hydrationEntries.slice(lastIndex - 6, lastIndex + 1);
+  const weeklyHydrationData = weeklyHydration.map((entry) => ({
     date: entry.date,
-    numOunces: entry.numOunces + 'ounces consumed',
+    numOunces: entry.numOunces + ' ounces drank ',
   }));
   return weeklyHydrationData;
 }
@@ -139,11 +156,11 @@ function getAvgQuality(sleepData, userID) {
 
 //hours per day - oz per day
 function getHoursByDay(sleepData, id, date) {
-  console.log('getHoursByDay:', sleepData, id, date);
+  // console.log('getHoursByDay:', sleepData, id, date);
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
-  console.log('sleepEntries:', sleepEntries);
+  // console.log('sleepEntries:', sleepEntries);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
-  console.log('dailyEntry:', dailyEntry);
+
   return dailyEntry.hoursSlept;
 }
 
@@ -187,19 +204,7 @@ function getWeekSleep(sleepData, userID) {
   return weeklySleepData;
 }
 
-// Weekly Sleep Function for 7 most current days
-function getWeeklyFluid(hydrationData, userID) {
-  const hydrationEntries = hydrationData.filter(
-    (entry) => entry.userID === userID
-  );
-  const lastIndex = hydrationEntries.length - 1;
-  const weeklyHydration = hydrationEntries.slice(lastIndex - 6, lastIndex + 1);
-  const weeklyHydrationData = weeklyHydration.map((entry) => ({
-    date: entry.date,
-    numOunces: entry.numOunces + ' ounces drank ',
-  }));
-  return weeklyHydrationData;
-}
+
 
 /* ~~~~~ Exports ~~~~~*/
 
@@ -207,6 +212,8 @@ export {
   getRandomUser,
   getUserById,
   getAvgStepGoal,
+  // getAvgFluidForAllTime, DO WE EVEN NEED THIS
+  getFluidDrankForSpecificDay,
   getWeeklyFluid,
   // getFluidPerWeek,
   // getFluidOuncesPerDay,
