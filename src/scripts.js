@@ -23,7 +23,9 @@ import {
 
   hideChickenImage,
   showChickenImage,
-  hideSleepGraphs
+  hideSleepGraphs,
+  displayActivity,
+  displayWeeklyStepCount,
 } from './domUpdates';
 import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
 
@@ -231,12 +233,14 @@ const initializeApp = () => {
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
 
-  // displayActivityData(activity, currentUser);
+  displayActivityData(activity, currentUser);
   displayUserData();
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
   displaySleepChart(sleep, currentUser);
+  displayActivity();
+  displayWeeklyStepCount();
   // displayCalendar()
 };
 
