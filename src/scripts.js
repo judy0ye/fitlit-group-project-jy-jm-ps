@@ -15,8 +15,15 @@ import {
   // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
   weeklyHydrationButton,
-  displayGraphs,
-  show,
+  displayHydrationGraphs,
+  hideHydrationGraphs,
+  sleepButton,
+  displaySleepGraphs,
+  groupedHydration,
+
+  hideChickenImage,
+  showChickenImage,
+  hideSleepGraphs,
   displayActivity,
   displayWeeklyStepCount,
 } from './domUpdates';
@@ -199,7 +206,19 @@ window.addEventListener('load', function () {
   });
 });
 
-weeklyHydrationButton.addEventListener('click', displayGraphs);
+const onClickHydration = () => {
+  hideChickenImage();
+  hideSleepGraphs()
+  displayHydrationGraphs();
+}
+
+const onClickSleep = () => {
+  hideChickenImage()
+  hideHydrationGraphs()
+  displaySleepGraphs()
+}
+weeklyHydrationButton.addEventListener('click', onClickHydration);
+sleepButton.addEventListener('click', onClickSleep)
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -225,4 +244,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { hydration, currentUser, displaySleepChart };
+export { hydration, currentUser, displaySleepChart, };
