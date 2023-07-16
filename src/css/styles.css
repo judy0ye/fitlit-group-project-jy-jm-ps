@@ -120,9 +120,11 @@ body, html {
 
 /* ~~~~~ BUTTON STYLES ~~~~~ */
 
-.button:disabled {
+.hydration-button.disable-button,
+.sleep-button.disable-button,
+.activity-button.disable-button {
   background-color: #EAEAF4;
-  cursor: default;
+  cursor:not-allowed
 }
 
 .activity-button {
