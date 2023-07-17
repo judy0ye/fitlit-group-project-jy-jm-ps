@@ -119,6 +119,8 @@ window.addEventListener('load', function () {
   });
 });
 
+
+
 const onClickHydration = () => {
   hideChickenImage();
   hideSleepGraphs()
