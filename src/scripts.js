@@ -26,7 +26,7 @@ import {
   hideChickenImage,
   showChickenImage,
   hideSleepGraphs,
-  refactor/activity-functions
+
 
   getWeeklySleep, 
   inputField,
@@ -153,10 +153,8 @@ refactor/activity-functions
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 
-  hideChickenImage()
-  hideHydrationGraphs()
-  displaySleepGraphs()
-}
+
+
 
 const onChangeInputField = () => {
   activateButtons()
@@ -235,8 +233,5 @@ const initializeApp = () => {
   getUserDates(currentUser);
   // displayCalendar()
 };
-
-refactor/activity-functions
-export { hydration, currentUser, displaySleepChart };
 
 export { hydration, currentUser, sleep, displaySleepChart, };

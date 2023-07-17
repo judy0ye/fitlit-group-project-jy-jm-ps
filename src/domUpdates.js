@@ -30,11 +30,6 @@ let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
 const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 
-const oneWeekSleepChart = document.querySelector('.weekly-sleep-data');
-const weeklyHydrationButton = document.querySelector('.hydration-button');
-const sleepButton = document.querySelector('.sleep-button');
-const chickenImage = document.querySelector('.main-image');
-
 const oneWeekSleepChart = document.querySelector('.weekly-sleep-data')
 const oneWeekSleepFromCalendar = document.querySelector('.weekly-sleep-from-calendar-data')
 const weeklyHydrationButton = document.querySelector('.hydration-button');
