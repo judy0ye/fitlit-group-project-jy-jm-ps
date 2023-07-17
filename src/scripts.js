@@ -25,7 +25,9 @@ import {
   displayWeeklyStepCount,
   hideChickenImage,
   showChickenImage,
-  hideSleepGraphs
+  hideSleepGraphs,
+  calculateWeeklyAverage, 
+  inputField
 } from './domUpdates';
 import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
 
@@ -132,8 +134,16 @@ const onClickSleep = () => {
   hideHydrationGraphs()
   displaySleepGraphs()
 }
+
+const onClickInputField = () => {
+  calculateWeeklyAverage()
+}
+
+
+
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep)
+inputField.addEventListener('change', onClickInputField)
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 

@@ -32,8 +32,38 @@ const oneWeekSleepChart = document.querySelector('.weekly-sleep-data')
 const weeklyHydrationButton = document.querySelector('.hydration-button');
 const sleepButton = document.querySelector('.sleep-button')
 const chickenImage = document.querySelector('.main-image')
+const inputField = document.getElementById('start-date-input')
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
+// let currentDate = inputDate.getFullYear() + "/" + ("0" + (date.getMonth()+1)).slice(-2)
+  //  + "/"+ ("0" + date.getDate()).slice(-2);
+
+const calculateWeeklyAverage = () => {
+  const inputDate = new Date(inputField.value + ' 12:00:00');
+  // let currentDate = inputDate.getFullYear() + "/" + ("0" + (date.getMonth()+1)).slice(-2)
+  //  + "/"+ ("0" + date.getDate()).slice(-2);
+
+  let waterDate = hydration.find(waterEntry => waterEntry.date === inputDate)
+  
+  console.log('waterDate', waterDate)
+  console.log('inputDate', inputDate)
+ if (inputDate === waterDate) {
+
+ }
+
+
+  // push into array
+  // add all those numOunces together
+  // total of numOunces divide by length of array
+  // return that value
+  // takethosevalues.filter(value => )
+  
+  // if 0 dates in range, give message of you didn't choose 7
+}  
+
+
+
+
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
@@ -260,4 +290,6 @@ export {
   showChickenImage,
   displayActivity,
   displayWeeklyStepCount,
+  calculateWeeklyAverage,
+  inputField
 };
