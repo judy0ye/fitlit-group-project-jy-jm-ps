@@ -27,7 +27,10 @@ import {
   showChickenImage,
   hideSleepGraphs,
   calculateWeeklyAverage, 
-  inputField
+  inputField,
+  displaySevenDaySleep,
+  dataField,
+  sleepFromCalendarButton 
 } from './domUpdates';
 import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
 
@@ -135,15 +138,26 @@ const onClickSleep = () => {
   displaySleepGraphs()
 }
 
-const onChangeInputField = () => {
-  calculateWeeklyAverage()
-}
+// const onChangeInputField = () => {
+//   calculateWeeklyAverage()
+// }
 
-
+// dataField.addEventListener('click', function(e) {
+//   if (e.target.classList.contains('sleep-button')) {
+//     displaySevenDaySleep()
+//   }
+// })
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep)
-inputField.addEventListener('change', onChangeInputField)
+// inputField.addEventListener('change', onChangeInputField)
+dataField.addEventListener('click', function(e) {
+  if (e.target.classList.contains('sleep-from-calendar-button')) {
+    calculateWeeklyAverage()
+    displaySevenDaySleep()
+
+  }
+})
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -167,4 +181,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { hydration, currentUser, displaySleepChart, };
+export { hydration, currentUser, sleep, displaySleepChart, };

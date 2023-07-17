@@ -16,14 +16,21 @@
         <div class="data-view">
           <h2>View Weekly Averages</h2>
   <!-- Input Label -->
-  <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average is based on your most recent 7 days. If you want an average of a different set of 7 days, please choose a date from the calendar input field.</p>
-        <label for="start-date-input">Please enter start date: </label>
+  <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average is based on your most recent 7 days.</p>
+  <!-- Buttons -->
+<button class="activity-button">Activity</button>
+<button class="hydration-button">Hydration</button>
+<button class="sleep-button">Sleep</button>
+<p>If you want an average of a different set of 7 days, please choose a date from the calendar input field.</p>
+        <label for="start-date-input">Please choose start date: </label>
         <input type="date" name="start-date" id="start-date-input" value="2023-07-01" min="2023-03-24" max="2023-07-01" />
         <br />
-<!-- Buttons -->
-          <button class="activity-button">Activity</button>
-          <button class="hydration-button">Hydration</button>
-          <button class="sleep-button">Sleep</button>
+          <!-- Buttons -->
+<button class="activity-from-calendar-button">Activity</button>
+<button class="hydration-from-calendar-button">Hydration</button>
+<button class="sleep-from-calendar-button">Sleep</button>
+        <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average is based on your most recent 7 days. If you want an average of a different set of 7 days, please choose a date from the calendar input field.</p>
+
         </div>
         <div class="activity">
           <p>This is for our single-day activity data</p>
@@ -48,6 +55,9 @@
           </section>
           <section class="weekly-sleep-data hidden">
             <!-- weekly sleep data will populate here -->
+          </section>
+          <section class="weekly-sleep-from-calendar-data hidden">
+            <!-- weekly sleep from calendar data will populate here -->
           </section>
           <section class="hydration-chart">
             <canvas id="myChart"></canvas>
