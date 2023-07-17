@@ -32,7 +32,7 @@ const getAvgStepGoal = (users) => {
 
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
-//???????
+
 function getAvgFluidForAllTime(hydrationData, id) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const avgHydration = hydrationEntries.reduce((acc, user) => {
@@ -44,7 +44,8 @@ function getAvgFluidForAllTime(hydrationData, id) {
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
-
+  // console.log('DAILY ENTRY', dailyEntry);
+  // console.log('NUM OUNCES', dailyEntry.numOunces);
   return dailyEntry.numOunces;
 }
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,9 +142,34 @@ function getWeekSleep(sleepData, userID, startDate) {
   for (let i = indexOfCurrentDayEntry; i > indexOfCurrentDayEntry - 7; i--) {
     if (i >= 0 && sleepEntries[i]) {
       weeklySleep.push(sleepEntries[i]);
+      console.log('WEEKLY SLEEP', weeklySleep);
     }
   }
+  return weeklySleep;
 }
+
+function findCurrentDate(userID, hydrationData, sleepData, activityData) {
+  let dateChoices = [];
+  const hydrationEntries = hydrationData.filter(
+    (entry) => entry.userID === userID
+  );
+  const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
+  const activityEntries = activityData.filter(
+    (entry) => entry.userID === userID
+  );
+  const lastHydrationEntry = hydrationEntries.slice(-1)[0];
+  const lastSleepEntry = sleepEntries.slice(-1)[0];
+  const lastActivityEntry = activityEntries.slice(-1)[0];
+  const lastHydrationDate = lastHydrationEntry.date;
+  const lastSleepDate = lastSleepEntry.date;
+  const lastActivityDate = lastActivityEntry.date;
+  dateChoices.push(lastHydrationDate, lastSleepDate, lastActivityDate);
+  dateChoices.sort();
+  let currentDate = dateChoices.slice(-1);
+  console.log('DATE', currentDate);
+  return currentDate;
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ASK SAM - Need a Function to help us get a global currentDATE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -207,67 +233,24 @@ const activeMinutesPerDay = (activityData, userID, currentDate) => {
   return dailyMinutes.minutesActive;
 };
 
-//Might be able to use some of this logic for step calculations:
-// const returnActiveMinutesByDay = (activityData, userID) => {
-//   const activityEntries = activityData.filter(
-//     (entry) => entry.userID === userID.id
-//   );
-//   const totalMinutes = activityEntries.reduce((acc, user) => {
-//     return (acc += user.minutesActive);
-//   }, 0);
-//   // const avgActivityHours = Math.floor(totalMinutes / 60 / activityEntries.length);
-//   // console.log('AVERAGE ACTIVITY (HOURS):', avgActivityHours);
-//   console.log('TOTAL MINUTES', totalMinutes);
-//   return totalMinutes;
-// };
 
-// const weeklySteps = (activityData, userID, activityDate) => {
-//   const userActivityData = activityData.filter(())
-//   const startDataIndex = userActivityData.findIndex(
-//     (entry) => entry.date === startDate
-//   );
-//   const weeklyData = userActivityData
-//     .slice(startDataIndex - 6, startDataIndex + 1)
-//     .reverse();
-
-//   return weeklyData.map((entry) => ({
-//     date: entry.date,
-//     steps: entry.numSteps + ' steps taken',
-//   }));
-// };
-
-const weeklySteps = (activityData, userID) => {
-  
-  const activityEntries = activityData
-  .filter((entry) => {entry.userID === userID.id})
-  const lastIndex = activityEntries.length - 1;
-  const lastWeekOfActivity = activityEntries.slice(lastIndex - 6, lastIndex + 1);
-  const weeklyStepData = lastWeekOfActivity.map((entry) => ({
-    date: entry.date,
-    numSteps: entry.numSteps + ' number of steps ',
-  }));
-  return weeklyStepData;
-}
-//still need to be able to choose 7 days from the calendar
-//compare steps by day to step goal and return
-
-  // const startDataIndex = userActivityData.findIndex(
-  //   (entry) => entry.date === startDate
-  // );
-  // const weeklyData = userActivityData
-  //   .slice(startDataIndex - 6, startDataIndex + 1)
-  //   .reverse();
-
-  // return weeklyData.map((entry) => ({
-  //   date: entry.date,
-  //   steps: entry.numSteps + ' steps taken',
-  // }));
+const weeklySteps = (activityData, userID, startDate) => {
+  const activityEntries = activityData.filter(
+    (entry) => entry.userID === userID
+  );
+  const startDateIndex = activityEntries.findIndex(
+    (entry) => entry.date === startDate
+  );
+  const weeklyData = activityData
+    .slice(startDateIndex - 6, startDateIndex + 1)
+    .reverse();
+  return weeklyData;
+  };
 
   const calculateMilesUserWalked = (activity, users) => {
     const milesWalked = (activity.numSteps * users.strideLength) / 5280;
     return Number(milesWalked.toFixed(2));
   };
-
 
 
 const metStepGoal = (activityData, userData, userID, date) => {
@@ -298,10 +281,10 @@ export {
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
-  //getSleepDataByDate,
   getWeekSleep,
   activeMinutesPerDay,
   stepsPerDay,
   weeklySteps,
+  findCurrentDate,
   calculateMilesUserWalked 
 };

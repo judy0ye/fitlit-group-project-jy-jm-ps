@@ -1,6 +1,4 @@
 body, html {
-  /* background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); */
-  /* background-repeat: no-repeat; */
   height: 100%;
   margin: 0;
   padding: 0;
@@ -22,18 +20,12 @@ body, html {
 }
 
 .logo {
-  /* border: 3px solid #333333;
-  border-radius: 3px;
-  padding: .25em; */
   grid-area: logo;
   padding: 5px;
   background-color: #25C1E3;
 }
 
 .greeting {
-  /* border: 3px solid #333333;
-  border-radius: 3px;
-  padding: .25em; */
   grid-area: greeting;
   font-size: 18px;
   background-color: #25C1E3;
@@ -62,32 +54,19 @@ body, html {
 
 .graphs {
   position: relative;
-  /* background-image: url('./images/FitChicks_scene_lg.png');
-  background-size: cover;
-  background-repeat: no-repeat; */
-  /* background-image: url(./images/FitChicks_scene_lg.png) no-repeat top left fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover; 
-  background-size: cover; */
-  /* border: 3px solid #333333;
-  border-radius: 3px;
-  padding: .25em; */
   grid-area: graphs;
 }
 
-/* .graphs img {
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
-} */
-
 .main-image {
+  text-align: center;
   grid-area: graphs;
   width: 100%;
   overflow:hidden;
-  object-fit: contain;
+}
 
+.main-image img {
+  max-height:50%;
+  margin: 0 auto;
 }
 
 .user-data {

@@ -12,8 +12,10 @@ import {
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
   returnDailySteps,
+  weeklySteps,
   getAvgStepGoal,
   calculateMilesUserWalked 
+
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
@@ -32,8 +34,10 @@ let weeklySleep = document.querySelector('#weeklySleepHours');
 let averageSleep = document.querySelector('#averageSleep');
 const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 
-const oneWeekSleepChart = document.querySelector('.weekly-sleep-data')
-const oneWeekSleepFromCalendar = document.querySelector('.weekly-sleep-from-calendar-data')
+const oneWeekSleepChart = document.querySelector('.weekly-sleep-data');
+const oneWeekSleepFromCalendar = document.querySelector(
+  '.weekly-sleep-from-calendar-data'
+);
 const weeklyHydrationButton = document.querySelector('.hydration-button');
 const sleepButton = document.querySelector('.sleep-button')
 const chickenImage = document.querySelector('.main-image')
@@ -49,61 +53,78 @@ const dailyActivityData = document.querySelector('.activity')
 const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = ''
   oneWeekSleepFromCalendar.innerHTML = ''
+
   const startDate = new Date(inputField.value + ' 12:00:00');
 
-  let waterEntries = []
+  let waterEntries = [];
   for (let i = 0; i < 7; i++) {
-    let nextDate = new Date(startDate)
-    nextDate.setDate(nextDate.getDate()+i) 
-    let date = nextDate.getFullYear() + "/" + ("0" + (nextDate.getMonth()+1)).slice(-2)
-   + "/"+ ("0" + nextDate.getDate()).slice(-2);
-    let waterEntry = hydration.find(entry => entry.date === date && entry.userID === currentUser.id)
+    let nextDate = new Date(startDate);
+    nextDate.setDate(nextDate.getDate() + i);
+    let date =
+      nextDate.getFullYear() +
+      '/' +
+      ('0' + (nextDate.getMonth() + 1)).slice(-2) +
+      '/' +
+      ('0' + nextDate.getDate()).slice(-2);
+    let waterEntry = hydration.find(
+      (entry) => entry.date === date && entry.userID === currentUser.id
+    );
     if (waterEntry) {
-      waterEntries.push(waterEntry)
+      waterEntries.push(waterEntry);
     }
   }
-  
+
   let numOz = waterEntries.reduce((acc, entry) => {
-    return acc + entry.numOunces
-  }, 0)
+    return acc + entry.numOunces;
+  }, 0);
 
   if (waterEntries.length === 0) {
-    return 0
+    return 0;
   }
   
   let avg = Math.round(numOz/waterEntries.length)
  
   waterEntries.forEach((entry) => {
-    oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`
-  }); 
-  oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`
-}  
+    oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
+  });
+  oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+};
 
 const displaySevenDayHydration = () => {
-  oneWeekHydrationFromCalendar.classList.remove('hidden')
-  hydrationFromCalendarButton.disabled = true
-  hydrationFromCalendarButton.classList.add('disable-button')
-}
+  oneWeekHydrationFromCalendar.classList.remove('hidden');
+  hydrationFromCalendarButton.disabled = true;
+  hydrationFromCalendarButton.classList.add('disable-button');
+};
 
 const getWeeklySleep= () => {
   oneWeekSleepFromCalendar.innerHTML = ''
   oneWeekHydrationFromCalendar.innerHTML = ''
+
   const startDate = new Date(inputField.value + ' 12:00:00');
 
-  let sleepHourEntries = []
+  let sleepHourEntries = [];
   for (let i = 0; i < 7; i++) {
-    let nextDate = new Date(startDate)
-    nextDate.setDate(nextDate.getDate()+i) 
-    let date = nextDate.getFullYear() + "/" + ("0" + (nextDate.getMonth()+1)).slice(-2)
-   + "/"+ ("0" + nextDate.getDate()).slice(-2);
-    let sleepHourEntry = sleep.find(entry => entry.date === date && entry.userID === currentUser.id)
+    let nextDate = new Date(startDate);
+    nextDate.setDate(nextDate.getDate() + i);
+    let date =
+      nextDate.getFullYear() +
+      '/' +
+      ('0' + (nextDate.getMonth() + 1)).slice(-2) +
+      '/' +
+      ('0' + nextDate.getDate()).slice(-2);
+    let sleepHourEntry = sleep.find(
+      (entry) => entry.date === date && entry.userID === currentUser.id
+    );
     if (sleepHourEntry) {
-      sleepHourEntries.push(sleepHourEntry)
+      sleepHourEntries.push(sleepHourEntry);
     }
   }
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
-      return acc + entry.hoursSlept
-    }, 0)
+    return acc + entry.hoursSlept;
+  }, 0);
+
+
+  let avg = Math.round(hoursSlept / sleepHourEntries.length);
 
   let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.sleepQuality
@@ -116,26 +137,31 @@ const getWeeklySleep= () => {
     let avgHoursSlept = Math.round(hoursSlept/sleepHourEntries.length)
     let avgSleepQuality = Math.round(sleepQuality/sleepHourEntries.length)
 
- sleepHourEntries.forEach((entry) => {
+
+  sleepHourEntries.forEach((entry) => {
     oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
+
     hours and your sleep quality was rated: ${entry.sleepQuality}</p>`
   }); 
  oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`
  oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`
 }  
 
+
 const displaySevenDaySleep = () => {
-  oneWeekSleepFromCalendar.classList.remove('hidden')
-  sleepFromCalendarButton.disabled = true
-  sleepFromCalendarButton.classList.add('disable-button')
-}
+  oneWeekSleepFromCalendar.classList.remove('hidden');
+  sleepFromCalendarButton.disabled = true;
+  sleepFromCalendarButton.classList.add('disable-button');
+};
 
 const activateButtons = () => {
+
   sleepFromCalendarButton.disabled = false
   sleepFromCalendarButton.classList.remove('disable-button')
   hydrationFromCalendarButton.disabled = false
   hydrationFromCalendarButton.classList.remove('disable-button')
 }
+
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
@@ -171,17 +197,6 @@ const showChickenImage = () => {
   chickenImage.classList.remove('hidden');
 };
 
-/* ~~~~~ Display Hydration Data Functions ~~~~~*/
-// function displayAverageFluidConsumed(hydration, currentUser) {
-//   const avgFluid = getAvgFluidForAllTime(hydration, currentUser.id)
-//   console.log('avgFluidFORALLTIME', avgFluid)
-//   // averageSleep.innerText += `You average ${getAvgSleep(
-//   //   sleep,
-//   //   currentUser.id
-//   // )} hours of sleep each night and a
-//   // ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
-// }
-
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(
     hydration,
@@ -205,8 +220,7 @@ function displayWeeklyHydrationData(hydration, currentUser) {
   //   oneWeekHydrationChart.appendChild(section);
   // });
   weeklyHydrationEntries.forEach((entry) => {
-
-    oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`
+    oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
   });
 }
 
@@ -268,9 +282,8 @@ function displayWeeklySleep(sleep, currentUser, currentDate) {
   // section.innerHTML = groupedSleep.join()
   // oneWeekSleepChart.appendChild(section)
   weeklySleepEntries.forEach((entry) => {
-
-    oneWeekSleepChart.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`
-  }); 
+    oneWeekSleepChart.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`;
+  });
 }
 
 function displaySleepGraphs() {
@@ -324,27 +337,37 @@ function displayAverageSleep(sleep, currentUser) {
 //   )} minutes today!`;
 // }
 
-// function displayWeeklyStepCount() {
-//   const weeklyActivityEntries = activity.returnWeeklySteps(
-//     newUser.id,
-//     currentDate
-//   );
-//   weeklyActivityEntries.forEach((entry) => {
-//     if (activity.returnMetStepGoal(newUser.id, entry.date)) {
-//       weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You met your goal.  Take a nap!
-//         `;
-//     } else {
-//       weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You have not met your goal.  STEP IT UP!
-//         `;
-//     }
-//   });
-// }
+function displayWeeklyStepCount(activityData, currentUser, currentDate) {
+  const weeklyActivityEntries = weeklySteps(
+    activityData,
+    currentUser.id,
+    currentDate
+  );
+  weeklyActivityEntries.forEach((entry) => {
+    if (entry.numSteps >= currentUser.dailyStepGoal) {
+      weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You met your goal.  Take a nap!
+        `;
+    } else {
+      weeklyStepCount.innerText += `${entry.date}: ${entry.steps}. You have not met your goal.  STEP IT UP!
+        `;
+    }
+  });
+}
 
-// function displayActivity() {
-//   dailySteps.innerText = `You took ${activity.returnDailySteps(currentUser.id, currentDate)} steps today!`;
-//   dailyMiles.innerText = `You have walked ${activity.returnMiles(currentUser.id, currentDate)} miles today!`;
-//   dailyMinutes.innerText = `You were active for ${activity.returnMinutesActive(currentUser.id, currentDate)} minutes today!`;
-// };
+function displayActivity() {
+  dailySteps.innerText = `You took ${activity.returnDailySteps(
+    currentUser.id,
+    currentDate
+  )} steps today!`;
+  dailyMiles.innerText = `You have walked ${activity.returnMiles(
+    currentUser.id,
+    currentDate
+  )} miles today!`;
+  dailyMinutes.innerText = `You were active for ${activity.returnMinutesActive(
+    currentUser.id,
+    currentDate
+  )} minutes today!`;
+}
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
@@ -355,31 +378,22 @@ export {
   displayWeeklySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
   weeklyHydrationButton,
-  // displayHydrationData,
-  // getUserById,
-  // getAvgStepGoal,
-  // getAvgFluidConsumed,
-  // getAvgFluidConsumedOnSpecifcDay
   displayHydrationGraphs,
   hideHydrationGraphs,
   sleepButton,
-  
+  displayWeeklyStepCount,
   hideSleepGraphs,
   groupedHydration,
   hideChickenImage,
   showChickenImage,
-
-  // displayActivity,
-  // displayWeeklyStepCount,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,
   dataField,
   displaySleepGraphs,
-  sleepFromCalendarButton, 
+  sleepFromCalendarButton,
   activateButtons,
   getWeeklyHydration,
   displaySevenDayHydration,
