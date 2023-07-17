@@ -26,9 +26,7 @@ import {
   hideChickenImage,
   showChickenImage,
   hideSleepGraphs,
-
-
-  getWeeklySleep, 
+  getWeeklySleep,
   inputField,
   displaySevenDaySleep,
   dataField,
@@ -37,7 +35,6 @@ import {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-
 } from './domUpdates';
 import {
   getRandomUser,
@@ -45,7 +42,7 @@ import {
   getAvgQuality,
   stepsPerDay,
   activeMinutesPerDay,
-  getUserDates,
+  weeklySteps,
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -110,7 +107,7 @@ function displaySleepChart(sleep, currentUser) {
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-let currentDate
+let currentDate;
 //date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
 let users, hydration, sleep, activity, currentUser;
 //console.log('PPPPPPP:', sleep)
@@ -145,7 +142,7 @@ const onClickHydration = () => {
 };
 
 const onClickSleep = () => {
-refactor/activity-functions
+  refactor / activity - functions;
   hideChickenImage();
   hideHydrationGraphs();
   displaySleepGraphs();
@@ -153,23 +150,19 @@ refactor/activity-functions
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 
-
-
-
 const onChangeInputField = () => {
-  activateButtons()
-}
+  activateButtons();
+};
 
 const onClickHydrationButton = () => {
-  hideChickenImage()
-  getWeeklyHydration()
-  displaySevenDayHydration()
+  hideChickenImage();
+  getWeeklyHydration();
+  displaySevenDayHydration();
   if (sleepFromCalendarButton.disabled === true) {
-    hydrationFromCalendarButton.classList.remove('disable-button')
-    hydrationFromCalendarButton.disabled = false
-    
+    hydrationFromCalendarButton.classList.remove('disable-button');
+    hydrationFromCalendarButton.disabled = false;
   }
-}
+};
 // dataField.addEventListener('click', function(e) {
 //   if (e.target.classList.contains('sleep-button')) {
 //     displaySevenDaySleep()
@@ -177,27 +170,26 @@ const onClickHydrationButton = () => {
 // })
 
 const onClickSleepButton = () => {
-  hideChickenImage()
-  getWeeklySleep()
-  displaySevenDaySleep()
+  hideChickenImage();
+  getWeeklySleep();
+  displaySevenDaySleep();
   if (hydrationFromCalendarButton.disabled === true) {
-    sleepFromCalendarButton.classList.remove('disable-button')
-    sleepFromCalendarButton.disabled = false
-    
+    sleepFromCalendarButton.classList.remove('disable-button');
+    sleepFromCalendarButton.disabled = false;
   }
-}
+};
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
-sleepButton.addEventListener('click', onClickSleep)
-inputField.addEventListener('change', onChangeInputField)
-hydrationFromCalendarButton.addEventListener('click', onClickHydrationButton)
-sleepFromCalendarButton.addEventListener('click', onClickSleepButton)
+sleepButton.addEventListener('click', onClickSleep);
+inputField.addEventListener('change', onChangeInputField);
+hydrationFromCalendarButton.addEventListener('click', onClickHydrationButton);
+sleepFromCalendarButton.addEventListener('click', onClickSleepButton);
 // dataField.addEventListener('click', function(e) {
 //   if (e.target.classList.contains('sleep-from-calendar-button')) {
 //     hideChickenImage()
 //     getWeeklySleep()
 //     displaySevenDaySleep()
-    
+
 //   };
 //   if (e.target.classList.contains('hydration-from-calendar-button')) {
 //     hideChickenImage()
@@ -230,8 +222,9 @@ const initializeApp = () => {
   displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
-  getUserDates(currentUser);
+  // getUserDates(currentUser);
+  weeklySteps(activity, currentUser, currentDate);
   // displayCalendar()
 };
 
-export { hydration, currentUser, sleep, displaySleepChart, };
+export { hydration, currentUser, sleep, displaySleepChart };

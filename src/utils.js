@@ -219,8 +219,36 @@ const activeMinutesPerDay = (activityData, userID, currentDate) => {
 //   return totalMinutes;
 // };
 
-const returnWeeklySteps = (activityData, userID, startDate) => {
-  const userActivityData = findUserActivityData(activityData, userID);
+// const weeklySteps = (activityData, userID, activityDate) => {
+//   const userActivityData = activityData.filter(())
+//   const startDataIndex = userActivityData.findIndex(
+//     (entry) => entry.date === startDate
+//   );
+//   const weeklyData = userActivityData
+//     .slice(startDataIndex - 6, startDataIndex + 1)
+//     .reverse();
+
+//   return weeklyData.map((entry) => ({
+//     date: entry.date,
+//     steps: entry.numSteps + ' steps taken',
+//   }));
+// };
+
+const weeklySteps = (activityData, userID) => {
+  
+  const activityEntries = activityData
+  .filter((entry) => {entry.userID === userID.id})
+  const lastIndex = activityEntries.length - 1;
+  const lastWeekOfActivity = activityEntries.slice(lastIndex - 6, lastIndex + 1);
+  const weeklyStepData = lastWeekOfActivity.map((entry) => ({
+    date: entry.date,
+    numSteps: entry.numSteps + ' number of steps ',
+  }));
+  return weeklyStepData;
+}
+//still need to be able to choose 7 days from the calendar
+//compare steps by day to step goal and return
+
   const startDataIndex = userActivityData.findIndex(
     (entry) => entry.date === startDate
   );
@@ -234,20 +262,23 @@ const returnWeeklySteps = (activityData, userID, startDate) => {
   }));
 };
 
+
+
+
+const metStepGoal = (activityData, userData, userID, date) => {
+  const userInfo = findUserData(userData, userID);
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+
+  return dailyData.numSteps >= userInfo.dailyStepGoal;
+};
+
 const returnMiles = (activityData, userData, userID, date) => {
   const userInfo = findUserData(userData, userID);
   const userActivityData = findUserActivityData(activityData, userID);
   const dailyData = findUserDailyData(userActivityData, date);
 
   return Math.round((userInfo.strideLength * dailyData.numSteps) / 5280);
-};
-
-const returnMetStepGoal = (activityData, userData, userID, date) => {
-  const userInfo = findUserData(userData, userID);
-  const userActivityData = findUserActivityData(activityData, userID);
-  const dailyData = findUserDailyData(userActivityData, date);
-
-  return dailyData.numSteps >= userInfo.dailyStepGoal;
 };
 
 /* ~~~~~ Exports ~~~~~*/
@@ -266,4 +297,5 @@ export {
   getWeekSleep,
   activeMinutesPerDay,
   stepsPerDay,
+  weeklySteps,
 };
