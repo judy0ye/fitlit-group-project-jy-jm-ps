@@ -100,15 +100,13 @@ function displayWeeklyHydrationData(hydration, currentUser) {
   console.log('l',oneWeekHydrationChart)
 }
 
-
+// DO THIS
+// get average of data based upon user's input
+// grab input from input field
+// 
 
 // section.innerHTML = groupedSleep.join()
 
-
-// WORKS FOR DISPLAYING AFTER CLICK
-// function displayGraphs() {
-//   show(sections)
-// }
 
 function displayHydrationGraphs() {
   oneWeekHydrationChart.classList.remove('hidden')
@@ -151,10 +149,6 @@ function displayDailySleep(sleep, currentUser, currentDate) {
 // }
 function displayWeeklySleep(sleep, currentUser, currentDate) {
   const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
-  // weeklySleepEntries.forEach((entry) => {
-  //   weeklySleep.innerText += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}
-  //  `;
-
   //  groupedSleep = []
  
   //  weeklySleepEntries.forEach((entry) => {
