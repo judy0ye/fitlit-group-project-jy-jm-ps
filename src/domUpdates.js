@@ -12,11 +12,12 @@ import {
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
   returnDailySteps,
-  getAvgStepGoal
+  getAvgStepGoal,
+  calculateMilesUserWalked 
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
-import { hydration, currentUser, sleep, users } from './scripts';
+import { activity, hydration, currentUser, sleep, users } from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
 let groupedHydration, groupedSleep, weeklyWaterIntake;
 
@@ -41,6 +42,7 @@ const dataField = document.querySelector('.data-view')
 const sleepFromCalendarButton = document.querySelector('.sleep-from-calendar-button')
 const oneWeekHydrationFromCalendar = document.querySelector('.weekly-hydration-from-calendar-data')
 const hydrationFromCalendarButton = document.querySelector('.hydration-from-calendar-button')
+const dailyActivityData = document.querySelector('.activity')
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
@@ -48,7 +50,6 @@ const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = ''
   oneWeekSleepFromCalendar.innerHTML = ''
   const startDate = new Date(inputField.value + ' 12:00:00');
-  // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
   let waterEntries = []
   for (let i = 0; i < 7; i++) {
@@ -72,7 +73,6 @@ const getWeeklyHydration = () => {
   
   let avg = Math.round(numOz/waterEntries.length)
  
-
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`
   }); 
@@ -85,13 +85,10 @@ const displaySevenDayHydration = () => {
   hydrationFromCalendarButton.classList.add('disable-button')
 }
 
-// Return how many hours a user slept each day over the course of a given week (7 days)
-// This function should be able to calculate this for any week, not just the latest week
 const getWeeklySleep= () => {
   oneWeekSleepFromCalendar.innerHTML = ''
   oneWeekHydrationFromCalendar.innerHTML = ''
   const startDate = new Date(inputField.value + ' 12:00:00');
-  // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
   let sleepHourEntries = []
   for (let i = 0; i < 7; i++) {
@@ -125,10 +122,6 @@ const getWeeklySleep= () => {
   }); 
  oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`
  oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`
-  
-  
-
-console.log('7day sleep', sleepHourEntries)
 }  
 
 const displaySevenDaySleep = () => {
@@ -144,13 +137,14 @@ const activateButtons = () => {
   hydrationFromCalendarButton.classList.remove('disable-button')
 }
 
-
-
-
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
   const allUserStepGoalAvg = getAvgStepGoal(users)
+  const userActivity = activity.filter(activityEachDay => activityEachDay.userID === currentUser.id)
+  console.log('userActivity', userActivity)
+  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser) 
+  console.log('currentUserMilesWalked', currentUserMilesWalked)
 
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
@@ -162,6 +156,7 @@ const displayRandomUser = (currentUser) => {
 
   personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
   <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
+
 };
 
 const displayUserData = (currentUser) => {

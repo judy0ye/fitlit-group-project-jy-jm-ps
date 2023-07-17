@@ -217,4 +217,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { users, hydration, currentUser, sleep, displaySleepChart };
+export { activity, users, hydration, currentUser, sleep, displaySleepChart };

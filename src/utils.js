@@ -263,7 +263,10 @@ const weeklySteps = (activityData, userID) => {
   //   steps: entry.numSteps + ' steps taken',
   // }));
 
-
+  const calculateMilesUserWalked = (activity, users) => {
+    const milesWalked = (activity.numSteps * users.strideLength) / 5280;
+    return Number(milesWalked.toFixed(2));
+  };
 
 
 
@@ -300,4 +303,5 @@ export {
   activeMinutesPerDay,
   stepsPerDay,
   weeklySteps,
+  calculateMilesUserWalked 
 };
