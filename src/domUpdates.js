@@ -39,26 +39,31 @@ const inputField = document.getElementById('start-date-input')
   //  + "/"+ ("0" + date.getDate()).slice(-2);
 
 const calculateWeeklyAverage = () => {
-  const inputDate = new Date(inputField.value + ' 12:00:00');
-  // let currentDate = inputDate.getFullYear() + "/" + ("0" + (date.getMonth()+1)).slice(-2)
-  //  + "/"+ ("0" + date.getDate()).slice(-2);
+  const startDate = new Date(inputField.value + ' 12:00:00');
+  // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
-  let waterDate = hydration.find(waterEntry => waterEntry.date === inputDate)
+  let waterEntries = []
+  for (let i = 0; i < 7; i++) {
+    let nextDate = new Date(startDate)
+    nextDate.setDate(nextDate.getDate()+i) 
+    let date = nextDate.getFullYear() + "/" + ("0" + (nextDate.getMonth()+1)).slice(-2)
+   + "/"+ ("0" + nextDate.getDate()).slice(-2);
+    let waterEntry = hydration.find(entry => entry.date === date && entry.userID === currentUser.id)
+    if (waterEntry) {
+      waterEntries.push(waterEntry)
+    }
+  }
   
-  console.log('waterDate', waterDate)
-  console.log('inputDate', inputDate)
- if (inputDate === waterDate) {
+  let numOz = waterEntries.reduce((acc, entry) => {
+    return acc + entry.numOunces
+  }, 0)
 
- }
-
-
-  // push into array
-  // add all those numOunces together
-  // total of numOunces divide by length of array
-  // return that value
-  // takethosevalues.filter(value => )
+  if (waterEntries.length === 0) {
+    return 0
+  }
   
-  // if 0 dates in range, give message of you didn't choose 7
+  let avg = numOz/waterEntries.length
+  return avg
 }  
 
 

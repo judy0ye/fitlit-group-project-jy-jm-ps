@@ -135,7 +135,7 @@ const onClickSleep = () => {
   displaySleepGraphs()
 }
 
-const onClickInputField = () => {
+const onChangeInputField = () => {
   calculateWeeklyAverage()
 }
 
@@ -143,7 +143,7 @@ const onClickInputField = () => {
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep)
-inputField.addEventListener('change', onClickInputField)
+inputField.addEventListener('change', onChangeInputField)
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
