@@ -1,78 +1,51 @@
-# FitLit Starter Kit
+# FitLit - FitChicks 
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+## Overview
+FitLit is a web application dedicated to delivering user-friendly and comprehensive dashboards that depict user's daily habits. These include sleep patterns, hydration levels, and physical activity metrics.
+
+The application provides up-to-date activity data, empowering users with insights about their lifestyle and facilitating informed decisions towards achieving their health goals and milestones.
+
+FitLit operates on a local server environment and interacts with dedicated API endpoints to fetch and manipulate user-specific data. Moreover, FitLit supports user interactivity allowing users to add new hydration records and daily activity notes, which aids in further customizing their health-tracking experience.
 
 ## Setup
+Fork and clone this [repo](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps) and then in a different folder, fork and clone this [local server repo](https://github.com/turingschool-examples/fitlit-api).
 
-1. Within your group, decide on **one** person to have the project repository (repo) on their GitHub account. Then, that person should *fork* this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `npm start` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page).  `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.   
-1. Make sure both members of your team are collaborators on the forked repo.  
-1. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version.  If you start to run into Webpack errors, first check that all group members are using the correct version.  
+Do the following steps for both repos. Both repos need to be running in order for the app to work correctly.
 
-## Testing
+In your forked GitHub repository, click the code drop-down menu and copy the SSH key. 
+Open the terminal on your machine and navigate to the containing directory you’d like - to clone the repository folder and its contents to. On the command line, run “git clone” + the SSH key you copied earlier. A new folder will be created containing a local copy of the repository linked to the forked repository you created - enter the new directory.
 
-Mocha and chai are already set up, with a boilerplate test for you..
+Install the library dependencies:
 
+Run: ```npm install```
+Next: ```npm start``` in the terminal to see the HTML page
 
-## Data Model
+```Control + C``` is the command to stop running the local server
 
-**Users**
+## Preview of App
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+![preview-of-app]() 
 
-**Activity**
+## Project Progress: 
+We have successfully completed the first phase of this two-part group project. As part of Module Two of the Turing School of Software and Design Front End Web Development program, we've joined forces to drive this project forward. This intensive seven-month program focuses on equipping students with the necessary skills to thrive as web developers, offering proficiency in JavaScript, HTML, CSS, and the React framework.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
+The project was carried out over two intensive week-long sprints, conforming to the project specifications and evaluation rubric as detailed in [part 1](https://frontend.turing.edu/projects/module-2/fitlit-part-one-agile.html) and [part 2](https://frontend.turing.edu/projects/module-2/fitlit-part-two-agile.html). This project allowed us to continue growing our cooperative learning skills, teammwork, communication, and our software developer skills. 
 
-**Hydration**
+Through the progression of this project, we've honed our cooperative learning skills, communication, teamwork, and overall software development abilities. We're excited to keep evolving and advancing these skills as we navigate through the remainder of this program and beyond.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
+## Technologies Used:
+Javascript | Mocha & Chai | API | CSS | HTML
 
-**Sleep**
+## Countributors:
+Jan McSorley [LinkedIn](https://www.linkedin.com/in/janmcsorley/) || [github](https://github.com/jmcsorle)  
+Judy Ye ([LinkedIn](https://www.linkedin.com/in/judy-ye-742087279/) || [github](https://github.com/judy0ye))  
+Parvin Sattorova [LinkedIn](https://www.linkedin.com/in/parvin-sattorova-edwards-357526b3/) || [github](https://github.com/Sulton88Mehron90)
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+## Wins/Challenges:
+Challenges: 
+- One of the major challenges we faced was with setting up our functions to take in different data sets.
+- 
+Wins: 
+ - Working collaboratively within a group 3 developers.
+ - Effectively Fetching data from an API.
+ - Effective use of iterators.
