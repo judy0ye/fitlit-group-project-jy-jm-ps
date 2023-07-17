@@ -46,6 +46,7 @@ const hydrationFromCalendarButton = document.querySelector('.hydration-from-cale
 
 const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = ''
+  oneWeekSleepFromCalendar.innerHTML = ''
   const startDate = new Date(inputField.value + ' 12:00:00');
   // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
@@ -88,6 +89,7 @@ const displaySevenDayHydration = () => {
 // This function should be able to calculate this for any week, not just the latest week
 const getWeeklySleep= () => {
   oneWeekSleepFromCalendar.innerHTML = ''
+  oneWeekHydrationFromCalendar.innerHTML = ''
   const startDate = new Date(inputField.value + ' 12:00:00');
   // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
