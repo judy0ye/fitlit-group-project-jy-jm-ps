@@ -157,37 +157,18 @@ const onChangeInputField = () => {
   activateButtons();
 };
 
-// const onClickHydrationButton = () => {
-//   hideChickenImage();
-//   hideSleepGraphs()
-//   getWeeklyHydration();
-//   displaySevenDayHydration();
-//   if (sleepFromCalendarButton.disabled === true) {
-//    sleepFromCalendarButton.classList.remove('disable-button');
-//     sleepFromCalendarButton.disabled = false;
-//   }
-// };
+
+
 // // dataField.addEventListener('click', function(e) {
 // //   if (e.target.classList.contains('sleep-button')) {
 // //     displaySevenDaySleep()
 // //   }
 // // })
 
-// const onClickSleepButton = () => {
-//   hideChickenImage();
-//   getWeeklySleep();
-//   displaySevenDaySleep();
-//   if (hydrationFromCalendarButton.disabled === true) {
-//     sleepFromCalendarButton.classList.remove('disable-button');
-//     sleepFromCalendarButton.disabled = false;
-//   }
-// };
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 inputField.addEventListener('change', onChangeInputField);
-// hydrationFromCalendarButton.addEventListener('click', onClickHydrationButton);
-// sleepFromCalendarButton.addEventListener('click', onClickSleepButton);
 dataField.addEventListener('click', function(e) {
   if (e.target.classList.contains('sleep-from-calendar-button')) {
     hideChickenImage()

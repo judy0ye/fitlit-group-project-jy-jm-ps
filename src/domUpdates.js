@@ -70,7 +70,7 @@ const getWeeklyHydration = () => {
     return 0
   }
   
-  let avg = numOz/waterEntries.length
+  let avg = Math.round(numOz/waterEntries.length)
  
 
   waterEntries.forEach((entry) => {
@@ -108,17 +108,23 @@ const getWeeklySleep= () => {
       return acc + entry.hoursSlept
     }, 0)
 
+  let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
+    return acc + entry.sleepQuality
+  }, 0)  
+
     if (sleepHourEntries.length === 0) {
       return 0
     }
     
-    let avg = Math.round(hoursSlept/sleepHourEntries.length)
+    let avgHoursSlept = Math.round(hoursSlept/sleepHourEntries.length)
+    let avgSleepQuality = Math.round(sleepQuality/sleepHourEntries.length)
 
  sleepHourEntries.forEach((entry) => {
     oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
     hours and your sleep quality was rated: ${entry.sleepQuality}</p>`
   }); 
- oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avg} hours</p>`
+ oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`
+ oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`
   
   
 
@@ -133,9 +139,9 @@ const displaySevenDaySleep = () => {
 
 const activateButtons = () => {
   sleepFromCalendarButton.disabled = false
-  sleepFromCalendarButton.classList.add('disable-button')
+  sleepFromCalendarButton.classList.remove('disable-button')
   hydrationFromCalendarButton.disabled = false
-  hydrationFromCalendarButton.classList.add('disable-button')
+  hydrationFromCalendarButton.classList.remove('disable-button')
 }
 
 
