@@ -138,7 +138,7 @@ describe('average step goal amongst users', function () {
     ];
   });
 
-  it.skip('should return average step goal of all users', function () {
+  it('should return average step goal of all users', function () {
     const avgStepGoal = getAvgStepGoal(users);
 
     expect(avgStepGoal).to.deep.equal(5333);

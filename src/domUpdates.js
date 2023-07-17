@@ -12,10 +12,11 @@ import {
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
   returnDailySteps,
+  getAvgStepGoal
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
-import { hydration, currentUser, sleep } from './scripts';
+import { hydration, currentUser, sleep, users } from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
 let groupedHydration, groupedSleep, weeklyWaterIntake;
 
@@ -141,6 +142,8 @@ const activateButtons = () => {
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
+  const allUserStepGoalAvg = getAvgStepGoal(users)
+
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
   personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
@@ -149,7 +152,8 @@ const displayRandomUser = (currentUser) => {
   <h3>Stride Length: </h3>${currentUser.strideLength}
   </article>`;
 
-  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}</article>`;
+  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
+  <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
 };
 
 const displayUserData = (currentUser) => {

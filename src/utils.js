@@ -21,13 +21,15 @@ function getUserById(users, id) {
 
 const getAvgStepGoal = (users) => {
   if (!users) {
-    return undefined;
+    return 0;
   }
 
-  let counter = 0;
-  users.forEach((user) => (counter += user.dailyStepGoal));
-  return Math.round(counter / users.length);
+  const totalStepGoal= users.reduce((acc, userInfo) => {
+    return acc + userInfo.dailyStepGoal
+  }, 0)
+  return Math.round(totalStepGoal/users.length)
 };
+
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
 //???????

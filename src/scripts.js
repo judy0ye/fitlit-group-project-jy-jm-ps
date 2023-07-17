@@ -197,6 +197,7 @@ dataField.addEventListener('click', function(e) {
       hydrationFromCalendarButton.classList.remove('disable-button');
       hydrationFromCalendarButton.disabled = false;
     }
+   
   };
   if (e.target.classList.contains('hydration-from-calendar-button')) {
     hideChickenImage()
@@ -235,4 +236,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { hydration, currentUser, sleep, displaySleepChart };
+export { users, hydration, currentUser, sleep, displaySleepChart };
