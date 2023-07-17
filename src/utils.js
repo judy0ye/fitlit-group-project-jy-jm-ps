@@ -1,15 +1,9 @@
 /* ~~~~~ Days-JS ~~~~~*/
 
-// import dayjs from 'dayjs';
-// import calendar from 'dayjs/plugin/calendar';
-// dayjs.extend(calendar);
-// dayjs.extend(require('dayjs/plugin/utc'));
-
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 
 dayjs.extend(calendar);
-// dayjs.extend(utc)
 
 /* ~~~~~ Get Random User ~~~~~*/
 function getRandomUser(users) {
@@ -22,10 +16,6 @@ function getRandomUser(users) {
 function getUserById(users, id) {
   return users.find((user) => user.id === id);
 }
-
-// if API call gives undefined/gives back just an array
-// on line 2, remove 'users' from
-// userData.users
 
 /* ~~~~~ Get Average Step Goal ~~~~~*/
 
@@ -40,88 +30,60 @@ const getAvgStepGoal = (users) => {
 };
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
-
-// function getAvgFluidConsumed(hydrationData, id) {
-//   const days = hydrationData.reduce((days, user) => {
-//     if (user.userID === id) {
-//       days.push(user.date);
-//     }
-//     return days;
-//   }, []);
-
-//   const fluidConsumed = hydrationData.reduce((fluidOunces, user) => {
-//     if (user.userID === id) {
-//       fluidOunces += user.numOunces;
-//     }
-//     return fluidOunces;
-//   }, 0);
-
-//   return Math.round(fluidConsumed / days.length);
-// }
-
-// sleep quality all time - water for all time
+//???????
 function getAvgFluidForAllTime(hydrationData, id) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
-  // console.log('HYDRATIONENTREIS', hydrationEntries)
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
   }, 0);
   return Math.round(avgHydration / hydrationEntries.length);
 }
 
-// function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
-//   const user = hydrationData.find(
-//     (user) => user.userID === id && user.date === day
-//   );
-
-//   if (!user) {
-//     return 0;
-//   }
-//   return user.numOunces;
-// }
-//DO THIS NEXT
-// hours per day - oz per day
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
 
   return dailyEntry.numOunces;
 }
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SAVE FOR PART TWO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function getFluidOuncesPerDay(hydrationData, day, id) {
+  let invidualUser = []
 
-// function getFluidOuncesPerDay(hydrationData, day, id) {
-//   let invidualUser = []
+  hydrationData.filter(user => {
+    if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
+    invidualUser.push(user)
+    }
 
-//   hydrationData.filter(user => {
-//     if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
-//     invidualUser.push(user)
-//     }
+  })
+  const days = hydrationData.reduce((allDays, user) => {
+  if (!allDays[user.date]) {
+  allDays[user.date] = 0
+  }
+  allDays[user.date] += user.numOunces
+  return allDays;
+  }, {});
 
-//   })
-//   const days = hydrationData.reduce((allDays, user) => {
-//   if (!allDays[user.date]) {
-//   allDays[user.date] = 0
-//   }
-//   allDays[user.date] += user.numOunces
-//   return allDays;
-//   }, {});
+ console.log(days)
 
-//  // console.log(days)
+  const sortedDays = Object.entries(days)
+  sortedDays = [['date', oz], ['date', oz]]
+  .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
+  * the above works too but I'm more comfortable with the the lines below *
+  .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
+  .slice(0, 7)
+  .reduce((sevenDays, [date, ounces]) => {
+    sevenDays[date] = ounces;
+    return sevenDays;
+  }, {});
+ console.log('sortedDays: ', sortedDays)
+  return sortedDays
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SAVE ABOVE FOR PART 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-//   const sortedDays = Object.entries(days)
-//   // sortedDays = [['date', oz], ['date', oz]]
-//   // .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
-//   // * the above works too but I'm more comfortable with the the lines below *
-//   .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
-//   .slice(0, 7)
-//   .reduce((sevenDays, [date, ounces]) => {
-//     sevenDays[date] = ounces;
-//     return sevenDays;
-//   }, {});
-//  // console.log('sortedDays: ', sortedDays)
-//   return sortedDays
-// }
-
-// Weekly Sleep Function for 7 most current days
 function getWeeklyFluid(hydrationData, userID) {
   const hydrationEntries = hydrationData.filter(
     (entry) => entry.userID === userID
@@ -179,6 +141,35 @@ function getWeekSleep(sleepData, userID, startDate) {
       weeklySleep.push(sleepEntries[i]);
     }
   }
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ASK SAM - Need a Function to help us get a global currentDATE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  function getUserDates(userData) {
+    let userID = userData.user.id;
+    let userHydrationDates = [];
+    // let userSleepDates = [];
+    // let userActivityDates = [];
+
+    return {
+      hydrationsDates(hydrationData) {
+        const hydrationEntries = hydrationData.filter(
+          (entry) => entry.userID === userID.id
+        );
+        userHydrationDates.push(hydrationEntries.date);
+        console.log(userHydrationDates);
+        return userHydrationDates;
+      },
+    };
+    return hydrationsDates;
+  }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SEND TO SAM
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JAN - FIX THIS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   const weeklySleepData = weeklySleep.map((entry) => {
     return {
       date: entry.date,
@@ -189,9 +180,11 @@ function getWeekSleep(sleepData, userID, startDate) {
   return weeklySleepData;
 }
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 /* ~~~~~ Activity ~~~~~*/
-//bullet #2
-const returnDailySteps = (activityData, userID, currentDate) => {
+//bullet #2 -- change the name to dailySteps
+const stepsPerDay = (activityData, userID, currentDate) => {
   const activityEntries = activityData.filter(
     (entry) => entry.userID === userID.id
   );
@@ -201,7 +194,7 @@ const returnDailySteps = (activityData, userID, currentDate) => {
   return dailySteps.numSteps;
 };
 
-const returnActiveMinutesByDay = (activityData, userID, currentDate) => {
+const activeMinutesPerDay = (activityData, userID, currentDate) => {
   const activityEntries = activityData.filter(
     (entry) => entry.userID === userID.id
   );
@@ -210,8 +203,6 @@ const returnActiveMinutesByDay = (activityData, userID, currentDate) => {
   });
   return dailyMinutes.minutesActive;
 };
-
-
 
 //Might be able to use some of this logic for step calculations:
 // const returnActiveMinutesByDay = (activityData, userID) => {
@@ -250,13 +241,6 @@ const returnMiles = (activityData, userData, userID, date) => {
   return Math.round((userInfo.strideLength * dailyData.numSteps) / 5280);
 };
 
-// const returnMinutesActive = (activityData, userID, date) => {
-//   const userActivityData = findUserActivityData(activityData, userID);
-//   const dailyData = findUserDailyData(userActivityData, date);
-
-//   return dailyData.minutesActive;
-// };
-
 const returnMetStepGoal = (activityData, userData, userID, date) => {
   const userInfo = findUserData(userData, userID);
   const userActivityData = findUserActivityData(activityData, userID);
@@ -271,19 +255,14 @@ export {
   getRandomUser,
   getUserById,
   getAvgStepGoal,
-  // getAvgFluidForAllTime, DO WE EVEN NEED THIS
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
-  // getFluidPerWeek,
-  // getFluidOuncesPerDay,
-  // getAvgFluidConsumed,
-  // getFluidConsumedOnSpecificDay,
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
   //getSleepDataByDate,
   getWeekSleep,
-  returnDailySteps,
-  returnActiveMinutesByDay,
+  activeMinutesPerDay,
+  stepsPerDay,
 };

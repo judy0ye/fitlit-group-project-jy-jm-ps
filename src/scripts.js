@@ -31,8 +31,9 @@ import {
   getRandomUser,
   getAvgSleep,
   getAvgQuality,
-  returnDailySteps,
-  returnActiveMinutesByDay,
+  stepsPerDay,
+  activeMinutesPerDay,
+  getUserDates,
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -158,8 +159,9 @@ const initializeApp = () => {
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
   displaySleepChart(sleep, currentUser);
-  returnDailySteps(activity, currentUser, currentDate);
-  returnActiveMinutesByDay(activity, currentUser, currentDate);
+  stepsPerDay(activity, currentUser, currentDate);
+  activeMinutesPerDay(activity, currentUser, currentDate);
+  getUserDates(currentUser);
   // displayCalendar()
 };
 
