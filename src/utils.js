@@ -21,13 +21,15 @@ function getUserById(users, id) {
 
 const getAvgStepGoal = (users) => {
   if (!users) {
-    return undefined;
+    return 0;
   }
 
-  let counter = 0;
-  users.forEach((user) => (counter += user.dailyStepGoal));
-  return Math.round(counter / users.length);
+  const totalStepGoal= users.reduce((acc, userInfo) => {
+    return acc + userInfo.dailyStepGoal
+  }, 0)
+  return Math.round(totalStepGoal/users.length)
 };
+
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
 //???????
@@ -249,19 +251,22 @@ const weeklySteps = (activityData, userID) => {
 //still need to be able to choose 7 days from the calendar
 //compare steps by day to step goal and return
 
-  const startDataIndex = userActivityData.findIndex(
-    (entry) => entry.date === startDate
-  );
-  const weeklyData = userActivityData
-    .slice(startDataIndex - 6, startDataIndex + 1)
-    .reverse();
+  // const startDataIndex = userActivityData.findIndex(
+  //   (entry) => entry.date === startDate
+  // );
+  // const weeklyData = userActivityData
+  //   .slice(startDataIndex - 6, startDataIndex + 1)
+  //   .reverse();
 
-  return weeklyData.map((entry) => ({
-    date: entry.date,
-    steps: entry.numSteps + ' steps taken',
-  }));
-};
+  // return weeklyData.map((entry) => ({
+  //   date: entry.date,
+  //   steps: entry.numSteps + ' steps taken',
+  // }));
 
+  const calculateMilesUserWalked = (activity, users) => {
+    const milesWalked = (activity.numSteps * users.strideLength) / 5280;
+    return Number(milesWalked.toFixed(2));
+  };
 
 
 
@@ -298,4 +303,5 @@ export {
   activeMinutesPerDay,
   stepsPerDay,
   weeklySteps,
+  calculateMilesUserWalked 
 };
