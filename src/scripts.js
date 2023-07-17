@@ -5,6 +5,9 @@ import './css/styles.css';
 import './images/FitChicks_title.png';
 import './images/FitChicks_scene_lg.png';
 import './images/FitChicks_scene_sm.png';
+import './images/hydration.png';
+import './images/sleep.png';
+import './images/activity.png';
 import { fetchApiData } from './apiCalls';
 import {
   displayRandomUser,
@@ -42,7 +45,7 @@ import {
   getAvgQuality,
   stepsPerDay,
   activeMinutesPerDay,
-  weeklySteps,
+  findCurrentDate,
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -107,15 +110,7 @@ function displaySleepChart(sleep, currentUser) {
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-let currentDate;
-//date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
-let users, hydration, sleep, activity, currentUser;
-//console.log('PPPPPPP:', sleep)
-
-// const displayCalendar = () => {
-//     calendar.innerHTML = `<input id="dateInput" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
-//     calendar2.innerHTML = `<input id="dateInput2" type="date" max="${currentDate.split('/').join('-')}" name="date" placeholder="yyyy/mm/dd" required>`;
-//   };
+let users, hydration, sleep, activity, currentUser, currentDate;
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
@@ -206,6 +201,7 @@ sleepFromCalendarButton.addEventListener('click', onClickSleepButton);
 const initializeApp = () => {
   console.log('INITIALIZE APP:', users, hydration, activity, sleep);
   currentUser = getRandomUser(users);
+  currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(currentUser);
   // displaySleepData(sleep, currentUser);
   // displayHydrationData();
@@ -223,7 +219,7 @@ const initializeApp = () => {
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
   // getUserDates(currentUser);
-  weeklySteps(activity, currentUser, currentDate);
+  displayWeeklyStepCount(activity, currentUser, currentDate);
   // displayCalendar()
 };
 
