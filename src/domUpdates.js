@@ -13,10 +13,13 @@ import {
   getWeeklyFluid,
   returnDailySteps,
   weeklySteps,
+  getAvgStepGoal,
+  calculateMilesUserWalked 
+
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
-import { hydration, currentUser, sleep } from './scripts';
+import { activity, hydration, currentUser, sleep, users } from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
 let groupedHydration, groupedSleep, weeklyWaterIntake;
 
@@ -36,26 +39,22 @@ const oneWeekSleepFromCalendar = document.querySelector(
   '.weekly-sleep-from-calendar-data'
 );
 const weeklyHydrationButton = document.querySelector('.hydration-button');
-const sleepButton = document.querySelector('.sleep-button');
-const chickenImage = document.querySelector('.main-image');
-const inputField = document.getElementById('start-date-input');
-const dataField = document.querySelector('.data-view');
-const sleepFromCalendarButton = document.querySelector(
-  '.sleep-from-calendar-button'
-);
-const oneWeekHydrationFromCalendar = document.querySelector(
-  '.weekly-hydration-from-calendar-data'
-);
-const hydrationFromCalendarButton = document.querySelector(
-  '.hydration-from-calendar-button'
-);
+const sleepButton = document.querySelector('.sleep-button')
+const chickenImage = document.querySelector('.main-image')
+const inputField = document.getElementById('start-date-input')
+const dataField = document.querySelector('.data-view')
+const sleepFromCalendarButton = document.querySelector('.sleep-from-calendar-button')
+const oneWeekHydrationFromCalendar = document.querySelector('.weekly-hydration-from-calendar-data')
+const hydrationFromCalendarButton = document.querySelector('.hydration-from-calendar-button')
+const dailyActivityData = document.querySelector('.activity')
 
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
 const getWeeklyHydration = () => {
-  oneWeekHydrationFromCalendar.innerHTML = '';
+  oneWeekHydrationFromCalendar.innerHTML = ''
+  oneWeekSleepFromCalendar.innerHTML = ''
+
   const startDate = new Date(inputField.value + ' 12:00:00');
-  // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
   let waterEntries = [];
   for (let i = 0; i < 7; i++) {
@@ -82,9 +81,9 @@ const getWeeklyHydration = () => {
   if (waterEntries.length === 0) {
     return 0;
   }
-
-  let avg = numOz / waterEntries.length;
-
+  
+  let avg = Math.round(numOz/waterEntries.length)
+ 
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
   });
@@ -97,12 +96,11 @@ const displaySevenDayHydration = () => {
   hydrationFromCalendarButton.classList.add('disable-button');
 };
 
-// Return how many hours a user slept each day over the course of a given week (7 days)
-// This function should be able to calculate this for any week, not just the latest week
-const getWeeklySleep = () => {
-  oneWeekSleepFromCalendar.innerHTML = '';
+const getWeeklySleep= () => {
+  oneWeekSleepFromCalendar.innerHTML = ''
+  oneWeekHydrationFromCalendar.innerHTML = ''
+
   const startDate = new Date(inputField.value + ' 12:00:00');
-  // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
   let sleepHourEntries = [];
   for (let i = 0; i < 7; i++) {
@@ -125,20 +123,30 @@ const getWeeklySleep = () => {
     return acc + entry.hoursSlept;
   }, 0);
 
-  if (sleepHourEntries.length === 0) {
-    return 0;
-  }
 
   let avg = Math.round(hoursSlept / sleepHourEntries.length);
 
+  let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
+    return acc + entry.sleepQuality
+  }, 0)  
+
+    if (sleepHourEntries.length === 0) {
+      return 0
+    }
+    
+    let avgHoursSlept = Math.round(hoursSlept/sleepHourEntries.length)
+    let avgSleepQuality = Math.round(sleepQuality/sleepHourEntries.length)
+
+
   sleepHourEntries.forEach((entry) => {
     oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
-    hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
-  });
-  oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avg} hours</p>`;
 
-  console.log('7day sleep', sleepHourEntries);
-};
+    hours and your sleep quality was rated: ${entry.sleepQuality}</p>`
+  }); 
+ oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`
+ oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`
+}  
+
 
 const displaySevenDaySleep = () => {
   oneWeekSleepFromCalendar.classList.remove('hidden');
@@ -147,15 +155,23 @@ const displaySevenDaySleep = () => {
 };
 
 const activateButtons = () => {
-  sleepFromCalendarButton.disabled = false;
-  sleepFromCalendarButton.classList.add('disable-button');
-  hydrationFromCalendarButton.disabled = false;
-  hydrationFromCalendarButton.classList.add('disable-button');
-};
+
+  sleepFromCalendarButton.disabled = false
+  sleepFromCalendarButton.classList.remove('disable-button')
+  hydrationFromCalendarButton.disabled = false
+  hydrationFromCalendarButton.classList.remove('disable-button')
+}
+
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
+  const allUserStepGoalAvg = getAvgStepGoal(users)
+  const userActivity = activity.filter(activityEachDay => activityEachDay.userID === currentUser.id)
+  console.log('userActivity', userActivity)
+  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser) 
+  console.log('currentUserMilesWalked', currentUserMilesWalked)
+
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
   personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
@@ -164,7 +180,9 @@ const displayRandomUser = (currentUser) => {
   <h3>Stride Length: </h3>${currentUser.strideLength}
   </article>`;
 
-  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}</article>`;
+  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
+  <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
+
 };
 
 const displayUserData = (currentUser) => {

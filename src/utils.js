@@ -21,13 +21,15 @@ function getUserById(users, id) {
 
 const getAvgStepGoal = (users) => {
   if (!users) {
-    return undefined;
+    return 0;
   }
 
-  let counter = 0;
-  users.forEach((user) => (counter += user.dailyStepGoal));
-  return Math.round(counter / users.length);
+  const totalStepGoal= users.reduce((acc, userInfo) => {
+    return acc + userInfo.dailyStepGoal
+  }, 0)
+  return Math.round(totalStepGoal/users.length)
 };
+
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
 
@@ -231,6 +233,7 @@ const activeMinutesPerDay = (activityData, userID, currentDate) => {
   return dailyMinutes.minutesActive;
 };
 
+
 const weeklySteps = (activityData, userID, startDate) => {
   const activityEntries = activityData.filter(
     (entry) => entry.userID === userID
@@ -242,10 +245,20 @@ const weeklySteps = (activityData, userID, startDate) => {
     .slice(startDateIndex - 6, startDateIndex + 1)
     .reverse();
   return weeklyData;
-  // .map((entry) => ({
-  //   date: entry.date,
-  //   steps: entry.numSteps + ' steps taken ',
-  // }));
+  };
+
+  const calculateMilesUserWalked = (activity, users) => {
+    const milesWalked = (activity.numSteps * users.strideLength) / 5280;
+    return Number(milesWalked.toFixed(2));
+  };
+
+
+const metStepGoal = (activityData, userData, userID, date) => {
+  const userInfo = findUserData(userData, userID);
+  const userActivityData = findUserActivityData(activityData, userID);
+  const dailyData = findUserDailyData(userActivityData, date);
+
+  return dailyData.numSteps >= userInfo.dailyStepGoal;
 };
 
 const returnMiles = (activityData, userData, userID, date) => {
@@ -268,10 +281,10 @@ export {
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
-  //getSleepDataByDate,
   getWeekSleep,
   activeMinutesPerDay,
   stepsPerDay,
   weeklySteps,
   findCurrentDate,
+  calculateMilesUserWalked 
 };
