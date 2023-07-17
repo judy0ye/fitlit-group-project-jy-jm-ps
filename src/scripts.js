@@ -25,9 +25,14 @@ import {
   displayWeeklyStepCount,
   hideChickenImage,
   showChickenImage,
-  hideSleepGraphs
+  hideSleepGraphs,
 } from './domUpdates';
-import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
+import {
+  getRandomUser,
+  getAvgSleep,
+  getAvgQuality,
+  returnDailySteps,
+} from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
 import {
@@ -119,26 +124,24 @@ window.addEventListener('load', function () {
   });
 });
 
-
-
 const onClickHydration = () => {
   hideChickenImage();
-  hideSleepGraphs()
+  hideSleepGraphs();
   displayHydrationGraphs();
-}
+};
 
 const onClickSleep = () => {
-  hideChickenImage()
-  hideHydrationGraphs()
-  displaySleepGraphs()
-}
+  hideChickenImage();
+  hideHydrationGraphs();
+  displaySleepGraphs();
+};
 weeklyHydrationButton.addEventListener('click', onClickHydration);
-sleepButton.addEventListener('click', onClickSleep)
+sleepButton.addEventListener('click', onClickSleep);
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
-  // console.log('initializeApp:', users, hydration, activity, sleep);
+  console.log('INITIALIZE APP:', users, hydration, activity, sleep);
   currentUser = getRandomUser(users);
   displayRandomUser(currentUser);
   // displaySleepData(sleep, currentUser);
@@ -154,7 +157,8 @@ const initializeApp = () => {
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
   displaySleepChart(sleep, currentUser);
+  returnDailySteps(activity, currentUser, currentDate);
   // displayCalendar()
 };
 
-export { hydration, currentUser, displaySleepChart, };
+export { hydration, currentUser, displaySleepChart };

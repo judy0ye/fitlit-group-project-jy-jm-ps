@@ -66,7 +66,7 @@ function getAvgFluidForAllTime(hydrationData, id) {
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
   }, 0);
-  return Math.round(avgHydration / hydrationEntries.length)
+  return Math.round(avgHydration / hydrationEntries.length);
 }
 
 // function getFluidConsumedOnSpecificDay(hydrationData, day, id) {
@@ -143,7 +143,7 @@ function getAvgSleep(sleepData, userID) {
     return (acc += user.hoursSlept);
   }, 0);
   return Math.round((avgSleep / sleepEntries.length) * 10) / 10;
-};
+}
 
 function getAvgQuality(sleepData, userID) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
@@ -151,7 +151,7 @@ function getAvgQuality(sleepData, userID) {
     return (acc += user.sleepQuality);
   }, 0);
   return Math.round((avgQuality / sleepEntries.length) * 10) / 10;
-};
+}
 
 function getHoursByDay(sleepData, id, date) {
   // console.log('getHoursByDay:', sleepData, id, date);
@@ -160,66 +160,92 @@ function getHoursByDay(sleepData, id, date) {
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
 
   return dailyEntry.hoursSlept;
-};
+}
 
 function getQualityByDay(sleepData, userID, date) {
   // console.log('getQualityByDay:', userID);
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
   return dailyEntry.sleepQuality;
-};
+}
 
 function getWeekSleep(sleepData, userID, startDate) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-  const indexOfCurrentDayEntry = sleepEntries.findIndex(entry => entry.date === startDate);
+  const indexOfCurrentDayEntry = sleepEntries.findIndex(
+    (entry) => entry.date === startDate
+  );
   let weeklySleep = [];
   for (let i = indexOfCurrentDayEntry; i > indexOfCurrentDayEntry - 7; i--) {
     if (i >= 0 && sleepEntries[i]) {
       weeklySleep.push(sleepEntries[i]);
     }
-  };
+  }
   const weeklySleepData = weeklySleep.map((entry) => {
     return {
       date: entry.date,
       hoursSlept: entry.hoursSlept + ' hours slept',
       sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-    }
+    };
   });
   return weeklySleepData;
-};
+}
 
 /* ~~~~~ Activity ~~~~~*/
 
 // Judy's functions
 // function getMilesWalked(userData, activityData, id, day) {
-  //   const user = userData.find((user) => user.id === id);
-  
-  //   const activity = activityData.find(
-  //     (activity) => activity.userID === id && activity.date === day
+//   const user = userData.find((user) => user.id === id);
 
-const findUserActivityData = (activityData, userID) => activityData
-  .filter(entry => entry.userID === userID);
+//   const activity = activityData.find(
+//     (activity) => activity.userID === id && activity.date === day
 
-const findUserDailyData = (activityEntries, date) => activityEntries
-  .find(entry => entry.date === date);
+//first 3 functions are making sure that the userID, date, and data for the random user match - may be redundant based on Parvin's work on the Promise
 
-const findUserData = (userData, userID) => userData
-  .find(user => user.id === userID);
+// const findUserActivityData = (activityData, userID) => activityData
+//   .filter(entry => entry.userID === userID); // passing in random user id
+
+// const findUserDailyData = (activityEntries, date) => activityEntries
+//   .find(entry => entry.date === date); //looking for last date of activity and making sure it matches with our random user's date
+
+// const findUserData = (userData, userID) => userData
+//   .find(user => user.id === userID); // this I think is redundant based on getRandomUser
 
 const returnDailySteps = (activityData, userID, date) => {
-  const userActivityData = findUserActivityData(activityData, userID);
-  const dailyData = findUserDailyData(userActivityData, date);
-  return dailyData.numSteps;
+  const activityEntries = activityData.filter(
+    (entry) => entry.userID === userID
+  );
+  console.log('ACTIVITY ENTRIES', activityEntries);
+  const avgActivity = activityEntries.reduce((acc, user) => {
+    return (acc += user.hoursActivity);
+  }, 0);
+  return Math.round((avgActivity / activityEntries.length) * 10) / 10;
+
+  // const userActivityData = findUserActivityData(activityData, userID);
+  // const dailyData = findUserDailyData(userActivityData, date);
+  // return dailyData.numSteps;
 };
+
+
+
+// function getFluidDrankForSpecificDay(hydrationData, id, date) {
+//   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
+//   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
+
+//   return dailyEntry.numOunces;
+// }
+
+// **********
 
 const returnWeeklySteps = (activityData, userID, startDate) => {
   const userActivityData = findUserActivityData(activityData, userID);
-  const startDataIndex = userActivityData
-  .findIndex(entry => entry.date === startDate);
+  const startDataIndex = userActivityData.findIndex(
+    (entry) => entry.date === startDate
+  );
   const weeklyData = userActivityData
-  .slice(startDataIndex - 6, startDataIndex + 1).reverse();
+    .slice(startDataIndex - 6, startDataIndex + 1)
+    .reverse();
 
-  return weeklyData.map(entry => ({
+  return weeklyData.map((entry) => ({
     date: entry.date,
     steps: entry.numSteps + ' steps taken',
   }));
@@ -230,7 +256,7 @@ const returnMiles = (activityData, userData, userID, date) => {
   const userActivityData = findUserActivityData(activityData, userID);
   const dailyData = findUserDailyData(userActivityData, date);
 
-  return Math.round(userInfo.strideLength * dailyData.numSteps / 5280);
+  return Math.round((userInfo.strideLength * dailyData.numSteps) / 5280);
 };
 
 const returnMinutesActive = (activityData, userID, date) => {
@@ -247,8 +273,6 @@ const returnMetStepGoal = (activityData, userData, userID, date) => {
 
   return dailyData.numSteps >= userInfo.dailyStepGoal;
 };
-
-
 
 /* ~~~~~ Exports ~~~~~*/
 
@@ -269,4 +293,5 @@ export {
   getQualityByDay,
   //getSleepDataByDate,
   getWeekSleep,
+  returnDailySteps,
 };

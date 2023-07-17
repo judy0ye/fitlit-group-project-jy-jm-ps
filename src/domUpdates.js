@@ -11,6 +11,7 @@ import {
   // getAvgFluidForAllTime, DO WE EVEN NEED THIS
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
+  returnDailySteps,
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
