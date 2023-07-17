@@ -141,6 +141,7 @@ function getWeekSleep(sleepData, userID, startDate) {
       weeklySleep.push(sleepEntries[i]);
     }
   }
+}
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ASK SAM - Need a Function to help us get a global currentDATE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
