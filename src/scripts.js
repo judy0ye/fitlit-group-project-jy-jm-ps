@@ -30,7 +30,8 @@ import {
   inputField,
   displaySevenDaySleep,
   dataField,
-  sleepFromCalendarButton 
+  sleepFromCalendarButton,
+  activateButtons 
 } from './domUpdates';
 import { getRandomUser, getAvgSleep, getAvgQuality } from './utils';
 
@@ -138,9 +139,9 @@ const onClickSleep = () => {
   displaySleepGraphs()
 }
 
-// const onChangeInputField = () => {
-//   calculateWeeklyAverage()
-// }
+const onChangeInputField = () => {
+  activateButtons()
+}
 
 // dataField.addEventListener('click', function(e) {
 //   if (e.target.classList.contains('sleep-button')) {
@@ -150,7 +151,7 @@ const onClickSleep = () => {
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep)
-// inputField.addEventListener('change', onChangeInputField)
+inputField.addEventListener('change', onChangeInputField)
 dataField.addEventListener('click', function(e) {
   if (e.target.classList.contains('sleep-from-calendar-button')) {
     calculateWeeklyAverage()

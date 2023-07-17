@@ -72,6 +72,7 @@ const sleepFromCalendarButton = document.querySelector('.sleep-from-calendar-but
 // Return how many hours a user slept each day over the course of a given week (7 days)
 // This function should be able to calculate this for any week, not just the latest week
 const calculateWeeklyAverage = () => {
+  oneWeekFromCalendar.innerHTML = ''
   const startDate = new Date(inputField.value + ' 12:00:00');
   // 0-11 (+ 1) (1-12 01-012) slices from back 2
 
@@ -90,7 +91,6 @@ const calculateWeeklyAverage = () => {
  sleepHourEntries.forEach((entry) => {
     oneWeekFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} hours and your sleep quality was rated: ${entry.sleepQuality}.</p>`
   }); 
-  console.log('l', oneWeekFromCalendar)
 
 console.log('7day sleep', sleepHourEntries)
 
@@ -98,10 +98,14 @@ console.log('7day sleep', sleepHourEntries)
 
 const displaySevenDaySleep = () => {
   oneWeekFromCalendar.classList.remove('hidden')
-  dataField.disabled = true
-  dataField.classList.add('disable-button')
+  sleepFromCalendarButton.disabled = true
+  sleepFromCalendarButton.classList.add('disable-button')
 }
 
+const activateButtons = () => {
+  sleepFromCalendarButton.disabled = false
+  // sleepFromCalendarButton.classList.add('disable-button')
+}
 
 
 
@@ -335,5 +339,6 @@ export {
   displaySevenDaySleep,
   dataField,
   displaySleepGraphs,
-  sleepFromCalendarButton 
+  sleepFromCalendarButton, 
+  activateButtons 
 };
