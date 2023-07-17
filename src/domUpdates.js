@@ -205,7 +205,7 @@ function displayAverageSleep(sleep, currentUser) {
 
 function displayActivity() {
   dailySteps.innerText = `You took ${activity.returnDailySteps(
-    newUser.id,
+    currentUser.id,
     currentDate
   )} steps today!`;
   dailyMiles.innerText = `You have walked ${activity.returnMiles(
@@ -233,6 +233,13 @@ function displayWeeklyStepCount() {
     }
   });
 }
+
+
+function displayActivity() {
+  dailySteps.innerText = `You took ${activity.returnDailySteps(currentUser.id, currentDate)} steps today!`;
+  dailyMiles.innerText = `You have walked ${activity.returnMiles(currentUser.id, currentDate)} miles today!`;
+  dailyMinutes.innerText = `You were active for ${activity.returnMinutesActive(currentUser.id, currentDate)} minutes today!`;
+};
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 

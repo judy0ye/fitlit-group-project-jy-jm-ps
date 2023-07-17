@@ -32,6 +32,7 @@ import {
   getAvgSleep,
   getAvgQuality,
   returnDailySteps,
+  returnActiveMinutesByDay,
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -158,6 +159,7 @@ const initializeApp = () => {
   displayAverageSleep(sleep, currentUser, currentDate);
   displaySleepChart(sleep, currentUser);
   returnDailySteps(activity, currentUser, currentDate);
+  returnActiveMinutesByDay(activity, currentUser, currentDate);
   // displayCalendar()
 };
 

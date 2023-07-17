@@ -163,7 +163,6 @@ function getHoursByDay(sleepData, id, date) {
 }
 
 function getQualityByDay(sleepData, userID, date) {
-  // console.log('getQualityByDay:', userID);
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
   return dailyEntry.sleepQuality;
@@ -191,50 +190,42 @@ function getWeekSleep(sleepData, userID, startDate) {
 }
 
 /* ~~~~~ Activity ~~~~~*/
-
-// Judy's functions
-// function getMilesWalked(userData, activityData, id, day) {
-//   const user = userData.find((user) => user.id === id);
-
-//   const activity = activityData.find(
-//     (activity) => activity.userID === id && activity.date === day
-
-//first 3 functions are making sure that the userID, date, and data for the random user match - may be redundant based on Parvin's work on the Promise
-
-// const findUserActivityData = (activityData, userID) => activityData
-//   .filter(entry => entry.userID === userID); // passing in random user id
-
-// const findUserDailyData = (activityEntries, date) => activityEntries
-//   .find(entry => entry.date === date); //looking for last date of activity and making sure it matches with our random user's date
-
-// const findUserData = (userData, userID) => userData
-//   .find(user => user.id === userID); // this I think is redundant based on getRandomUser
-
-const returnDailySteps = (activityData, userID, date) => {
+//bullet #2
+const returnDailySteps = (activityData, userID, currentDate) => {
   const activityEntries = activityData.filter(
-    (entry) => entry.userID === userID
+    (entry) => entry.userID === userID.id
   );
-  console.log('ACTIVITY ENTRIES', activityEntries);
-  const avgActivity = activityEntries.reduce((acc, user) => {
-    return (acc += user.hoursActivity);
-  }, 0);
-  return Math.round((avgActivity / activityEntries.length) * 10) / 10;
+  const dailySteps = activityEntries.find((entry) => {
+    return entry.date === currentDate;
+  });
+  return dailySteps.numSteps;
+};
 
-  // const userActivityData = findUserActivityData(activityData, userID);
-  // const dailyData = findUserDailyData(userActivityData, date);
-  // return dailyData.numSteps;
+const returnActiveMinutesByDay = (activityData, userID, currentDate) => {
+  const activityEntries = activityData.filter(
+    (entry) => entry.userID === userID.id
+  );
+  const dailyMinutes = activityEntries.find((entry) => {
+    return entry.date === currentDate;
+  });
+  return dailyMinutes.minutesActive;
 };
 
 
 
-// function getFluidDrankForSpecificDay(hydrationData, id, date) {
-//   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
-//   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
-
-//   return dailyEntry.numOunces;
-// }
-
-// **********
+//Might be able to use some of this logic for step calculations:
+// const returnActiveMinutesByDay = (activityData, userID) => {
+//   const activityEntries = activityData.filter(
+//     (entry) => entry.userID === userID.id
+//   );
+//   const totalMinutes = activityEntries.reduce((acc, user) => {
+//     return (acc += user.minutesActive);
+//   }, 0);
+//   // const avgActivityHours = Math.floor(totalMinutes / 60 / activityEntries.length);
+//   // console.log('AVERAGE ACTIVITY (HOURS):', avgActivityHours);
+//   console.log('TOTAL MINUTES', totalMinutes);
+//   return totalMinutes;
+// };
 
 const returnWeeklySteps = (activityData, userID, startDate) => {
   const userActivityData = findUserActivityData(activityData, userID);
@@ -259,12 +250,12 @@ const returnMiles = (activityData, userData, userID, date) => {
   return Math.round((userInfo.strideLength * dailyData.numSteps) / 5280);
 };
 
-const returnMinutesActive = (activityData, userID, date) => {
-  const userActivityData = findUserActivityData(activityData, userID);
-  const dailyData = findUserDailyData(userActivityData, date);
+// const returnMinutesActive = (activityData, userID, date) => {
+//   const userActivityData = findUserActivityData(activityData, userID);
+//   const dailyData = findUserDailyData(userActivityData, date);
 
-  return dailyData.minutesActive;
-};
+//   return dailyData.minutesActive;
+// };
 
 const returnMetStepGoal = (activityData, userData, userID, date) => {
   const userInfo = findUserData(userData, userID);
@@ -294,4 +285,5 @@ export {
   //getSleepDataByDate,
   getWeekSleep,
   returnDailySteps,
+  returnActiveMinutesByDay,
 };
