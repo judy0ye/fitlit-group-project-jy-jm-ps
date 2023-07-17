@@ -142,10 +142,13 @@ const onClickHydration = () => {
 };
 
 const onClickSleep = () => {
-  refactor / activity - functions;
   hideChickenImage();
   hideHydrationGraphs();
   displaySleepGraphs();
+  if (hydrationFromCalendarButton.disabled === true) {
+    hydrationFromCalendarButton.classList.remove('disable-button');
+     hydrationFromCalendarButton.disabled = false;
+   }
 };
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
@@ -154,52 +157,57 @@ const onChangeInputField = () => {
   activateButtons();
 };
 
-const onClickHydrationButton = () => {
-  hideChickenImage();
-  getWeeklyHydration();
-  displaySevenDayHydration();
-  if (sleepFromCalendarButton.disabled === true) {
-    hydrationFromCalendarButton.classList.remove('disable-button');
-    hydrationFromCalendarButton.disabled = false;
-  }
-};
-// dataField.addEventListener('click', function(e) {
-//   if (e.target.classList.contains('sleep-button')) {
-//     displaySevenDaySleep()
+// const onClickHydrationButton = () => {
+//   hideChickenImage();
+//   hideSleepGraphs()
+//   getWeeklyHydration();
+//   displaySevenDayHydration();
+//   if (sleepFromCalendarButton.disabled === true) {
+//    sleepFromCalendarButton.classList.remove('disable-button');
+//     sleepFromCalendarButton.disabled = false;
 //   }
-// })
+// };
+// // dataField.addEventListener('click', function(e) {
+// //   if (e.target.classList.contains('sleep-button')) {
+// //     displaySevenDaySleep()
+// //   }
+// // })
 
-const onClickSleepButton = () => {
-  hideChickenImage();
-  getWeeklySleep();
-  displaySevenDaySleep();
-  if (hydrationFromCalendarButton.disabled === true) {
-    sleepFromCalendarButton.classList.remove('disable-button');
-    sleepFromCalendarButton.disabled = false;
-  }
-};
+// const onClickSleepButton = () => {
+//   hideChickenImage();
+//   getWeeklySleep();
+//   displaySevenDaySleep();
+//   if (hydrationFromCalendarButton.disabled === true) {
+//     sleepFromCalendarButton.classList.remove('disable-button');
+//     sleepFromCalendarButton.disabled = false;
+//   }
+// };
 
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 inputField.addEventListener('change', onChangeInputField);
-hydrationFromCalendarButton.addEventListener('click', onClickHydrationButton);
-sleepFromCalendarButton.addEventListener('click', onClickSleepButton);
-// dataField.addEventListener('click', function(e) {
-//   if (e.target.classList.contains('sleep-from-calendar-button')) {
-//     hideChickenImage()
-//     getWeeklySleep()
-//     displaySevenDaySleep()
-
-//   };
-//   if (e.target.classList.contains('hydration-from-calendar-button')) {
-//     hideChickenImage()
-//     getWeeklyHydration()
-//     displaySevenDayHydration()
-//     if (sleepFromCalendarButton.disabled === true) {
-//       activateHydrationFromCalendarButton()
-//     }
-//   }
-// })
+// hydrationFromCalendarButton.addEventListener('click', onClickHydrationButton);
+// sleepFromCalendarButton.addEventListener('click', onClickSleepButton);
+dataField.addEventListener('click', function(e) {
+  if (e.target.classList.contains('sleep-from-calendar-button')) {
+    hideChickenImage()
+    getWeeklySleep()
+    displaySevenDaySleep()
+    if (hydrationFromCalendarButton.disabled === true) {
+      hydrationFromCalendarButton.classList.remove('disable-button');
+      hydrationFromCalendarButton.disabled = false;
+    }
+  };
+  if (e.target.classList.contains('hydration-from-calendar-button')) {
+    hideChickenImage()
+    getWeeklyHydration()
+    displaySevenDayHydration()
+    if (sleepFromCalendarButton.disabled === true) {
+      sleepFromCalendarButton.classList.remove('disable-button');
+      sleepFromCalendarButton.disabled = false;
+    }
+  }
+})
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 

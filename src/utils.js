@@ -249,18 +249,18 @@ const weeklySteps = (activityData, userID) => {
 //still need to be able to choose 7 days from the calendar
 //compare steps by day to step goal and return
 
-  const startDataIndex = userActivityData.findIndex(
-    (entry) => entry.date === startDate
-  );
-  const weeklyData = userActivityData
-    .slice(startDataIndex - 6, startDataIndex + 1)
-    .reverse();
+  // const startDataIndex = userActivityData.findIndex(
+  //   (entry) => entry.date === startDate
+  // );
+  // const weeklyData = userActivityData
+  //   .slice(startDataIndex - 6, startDataIndex + 1)
+  //   .reverse();
 
-  return weeklyData.map((entry) => ({
-    date: entry.date,
-    steps: entry.numSteps + ' steps taken',
-  }));
-};
+  // return weeklyData.map((entry) => ({
+  //   date: entry.date,
+  //   steps: entry.numSteps + ' steps taken',
+  // }));
+
 
 
 
