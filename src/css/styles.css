@@ -112,7 +112,6 @@ body, html {
 .activity-from-calendar-button.disable-button {
   background-color: #EAEAF4;
   cursor:not-allowed;
-  cursor: pointer;
 }
 
 .activity-button,

@@ -36,6 +36,7 @@ import {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
+  displaySevenDayActivity
 } from './domUpdates';
 
 import {
@@ -163,6 +164,10 @@ dataField.addEventListener('click', function (e) {
     if (hydrationFromCalendarButton.disabled === true) {
       hydrationFromCalendarButton.classList.remove('disable-button');
       hydrationFromCalendarButton.disabled = false;
+    }
+    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
+      oneWeekActivityDataFromCalendarButton.disabled = false;
     }
   }
   if (e.target.classList.contains('hydration-from-calendar-button')) {
