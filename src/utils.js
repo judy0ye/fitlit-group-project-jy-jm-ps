@@ -208,7 +208,6 @@ JAN - FIX THIS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /* ~~~~~ Activity ~~~~~*/
-//bullet #2 -- change the name to dailySteps
 
 const stepsPerDay = (activityData, currentUser, currentDate) => {
   const activityEntries = activityData.filter(

@@ -1,4 +1,5 @@
 /* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
+
 import {
   getAvgSleep,
   getAvgQuality,
@@ -6,22 +7,22 @@ import {
   getWeekSleep,
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
-  returnDailySteps,
   weeklySteps,
   getAvgStepGoal,
   calculateMilesUserWalked,
   stepsPerDay,
   milesPerDay,
-  activeMinutesPerDay
+  activeMinutesPerDay,
 } from './utils';
 
-//import { fetchApiData } from './apiCalls';
-
-import { activity, hydration, currentUser, sleep, users, currentDate } from './scripts';
-
-/* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
-
-let groupedHydration, groupedSleep, weeklyWaterIntake;
+import {
+  activity,
+  hydration,
+  currentUser,
+  sleep,
+  users,
+  currentDate,
+} from './scripts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -173,12 +174,15 @@ const activateButtons = () => {
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
-  const allUserStepGoalAvg = getAvgStepGoal(users)
+  const allUserStepGoalAvg = getAvgStepGoal(users);
   const userActivity = activity
-    .filter(activityEachDay => activityEachDay.userID === currentUser.id)
-    .filter(each => each.date === currentDate)[0]
+    .filter((activityEachDay) => activityEachDay.userID === currentUser.id)
+    .filter((each) => each.date === currentDate)[0];
 
-  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser)
+  const currentUserMilesWalked = calculateMilesUserWalked(
+    userActivity,
+    currentUser
+  );
 
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
@@ -192,7 +196,6 @@ const displayRandomUser = (currentUser) => {
   <h3>Miles Walked Today:</h3>${currentUserMilesWalked}
   <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
 };
-
 
 const hideChickenImage = () => {
   chickenImage.classList.add('hidden');
@@ -286,7 +289,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
         `;
     }
   });
-};
+}
 
 function displayActivity(activityData, currentUser, currentDate) {
   dailySteps.innerText = `You took ${stepsPerDay(
@@ -304,7 +307,7 @@ function displayActivity(activityData, currentUser, currentDate) {
     currentUser,
     currentDate
   )} minutes today!`;
-};
+}
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
@@ -321,7 +324,6 @@ export {
   sleepButton,
   displayWeeklyStepCount,
   hideSleepGraphs,
-  groupedHydration,
   hideChickenImage,
   showChickenImage,
   getWeeklySleep,
@@ -334,5 +336,5 @@ export {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  displayActivity
+  displayActivity,
 };

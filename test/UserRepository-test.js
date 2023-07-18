@@ -4,8 +4,6 @@ import { expect } from 'chai';
 import {
   getRandomUser,
   getUserById,
-  getAvgFluidConsumed,
-  getFluidConsumedOnSpecificDay,
   getAvgStepGoal,
   getFluidOuncesPerDay,
   getAvgSleep,
