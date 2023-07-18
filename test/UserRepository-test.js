@@ -4,15 +4,21 @@ import { expect } from 'chai';
 import {
   getRandomUser,
   getUserById,
-  getAvgFluidConsumed,
-  getFluidConsumedOnSpecificDay,
   getAvgStepGoal,
+  getFluidDrankForSpecificDay,
+  getWeeklyFluid,
   getFluidOuncesPerDay,
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
   getWeekSleep,
+  activeMinutesPerDay,
+  stepsPerDay,
+  weeklySteps,
+  findCurrentDate,
+  calculateMilesUserWalked,
+  milesPerDay
 } from '../src/utils';
 import userData from '../src/data/users';
 import sleepTestData from '../src/data/sleep-test-data';
@@ -353,53 +359,40 @@ describe('Sleep Functions', function () {
 /* ~~~~~ Activity ~~~~~*/
 
 describe('Activity', function () {
-  it('returnDailySteps should be a function', function () {
-    expect(returnDailySteps).to.be.a('function');
+  it('stepsPerDay should be a function', function () {
+    expect(stepsPerDay).to.be.a('function');
   });
 
-  it('returnWeeklySteps should be a function', function () {
-    expect(returnWeeklySteps).to.be.a('function');
+  it('weeklySteps should be a function', function () {
+    expect(weeklySteps).to.be.a('function');
   });
 
-  it('returnMiles should be a function', function () {
-    expect(returnMiles).to.be.a('function');
+  it('calculateMilesUserWalked should be a function', function () {
+    expect(calculateMilesUserWalked).to.be.a('function');
   });
 
-  it('returnMinutesActive should be a function', function () {
-    expect(returnMinutesActive).to.be.a('function');
-  });
-
-  it('returnMetStepGoal should be a function', function () {
-    expect(returnMetStepGoal).to.be.a('function');
+  it('activeMinutesPerDay should be a function', function () {
+    expect(activeMinutesPerDay).to.be.a('function');
   });
 
   it('should be able to calculate the number of miles walked in a day', function () {
     expect(
-      returnMiles(activityTestData, userTestData, 1, '2023/03/24')
+      alculateMilesUserWalked(activityTestData, userTestData, 1, '2023/03/24')
     ).to.equal(6);
   });
 
   it('should be able to return how many minutes the user was active', function () {
-    expect(returnMinutesActive(activityTestData, 2, '2023/03/24')).to.equal(
+    expect(ractiveMinutesPerDay(activityTestData, 2, '2023/03/24')).to.equal(
       125
     );
   });
 
-  it('should be able to return if the user reached their step goal', function () {
-    expect(
-      returnMetStepGoal(activityTestData, userTestData, 1, '2023/03/25')
-    ).to.equal(true);
-    expect(
-      returnMetStepGoal(activityTestData, userTestData, 2, '2023/03/24')
-    ).to.equal(false);
-  });
-
   it('should return the number of steps for a specific day', function () {
-    expect(returnDailySteps(activityTestData, 1, '2023/03/24')).to.equal(7362);
+    expect(stepsPerDay(activityTestData, 1, '2023/03/24')).to.equal(7362);
   });
 
   it('should return the steps taken weekly starting from a specific date', function () {
-    const expectedWeeklyData = returnWeeklySteps(
+    const expectedWeeklyData = weeklySteps(
       activityTestData,
       1,
       '2023/03/31'

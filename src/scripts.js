@@ -36,9 +36,6 @@ import {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  // getWeeklyActivity,
-  oneWeekActivityDataFromCalendarButton,
-  displaySevenDayActivity
 } from './domUpdates';
 import {
   getRandomUser,
@@ -171,10 +168,6 @@ dataField.addEventListener('click', function (e) {
       hydrationFromCalendarButton.classList.remove('disable-button');
       hydrationFromCalendarButton.disabled = false;
     }
-    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-      oneWeekActivityDataFromCalendarButton.disabled = false;
-    }
   }
   if (e.target.classList.contains('hydration-from-calendar-button')) {
     hideChickenImage();
@@ -183,23 +176,6 @@ dataField.addEventListener('click', function (e) {
     if (sleepFromCalendarButton.disabled === true) {
       sleepFromCalendarButton.classList.remove('disable-button');
       sleepFromCalendarButton.disabled = false;
-    }
-    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-      oneWeekActivityDataFromCalendarButton.disabled = false;
-    }
-  }
-  if (e.target.classList.contains('activity-from-calendar-button')) {
-    hideChickenImage();
-    displayWeeklyStepCount(activity, currentUser, currentDate);
-    displaySevenDayActivity()
-    if (sleepFromCalendarButton.disabled === true) {
-      sleepFromCalendarButton.classList.remove('disable-button');
-      sleepFromCalendarButton.disabled = false;
-    }
-    if (hydrationFromCalendarButton.disabled === true) {
-      hydrationFromCalendarButton.classList.remove('disable-button');
-      hydrationFromCalendarButton.disabled = false;
     }
   }
 });
@@ -222,6 +198,7 @@ const initializeApp = () => {
   displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
+  // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
 };
 
