@@ -24,12 +24,11 @@ const getAvgStepGoal = (users) => {
     return 0;
   }
 
-  const totalStepGoal= users.reduce((acc, userInfo) => {
-    return acc + userInfo.dailyStepGoal
-  }, 0)
-  return Math.round(totalStepGoal/users.length)
+  const totalStepGoal = users.reduce((acc, userInfo) => {
+    return acc + userInfo.dailyStepGoal;
+  }, 0);
+  return Math.round(totalStepGoal / users.length);
 };
-
 
 /* ~~~~~ Get Average Fluid ~~~~~*/
 
@@ -44,8 +43,6 @@ function getAvgFluidForAllTime(hydrationData, id) {
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
-  // console.log('DAILY ENTRY', dailyEntry);
-  // console.log('NUM OUNCES', dailyEntry.numOunces);
   return dailyEntry.numOunces;
 }
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,7 +139,6 @@ function getWeekSleep(sleepData, userID, startDate) {
   for (let i = indexOfCurrentDayEntry; i > indexOfCurrentDayEntry - 7; i--) {
     if (i >= 0 && sleepEntries[i]) {
       weeklySleep.push(sleepEntries[i]);
-      console.log('WEEKLY SLEEP', weeklySleep);
     }
   }
   return weeklySleep;
@@ -165,7 +161,7 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   const lastActivityDate = lastActivityEntry.date;
   dateChoices.push(lastHydrationDate, lastSleepDate, lastActivityDate);
   dateChoices.sort();
-  let currentDate = dateChoices.slice(-1);
+  let currentDate = dateChoices.slice(-1)[0];
   console.log('DATE', currentDate);
   return currentDate;
 }
@@ -233,7 +229,6 @@ const activeMinutesPerDay = (activityData, userID, currentDate) => {
   return dailyMinutes.minutesActive;
 };
 
-
 const weeklySteps = (activityData, userID, startDate) => {
   const activityEntries = activityData.filter(
     (entry) => entry.userID === userID
@@ -241,17 +236,16 @@ const weeklySteps = (activityData, userID, startDate) => {
   const startDateIndex = activityEntries.findIndex(
     (entry) => entry.date === startDate
   );
-  const weeklyData = activityData
+  const weeklyData = activityEntries
     .slice(startDateIndex - 6, startDateIndex + 1)
     .reverse();
   return weeklyData;
-  };
+};
 
-  const calculateMilesUserWalked = (activity, users) => {
-    const milesWalked = (activity.numSteps * users.strideLength) / 5280;
-    return Number(milesWalked.toFixed(2));
-  };
-
+const calculateMilesUserWalked = (activity, users) => {
+  const milesWalked = (activity.numSteps * users.strideLength) / 5280;
+  return Number(milesWalked.toFixed(2));
+};
 
 const metStepGoal = (activityData, userData, userID, date) => {
   const userInfo = findUserData(userData, userID);
@@ -286,5 +280,5 @@ export {
   stepsPerDay,
   weeklySteps,
   findCurrentDate,
-  calculateMilesUserWalked 
+  calculateMilesUserWalked,
 };
