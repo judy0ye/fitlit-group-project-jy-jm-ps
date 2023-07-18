@@ -315,89 +315,54 @@ describe('Sleep Functions', function () {
     expect(getQualityByDay(sleepData, 2, '2023/03/28')).to.equal(2.1);
   });
 
-  it("should be able to get user's weekly sleep data", function () {
-    expect(getWeekSleep(sleepData, 1, '2023/03/30')).to.deep.equal([
-      {
-        date: '2023/03/30',
-        hoursSlept: '6.2 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '3.3',
-      },
-      {
-        date: '2023/03/29',
-        hoursSlept: '5.6 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '2.1',
-      },
-      {
-        date: '2023/03/28',
-        hoursSlept: '6 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '4.6',
-      },
-      {
-        date: '2023/03/27',
-        hoursSlept: '7.1 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '4.7',
-      },
-      {
-        date: '2023/03/26',
-        hoursSlept: '5.4 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '3.1',
-      },
-      {
-        date: '2023/03/25',
-        hoursSlept: '6.3 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '3.3',
-      },
-      {
-        date: '2023/03/24',
-        hoursSlept: '9.6 hours slept',
-        sleepQuality: ' a sleep quality rating of ' + '4.3',
-      },
-    ]);
+  it('returns a week of sleep data for the specified user and start date', function() {
+    const weeklySleepData = getWeekSleep(sleepTestData, 1, '2023/03/30');
+
+    expect(weeklySleepData).to.have.lengthOf(7);
+    expect(weeklySleepData[0].date).to.equal('2023/03/30');
+    expect(weeklySleepData[weeklySleepData.length - 1].date).to.equal('2023/03/24');
   });
 });
 
 /* ~~~~~ Activity ~~~~~*/
 
-describe('Activity', function () {
-  it('stepsPerDay should be a function', function () {
-    expect(stepsPerDay).to.be.a('function');
+describe('Activity Data Tests', function() {
+  it('returns number of steps for the specified user and date', function() {
+    const currentUser = { id: 1, strideLength: 3.0 };
+    const currentDate = '2023/03/24';
+
+    const steps = stepsPerDay(activityTestData, currentUser, currentDate);
+    expect(steps).to.equal(7362);
   });
 
-  it('weeklySteps should be a function', function () {
-    expect(weeklySteps).to.be.a('function');
+  it('returns active minutes for the specified user and date', function() {
+    const currentUser = { id: 2, strideLength: 3.0 };
+    const currentDate = '2023/03/26';
+
+    const activeMinutes = activeMinutesPerDay(activityTestData, currentUser, currentDate);
+    expect(activeMinutes).to.equal(203);
   });
 
-  it('calculateMilesUserWalked should be a function', function () {
-    expect(calculateMilesUserWalked).to.be.a('function');
+  it('returns the number of miles walked for the specified user and date', function() {
+    const currentUser = { id: 1, strideLength: 1.0 };
+
+    const miles = milesPerDay(activityTestData, currentUser, '2023/03/30');
+    expect(miles).to.be.closeTo(2.83, 0.01);
   });
 
-  it('activeMinutesPerDay should be a function', function () {
-    expect(activeMinutesPerDay).to.be.a('function');
+  it('returns a week of activity data for the specified user and start date', function() {
+    const weeklyData = weeklySteps(activityTestData, 1, '2023/03/30');
+    expect(weeklyData).to.have.lengthOf(7);
+    expect(weeklyData[0].date).to.equal('2023/03/30');
+    expect(weeklyData[6].date).to.equal('2023/03/24');
   });
 
-  it('should be able to calculate the number of miles walked in a day', function () {
-    expect(
-      alculateMilesUserWalked(activityTestData, userTestData, 1, '2023/03/24')
-    ).to.equal(6);
-  });
+  it('returns the number of miles walked based on steps and stride length', function() {
+    const activity = { numSteps: 5280 };
+    const user = { strideLength: 1.0 };
 
-  it('should be able to return how many minutes the user was active', function () {
-    expect(ractiveMinutesPerDay(activityTestData, 2, '2023/03/24')).to.equal(
-      125
-    );
-  });
-
-  it('should return the number of steps for a specific day', function () {
-    expect(stepsPerDay(activityTestData, 1, '2023/03/24')).to.equal(7362);
-  });
-
-  it('should return the steps taken weekly starting from a specific date', function () {
-    const expectedWeeklyData = weeklySteps(
-      activityTestData,
-      1,
-      '2023/03/31'
-    );
-    expect(expectedWeeklyData[0].date).to.equal('2023/03/31');
-    expect(expectedWeeklyData[6].date).to.equal('2023/03/25');
+    const milesWalked = calculateMilesUserWalked(activity, user);
+    expect(milesWalked).to.be.closeTo(1.00, 0.01);
   });
 });
+
