@@ -2,6 +2,7 @@
 
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
+import { currentUser } from './scripts';
 
 dayjs.extend(calendar);
 
@@ -116,9 +117,7 @@ function getAvgQuality(sleepData, userID) {
 }
 
 function getHoursByDay(sleepData, id, date) {
-  // console.log('getHoursByDay:', sleepData, id, date);
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
-  // console.log('sleepEntries:', sleepEntries);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
 
   return dailyEntry.hoursSlept;
@@ -210,9 +209,10 @@ JAN - FIX THIS
 
 /* ~~~~~ Activity ~~~~~*/
 //bullet #2 -- change the name to dailySteps
-const stepsPerDay = (activityData, userID, currentDate) => {
+
+const stepsPerDay = (activityData, currentUser, currentDate) => {
   const activityEntries = activityData.filter(
-    (entry) => entry.userID === userID.id
+    (entry) => entry.userID === currentUser.id
   );
   const dailySteps = activityEntries.find((entry) => {
     return entry.date === currentDate;
@@ -220,14 +220,24 @@ const stepsPerDay = (activityData, userID, currentDate) => {
   return dailySteps.numSteps;
 };
 
-const activeMinutesPerDay = (activityData, userID, currentDate) => {
+const activeMinutesPerDay = (activityData, currentUser, currentDate) => {
   const activityEntries = activityData.filter(
-    (entry) => entry.userID === userID.id
+    (entry) => entry.userID === currentUser.id
   );
   const dailyMinutes = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
   return dailyMinutes.minutesActive;
+};
+
+const milesPerDay = (activityData, currentUser, currentDate) => {
+  const activityEntries = activityData.filter(
+    (entry) => entry.userID === currentUser.id
+  );
+  const dailyActivity = activityEntries.find((entry) => {
+    return entry.date === currentDate;
+  });
+  return calculateMilesUserWalked(dailyActivity, currentUser);
 };
 
 const weeklySteps = (activityData, userID, startDate) => {
@@ -248,22 +258,6 @@ const calculateMilesUserWalked = (activity, users) => {
   return Number(milesWalked.toFixed(2));
 };
 
-const metStepGoal = (activityData, userData, userID, date) => {
-  const userInfo = findUserData(userData, userID);
-  const userActivityData = findUserActivityData(activityData, userID);
-  const dailyData = findUserDailyData(userActivityData, date);
-
-  return dailyData.numSteps >= userInfo.dailyStepGoal;
-};
-
-const returnMiles = (activityData, userData, userID, date) => {
-  const userInfo = findUserData(userData, userID);
-  const userActivityData = findUserActivityData(activityData, userID);
-  const dailyData = findUserDailyData(userActivityData, date);
-
-  return Math.round((userInfo.strideLength * dailyData.numSteps) / 5280);
-};
-
 /* ~~~~~ Exports ~~~~~*/
 
 export {
@@ -282,4 +276,5 @@ export {
   weeklySteps,
   findCurrentDate,
   calculateMilesUserWalked,
+  milesPerDay
 };
