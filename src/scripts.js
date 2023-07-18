@@ -39,9 +39,8 @@ import {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   // getWeeklyActivity,
-  displaySevenDayActivity,
   oneWeekActivityDataFromCalendarButton,
-  weeklyActivityData  
+  displaySevenDayActivity
 } from './domUpdates';
 import {
   getRandomUser,
@@ -174,6 +173,10 @@ dataField.addEventListener('click', function (e) {
       hydrationFromCalendarButton.classList.remove('disable-button');
       hydrationFromCalendarButton.disabled = false;
     }
+    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
+      oneWeekActivityDataFromCalendarButton.disabled = false;
+    }
   }
   if (e.target.classList.contains('hydration-from-calendar-button')) {
     hideChickenImage();
@@ -183,14 +186,22 @@ dataField.addEventListener('click', function (e) {
       sleepFromCalendarButton.classList.remove('disable-button');
       sleepFromCalendarButton.disabled = false;
     }
+    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
+      oneWeekActivityDataFromCalendarButton.disabled = false;
+    }
   }
   if (e.target.classList.contains('activity-from-calendar-button')) {
     hideChickenImage();
     displayWeeklyStepCount(activity, currentUser, currentDate);
-    weeklyActivityData.classList.remove('hidden')
-    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-      oneWeekActivityDataFromCalendarButton.remove('disable-button');
-      oneWeekActivityDataFromCalendarButton.disabled = false;
+    displaySevenDayActivity()
+    if (sleepFromCalendarButton.disabled === true) {
+      sleepFromCalendarButton.classList.remove('disable-button');
+      sleepFromCalendarButton.disabled = false;
+    }
+    if (hydrationFromCalendarButton.disabled === true) {
+      hydrationFromCalendarButton.classList.remove('disable-button');
+      hydrationFromCalendarButton.disabled = false;
     }
   }
 });

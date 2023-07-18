@@ -162,11 +162,19 @@ const displaySevenDaySleep = () => {
   sleepFromCalendarButton.classList.add('disable-button');
 };
 
+const displaySevenDayActivity = () => {
+  weeklyActivityData.classList.remove('hidden');
+  oneWeekActivityDataFromCalendarButton.disabled = true;
+  oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
+};
+
 const activateButtons = () => {
   sleepFromCalendarButton.disabled = false;
   sleepFromCalendarButton.classList.remove('disable-button');
   hydrationFromCalendarButton.disabled = false;
   hydrationFromCalendarButton.classList.remove('disable-button');
+  oneWeekActivityDataFromCalendarButton.disabled = false;
+  oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
 };
 
 // const getWeeklyActivity = () => {
@@ -222,11 +230,7 @@ const activateButtons = () => {
 //   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average minutes active were ${avgFlightOfStairsTaken}</p>`;
 // };
 
-const displaySevenDayActivity = () => {
-  oneWeekActivityDataFromCalendar.classList.remove('hidden');
-  // sleepFromCalendarButton.disabled = true;
-  // sleepFromCalendarButton.classList.add('disable-button');
-};
+
 
 
 
@@ -290,6 +294,8 @@ function hideHydrationGraphs() {
   weeklyHydrationButton.classList.remove('disable-button');
 }
 
+
+
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
 function displayDailySleep(sleep, currentUser, currentDate) {
@@ -347,6 +353,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
   });
 }
 
+
 function displayActivity() {
   dailySteps.innerText = `You took ${activity.returnDailySteps(
     currentUser.id,
@@ -378,7 +385,6 @@ export {
   sleepButton,
   displayWeeklyStepCount,
   hideSleepGraphs,
-  groupedHydration,
   hideChickenImage,
   showChickenImage,
   getWeeklySleep,
@@ -392,7 +398,6 @@ export {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   // getWeeklyActivity,
-  // displaySevenDayActivity,
-  weeklyActivityData,
+  displaySevenDayActivity,
   oneWeekActivityDataFromCalendarButton  
 };
