@@ -185,7 +185,6 @@ dataField.addEventListener('click', function (e) {
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
-  console.log('INITIALIZE APP:', users, hydration, activity, sleep);
   currentUser = getRandomUser(users);
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(currentUser);
@@ -209,4 +208,4 @@ const initializeApp = () => {
   // displayCalendar()
 };
 
-export { activity, users, hydration, currentUser, sleep, displaySleepChart };
+export { currentDate, activity, users, hydration, currentUser, sleep, displaySleepChart };

@@ -153,6 +153,7 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   const activityEntries = activityData.filter(
     (entry) => entry.userID === userID
   );
+
   const lastHydrationEntry = hydrationEntries.slice(-1)[0];
   const lastSleepEntry = sleepEntries.slice(-1)[0];
   const lastActivityEntry = activityEntries.slice(-1)[0];
