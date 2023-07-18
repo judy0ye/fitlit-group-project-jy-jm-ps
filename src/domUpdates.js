@@ -1,4 +1,5 @@
 /* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
+
 import {
   getAvgSleep,
   getAvgQuality,
@@ -6,22 +7,22 @@ import {
   getWeekSleep,
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
-  returnDailySteps,
   weeklySteps,
   getAvgStepGoal,
   calculateMilesUserWalked,
   stepsPerDay,
   milesPerDay,
-  activeMinutesPerDay
+  activeMinutesPerDay,
 } from './utils';
 
-//import { fetchApiData } from './apiCalls';
-
-import { activity, hydration, currentUser, sleep, users, currentDate } from './scripts';
-
-/* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
-
-let groupedHydration, groupedSleep, weeklyWaterIntake;
+import {
+  activity,
+  hydration,
+  currentUser,
+  sleep,
+  users,
+  currentDate,
+} from './scripts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -240,12 +241,15 @@ const activateButtons = () => {
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
-  const allUserStepGoalAvg = getAvgStepGoal(users)
+  const allUserStepGoalAvg = getAvgStepGoal(users);
   const userActivity = activity
-    .filter(activityEachDay => activityEachDay.userID === currentUser.id)
-    .filter(each => each.date === currentDate)[0]
+    .filter((activityEachDay) => activityEachDay.userID === currentUser.id)
+    .filter((each) => each.date === currentDate)[0];
 
-  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser)
+  const currentUserMilesWalked = calculateMilesUserWalked(
+    userActivity,
+    currentUser
+  );
 
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
@@ -354,7 +358,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
       weeklyActivityData.innerHTML += `<p>${entry.date}: You took ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!</p> `;
     }
   });
-};
+}
 
 function displayActivity(activityData, currentUser, currentDate) {
   dailySteps.innerText = `You took ${stepsPerDay(
@@ -372,7 +376,7 @@ function displayActivity(activityData, currentUser, currentDate) {
     currentUser,
     currentDate
   )} minutes today!`;
-};
+}
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 

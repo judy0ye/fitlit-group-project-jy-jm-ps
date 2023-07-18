@@ -40,6 +40,7 @@ import {
   oneWeekActivityDataFromCalendarButton,
   displaySevenDayActivity
 } from './domUpdates';
+
 import {
   getRandomUser,
   getAvgSleep,
@@ -50,6 +51,7 @@ import {
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
+
 import {
   Chart,
   BarController,
@@ -153,12 +155,6 @@ const onChangeInputField = () => {
   activateButtons();
 };
 
-// // dataField.addEventListener('click', function(e) {
-// //   if (e.target.classList.contains('sleep-button')) {
-// //     displaySevenDaySleep()
-// //   }
-// // })
-
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 inputField.addEventListener('change', onChangeInputField);
@@ -225,4 +221,12 @@ const initializeApp = () => {
   displayWeeklyStepCount(activity, currentUser, currentDate);
 };
 
-export { currentDate, activity, users, hydration, currentUser, sleep, displaySleepChart };
+export {
+  currentDate,
+  activity,
+  users,
+  hydration,
+  currentUser,
+  sleep,
+  displaySleepChart,
+};
