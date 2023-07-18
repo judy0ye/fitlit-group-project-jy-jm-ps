@@ -1,24 +1,24 @@
 /* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
-
-//import { currentUser } from './dataModel';
-//import { getAvgStepGoal, getRandomUser  } from './utils';
-// import { getFluidPerWeek } from './utils';
 import {
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getWeekSleep,
-  // getAvgFluidForAllTime, DO WE EVEN NEED THIS
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
   returnDailySteps,
   weeklySteps,
   getAvgStepGoal,
   calculateMilesUserWalked,
+  stepsPerDay,
+  milesPerDay,
+  activeMinutesPerDay
 } from './utils';
+
 //import { fetchApiData } from './apiCalls';
 
-import { activity, hydration, currentUser, sleep, users, currentDate} from './scripts';
+import { activity, hydration, currentUser, sleep, users, currentDate } from './scripts';
+
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
 
 let groupedHydration, groupedSleep, weeklyWaterIntake;
@@ -36,6 +36,9 @@ const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 const weeklyActivityData = document.querySelector(
   '.weekly-activity-from-calendar-data'
 );
+const dailySteps = document.querySelector('.activity-daily-steps');
+const dailyMinutes = document.querySelector('.activity-daily-minutes');
+const dailyMiles = document.querySelector('.activity-daily-miles');
 
 const oneWeekSleepChart = document.querySelector('.weekly-sleep-data');
 const oneWeekSleepFromCalendar = document.querySelector(
@@ -242,8 +245,8 @@ const displayRandomUser = (currentUser) => {
     .filter(activityEachDay => activityEachDay.userID === currentUser.id)
     .filter(each => each.date === currentDate)[0]
 
-  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser) 
-  
+  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser)
+
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
   personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
@@ -351,29 +354,30 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
       weeklyActivityData.innerHTML += `<p>${entry.date}: You took ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!</p> `;
     }
   });
-}
+};
 
-
-function displayActivity() {
-  dailySteps.innerText = `You took ${activity.returnDailySteps(
-    currentUser.id,
+function displayActivity(activityData, currentUser, currentDate) {
+  dailySteps.innerText = `You took ${stepsPerDay(
+    activityData,
+    currentUser,
     currentDate
   )} steps today!`;
-  dailyMiles.innerText = `You have walked ${activity.returnMiles(
-    currentUser.id,
+  dailyMiles.innerText = `You have walked ${milesPerDay(
+    activityData,
+    currentUser,
     currentDate
   )} miles today!`;
-  dailyMinutes.innerText = `You were active for ${activity.returnMinutesActive(
-    currentUser.id,
+  dailyMinutes.innerText = `You were active for ${activeMinutesPerDay(
+    activityData,
+    currentUser,
     currentDate
   )} minutes today!`;
-}
+};
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
   displayRandomUser,
-  
   displayDailySleep,
   displayWeeklySleep,
   displayAverageSleep,
@@ -397,7 +401,7 @@ export {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  // getWeeklyActivity,
   displaySevenDayActivity,
-  oneWeekActivityDataFromCalendarButton  
+  oneWeekActivityDataFromCalendarButton,
+  displayActivity
 };

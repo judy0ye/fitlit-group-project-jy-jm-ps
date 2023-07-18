@@ -12,11 +12,9 @@ import { fetchApiData } from './apiCalls';
 import {
   displayRandomUser,
   displayWeeklySleep,
-  displayUserData,
   displayDailySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  // displayAverageFluidConsumed, DO WE EVEN NEED THIS
   displayWeeklyHydrationData,
   weeklyHydrationButton,
   displayHydrationGraphs,
@@ -212,23 +210,19 @@ const initializeApp = () => {
   currentUser = getRandomUser(users);
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(currentUser);
-  // displaySleepData(sleep, currentUser);
   // displayHydrationData();
   //displayHydrationData(hydration, currentUser);
   // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
-
-  // displayActivityData(activity, currentUser);
+  displayActivity(activity, currentUser, currentDate);
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
   displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
-  // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
-  // displayCalendar()
 };
 
 export { currentDate, activity, users, hydration, currentUser, sleep, displaySleepChart };
