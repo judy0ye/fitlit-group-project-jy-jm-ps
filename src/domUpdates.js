@@ -1,4 +1,5 @@
 /* ~~~~~~~~~~ IMPORTS ~~~~~~~~~~*/
+
 import {
   getAvgSleep,
   getAvgQuality,
@@ -6,22 +7,22 @@ import {
   getWeekSleep,
   getFluidDrankForSpecificDay,
   getWeeklyFluid,
-  returnDailySteps,
   weeklySteps,
   getAvgStepGoal,
   calculateMilesUserWalked,
   stepsPerDay,
   milesPerDay,
-  activeMinutesPerDay
+  activeMinutesPerDay,
 } from './utils';
 
-//import { fetchApiData } from './apiCalls';
-
-import { activity, hydration, currentUser, sleep, users, currentDate } from './scripts';
-
-/* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
-
-let groupedHydration, groupedSleep, weeklyWaterIntake;
+import {
+  activity,
+  hydration,
+  currentUser,
+  sleep,
+  users,
+  currentDate,
+} from './scripts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -39,7 +40,6 @@ const weeklyActivityData = document.querySelector(
 const dailySteps = document.querySelector('.activity-daily-steps');
 const dailyMinutes = document.querySelector('.activity-daily-minutes');
 const dailyMiles = document.querySelector('.activity-daily-miles');
-
 const oneWeekSleepChart = document.querySelector('.weekly-sleep-data');
 const oneWeekSleepFromCalendar = document.querySelector(
   '.weekly-sleep-from-calendar-data'
@@ -59,8 +59,11 @@ const hydrationFromCalendarButton = document.querySelector(
   '.hydration-from-calendar-button'
 );
 const dailyActivityData = document.querySelector('.activity');
+const oneWeekActivityDataFromCalendarButton = document.querySelector(
+  '.activity-from-calendar-button'
+);
 
-/* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
+/* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
 
 const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = '';
@@ -111,6 +114,7 @@ const displaySevenDayHydration = () => {
 const getWeeklySleep = () => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
+  weeklyActivityData.innerHTML = '';
 
   const startDate = new Date(inputField.value + ' 12:00:00');
 
@@ -134,8 +138,6 @@ const getWeeklySleep = () => {
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.hoursSlept;
   }, 0);
-
-  let avg = Math.round(hoursSlept / sleepHourEntries.length);
 
   let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.sleepQuality;
@@ -173,12 +175,15 @@ const activateButtons = () => {
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
-  const allUserStepGoalAvg = getAvgStepGoal(users)
+  const allUserStepGoalAvg = getAvgStepGoal(users);
   const userActivity = activity
-    .filter(activityEachDay => activityEachDay.userID === currentUser.id)
-    .filter(each => each.date === currentDate)[0]
+    .filter((activityEachDay) => activityEachDay.userID === currentUser.id)
+    .filter((each) => each.date === currentDate)[0];
 
-  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser)
+  const currentUserMilesWalked = calculateMilesUserWalked(
+    userActivity,
+    currentUser
+  );
 
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
@@ -209,7 +214,7 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
     currentDate
   );
 
-  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`;
+  hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
 }
 
 function displayWeeklyHydrationData(hydration, currentUser) {
@@ -277,6 +282,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
+  weeklyActivityData.innerHTML = '';
   weeklyActivityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
       weeklyActivityData.innerText += `${entry.date}: ${entry.numSteps}. You met your goal.  Take a nap!
@@ -286,7 +292,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
         `;
     }
   });
-};
+}
 
 function displayActivity(activityData, currentUser, currentDate) {
   dailySteps.innerText = `You took ${stepsPerDay(
@@ -304,7 +310,7 @@ function displayActivity(activityData, currentUser, currentDate) {
     currentUser,
     currentDate
   )} minutes today!`;
-};
+}
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
@@ -334,5 +340,7 @@ export {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  displayActivity
+  displaySevenDayActivity,
+  oneWeekActivityDataFromCalendarButton,
+  displayActivity,
 };

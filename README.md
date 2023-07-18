@@ -25,14 +25,19 @@ Next: ```npm start``` in the terminal to see the HTML page
 
 ## Preview of App
 
-![preview-of-app]() 
+![ezgif com-video-to-gif](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps/assets/129805348/75020245-8935-4674-b013-f7ab2c8d4be2)
+
+## Functionality in Progress
+There will be several accessibility enhancements during phase 2 of this project. Also the colored buttons are part of the design and functionality we are considering for part 2.
 
 ## Project Progress: 
 We have successfully completed the first phase of this two-part group project. As part of Module Two of the Turing School of Software and Design Front End Web Development program, we've joined forces to drive this project forward. This intensive seven-month program focuses on equipping students with the necessary skills to thrive as web developers, offering proficiency in JavaScript, HTML, CSS, and the React framework.
 
-The project was carried out over two intensive week-long sprints, conforming to the project specifications and evaluation rubric as detailed in [part 1](https://frontend.turing.edu/projects/module-2/fitlit-part-one-agile.html) and [part 2](https://frontend.turing.edu/projects/module-2/fitlit-part-two-agile.html). This project allowed us to continue growing our cooperative learning skills, teammwork, communication, and our software developer skills. 
+The project was carried out over two intensive week-long sprints, conforming to the project specifications and evaluation rubric as detailed in [part 1](https://frontend.turing.edu/projects/module-2/fitlit-part-one-agile.html) and [part 2](https://frontend.turing.edu/projects/module-2/fitlit-part-two-agile.html). This project allowed us to continue growing our cooperative learning skills, teammwork, communication, and our software development skills. We're excited to keep evolving and advancing these skills as we navigate through the remainder of this program and beyond.
 
-Through the progression of this project, we've honed our cooperative learning skills, communication, teamwork, and overall software development abilities. We're excited to keep evolving and advancing these skills as we navigate through the remainder of this program and beyond.
+## Additional Project Documentation:
+ - [Project Board](https://github.com/users/judy0ye/projects/2/views/1)
+ - [Notion Planning Document](https://www.notion.so/FitLit-Project-Plan-a04afd24f0504911b684b82932ae3f64)
 
 ## Technologies Used:
 Javascript | Mocha & Chai | API | CSS | HTML
@@ -44,8 +49,11 @@ Parvin Sattorova [LinkedIn](https://www.linkedin.com/in/parvin-sattorova-edwards
 
 ## Wins/Challenges:
 Challenges: 
-- One of the major challenges we faced was with setting up our functions to take in different data sets.
-- 
+ - None of us had ever used a GitHub Project Board before, so there was a learning curve that affected our early planning efforts. In hingsight, we did not spend enough time planning and pseudocoding and this led to several conflicts in the style and effectiveness of our functions and our ability to meet project deadlines.
+ - None of us had ever used Figma, Days.js, or Charts.js, so we spent quite a bit of time researching these tools to see if they might be a more long-term effective solution to some of the application requirements.
+ - A major challenge we faced was with setting up our functions to take in different data sets.
+ - In our DTR document we were committed to ensuring that we would all understand everything that went into the development of the project. We did as much paired programming as we could and did our best to teach each other along the way, but the scope of the project meant that we had to divide our research efforts and there are pieces of the project that had to be managed by just one person. We will try to go over those pieces before the second part of the project begins.
+
 Wins: 
  - Working collaboratively within a group 3 developers.
  - Effectively Fetching data from an API.

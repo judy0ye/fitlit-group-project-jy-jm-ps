@@ -46,44 +46,6 @@ function getFluidDrankForSpecificDay(hydrationData, id, date) {
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
   return dailyEntry.numOunces;
 }
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SAVE FOR PART TWO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function getFluidOuncesPerDay(hydrationData, day, id) {
-  let invidualUser = []
-
-  hydrationData.filter(user => {
-    if (user.userID = id && dayjs(user.date).isSame(day, 'day')) {
-    invidualUser.push(user)
-    }
-
-  })
-  const days = hydrationData.reduce((allDays, user) => {
-  if (!allDays[user.date]) {
-  allDays[user.date] = 0
-  }
-  allDays[user.date] += user.numOunces
-  return allDays;
-  }, {});
-
- console.log(days)
-
-  const sortedDays = Object.entries(days)
-  sortedDays = [['date', oz], ['date', oz]]
-  .sort(([dateA], [dateB]) => dayjs(dateA).diff(dayjs(dateB)))
-  * the above works too but I'm more comfortable with the the lines below *
-  .sort((a, b) => dayjs(a[0]).diff(dayjs(b[0]), 'day'))
-  .slice(0, 7)
-  .reduce((sevenDays, [date, ounces]) => {
-    sevenDays[date] = ounces;
-    return sevenDays;
-  }, {});
- console.log('sortedDays: ', sortedDays)
-  return sortedDays
-}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SAVE ABOVE FOR PART 2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 function getWeeklyFluid(hydrationData, userID) {
   const hydrationEntries = hydrationData.filter(
@@ -166,49 +128,7 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   return currentDate;
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ASK SAM - Need a Function to help us get a global currentDATE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  function getUserDates(userData) {
-    let userID = userData.user.id;
-    let userHydrationDates = [];
-    // let userSleepDates = [];
-    // let userActivityDates = [];
-
-    return {
-      hydrationsDates(hydrationData) {
-        const hydrationEntries = hydrationData.filter(
-          (entry) => entry.userID === userID.id
-        );
-        userHydrationDates.push(hydrationEntries.date);
-        console.log(userHydrationDates);
-        return userHydrationDates;
-      },
-    };
-    return hydrationsDates;
-  }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-SEND TO SAM
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-JAN - FIX THIS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  const weeklySleepData = weeklySleep.map((entry) => {
-    return {
-      date: entry.date,
-      hoursSlept: entry.hoursSlept + ' hours slept',
-      sleepQuality: ' a sleep quality rating of ' + entry.sleepQuality,
-    };
-  });
-  return weeklySleepData;
-}
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
 /* ~~~~~ Activity ~~~~~*/
-//bullet #2 -- change the name to dailySteps
 
 const stepsPerDay = (activityData, currentUser, currentDate) => {
   const activityEntries = activityData.filter(
@@ -276,5 +196,5 @@ export {
   weeklySteps,
   findCurrentDate,
   calculateMilesUserWalked,
-  milesPerDay
+  milesPerDay,
 };

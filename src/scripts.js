@@ -36,7 +36,10 @@ import {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
+  oneWeekActivityDataFromCalendarButton,
+  displaySevenDayActivity,
 } from './domUpdates';
+
 import {
   getRandomUser,
   getAvgSleep,
@@ -47,6 +50,7 @@ import {
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
+
 import {
   Chart,
   BarController,
@@ -150,12 +154,6 @@ const onChangeInputField = () => {
   activateButtons();
 };
 
-// // dataField.addEventListener('click', function(e) {
-// //   if (e.target.classList.contains('sleep-button')) {
-// //     displaySevenDaySleep()
-// //   }
-// // })
-
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepButton.addEventListener('click', onClickSleep);
 inputField.addEventListener('change', onChangeInputField);
@@ -177,6 +175,23 @@ dataField.addEventListener('click', function (e) {
       sleepFromCalendarButton.classList.remove('disable-button');
       sleepFromCalendarButton.disabled = false;
     }
+  if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+      oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
+      oneWeekActivityDataFromCalendarButton.disabled = false;
+    }
+  }
+  if (e.target.classList.contains('activity-from-calendar-button')) {
+    hideChickenImage();
+    displayWeeklyStepCount(activity, currentUser, currentDate);
+    displaySevenDayActivity();
+    if (sleepFromCalendarButton.disabled === true) {
+      sleepFromCalendarButton.classList.remove('disable-button');
+      sleepFromCalendarButton.disabled = false;
+    }
+    if (hydrationFromCalendarButton.disabled === true) {
+      hydrationFromCalendarButton.classList.remove('disable-button');
+      hydrationFromCalendarButton.disabled = false;
+    }
   }
 });
 
@@ -186,9 +201,6 @@ const initializeApp = () => {
   currentUser = getRandomUser(users);
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(currentUser);
-  // displayHydrationData();
-  //displayHydrationData(hydration, currentUser);
-  // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
   displayActivity(activity, currentUser, currentDate);
@@ -202,4 +214,12 @@ const initializeApp = () => {
   displayWeeklyStepCount(activity, currentUser, currentDate);
 };
 
-export { currentDate, activity, users, hydration, currentUser, sleep, displaySleepChart };
+export {
+  currentDate,
+  activity,
+  users,
+  hydration,
+  currentUser,
+  sleep,
+  displaySleepChart,
+};
