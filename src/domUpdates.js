@@ -68,7 +68,8 @@ const oneWeekActivityDataFromCalendarButton = document.querySelector(
 const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = '';
   oneWeekSleepFromCalendar.innerHTML = '';
-
+  weeklyActivityData.innerHTML = '';
+  
   const startDate = new Date(inputField.value + ' 12:00:00');
 
   let waterEntries = [];
@@ -109,6 +110,12 @@ const displaySevenDayHydration = () => {
   oneWeekHydrationFromCalendar.classList.remove('hidden');
   hydrationFromCalendarButton.disabled = true;
   hydrationFromCalendarButton.classList.add('disable-button');
+};
+
+const displaySevenDayActivity = () => {
+  weeklyActivityData.classList.remove('hidden');
+  oneWeekActivityDataFromCalendarButton.disabled = true;
+  oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
 };
 
 const getWeeklySleep = () => {
@@ -170,6 +177,8 @@ const activateButtons = () => {
   sleepFromCalendarButton.classList.remove('disable-button');
   hydrationFromCalendarButton.disabled = false;
   hydrationFromCalendarButton.classList.remove('disable-button');
+  oneWeekActivityDataFromCalendarButton.disabled = false;
+  oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
 };
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
@@ -282,14 +291,18 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
+
+  oneWeekSleepFromCalendar.innerHTML = '';
+  oneWeekHydrationFromCalendar.innerHTML = '';
   weeklyActivityData.innerHTML = '';
+  
   weeklyActivityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
-      weeklyActivityData.innerText += `${entry.date}: ${entry.numSteps}. You met your goal.  Take a nap!
-        `;
+      weeklyActivityData.innerHTML += `<p>${entry.date}: You walked ${entry.numSteps} of steps. You met your goal.  Take a nap!
+      </p>  `;
     } else {
-      weeklyActivityData.innerText += `${entry.date}: ${entry.numSteps}. You have not met your goal.  STEP IT UP!
-        `;
+      weeklyActivityData.innerHTML += `<p>${entry.date}: You walked${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
+      </p> `;
     }
   });
 }
@@ -341,4 +354,5 @@ export {
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
   displayActivity,
+  displaySevenDayActivity
 };
