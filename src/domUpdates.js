@@ -18,8 +18,7 @@ import {
 } from './utils';
 //import { fetchApiData } from './apiCalls';
 
-import { activity, hydration, currentUser, sleep, users } from './scripts';
-
+import { activity, hydration, currentUser, sleep, users, currentDate} from './scripts';
 /* ~~~~~~~~~~ GLOBAL VARIABLE ~~~~~~~~~~*/
 
 let groupedHydration, groupedSleep, weeklyWaterIntake;
@@ -171,17 +170,13 @@ const activateButtons = () => {
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
-  const allUserStepGoalAvg = getAvgStepGoal(users);
-  const userActivity = activity.filter(
-    (activityEachDay) => activityEachDay.userID === currentUser.id
-  );
-  console.log('userActivity', userActivity);
-  const currentUserMilesWalked = calculateMilesUserWalked(
-    userActivity,
-    currentUser
-  );
-  console.log('currentUserMilesWalked', currentUserMilesWalked);
+  const allUserStepGoalAvg = getAvgStepGoal(users)
+  const userActivity = activity
+    .filter(activityEachDay => activityEachDay.userID === currentUser.id)
+    .filter(each => each.date === currentDate)[0]
 
+  const currentUserMilesWalked = calculateMilesUserWalked(userActivity, currentUser) 
+  
   personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
 
   personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
@@ -191,6 +186,7 @@ const displayRandomUser = (currentUser) => {
   </article>`;
 
   personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
+  <h3>Miles Walked Today:</h3>${currentUserMilesWalked}
   <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
 };
 
