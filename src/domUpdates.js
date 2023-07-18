@@ -40,7 +40,6 @@ const weeklyActivityData = document.querySelector(
 const dailySteps = document.querySelector('.activity-daily-steps');
 const dailyMinutes = document.querySelector('.activity-daily-minutes');
 const dailyMiles = document.querySelector('.activity-daily-miles');
-
 const oneWeekSleepChart = document.querySelector('.weekly-sleep-data');
 const oneWeekSleepFromCalendar = document.querySelector(
   '.weekly-sleep-from-calendar-data'
@@ -60,9 +59,11 @@ const hydrationFromCalendarButton = document.querySelector(
   '.hydration-from-calendar-button'
 );
 const dailyActivityData = document.querySelector('.activity');
-// const oneWeekActivityDataFromCalendar = document.querySelector('.weekly-activity-from-calendar-data')
-const oneWeekActivityDataFromCalendarButton = document.querySelector('.activity-from-calendar-button')
-/* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
+const oneWeekActivityDataFromCalendarButton = document.querySelector(
+  '.activity-from-calendar-button'
+);
+
+/* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
 
 const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = '';
@@ -113,7 +114,7 @@ const displaySevenDayHydration = () => {
 const getWeeklySleep = () => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
-  weeklyActivityData.innerHTML = ''
+  weeklyActivityData.innerHTML = '';
 
   const startDate = new Date(inputField.value + ' 12:00:00');
 
@@ -137,8 +138,6 @@ const getWeeklySleep = () => {
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.hoursSlept;
   }, 0);
-
-  let avg = Math.round(hoursSlept / sleepHourEntries.length);
 
   let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.sleepQuality;
@@ -181,63 +180,6 @@ const activateButtons = () => {
   oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
 };
 
-// const getWeeklyActivity = () => {
-//   oneWeekSleepFromCalendar.innerHTML = '';
-//   oneWeekHydrationFromCalendar.innerHTML = '';
-
-//   const startDate = new Date(inputField.value + ' 12:00:00');
-//   // step count, flights of stairs climbed, and minutes active
-//   let activityEntries = [];
-//   for (let i = 0; i < 7; i++) {
-//     let nextDate = new Date(startDate);
-//     nextDate.setDate(nextDate.getDate() + i);
-//     let date =
-//       nextDate.getFullYear() +
-//       '/' +
-//       ('0' + (nextDate.getMonth() + 1)).slice(-2) +
-//       '/' +
-//       ('0' + nextDate.getDate()).slice(-2);
-//     let activityEntry = activity.find(
-//       (entry) => entry.date === date && entry.userID === currentUser.id
-//     );
-//     if (activityEntry) {
-//       activityEntries.push(activityEntry);
-//     }
-//   }
-
-//   let numSteps = activityEntries.reduce((acc, entry) => {
-//     return acc + entry.numSteps;
-//   }, 0);
-
-//   let minutesActive = activityEntries.reduce((acc, entry) => {
-//     return acc + entry.minutesActive;
-//   }, 0);
-
-//   let flightOfStairsTaken = activityEntries.reduce((acc, entry) => {
-//     return acc + entry.flightsOfStairs;
-//   }, 0);
-
-//   if (activityEntries.length === 0) {
-//     return 0;
-//   }
-
-//   let avgNumSteps = Math.round(numSteps / activityEntries.length);
-//   let avgMinutesActive = Math.round(minutesActive/ activityEntries.length);
-//   let avgFlightOfStairsTaken = Math.round(flightOfStairsTaken/ activityEntries.length);
-
-//   activityEntries.forEach((entry) => {
-//     oneWeekActivityDataFromCalendar.innerHTML += `<p>On ${entry.date}, you walked for ${entry.minutesActive}
-//     minutes and went up ${entry.flightsOfStairs}</p>`;
-//   });
-//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average number of steps were ${avgNumSteps}</p>`;
-//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average minutes active were ${avgMinutesActive}</p>`;
-//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average minutes active were ${avgFlightOfStairsTaken}</p>`;
-// };
-
-
-
-
-
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
@@ -279,7 +221,7 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
     currentDate
   );
 
-  hydrationInfo.innerHTML = `You drank ${fluidToday} ounces today`;
+  hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
 }
 
 function displayWeeklyHydrationData(hydration, currentUser) {
@@ -300,8 +242,6 @@ function hideHydrationGraphs() {
   weeklyHydrationButton.disabled = false;
   weeklyHydrationButton.classList.remove('disable-button');
 }
-
-
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
@@ -349,7 +289,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
-  weeklyActivityData.innerHTML = ''
+  weeklyActivityData.innerHTML = '';
   weeklyActivityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
       weeklyActivityData.innerHTML += `<p>${entry.date}: You took ${entry.numSteps} steps. You met your goal.  Take a nap!
@@ -407,5 +347,5 @@ export {
   hydrationFromCalendarButton,
   displaySevenDayActivity,
   oneWeekActivityDataFromCalendarButton,
-  displayActivity
+  displayActivity,
 };
