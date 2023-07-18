@@ -404,7 +404,7 @@ export {
   activateButtons,
   getWeeklyHydration,
   displaySevenDayHydration,
-  hydrationFromCalendarButton,
+   hydrationFromCalendarButton,
   displaySevenDayActivity,
   oneWeekActivityDataFromCalendarButton,
   displayActivity

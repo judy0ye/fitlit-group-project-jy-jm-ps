@@ -2,7 +2,7 @@
 
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
-import { currentUser } from './scripts';
+// import { currentUser } from './scripts';
 
 dayjs.extend(calendar);
 
@@ -197,4 +197,5 @@ export {
   findCurrentDate,
   calculateMilesUserWalked,
   milesPerDay,
+  getAvgFluidForAllTime,
 };

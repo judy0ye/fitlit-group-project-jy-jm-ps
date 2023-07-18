@@ -5,12 +5,14 @@ import {
   getRandomUser,
   getUserById,
   getAvgStepGoal,
-  getFluidOuncesPerDay,
+  getFluidDrankForSpecificDay,
   getAvgSleep,
   getAvgQuality,
   getHoursByDay,
   getQualityByDay,
   getWeekSleep,
+  getAvgFluidForAllTime,
+  getWeeklyFluid
 } from '../src/utils';
 import userData from '../src/data/users';
 import sleepTestData from '../src/data/sleep-test-data';
@@ -209,40 +211,39 @@ describe('fluid consumed', function () {
       ],
     };
   });
-  it.skip('should return average fluid ounces consumed per day for all time', function () {
+  it('should return average fluid ounces consumed per day for all time', function () {
     const id = 1;
-    const avgFluidConsumed = getAvgFluidConsumed(hydrationInfo.userWater, id);
+    const avgFluidConsumed = getAvgFluidForAllTime(hydrationInfo.userWater, id);
 
     expect(avgFluidConsumed).to.deep.equal(36);
   });
-  it.skip("should return a user's fluid ounces consumed on a specific day", function () {
+  it("should return a user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/25';
     const id = 2;
-    const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
+    const fluidOnSpecificDay = getFluidDrankForSpecificDay(
       hydrationInfo.userWater,
-      date,
-      id
+      id,
+      date
     );
 
-    expect(fluidOnSpecificDay).to.equal(35);
+    expect(fluidOnSpecificDay).to.deep.equal(35);
   });
-  it.skip("should return another user's fluid ounces consumed on a specific day", function () {
+  it("should return another user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/24';
     const id = 3;
-    const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
+    const fluidOnSpecificDay = getFluidDrankForSpecificDay(
       hydrationInfo.userWater,
-      date,
-      id
+      id,
+      date
     );
 
     expect(fluidOnSpecificDay).to.equal(95);
   });
-  it.skip('should return how many fluid ounces of water a user consumed each day over a course of 7 days', function () {
+  it('should return how many fluid ounces of water a user consumed each day over a course of 7 days', function () {
     const id = 1;
     const startDate = '2023/03/01';
-    const ouncePerDay = getFluidOuncesPerDay(
+    const ouncePerDay = getWeeklyFluid(
       hydrationInfo.userWater,
-      startDate,
       id
     );
 
