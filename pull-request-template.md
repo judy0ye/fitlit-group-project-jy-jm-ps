@@ -24,5 +24,4 @@ Checklist:
 What's next?
 
 ## Contributors to this pull request:
- - Jan McSorley
 
