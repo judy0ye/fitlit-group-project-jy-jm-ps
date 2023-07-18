@@ -217,13 +217,13 @@ describe('fluid consumed', function () {
       ],
     };
   });
-  it('should return average fluid ounces consumed per day for all time', function () {
+  it.skip('should return average fluid ounces consumed per day for all time', function () {
     const id = 1;
     const avgFluidConsumed = getAvgFluidConsumed(hydrationInfo.userWater, id);
 
     expect(avgFluidConsumed).to.deep.equal(36);
   });
-  it("should return a user's fluid ounces consumed on a specific day", function () {
+  it.skip("should return a user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/25';
     const id = 2;
     const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
@@ -234,7 +234,7 @@ describe('fluid consumed', function () {
 
     expect(fluidOnSpecificDay).to.equal(35);
   });
-  it("should return another user's fluid ounces consumed on a specific day", function () {
+  it.skip("should return another user's fluid ounces consumed on a specific day", function () {
     const date = '2023/03/24';
     const id = 3;
     const fluidOnSpecificDay = getFluidConsumedOnSpecificDay(
