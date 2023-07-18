@@ -56,7 +56,8 @@ const hydrationFromCalendarButton = document.querySelector(
   '.hydration-from-calendar-button'
 );
 const dailyActivityData = document.querySelector('.activity');
-
+// const oneWeekActivityDataFromCalendar = document.querySelector('.weekly-activity-from-calendar-data')
+const oneWeekActivityDataFromCalendarButton = document.querySelector('.activity-from-calendar-button')
 /* ~~~~~~~~~~ DOM MANIPULATION FUNCTIONS ~~~~~~~~~~*/
 
 const getWeeklyHydration = () => {
@@ -108,6 +109,7 @@ const displaySevenDayHydration = () => {
 const getWeeklySleep = () => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
+  weeklyActivityData.innerHTML = ''
 
   const startDate = new Date(inputField.value + ' 12:00:00');
 
@@ -167,6 +169,67 @@ const activateButtons = () => {
   hydrationFromCalendarButton.classList.remove('disable-button');
 };
 
+// const getWeeklyActivity = () => {
+//   oneWeekSleepFromCalendar.innerHTML = '';
+//   oneWeekHydrationFromCalendar.innerHTML = '';
+
+//   const startDate = new Date(inputField.value + ' 12:00:00');
+//   // step count, flights of stairs climbed, and minutes active
+//   let activityEntries = [];
+//   for (let i = 0; i < 7; i++) {
+//     let nextDate = new Date(startDate);
+//     nextDate.setDate(nextDate.getDate() + i);
+//     let date =
+//       nextDate.getFullYear() +
+//       '/' +
+//       ('0' + (nextDate.getMonth() + 1)).slice(-2) +
+//       '/' +
+//       ('0' + nextDate.getDate()).slice(-2);
+//     let activityEntry = activity.find(
+//       (entry) => entry.date === date && entry.userID === currentUser.id
+//     );
+//     if (activityEntry) {
+//       activityEntries.push(activityEntry);
+//     }
+//   }
+
+//   let numSteps = activityEntries.reduce((acc, entry) => {
+//     return acc + entry.numSteps;
+//   }, 0);
+
+//   let minutesActive = activityEntries.reduce((acc, entry) => {
+//     return acc + entry.minutesActive;
+//   }, 0);
+
+//   let flightOfStairsTaken = activityEntries.reduce((acc, entry) => {
+//     return acc + entry.flightsOfStairs;
+//   }, 0);
+
+//   if (activityEntries.length === 0) {
+//     return 0;
+//   }
+
+//   let avgNumSteps = Math.round(numSteps / activityEntries.length);
+//   let avgMinutesActive = Math.round(minutesActive/ activityEntries.length);
+//   let avgFlightOfStairsTaken = Math.round(flightOfStairsTaken/ activityEntries.length);
+
+//   activityEntries.forEach((entry) => {
+//     oneWeekActivityDataFromCalendar.innerHTML += `<p>On ${entry.date}, you walked for ${entry.minutesActive}
+//     minutes and went up ${entry.flightsOfStairs}</p>`;
+//   });
+//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average number of steps were ${avgNumSteps}</p>`;
+//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average minutes active were ${avgMinutesActive}</p>`;
+//   oneWeekActivityDataFromCalendar.innerHTML += `<p>Your average minutes active were ${avgFlightOfStairsTaken}</p>`;
+// };
+
+const displaySevenDayActivity = () => {
+  oneWeekActivityDataFromCalendar.classList.remove('hidden');
+  // sleepFromCalendarButton.disabled = true;
+  // sleepFromCalendarButton.classList.add('disable-button');
+};
+
+
+
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
 const displayRandomUser = (currentUser) => {
@@ -188,10 +251,6 @@ const displayRandomUser = (currentUser) => {
   personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
   <h3>Miles Walked Today:</h3>${currentUserMilesWalked}
   <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
-};
-
-const displayUserData = (currentUser) => {
-  console.log('DISPLAY CURRENT USER:', currentUser);
 };
 
 const hideChickenImage = () => {
@@ -277,13 +336,13 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
+  weeklyActivityData.innerHTML = ''
   weeklyActivityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
-      weeklyActivityData.innerText += `${entry.date}: ${entry.numSteps}. You met your goal.  Take a nap!
-        `;
+      weeklyActivityData.innerHTML += `<p>${entry.date}: You took ${entry.numSteps} steps. You met your goal.  Take a nap!
+        </p>`;
     } else {
-      weeklyActivityData.innerText += `${entry.date}: ${entry.numSteps}. You have not met your goal.  STEP IT UP!
-        `;
+      weeklyActivityData.innerHTML += `<p>${entry.date}: You took ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!</p> `;
     }
   });
 }
@@ -307,7 +366,7 @@ function displayActivity() {
 
 export {
   displayRandomUser,
-  displayUserData,
+  
   displayDailySleep,
   displayWeeklySleep,
   displayAverageSleep,
@@ -332,4 +391,8 @@ export {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
+  // getWeeklyActivity,
+  // displaySevenDayActivity,
+  weeklyActivityData,
+  oneWeekActivityDataFromCalendarButton  
 };

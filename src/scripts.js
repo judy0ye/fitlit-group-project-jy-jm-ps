@@ -38,6 +38,10 @@ import {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
+  // getWeeklyActivity,
+  displaySevenDayActivity,
+  oneWeekActivityDataFromCalendarButton,
+  weeklyActivityData  
 } from './domUpdates';
 import {
   getRandomUser,
@@ -180,6 +184,15 @@ dataField.addEventListener('click', function (e) {
       sleepFromCalendarButton.disabled = false;
     }
   }
+  if (e.target.classList.contains('activity-from-calendar-button')) {
+    hideChickenImage();
+    displayWeeklyStepCount(activity, currentUser, currentDate);
+    weeklyActivityData.classList.remove('hidden')
+    if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+      oneWeekActivityDataFromCalendarButton.remove('disable-button');
+      oneWeekActivityDataFromCalendarButton.disabled = false;
+    }
+  }
 });
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
@@ -196,7 +209,6 @@ const initializeApp = () => {
   displayWeeklyHydrationData(hydration, currentUser);
 
   // displayActivityData(activity, currentUser);
-  displayUserData();
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
