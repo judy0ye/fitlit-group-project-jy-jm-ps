@@ -327,7 +327,6 @@ export {
   sleepButton,
   displayWeeklyStepCount,
   hideSleepGraphs,
-  groupedHydration,
   hideChickenImage,
   showChickenImage,
   getWeeklySleep,
@@ -340,7 +339,6 @@ export {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  displaySevenDayActivity,
   oneWeekActivityDataFromCalendarButton,
   displayActivity,
 };

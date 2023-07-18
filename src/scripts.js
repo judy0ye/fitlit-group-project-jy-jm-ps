@@ -21,7 +21,6 @@ import {
   hideHydrationGraphs,
   sleepButton,
   displaySleepGraphs,
-  groupedHydration,
   displayActivity,
   displayWeeklyStepCount,
   hideChickenImage,
@@ -37,7 +36,6 @@ import {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
-  displaySevenDayActivity,
 } from './domUpdates';
 
 import {
