@@ -36,9 +36,8 @@ import {
   getWeeklyHydration,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
-  // getWeeklyActivity,
   oneWeekActivityDataFromCalendarButton,
-  displaySevenDayActivity
+  displaySevenDayActivity,
 } from './domUpdates';
 
 import {
@@ -188,7 +187,7 @@ dataField.addEventListener('click', function (e) {
   if (e.target.classList.contains('activity-from-calendar-button')) {
     hideChickenImage();
     displayWeeklyStepCount(activity, currentUser, currentDate);
-    displaySevenDayActivity()
+    displaySevenDayActivity();
     if (sleepFromCalendarButton.disabled === true) {
       sleepFromCalendarButton.classList.remove('disable-button');
       sleepFromCalendarButton.disabled = false;
@@ -206,9 +205,6 @@ const initializeApp = () => {
   currentUser = getRandomUser(users);
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(currentUser);
-  // displayHydrationData();
-  //displayHydrationData(hydration, currentUser);
-  // displayAverageFluidConsumed(hydration, currentUser); DO WE EVEN NEED THIS
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
   displayActivity(activity, currentUser, currentDate);
