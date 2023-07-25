@@ -64,15 +64,14 @@ const oneWeekActivityDataFromCalendarButton = document.querySelector(
 );
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
-
-const getWeeklyHydration = () => {
-  oneWeekHydrationFromCalendar.innerHTML = '';
+const getWeeklyInfo = (wellnessInfo) => {
   oneWeekSleepFromCalendar.innerHTML = '';
+  oneWeekHydrationFromCalendar.innerHTML = '';
   weeklyActivityData.innerHTML = '';
-  
+
   const startDate = new Date(inputField.value + ' 12:00:00');
 
-  let waterEntries = [];
+  let entries = [];
   for (let i = 0; i < 7; i++) {
     let nextDate = new Date(startDate);
     nextDate.setDate(nextDate.getDate() + i);
@@ -82,13 +81,18 @@ const getWeeklyHydration = () => {
       ('0' + (nextDate.getMonth() + 1)).slice(-2) +
       '/' +
       ('0' + nextDate.getDate()).slice(-2);
-    let waterEntry = hydration.find(
-      (entry) => entry.date === date && entry.userID === currentUser.id
+    let entry = wellnessInfo.find(
+      (info) => info.date === date && info.userID === currentUser.id
     );
-    if (waterEntry) {
-      waterEntries.push(waterEntry);
+    if (entry) {
+      entries.push(entry);
     }
   }
+  return entries
+};
+
+const getWeeklyHydration = () => {
+  const waterEntries = getWeeklyInfo(hydration)
 
   let numOz = waterEntries.reduce((acc, entry) => {
     return acc + entry.numOunces;
@@ -119,29 +123,7 @@ const displaySevenDayActivity = () => {
 };
 
 const getWeeklySleep = () => {
-  oneWeekSleepFromCalendar.innerHTML = '';
-  oneWeekHydrationFromCalendar.innerHTML = '';
-  weeklyActivityData.innerHTML = '';
-
-  const startDate = new Date(inputField.value + ' 12:00:00');
-
-  let sleepHourEntries = [];
-  for (let i = 0; i < 7; i++) {
-    let nextDate = new Date(startDate);
-    nextDate.setDate(nextDate.getDate() + i);
-    let date =
-      nextDate.getFullYear() +
-      '/' +
-      ('0' + (nextDate.getMonth() + 1)).slice(-2) +
-      '/' +
-      ('0' + nextDate.getDate()).slice(-2);
-    let sleepHourEntry = sleep.find(
-      (entry) => entry.date === date && entry.userID === currentUser.id
-    );
-    if (sleepHourEntry) {
-      sleepHourEntries.push(sleepHourEntry);
-    }
-  }
+  const sleepHourEntries = getWeeklyInfo(sleep)
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.hoursSlept;
   }, 0);
