@@ -268,22 +268,14 @@ function displayAverageSleep(sleep, currentUser) {
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
 function displayWeeklyStepCount(activityData, currentUser, currentDate) {
-  const weeklyActivityEntries = weeklySteps(
-    activityData,
-    currentUser.id,
-    currentDate
-  );
+  const activityEntries = getWeeklyInfo(activity)
 
-  oneWeekSleepFromCalendar.innerHTML = '';
-  oneWeekHydrationFromCalendar.innerHTML = '';
-  weeklyActivityData.innerHTML = '';
-  
-  weeklyActivityEntries.forEach((entry) => {
+  activityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
-      weeklyActivityData.innerHTML += `<p>${entry.date}: You walked ${entry.numSteps} of steps. You met your goal.  Take a nap!
+      weeklyActivityData.innerHTML += `<p>On ${entry.date}, you walked ${entry.numSteps} of steps. You met your goal.  Take a nap!
       </p>  `;
     } else {
-      weeklyActivityData.innerHTML += `<p>${entry.date}: You walked${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
+      weeklyActivityData.innerHTML += `<p>On ${entry.date}, you walked ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
       </p> `;
     }
   });

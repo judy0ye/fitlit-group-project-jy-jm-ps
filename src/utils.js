@@ -166,18 +166,18 @@ const milesPerDay = (activityData, currentUser, currentDate) => {
   return calculateMilesUserWalked(dailyActivity, currentUser);
 };
 
-const weeklySteps = (activityData, userID, startDate) => {
-  const activityEntries = activityData.filter(
-    (entry) => entry.userID === userID
-  );
-  const startDateIndex = activityEntries.findIndex(
-    (entry) => entry.date === startDate
-  );
-  const weeklyData = activityEntries
-    .slice(startDateIndex - 6, startDateIndex + 1)
-    .reverse();
-  return weeklyData;
-};
+// const weeklySteps = (activityData, userID, startDate) => {
+//   const activityEntries = activityData.filter(
+//     (entry) => entry.userID === userID
+//   );
+//   const startDateIndex = activityEntries.findIndex(
+//     (entry) => entry.date === startDate
+//   );
+//   const weeklyData = activityEntries
+//     .slice(startDateIndex - 6, startDateIndex + 1)
+//     .reverse();
+//   return weeklyData;
+// };
 
 const calculateMilesUserWalked = (activity, users) => {
   const milesWalked = (activity.numSteps * users.strideLength) / 5280;
@@ -199,7 +199,7 @@ export {
   getWeekSleep,
   activeMinutesPerDay,
   stepsPerDay,
-  weeklySteps,
+  // weeklySteps,
   findCurrentDate,
   calculateMilesUserWalked,
   milesPerDay,
