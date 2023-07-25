@@ -257,6 +257,15 @@ describe('fluid consumed', function () {
     { date: '2023/03/28', numOunces: 6 },
     { date: '2023/03/29', numOunces: 84 }]);
   });
+  it('should return undefined if data is not passed in', function() {
+    const fluidAllTime = getAvgFluidForAllTime();
+    const fluidOnSpecificDay = getFluidDrankForSpecificDay();
+    const fluidForSevenDays = getWeeklyFluid()
+
+    expect(fluidAllTime).to.be.undefined;
+    expect(fluidOnSpecificDay).to.be.undefined;
+    expect(fluidForSevenDays).to.be.undefined;
+  })
 });
 
 /* ~~~~~ Sleep ~~~~~*/

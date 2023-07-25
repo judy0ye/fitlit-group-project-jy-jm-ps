@@ -22,7 +22,7 @@ function getUserById(users, id) {
 
 const getAvgStepGoal = (users) => {
   if (!users) {
-    return 0;
+    return undefined;
   }
 
   const totalStepGoal = users.reduce((acc, userInfo) => {
@@ -34,6 +34,10 @@ const getAvgStepGoal = (users) => {
 /* ~~~~~ Get Average Fluid ~~~~~*/
 
 function getAvgFluidForAllTime(hydrationData, id) {
+  if (!hydrationData || !id) {
+    return undefined;
+  }
+
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
@@ -42,12 +46,19 @@ function getAvgFluidForAllTime(hydrationData, id) {
 }
 
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
+  if (!hydrationData || !id || !date) {
+    return undefined;
+  }
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
   return dailyEntry.numOunces;
 }
 
 function getWeeklyFluid(hydrationData, userID) {
+  if (!hydrationData || !userID) {
+    return undefined;
+  }
+
   const hydrationEntries = hydrationData.filter(
     (entry) => entry.userID === userID
   );
