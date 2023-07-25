@@ -150,7 +150,7 @@ describe('average step goal amongst users', function () {
     expect(avgStepGoal).to.deep.equal(5333);
   });
 
-  it.skip('should return undefined if no arguments are pass in', function () {
+  it('should return undefined if no arguments are pass in', function () {
     const avgStepGoal = getAvgStepGoal();
 
     expect(avgStepGoal).to.be.undefined;
