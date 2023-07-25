@@ -55,7 +55,7 @@ function getWeeklyFluid(hydrationData, userID) {
   const weeklyHydration = hydrationEntries.slice(lastIndex - 6, lastIndex + 1);
   const weeklyHydrationData = weeklyHydration.map((entry) => ({
     date: entry.date,
-    numOunces: entry.numOunces + ' ounces drank ',
+    numOunces: entry.numOunces
   }));
   return weeklyHydrationData;
 }
@@ -203,4 +203,5 @@ export {
   findCurrentDate,
   calculateMilesUserWalked,
   milesPerDay,
+  getAvgFluidForAllTime
 };
