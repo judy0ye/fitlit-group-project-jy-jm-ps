@@ -10,7 +10,7 @@ Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 
 document.querySelector('.hydration-button').addEventListener('click', () => {
-  // Replace 'yourData' with the actual data you want to pass to the function
+ 
   let hydrationData = getWeeklyHydration(); 
   createHydrationChart(hydrationData);
 });
@@ -52,6 +52,12 @@ function createHydrationChart(hydrationData) {
     },
   });
 }
+
+document.querySelector('.sleep-button').addEventListener('click', () => {
+ 
+  let sleepData = getWeeklySleep(); 
+  createSleepChart(sleepData);
+});
 
 function createSleepChart(sleepData) {
   const sleepChartContext = document.getElementById('sleepChart').getContext('2d');
