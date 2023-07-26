@@ -7,13 +7,14 @@
   <body>
     <main>
       <div class="grid-layout">
-        <header class="logo">
+         <header class="logo">
           <h1>
-            <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500"/>
+            <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
           </h1>
-        </header>
-      <div class="greeting"></div>
-      <div class="data-view">
+          </header>
+        <div class="greeting"></div>
+        <div class="data-view-grid">
+      <div class="data-view rounded-corner">
         <h2>View Weekly Averages</h2>
         <p>Choose a start date to view data for one week</p>
         <label for="start-date-input">Please choose start date: </label>
@@ -29,7 +30,7 @@
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
         </div>
-        <div class="activity">
+        <div class="activity rounded-corner">
           <h2>Activity Data</h2>
           <section class="activity-daily-steps">
           </section>
@@ -38,17 +39,17 @@
           <section class="activity-daily-miles">
           </section>
         </div>
-        <div class="hydration">
+        <div class="hydration rounded-corner">
           <h2>Hydration Data</h2>
         </div>
-        <div class="sleep">
+        <div class="sleep rounded-corner">
           <section>
             <h2>Sleep Data</h2>
             <p id="dailySleep"></p>
             <p id="averageSleep"></p>
           </section>
         </div>
-        <div class="graphs">
+        <div class="graphs rounded-corner graphs-bg-img">
           <section class="weekly-hydration-data hidden">
           </section>
           <section class="weekly-activity-data hidden">
@@ -64,19 +65,20 @@
           <section class="hydration-chart hidden">
             <canvas id="myChart"></canvas>
           </section>
-          <section class="main-image">
+          <!-- <section class="main-image">
             <img src="./images/FitChicks_scene_sm.png" alt="Fit Chicks" />
-          </section>
+          </section> -->
           <section class="hidden">
             <h2>Weekly Sleep Info:</h2>
             <p id="weeklySleepHours"></p3>
           </section>
         </div>
-        <div class="user-data">This is the user's personal data</div>
-        <div class="goals">These are user goals</div>
-        <div class="community">
+        <div class="user-data rounded-corner">This is the user's personal data</div>
+        <div class="goals rounded-corner">These are user goals</div>
+        <div class="community rounded-corner">
           <h2>Friends</h2>
           <p>This is where friends will be listed data</p>
+        </div>
         </div>
       </div>
     </main>

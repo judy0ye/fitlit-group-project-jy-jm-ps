@@ -10,20 +10,34 @@ body, html {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: 0.8fr 0.8fr 0.8fr 1.6fr;
-  grid-template-rows: 0.04fr 1.59fr .50fr 1.87fr;
+  grid-template-columns: 62% 38%;
+  grid-template-rows: 0.04fr 3.96fr;
   grid-template-areas:
-    "logo logo logo greeting"
+    "logo greeting"
+    "data-view-grid data-view-grid";
+  row-gap: 20px;
+   }
+
+
+.data-view-grid {
+  display: grid;
+  height: 100vh;
+  width: 96vw;
+  margin: 0 2vw;
+  grid-template-columns: 0.8fr 0.8fr 0.8fr 1.6fr;
+  grid-template-rows: 1.59fr .50fr 1.87fr;
+  grid-template-areas:
     "activity hydration sleep data-view"
     "activity hydration sleep graphs"
     "user-data goals community graphs";
+  gap: 1% 1%
 }
 
-.user-data,
+/* .user-data,
 .activity {
   padding: .5em;
   margin-left: 1em;
-}
+} */
 
 .logo {
   grid-area: logo;
@@ -32,6 +46,9 @@ body, html {
 }
 
 .greeting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-area: greeting;
   font-size: 18px;
   background-color: #25C1E3;
@@ -39,21 +56,15 @@ body, html {
 }
 
 .activity {
-  border: 3px solid #333333;
-  border-radius: 3px;
   grid-area: activity;
 }
 
 .hydration {
-  border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: hydration;
 }
 
 .sleep {
-  border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: sleep;
 }
@@ -63,45 +74,38 @@ body, html {
   grid-area: graphs;
 }
 
-.main-image {
-  text-align: center;
-  grid-area: graphs;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  overflow:hidden;
-}
+.graphs-bg-img {
 
-.main-image img {
-  max-height:100%;
-  margin: 0 auto;
+  background-image: url('../images/FitChicks_scene_sm.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .user-data {
-  border: 3px solid #333333;
-  border-radius: 3px;
   grid-area: user-data;
 }
 
 .goals {
-  border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: goals;
 }
 
 .community {
-  border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: community;
 }
 
 .data-view {
-  border: 3px solid #333333;
-  border-radius: 3px;
   padding: .25em;
   grid-area: data-view;
+}
+
+.rounded-corner {
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+  -moz-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+  box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
 }
 
 /* ~~~~~ BUTTON STYLES ~~~~~ */
@@ -151,3 +155,52 @@ body, html {
 }
 
 /* ~~~~~ MEDIA QUERIES ~~~~~ */
+
+/* iPad / Tablet */
+@media only screen and (max-width: 768px) {
+
+  .grid-layout {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 0.04fr 3.96fr;
+    grid-template-areas:
+      "logo greeting"
+      "data-view-grid data-view-grid";
+    row-gap: 20px;
+     }
+  
+  .data-view-grid {
+    display: grid;
+    height: 100vh;
+    width: 96vw;
+    margin: 0 2vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "activity hydration sleep"
+      "data-view graphs graphs"
+      "user-data goals community";
+    gap: 1% 1%
+  }
+  .logo img {
+    max-width: 80%
+  }
+  .greeting {
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+/* Large Mobile Phone */
+@media only screen and (max-width: 425px) {
+  
+}
+
+/* Small Mobile Phone */
+@media only screen and (max-width: 320px) {
+  
+}
+
