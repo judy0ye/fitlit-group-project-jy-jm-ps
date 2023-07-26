@@ -36,7 +36,8 @@ import {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
-  displaySevenDayActivity
+  displaySevenDayActivity,
+  displayRandomQuote
 } from './domUpdates';
 
 import {
@@ -122,7 +123,8 @@ window.addEventListener('load', function () {
     fetchApiData('sleep'),
     fetchApiData('activity'),
   ]).then((data) => {
-    console.log('onload from fetch data:', data);
+   // console.log('onload from fetch data:', data);
+    console.log("Parvin:", data)
     users = data[0].users;
     hydration = data[1].hydrationData;
     sleep = data[2].sleepData;
@@ -215,6 +217,7 @@ const initializeApp = () => {
   activeMinutesPerDay(activity, currentUser, currentDate);
   // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
+  displayRandomQuote()
 };
 
 export {

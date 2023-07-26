@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Fitlit</title>
-  </head>
-  <body>
-    <main>
-      <div class="grid-layout">
-         <header class="logo">
-          <h1>
-            <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
-          </h1>
-          </header>
-        <div class="greeting"></div>
-        <div class="data-view-grid">
-      <div class="data-view rounded-corner">
-        <h2>View Weekly Averages</h2>
-        <p>Choose a start date to view data for one week</p>
-        <label for="start-date-input">Please choose start date: </label>
-        <input type="date" name="start-date" id="start-date-input" value="2023-07-01" min="2023-03-24" max="2023-07-01" />
-        <br />
-        <br />
-        <button class="activity-from-calendar-button">Activity</button>
-        <button class="hydration-from-calendar-button">Hydration</button>
-        <button class="sleep-from-calendar-button">Sleep</button>
-        <br />
-        <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average is based on your most recent 7 days.</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>FitChicks</title>
+</head>
+
+<body>
+  <main>
+    <div class="grid-layout">
+      <header class="logo">
+        <h1>
+          <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
+        </h1>
+        <div class="lower-header">
+          <h2 id="headerQuote" class="header-quote"></h2>
+        </div>
+
+      </header>
+      <div class="greeting"></div>
+      <div class="data-view-grid">
+        <div class="data-view rounded-corner">
+          <h2>View Weekly Averages</h2>
+          <p>Choose a start date to view data for one week</p>
+          <label for="start-date-input">Please choose start date: </label>
+          <input type="date" name="start-date" id="start-date-input" value="2023-07-01" min="2023-03-24"
+            max="2023-07-01" />
+          <br />
+          <br />
+          <button class="activity-from-calendar-button">Activity</button>
+          <button class="hydration-from-calendar-button">Hydration</button>
+          <button class="sleep-from-calendar-button">Sleep</button>
+          <br />
+          <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average
+            is based on your most recent 7 days.</p>
           <button class="activity-button">Activity</button>
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
@@ -41,7 +49,17 @@
         </div>
         <div class="hydration rounded-corner">
           <h2>Hydration Data</h2>
-        </div>
+        <form id="form">
+          <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
+          <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1"
+            max="600,000,000,000,000" required>
+          <label for="start">Date:</label>
+          <input type="date" id="start" name="date-start" max="2023-07-01" required aria-label="Choose a date">
+          <input type="submit" value="Submit" class="submit" />
+          <button class="modal-button" data-micromodal-close="hydration-modal"
+            id="hydrationCloseButton">Close</button>
+        </form>
+      </div>
         <div class="sleep rounded-corner">
           <section>
             <h2>Sleep Data</h2>
@@ -61,6 +79,10 @@
           <section class="weekly-hydration-from-calendar-data hidden">
           </section>
           <section class="weekly-sleep-from-calendar-data hidden">
+            <!-- <aside class="infographic chart-placeholder">
+              <div id="map"></div>
+              <canvas class="info-chart" id="chart"></canvas>
+            </aside> -->
           </section>
           <section class="hydration-chart ">
             <canvas id="myChart"></canvas>
@@ -70,7 +92,8 @@
           </section> -->
           <section class="hidden">
             <h2>Weekly Sleep Info:</h2>
-            <p id="weeklySleepHours"></p3>
+            <p id="weeklySleepHours">
+              </p3>
           </section>
         </div>
         <div class="user-data rounded-corner">This is the user's personal data</div>
@@ -79,10 +102,11 @@
           <h2>Friends</h2>
           <p>This is where friends will be listed data</p>
         </div>
-        </div>
       </div>
-    </main>
-    <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
-    <script src="bundle.js"></script>
-  </body>
+    </div>
+  </main>
+  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+  <script src="bundle.js"></script>
+</body>
+
 </html>

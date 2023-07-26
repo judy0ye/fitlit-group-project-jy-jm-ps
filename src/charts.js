@@ -96,3 +96,102 @@ import {
    });
  };
  
+
+
+ // Chart Functions
+// const clearChartArea = () => {
+//   const chartArea = document.querySelector(".infographic");
+//   chartArea.classList.remove("map-error");
+//   chartArea.classList.remove("chart-placeholder");
+//   chartArea.innerHTML = `
+//   <div id="map"></div>
+//   <canvas id='chart'></canvas>`;
+// };
+
+// const createHydrationChart = (hydration, userID, date) => {
+//   const weeklyOunces = hydration.weeklyOuncesConsumed(userID, date);
+//   const labels = weeklyOunces.map(days => days.date);
+//   const data = weeklyOunces.map(days => days.numOunces);
+//   clearChartArea();
+//   new Chart("chart", {
+//     type: 'bar',
+//     data: {
+//       datasets: [{
+//         label: "ounces",
+//         backgroundColor: "#F57630",
+//         borderColor: "#3C4252",
+//         borderWidth: 2,
+//         hoverBackgroundColor: "#F68C52",
+//         hoverBorderColor: "#3C4252",
+//         data: data,
+//       }],
+//       labels: labels,
+//     }
+//   });
+// };
+
+// const createHoursSleptChart = (sleep, userID, date) => {
+//   const weeklyHours = sleep.calculateWeeklyHoursSlept(userID, date);
+//   const labels = weeklyHours.map(days => days.date);
+//   const data = weeklyHours.map(days => days.hoursSlept);
+//   clearChartArea();
+//   new Chart("chart", {
+//     type: "line",
+//     data: {
+//       datasets: [{
+//         label: "Hours Slept",
+//         backgroundColor: "#F16433",
+//         borderColor: "a25e9b",
+//         borderWidth: 2,
+//         hoverBackgroundColor: "#5A73C0",
+//         hoverBorderColor: "#5A73C0",
+//         data: data,
+//       }, ],
+//       labels: labels,
+//     },
+//   });
+// };
+
+// const createSleepQualityChart = (sleep, userID, date) => {
+//   const weeklyHours = sleep.calculateWeeklySleepQuality(userID, date);
+//   const labels = weeklyHours.map((days) => days.date);
+//   const data = weeklyHours.map((days) => days.sleepQuality);
+//   clearChartArea();
+//   new Chart("chart", {
+//     type: "bar",
+//     data: {
+//       datasets: [{
+//         label: "Sleep Quality",
+//         backgroundColor: "#F57630",
+//         borderColor: "#3C4252",
+//         borderWidth: 2,
+//         hoverBackgroundColor: "#F68C52",
+//         hoverBorderColor: "#3C4252",
+//         data: data,
+//       }, ],
+//       labels: labels,
+//     },
+//   });
+// };
+
+// const createActivityChart = (activity, userID, date) => {
+//   const weeklyMinutes = activity.weeklyMinutes(userID, date);
+//   const labels = weeklyMinutes.map(days => days.date);
+//   const data = weeklyMinutes.map(days => days.minutesActive);
+//   clearChartArea();
+//   new Chart("chart", {
+//     type: 'bar',
+//     data: {
+//       datasets: [{
+//         label: "minutes",
+//         backgroundColor: "#F57630",
+//         borderColor: "#3C4252",
+//         borderWidth: 2,
+//         hoverBackgroundColor: "#F68C52",
+//         hoverBorderColor: "#3C4252",
+//         data: data,
+//       }],
+//       labels: labels,
+//     }
+//   });
+// };

@@ -4,6 +4,17 @@ body, html {
   padding: 0;
 }
 
+
+.header-quote {
+  font-family: 'Comic Neue', cursive;
+  font-size: 24px; 
+  color: #333;
+  /* color: #0e0202;  */
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
 
 .grid-layout {
@@ -50,10 +61,16 @@ body, html {
   justify-content: center;
   align-items: center;
   grid-area: greeting;
-  font-size: 18px;
+  /* font-size: 18px; */
   background-color: #25C1E3;
   padding-top: 20px;
+  font-size: 24px;
+  padding: 20px;
+  color: #333; 
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
+
 
 .activity {
   grid-area: activity;

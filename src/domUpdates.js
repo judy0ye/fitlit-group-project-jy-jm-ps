@@ -23,7 +23,7 @@ import {
   users,
   currentDate,
 } from './scripts';
-
+import quotes from './data/quotes';
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
@@ -62,6 +62,11 @@ const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton = document.querySelector(
   '.activity-from-calendar-button'
 );
+let quote = document.querySelector('#headerQuote');
+
+function displayRandomQuote() {
+  quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+};
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
 const getWeeklyInfo = (wellnessInfo) => {
@@ -328,5 +333,6 @@ export {
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
   displayActivity,
-  displaySevenDayActivity
+  displaySevenDayActivity,
+  displayRandomQuote
 };
