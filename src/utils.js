@@ -22,7 +22,7 @@ function getUserById(users, id) {
 
 const getAvgStepGoal = (users) => {
   if (!users) {
-    return 0;
+    return undefined;
   }
 
   const totalStepGoal = users.reduce((acc, userInfo) => {
@@ -34,6 +34,10 @@ const getAvgStepGoal = (users) => {
 /* ~~~~~ Get Average Fluid ~~~~~*/
 
 function getAvgFluidForAllTime(hydrationData, id) {
+  if (!hydrationData || !id) {
+    return undefined;
+  }
+
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const avgHydration = hydrationEntries.reduce((acc, user) => {
     return (acc += user.numOunces);
@@ -42,12 +46,19 @@ function getAvgFluidForAllTime(hydrationData, id) {
 }
 
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
+  if (!hydrationData || !id || !date) {
+    return undefined;
+  }
   const hydrationEntries = hydrationData.filter((entry) => entry.userID === id);
   const dailyEntry = hydrationEntries.find((entry) => entry.date === date);
   return dailyEntry.numOunces;
 }
 
 function getWeeklyFluid(hydrationData, userID) {
+  if (!hydrationData || !userID) {
+    return undefined;
+  }
+
   const hydrationEntries = hydrationData.filter(
     (entry) => entry.userID === userID
   );
@@ -55,7 +66,7 @@ function getWeeklyFluid(hydrationData, userID) {
   const weeklyHydration = hydrationEntries.slice(lastIndex - 6, lastIndex + 1);
   const weeklyHydrationData = weeklyHydration.map((entry) => ({
     date: entry.date,
-    numOunces: entry.numOunces + ' ounces drank ',
+    numOunces: entry.numOunces
   }));
   return weeklyHydrationData;
 }
@@ -105,28 +116,34 @@ function getWeekSleep(sleepData, userID, startDate) {
   return weeklySleep;
 }
 
-function findCurrentDate(userID, hydrationData, sleepData, activityData) {
-  let dateChoices = [];
-  const hydrationEntries = hydrationData.filter(
-    (entry) => entry.userID === userID
-  );
-  const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
-  const activityEntries = activityData.filter(
+function findLastEntry(userID, data) { 
+  const entries = data.filter(
     (entry) => entry.userID === userID
   );
 
-  const lastHydrationEntry = hydrationEntries.slice(-1)[0];
-  const lastSleepEntry = sleepEntries.slice(-1)[0];
-  const lastActivityEntry = activityEntries.slice(-1)[0];
-  const lastHydrationDate = lastHydrationEntry.date;
-  const lastSleepDate = lastSleepEntry.date;
-  const lastActivityDate = lastActivityEntry.date;
-  dateChoices.push(lastHydrationDate, lastSleepDate, lastActivityDate);
+  const lastEntry = entries.slice(-1)[0];
+  const lastDate = lastEntry.date;
+
+  return lastDate
+}
+
+function findCurrentDate(userID, hydrationData, sleepData, activityData) {
+  let dateChoices = [];
+  const lastHydrationEntry = findLastEntry(userID, hydrationData);
+  const lastSleepEntry = findLastEntry(userID, sleepData);
+  const lastActivityEntry = findLastEntry(userID, activityData)
+
+  dateChoices.push(lastHydrationEntry, lastSleepEntry, lastActivityEntry);
   dateChoices.sort();
   let currentDate = dateChoices.slice(-1)[0];
   console.log('DATE', currentDate);
   return currentDate;
 }
+
+// pass in one data for hydration, sleep (find current date )
+// anything repeated- take out
+// lastHydrationDate, lastSleepDate, lastActivityDate
+// filter data by user, 
 
 /* ~~~~~ Activity ~~~~~*/
 
@@ -197,4 +214,5 @@ export {
   findCurrentDate,
   calculateMilesUserWalked,
   milesPerDay,
+  getAvgFluidForAllTime
 };
