@@ -62,6 +62,7 @@ const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton = document.querySelector(
   '.activity-from-calendar-button'
 );
+
 let quote = document.querySelector('#headerQuote');
 
 function displayRandomQuote() {
