@@ -46,7 +46,7 @@ const oneWeekSleepFromCalendar = document.querySelector(
 );
 const weeklyHydrationButton = document.querySelector('.hydration-button');
 const sleepButton = document.querySelector('.sleep-button');
-const chickenImage = document.querySelector('.main-image');
+const chickenImage = document.querySelector('.graphs-bg-img');
 const inputField = document.getElementById('start-date-input');
 const dataField = document.querySelector('.data-view');
 const sleepFromCalendarButton = document.querySelector(
@@ -191,11 +191,11 @@ const displayRandomUser = (currentUser) => {
 
 
 const hideChickenImage = () => {
-  chickenImage.classList.add('hidden');
+  chickenImage.classList.remove('graphs-bg-img');
 };
 
 const showChickenImage = () => {
-  chickenImage.classList.remove('hidden');
+  chickenImage.classList.add('graphs-bg-img');
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
