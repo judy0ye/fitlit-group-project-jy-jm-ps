@@ -24,6 +24,10 @@ import {
   currentDate,
 } from './scripts';
 import quotes from './data/quotes';
+
+import { createHydrationChart, createSleepChart } from './charts';
+import { Chart } from 'chart.js';
+
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
@@ -97,8 +101,32 @@ const getWeeklyInfo = (wellnessInfo) => {
   return entries
 };
 
+//goof working function before chart implementation.
+
+// const getWeeklyHydration = () => {
+//   const waterEntries = getWeeklyInfo(hydration)
+
+//   let numOz = waterEntries.reduce((acc, entry) => {
+//     return acc + entry.numOunces;
+//   }, 0);
+
+//   if (waterEntries.length === 0) {
+//     return 0;
+//   }
+
+//   let avg = Math.round(numOz / waterEntries.length);
+
+//   waterEntries.forEach((entry) => {
+//     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
+//   });
+//   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+// };
+
+//modifyed function for chart.
+
 const getWeeklyHydration = () => {
-  const waterEntries = getWeeklyInfo(hydration)
+  const waterEntries = getWeeklyInfo(hydration);
+  console.log('About to call createHydrationChart...');
 
   let numOz = waterEntries.reduce((acc, entry) => {
     return acc + entry.numOunces;
@@ -110,11 +138,18 @@ const getWeeklyHydration = () => {
 
   let avg = Math.round(numOz / waterEntries.length);
 
+  oneWeekHydrationFromCalendar.innerHTML = ''; // clear previous entries for chart part
+
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
   });
   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+
+  createHydrationChart(waterEntries); // create the chart with the fetched data
 };
+
+
+
 
 const displaySevenDayHydration = () => {
   oneWeekHydrationFromCalendar.classList.remove('hidden');
@@ -127,6 +162,35 @@ const displaySevenDayActivity = () => {
   oneWeekActivityDataFromCalendarButton.disabled = true;
   oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
 };
+//Good working function before chart.
+
+// const getWeeklySleep = () => {
+//   const sleepHourEntries = getWeeklyInfo(sleep)
+//   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
+//     return acc + entry.hoursSlept;
+//   }, 0);
+
+//   let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
+//     return acc + entry.sleepQuality;
+//   }, 0);
+
+//   if (sleepHourEntries.length === 0) {
+//     return 0;
+//   }
+
+//   let avgHoursSlept = Math.round(hoursSlept / sleepHourEntries.length);
+//   let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
+
+//   sleepHourEntries.forEach((entry) => {
+//     oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
+
+//     hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
+//   });
+//   oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
+//   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
+// };
+
+//Chrt implemented.
 
 const getWeeklySleep = () => {
   const sleepHourEntries = getWeeklyInfo(sleep)
@@ -146,13 +210,17 @@ const getWeeklySleep = () => {
   let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
 
   sleepHourEntries.forEach((entry) => {
-    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
-
-    hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
+    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
   });
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
+
+  createSleepChart(sleepHourEntries); // create the chart with the fetched data
 };
+
+
+
+
 
 const displaySevenDaySleep = () => {
   oneWeekSleepFromCalendar.classList.remove('hidden');
