@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Fitlit</title>
-  </head>
-  <body>
-    <main>
-      <div class="grid-layout">
-         <header class="logo">
-          <h1>
-            <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
-          </h1>
-          </header>
-        <div class="greeting"></div>
-        <div class="data-view-grid">
-      <div class="data-view rounded-corner">
-        <h2>View Weekly Averages</h2>
-        <p>Choose a start date to view data for one week</p>
-        <label for="start-date-input">Please choose start date: </label>
-        <input type="date" name="start-date" id="start-date-input" value="2023-07-01" min="2023-03-24" max="2023-07-01" />
-        <br />
-        <br />
-        <button class="activity-from-calendar-button">Activity</button>
-        <button class="hydration-from-calendar-button">Hydration</button>
-        <button class="sleep-from-calendar-button">Sleep</button>
-        <br />
-        <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average is based on your most recent 7 days.</p>
+<head>
+  <meta charset="UTF-8" />
+  <title>FitChicks</title>
+</head>
+<body>
+  <main>
+    <div class="grid-layout">
+      <header class="logo">
+        <h1>
+          <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
+        </h1>
+        <div class="lower-header">
+          <h2 id="headerQuote" class="header-quote"></h2>
+        </div>
+      </header>
+      <div class="greeting"></div>
+      <div class="data-view-grid">
+        <div class="data-view rounded-corner">
+          <h2>View Weekly Averages</h2>
+          <p>Choose a start date to view data for one week</p>
+          <label for="start-date-input">Please choose start date: </label>
+          <input type="date" name="start-date" id="start-date-input" value="2023-07-01" min="2023-03-24"
+            max="2023-07-01" />
+          <br />
+          <br />
+          <button class="activity-from-calendar-button">Activity</button>
+          <button class="hydration-from-calendar-button">Hydration</button>
+          <button class="sleep-from-calendar-button">Sleep</button>
+          <br />
+          <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average
+            is based on your most recent 7 days.</p>
           <button class="activity-button">Activity</button>
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
@@ -41,6 +46,13 @@
         </div>
         <div class="hydration rounded-corner">
           <h2>Hydration Data</h2>
+          <div id="hydrationInfo"></div>
+          <form id="form">
+            <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
+            <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1" max="300,000,000"
+              required>
+            <input type="submit" value="Submit Ounces" class="submit">
+          </form>
         </div>
         <div class="sleep rounded-corner">
           <section>
@@ -50,17 +62,25 @@
           </section>
         </div>
         <div class="graphs rounded-corner graphs-bg-img">
-          <section class="weekly-hydration-data hidden">
+          <!-- <section class="weekly-hydration-data hidden"> -->
+          <section class="weekly-hydration-data">
+            <canvas id="hydrationChart"></canvas>
           </section>
           <section class="weekly-activity-data hidden">
           </section>
-          <section class="weekly-sleep-data hidden">
+          <!-- <section class="weekly-sleep-data hidden"> -->
+          <section class="weekly-sleep-data"></section>
+          <canvas id="sleepChart"></canvas>
           </section>
           <section class="weekly-activity-from-calendar-data hidden">
           </section>
           <section class="weekly-hydration-from-calendar-data hidden">
           </section>
           <section class="weekly-sleep-from-calendar-data hidden">
+            <!-- <aside class="infographic chart-placeholder">
+              <div id="map"></div>
+              <canvas class="info-chart" id="chart"></canvas>
+            </aside> -->
           </section>
           <section class="hydration-chart ">
             <canvas id="myChart"></canvas>
@@ -70,19 +90,46 @@
           </section> -->
           <section class="hidden">
             <h2>Weekly Sleep Info:</h2>
-            <p id="weeklySleepHours"></p3>
+            <p id="weeklySleepHours">
+            </p>
           </section>
         </div>
         <div class="user-data rounded-corner">This is the user's personal data</div>
         <div class="goals rounded-corner">These are user goals</div>
         <div class="community rounded-corner">
-          <h2>Friends</h2>
-          <p>This is where friends will be listed data</p>
-        </div>
+
+          <!-- <div class="motivation-card">
+            <img class="motivation-image" src="./images/boiled-egg.avif" alt="Motivation Image">
+            <div class="container">
+                <h4><b>Motivation Card Title</b></h4>
+                <p class="motivation-text">Some motivational text...</p>
+                <select class="motivation-level-dropdown">
+                    <option value="level1">Level 1</option>
+                    <option value="level2">Level 2</option>
+                    <option value="level3">Level 3</option>
+                    <option value="level4">Level 4</option>
+                    <option value="level5">Level 5</option>
+                </select>
+            </div>
+        </div> -->
+          <select id="motivation-levels">
+            <option value="1">Level 1 - Not Motivated</option>
+            <option value="2">Level 2 - Slightly Motivated</option>
+            <option value="3">Level 3 - Moderately Motivated</option>
+            <option value="4">Level 4 - Highly Motivated</option>
+            <option value="5">Level 5 - Extremely Motivated</option>
+          </select>
+          <div id="motivation-card">
+            <!-- Chosen motivation level and corresponding image will be displayed here -->
+          </div>
+          <!-- <h2>Friends</h2> -->
+          <!-- <p>This is where friends will be listed data</p> -->
         </div>
       </div>
-    </main>
-    <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
-    <script src="bundle.js"></script>
-  </body>
+    </div>
+  </main>
+  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+  <script src="bundle.js"></script>
+</body>
+
 </html>

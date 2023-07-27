@@ -3,12 +3,13 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
+// import './images/boiled-egg.avif';
 import './images/FitChicks_scene_lg.png';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
 import './images/sleep.png';
 import './images/activity.png';
-import { fetchApiData } from './apiCalls';
+import { fetchApiData, postSavedHydration} from './apiCalls';
 import {
   displayRandomUser,
   displayWeeklySleep,
@@ -36,7 +37,10 @@ import {
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
-  displaySevenDayActivity
+  displaySevenDayActivity,
+  displayRandomQuote,
+  form,
+  hydrationInfo
 } from './domUpdates';
 
 import {
@@ -70,44 +74,6 @@ Chart.register(
   Title,
   Legend
 );
-
-/* ~~~~~~~~~~ CHART FUNCTIONS ~~~~~~~~~~*/
-
-function displaySleepChart(sleep, currentUser) {
-  let avgSleep = getAvgSleep(sleep, currentUser.id);
-  let avgQuality = getAvgQuality(sleep, currentUser.id);
-
-  // Get a reference to the canvas element
-  let sleepChartContext = document.getElementById('myChart').getContext('2d');
-
-  // Create the chart
-  let sleepChart = new Chart(sleepChartContext, {
-    type: 'bar',
-    data: {
-      labels: ['Avg Sleep', 'Avg Quality'],
-      datasets: [
-        {
-          label: 'Hours / Rating',
-          data: [avgSleep, avgQuality],
-          backgroundColor: [
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-          ],
-          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-}
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
@@ -198,6 +164,84 @@ dataField.addEventListener('click', function (e) {
   }
 });
 
+function displayNewHydrationEntry(response) { 
+
+  console.log('Response from server:', response);
+
+  const hydrationInfo = document.getElementById('hydrationInfo');
+  hydrationInfo.innerHTML += `<p>Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!</p>`;
+};
+
+/* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
+const motivationDropdown = document.getElementById('motivation-levels');
+const motivationCard = document.getElementById('motivation-card');
+
+motivationDropdown.addEventListener('change', (event) => {
+  let motivationLevel = event.target.value;
+  let motivationText;
+  let imageSrc;
+
+  switch(motivationLevel) {
+    case "1":
+      motivationText = "Not Motivated";
+      imageSrc = "./images/level1.png";  // update with actual path
+      break;
+    case "2":
+      motivationText = "Slightly Motivated";
+      imageSrc = "./images/level2.png";  // update with actual path
+      break;
+    case "3":
+      motivationText = "Moderately Motivated";
+      imageSrc = "./images/level3.png";  // update with actual path
+      break;
+    case "4":
+      motivationText = "Highly Motivated";
+      imageSrc = "./images/level4.png";  // update with actual path
+      break;
+    case "5":
+      motivationText = "Extremely Motivated";
+      imageSrc = "./images/level5.png";  // update with actual path
+      break;
+  }
+
+  motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
+});
+
+// const motivationDropdown = document.getElementsByClassName('motivation-level-dropdown')[0];
+// const motivationCard = document.getElementsByClassName('motivation-card')[0];
+
+// motivationDropdown.addEventListener('change', (event) => {
+//   let motivationLevel = event.target.value;
+//   let motivationText;
+//   let imageSrc;
+
+//   switch(motivationLevel) {
+//     case "level1":
+//       motivationText = "Not Motivated";
+//       imageSrc = "./images/level1.png";  
+//       break;
+//     case "level2":
+//       motivationText = "Slightly Motivated";
+//       imageSrc = "./images/level2.png";  
+//       break;
+//     case "level3":
+//       motivationText = "Moderately Motivated";
+//       imageSrc = "./images/level3.png";  
+//       break;
+//     case "level4":
+//       motivationText = "Highly Motivated";
+//       imageSrc = "./images/level4.png";  
+//       break;
+//     case "level5":
+//       motivationText = "Extremely Motivated";
+//       imageSrc = "./images/level5.png";  
+//       break;
+//   }
+
+//   motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
+// });
+
+
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
@@ -210,11 +254,39 @@ const initializeApp = () => {
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
-  displaySleepChart(sleep, currentUser);
+  //displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
   // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
+  displayRandomQuote()
+  //postSavedHydration()
+
+  const formElement = document.getElementById('form').addEventListener('submit', function(event) {
+    console.log('Form submitted!')
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+    
+    const postUserInput = {
+      userID: currentUser.id,
+      date: "2023/07/02",
+      numOunces: formData.get('waterIntake')
+    };
+    
+    console.log('Form submitted!');
+    
+    postSavedHydration(postUserInput)
+    .then(json => {
+      displayNewHydrationEntry(json);
+      console.log(json);
+    })
+    .catch(err => console.error(`Error at: ${err}`));
+  
+    console.log('Data sent in the request:', postUserInput);
+    
+    event.target.reset();
+  });
 };
 
 export {
@@ -223,6 +295,5 @@ export {
   users,
   hydration,
   currentUser,
-  sleep,
-  displaySleepChart,
+  sleep
 };

@@ -23,6 +23,10 @@ import {
   users,
   currentDate,
 } from './scripts';
+import quotes from './data/quotes';
+
+import { createHydrationChart, createSleepChart } from './charts';
+import { Chart } from 'chart.js';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -62,6 +66,13 @@ const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton = document.querySelector(
   '.activity-from-calendar-button'
 );
+const form = document.querySelector('#form');
+const formInput = document.querySelector('.water-intake')
+const quote = document.querySelector('#headerQuote');
+
+function displayRandomQuote() {
+  quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+};
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
 const getWeeklyInfo = (wellnessInfo) => {
@@ -91,8 +102,32 @@ const getWeeklyInfo = (wellnessInfo) => {
   return entries
 };
 
+//goof working function before chart implementation.
+
+// const getWeeklyHydration = () => {
+//   const waterEntries = getWeeklyInfo(hydration)
+
+//   let numOz = waterEntries.reduce((acc, entry) => {
+//     return acc + entry.numOunces;
+//   }, 0);
+
+//   if (waterEntries.length === 0) {
+//     return 0;
+//   }
+
+//   let avg = Math.round(numOz / waterEntries.length);
+
+//   waterEntries.forEach((entry) => {
+//     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
+//   });
+//   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+// };
+
+//modifyed function for chart.
+
 const getWeeklyHydration = () => {
-  const waterEntries = getWeeklyInfo(hydration)
+  const waterEntries = getWeeklyInfo(hydration);
+  console.log('About to call createHydrationChart...');
 
   let numOz = waterEntries.reduce((acc, entry) => {
     return acc + entry.numOunces;
@@ -104,10 +139,14 @@ const getWeeklyHydration = () => {
 
   let avg = Math.round(numOz / waterEntries.length);
 
+  oneWeekHydrationFromCalendar.innerHTML = ''; // clear previous entries for chart part
+
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
   });
   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+
+  createHydrationChart(waterEntries); // create the chart with the fetched data
 };
 
 const displaySevenDayHydration = () => {
@@ -120,6 +159,7 @@ const displaySevenDayActivity = () => {
   weeklyActivityData.classList.remove('hidden');
   oneWeekActivityDataFromCalendarButton.disabled = true;
   oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
+
 };
 
 const getWeeklySleep = () => {
@@ -140,12 +180,12 @@ const getWeeklySleep = () => {
   let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
 
   sleepHourEntries.forEach((entry) => {
-    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
-
-    hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
+    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
   });
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
+
+  createSleepChart(sleepHourEntries); // create the chart with the fetched data
 };
 
 const displaySevenDaySleep = () => {
@@ -328,5 +368,8 @@ export {
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
   displayActivity,
-  displaySevenDayActivity
+  displaySevenDayActivity,
+  displayRandomQuote,
+  form,
+  hydrationInfo
 };
