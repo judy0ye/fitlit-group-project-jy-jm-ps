@@ -173,6 +173,39 @@ function displayNewHydrationEntry(response) {
 };
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
+const motivationDropdown = document.getElementById('motivation-levels');
+const motivationCard = document.getElementById('motivation-card');
+
+motivationDropdown.addEventListener('change', (event) => {
+  let motivationLevel = event.target.value;
+  let motivationText;
+  let imageSrc;
+
+  switch(motivationLevel) {
+    case "1":
+      motivationText = "Not Motivated";
+      imageSrc = "./images/level1.png";  // update with actual path
+      break;
+    case "2":
+      motivationText = "Slightly Motivated";
+      imageSrc = "./images/level2.png";  // update with actual path
+      break;
+    case "3":
+      motivationText = "Moderately Motivated";
+      imageSrc = "./images/level3.png";  // update with actual path
+      break;
+    case "4":
+      motivationText = "Highly Motivated";
+      imageSrc = "./images/level4.png";  // update with actual path
+      break;
+    case "5":
+      motivationText = "Extremely Motivated";
+      imageSrc = "./images/level5.png";  // update with actual path
+      break;
+  }
+
+  motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
+});
 
 // const motivationDropdown = document.getElementsByClassName('motivation-level-dropdown')[0];
 // const motivationCard = document.getElementsByClassName('motivation-card')[0];

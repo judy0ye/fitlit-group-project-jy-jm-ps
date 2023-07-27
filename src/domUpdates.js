@@ -162,36 +162,6 @@ const displaySevenDayActivity = () => {
 
 };
 
-//Good working function before chart.
-
-// const getWeeklySleep = () => {
-//   const sleepHourEntries = getWeeklyInfo(sleep)
-//   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
-//     return acc + entry.hoursSlept;
-//   }, 0);
-
-//   let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
-//     return acc + entry.sleepQuality;
-//   }, 0);
-
-//   if (sleepHourEntries.length === 0) {
-//     return 0;
-//   }
-
-//   let avgHoursSlept = Math.round(hoursSlept / sleepHourEntries.length);
-//   let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
-
-//   sleepHourEntries.forEach((entry) => {
-//     oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} 
-
-//     hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
-//   });
-//   oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
-//   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
-// };
-
-//Chrt implemented.
-
 const getWeeklySleep = () => {
   const sleepHourEntries = getWeeklyInfo(sleep)
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
@@ -217,10 +187,6 @@ const getWeeklySleep = () => {
 
   createSleepChart(sleepHourEntries); // create the chart with the fetched data
 };
-
-
-
-
 
 const displaySevenDaySleep = () => {
   oneWeekSleepFromCalendar.classList.remove('hidden');
