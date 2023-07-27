@@ -3,6 +3,7 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
+// import './images/boiled-egg.avif';
 import './images/FitChicks_scene_lg.png';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
@@ -163,68 +164,6 @@ dataField.addEventListener('click', function (e) {
   }
 });
 
-// POST hydration
-
-// const formElement = document.getElementById('form');
-
-// formElement.addEventListener('submit', (event) => {
-//   console.log('Form submitted!');
-//   event.preventDefault();
-
-//   const formData = new FormData(event.target);
-  
-//   console.log('Form submitted!');
-
-//   const postUserInput = {
-//     userID: currentUser.id,
-//     date: "2023/07/02",
-//     numOunces: formData.get('waterIntake')
-//   };
-//      console.log('Data sent in the request:', postUserInput);
-
-//   fetch('http://localhost:3001/api/v1/hydration', {
-//     method: 'POST',
-//     body: JSON.stringify(postUserInput),
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   })
-//     .then(response => response.json())
-//     .then( postUserInput => {
-//       displayNewHydrationEntry(postUserInput);
-//       console.log("postUserInput", postUserInput)
-//     })
-//     .catch(err => console.log(`Error at: ${err}`));
-
-//   event.target.reset();
-// })
-
-// const formElement = document.getElementById('form').addEventListener('submit', function(event) {
-//   console.log('Form submitted!')
-//   event.preventDefault();
-
-//   const formData = new FormData(event.target);
-  
-//   const postUserInput = {
-//     userID: currentUser.id,
-//     date: "2023/07/02",
-//     numOunces: formData.get('waterIntake')
-//   };
-  
-//   console.log('Form submitted!');
-  
-//   postSavedHydration(postUserInput)
-//   .then(json => {
-//     displayNewHydrationEntry(json);
-//     console.log(json);
-//   })
-//   .catch(err => console.error(`Error at: ${err}`));
-
-//   console.log('Data sent in the request:', postUserInput);
-  
-//   event.target.reset();
-// })
-
 function displayNewHydrationEntry(response) { 
 
   console.log('Response from server:', response);
@@ -232,6 +171,42 @@ function displayNewHydrationEntry(response) {
   const hydrationInfo = document.getElementById('hydrationInfo');
   hydrationInfo.innerHTML += `<p>Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!</p>`;
 };
+
+/* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
+
+// const motivationDropdown = document.getElementsByClassName('motivation-level-dropdown')[0];
+// const motivationCard = document.getElementsByClassName('motivation-card')[0];
+
+// motivationDropdown.addEventListener('change', (event) => {
+//   let motivationLevel = event.target.value;
+//   let motivationText;
+//   let imageSrc;
+
+//   switch(motivationLevel) {
+//     case "level1":
+//       motivationText = "Not Motivated";
+//       imageSrc = "./images/level1.png";  
+//       break;
+//     case "level2":
+//       motivationText = "Slightly Motivated";
+//       imageSrc = "./images/level2.png";  
+//       break;
+//     case "level3":
+//       motivationText = "Moderately Motivated";
+//       imageSrc = "./images/level3.png";  
+//       break;
+//     case "level4":
+//       motivationText = "Highly Motivated";
+//       imageSrc = "./images/level4.png";  
+//       break;
+//     case "level5":
+//       motivationText = "Extremely Motivated";
+//       imageSrc = "./images/level5.png";  
+//       break;
+//   }
+
+//   motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
+// });
 
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/

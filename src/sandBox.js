@@ -84,3 +84,68 @@ const hydrationData = {
 
 // Send POST request to save hydration data
 postSavedHydration(hydrationData);
+
+
+
+
+// POST hydration
+
+// const formElement = document.getElementById('form');
+
+// formElement.addEventListener('submit', (event) => {
+//   console.log('Form submitted!');
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+  
+//   console.log('Form submitted!');
+
+//   const postUserInput = {
+//     userID: currentUser.id,
+//     date: "2023/07/02",
+//     numOunces: formData.get('waterIntake')
+//   };
+//      console.log('Data sent in the request:', postUserInput);
+
+//   fetch('http://localhost:3001/api/v1/hydration', {
+//     method: 'POST',
+//     body: JSON.stringify(postUserInput),
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//     .then(response => response.json())
+//     .then( postUserInput => {
+//       displayNewHydrationEntry(postUserInput);
+//       console.log("postUserInput", postUserInput)
+//     })
+//     .catch(err => console.log(`Error at: ${err}`));
+
+//   event.target.reset();
+// })
+
+// const formElement = document.getElementById('form').addEventListener('submit', function(event) {
+//   console.log('Form submitted!')
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+  
+//   const postUserInput = {
+//     userID: currentUser.id,
+//     date: "2023/07/02",
+//     numOunces: formData.get('waterIntake')
+//   };
+  
+//   console.log('Form submitted!');
+  
+//   postSavedHydration(postUserInput)
+//   .then(json => {
+//     displayNewHydrationEntry(json);
+//     console.log(json);
+//   })
+//   .catch(err => console.error(`Error at: ${err}`));
+
+//   console.log('Data sent in the request:', postUserInput);
+  
+//   event.target.reset();
+// })
