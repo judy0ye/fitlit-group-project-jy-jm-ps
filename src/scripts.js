@@ -8,7 +8,7 @@ import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
 import './images/sleep.png';
 import './images/activity.png';
-import { fetchApiData } from './apiCalls';
+import { fetchApiData, postSavedHydration} from './apiCalls';
 import {
   displayRandomUser,
   displayWeeklySleep,
@@ -37,7 +37,9 @@ import {
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
   displaySevenDayActivity,
-  displayRandomQuote
+  displayRandomQuote,
+  form,
+  hydrationInfo
 } from './domUpdates';
 
 import {
@@ -72,44 +74,6 @@ Chart.register(
   Legend
 );
 
-/* ~~~~~~~~~~ CHART FUNCTIONS ~~~~~~~~~~*/
-
-function displaySleepChart(sleep, currentUser) {
-  let avgSleep = getAvgSleep(sleep, currentUser.id);
-  let avgQuality = getAvgQuality(sleep, currentUser.id);
-
-  // Get a reference to the canvas element
-  let sleepChartContext = document.getElementById('myChart').getContext('2d');
-
-  // Create the chart
-  let sleepChart = new Chart(sleepChartContext, {
-    type: 'bar',
-    data: {
-      labels: ['Avg Sleep', 'Avg Quality'],
-      datasets: [
-        {
-          label: 'Hours / Rating',
-          data: [avgSleep, avgQuality],
-          backgroundColor: [
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-          ],
-          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-}
-
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
 let users, hydration, sleep, activity, currentUser, currentDate;
@@ -123,8 +87,7 @@ window.addEventListener('load', function () {
     fetchApiData('sleep'),
     fetchApiData('activity'),
   ]).then((data) => {
-   // console.log('onload from fetch data:', data);
-    console.log("Parvin:", data)
+    console.log('onload from fetch data:', data);
     users = data[0].users;
     hydration = data[1].hydrationData;
     sleep = data[2].sleepData;
@@ -200,6 +163,77 @@ dataField.addEventListener('click', function (e) {
   }
 });
 
+// POST hydration
+
+// const formElement = document.getElementById('form');
+
+// formElement.addEventListener('submit', (event) => {
+//   console.log('Form submitted!');
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+  
+//   console.log('Form submitted!');
+
+//   const postUserInput = {
+//     userID: currentUser.id,
+//     date: "2023/07/02",
+//     numOunces: formData.get('waterIntake')
+//   };
+//      console.log('Data sent in the request:', postUserInput);
+
+//   fetch('http://localhost:3001/api/v1/hydration', {
+//     method: 'POST',
+//     body: JSON.stringify(postUserInput),
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//     .then(response => response.json())
+//     .then( postUserInput => {
+//       displayNewHydrationEntry(postUserInput);
+//       console.log("postUserInput", postUserInput)
+//     })
+//     .catch(err => console.log(`Error at: ${err}`));
+
+//   event.target.reset();
+// })
+
+// const formElement = document.getElementById('form').addEventListener('submit', function(event) {
+//   console.log('Form submitted!')
+//   event.preventDefault();
+
+//   const formData = new FormData(event.target);
+  
+//   const postUserInput = {
+//     userID: currentUser.id,
+//     date: "2023/07/02",
+//     numOunces: formData.get('waterIntake')
+//   };
+  
+//   console.log('Form submitted!');
+  
+//   postSavedHydration(postUserInput)
+//   .then(json => {
+//     displayNewHydrationEntry(json);
+//     console.log(json);
+//   })
+//   .catch(err => console.error(`Error at: ${err}`));
+
+//   console.log('Data sent in the request:', postUserInput);
+  
+//   event.target.reset();
+// })
+
+function displayNewHydrationEntry(response) { 
+
+  console.log('Response from server:', response);
+
+  const hydrationInfo = document.getElementById('hydrationInfo');
+  hydrationInfo.innerHTML += `<p>You drink ${response.numOunces}</p>`;
+};
+
+
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
 const initializeApp = () => {
@@ -212,12 +246,39 @@ const initializeApp = () => {
   displayDailySleep(sleep, currentUser, currentDate);
   displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
-  displaySleepChart(sleep, currentUser);
+  //displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
   // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
   displayRandomQuote()
+  //postSavedHydration()
+
+  const formElement = document.getElementById('form').addEventListener('submit', function(event) {
+    console.log('Form submitted!')
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+    
+    const postUserInput = {
+      userID: currentUser.id,
+      date: "2023/07/02",
+      numOunces: formData.get('waterIntake')
+    };
+    
+    console.log('Form submitted!');
+    
+    postSavedHydration(postUserInput)
+    .then(json => {
+      displayNewHydrationEntry(json);
+      console.log(json);
+    })
+    .catch(err => console.error(`Error at: ${err}`));
+  
+    console.log('Data sent in the request:', postUserInput);
+    
+    event.target.reset();
+  });
 };
 
 export {
@@ -226,6 +287,5 @@ export {
   users,
   hydration,
   currentUser,
-  sleep,
-  displaySleepChart,
+  sleep
 };

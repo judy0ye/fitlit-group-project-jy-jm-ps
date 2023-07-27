@@ -66,8 +66,9 @@ const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton = document.querySelector(
   '.activity-from-calendar-button'
 );
-
-let quote = document.querySelector('#headerQuote');
+const form = document.querySelector('#form');
+const formInput = document.querySelector('.water-intake')
+const quote = document.querySelector('#headerQuote');
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
@@ -148,9 +149,6 @@ const getWeeklyHydration = () => {
   createHydrationChart(waterEntries); // create the chart with the fetched data
 };
 
-
-
-
 const displaySevenDayHydration = () => {
   oneWeekHydrationFromCalendar.classList.remove('hidden');
   hydrationFromCalendarButton.disabled = true;
@@ -161,7 +159,9 @@ const displaySevenDayActivity = () => {
   weeklyActivityData.classList.remove('hidden');
   oneWeekActivityDataFromCalendarButton.disabled = true;
   oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
+
 };
+
 //Good working function before chart.
 
 // const getWeeklySleep = () => {
@@ -403,5 +403,7 @@ export {
   oneWeekActivityDataFromCalendarButton,
   displayActivity,
   displaySevenDayActivity,
-  displayRandomQuote
+  displayRandomQuote,
+  form,
+  hydrationInfo
 };

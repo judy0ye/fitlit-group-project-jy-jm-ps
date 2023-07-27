@@ -34,6 +34,8 @@ function createHydrationChart(hydrationData) {
           label: 'Hydration (ounces)',
           data: data,
           borderColor: 'rgba(0, 123, 255, 1)', // Changed color to a vibrant blue
+          pointBackgroundColor: 'rgba(0, 255, 0, 1)', // Changed point color to a vibrant green
+          pointRadius: 5, // Increased point size
           borderWidth: 2, // Increased border width for emphasis
           fill: false,
         },
@@ -100,5 +102,44 @@ function createSleepChart(sleepData) {
     },
   });
 }
+
+
+// function displaySleepChart(sleep, currentUser) {
+//   let avgSleep = getAvgSleep(sleep, currentUser.id);
+//   let avgQuality = getAvgQuality(sleep, currentUser.id);
+
+//   // Get a reference to the canvas element
+//   let sleepChartContext = document.getElementById('myChart').getContext('2d');
+
+//   // Create the chart
+//   let sleepChart = new Chart(sleepChartContext, {
+//     type: 'bar',
+//     data: {
+//       labels: ['Avg Sleep', 'Avg Quality'],
+//       datasets: [
+//         {
+//           label: 'Hours / Rating',
+//           data: [avgSleep, avgQuality],
+//           backgroundColor: [
+//             'rgba(75, 192, 192, 0.2)',
+//             'rgba(255, 206, 86, 0.2)',
+//           ],
+//           borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
+//           borderWidth: 1,
+//         },
+//       ],
+//     },
+//     options: {
+//       responsive: true,
+//       scales: {
+//         y: {
+//           beginAtZero: true,
+//         },
+//       },
+//     },
+//   });
+// }
+
+
 
 export { createHydrationChart, createSleepChart };

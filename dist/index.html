@@ -49,15 +49,12 @@
         </div>
         <div class="hydration rounded-corner">
           <h2>Hydration Data</h2>
+          <div id="hydrationInfo"></div>
           <form id="form">
             <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
-            <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1"
-              max="600,000,000,000,000" required>
-            <label for="start">Date:</label>
-            <input type="date" id="start" name="date-start" max="2023-07-01" required aria-label="Choose a date">
-            <input type="submit" value="Submit" class="submit" />
-            <button class="modal-button" data-micromodal-close="hydration-modal"
-              id="hydrationCloseButton">Close</button>
+            <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1" max="300,000,000"
+              required>
+            <input type="submit" value="Submit Ounces" class="submit">
           </form>
         </div>
         <div class="sleep rounded-corner">
@@ -76,7 +73,7 @@
           </section>
           <!-- <section class="weekly-sleep-data hidden"> -->
           <section class="weekly-sleep-data"></section>
-            <canvas id="sleepChart"></canvas>
+          <canvas id="sleepChart"></canvas>
           </section>
           <section class="weekly-activity-from-calendar-data hidden">
           </section>
@@ -97,14 +94,14 @@
           <section class="hidden">
             <h2>Weekly Sleep Info:</h2>
             <p id="weeklySleepHours">
-              </p3>
+              </p>
           </section>
         </div>
         <div class="user-data rounded-corner">This is the user's personal data</div>
         <div class="goals rounded-corner">These are user goals</div>
         <div class="community rounded-corner">
-          <h2>Friends</h2>
-          <p>This is where friends will be listed data</p>
+          <!-- <h2>Friends</h2> -->
+          <!-- <p>This is where friends will be listed data</p> -->
         </div>
       </div>
     </div>
