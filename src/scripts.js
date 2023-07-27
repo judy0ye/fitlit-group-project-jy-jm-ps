@@ -230,7 +230,7 @@ function displayNewHydrationEntry(response) {
   console.log('Response from server:', response);
 
   const hydrationInfo = document.getElementById('hydrationInfo');
-  hydrationInfo.innerHTML += `<p>You drink ${response.numOunces}</p>`;
+  hydrationInfo.innerHTML += `<p>Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!</p>`;
 };
 
 
