@@ -247,7 +247,7 @@ motivationDropdown.addEventListener('change', (event) => {
 const initializeApp = () => {
   currentUser = getRandomUser(users);
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
-  displayRandomUser(currentUser);
+  displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayWeeklyHydrationData(hydration, currentUser);
   displayActivity(activity, currentUser, currentDate);

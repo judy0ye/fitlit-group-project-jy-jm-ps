@@ -205,7 +205,7 @@ const activateButtons = () => {
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
-const displayRandomUser = (currentUser) => {
+const displayRandomUser = (activity, currentUser) => {
   const allUserStepGoalAvg = getAvgStepGoal(users);
   const userActivity = activity
     .filter((activityEachDay) => activityEachDay.userID === currentUser.id)
