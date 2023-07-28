@@ -267,12 +267,13 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
 }
 
+/* WE MIGHT NOT NEED THIS */
 function displayWeeklyHydrationData(hydration, currentUser) {
   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
 
-  weeklyHydrationEntries.forEach((entry) => {
-    oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
-  });
+  // weeklyHydrationEntries.forEach((entry) => {
+  //   oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
+  // });
 }
 
 function displayHydrationGraphs() {
