@@ -1,11 +1,9 @@
 /* ~~~~~ Fetch Requests ~~~~~*/
 
 // const fetchApiData = data => {
-
 //   return fetch(`https://fitlit-api.herokuapp.com/api/v1/${data}`)
 //     .then(response => response.json())
 //     .catch(error => console.error('Error:', error));
-
 // }
 
 const fetchApiData = data => {
@@ -15,14 +13,14 @@ const fetchApiData = data => {
 };
 
 const postSavedHydration = data => {
-  return fetch('http://localhost:3001/api/v1/hydration', 
-  {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
+  return fetch('http://localhost:3001/api/v1/hydration',
+    {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
     .then(response => {
       console.log('Hydration data:', data);
       if (response.ok) {
