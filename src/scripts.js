@@ -12,11 +12,11 @@ import './images/activity.png';
 import { fetchApiData, postSavedHydration} from './apiCalls';
 import {
   displayRandomUser,
-  displayWeeklySleep,
+  // displayWeeklySleep,
   displayDailySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  displayWeeklyHydrationData,
+  // displayWeeklyHydrationData,
   weeklyHydrationButton,
   displayHydrationGraphs,
   hideHydrationGraphs,
@@ -300,10 +300,10 @@ const initializeApp = () => {
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
-  displayWeeklyHydrationData(hydration, currentUser);
+  // displayWeeklyHydrationData(hydration, currentUser);
   displayActivity(activity, currentUser, currentDate);
   displayDailySleep(sleep, currentUser, currentDate);
-  displayWeeklySleep(sleep, currentUser, currentDate);
+  // displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
   //displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);

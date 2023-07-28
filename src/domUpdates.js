@@ -268,13 +268,13 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
 }
 
 /* WE MIGHT NOT NEED THIS */
-function displayWeeklyHydrationData(hydration, currentUser) {
-  const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
+// function displayWeeklyHydrationData(hydration, currentUser) {
+//   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
 
-  // weeklyHydrationEntries.forEach((entry) => {
-  //   oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
-  // });
-}
+//   // weeklyHydrationEntries.forEach((entry) => {
+//   //   oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
+//   // });
+// }
 
 function displayHydrationGraphs() {
   oneWeekHydrationChart.classList.remove('hidden');
@@ -298,12 +298,12 @@ function displayDailySleep(sleep, currentUser, currentDate) {
   }
 }
 
-function displayWeeklySleep(sleep, currentUser, currentDate) {
-  const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
-  weeklySleepEntries.forEach((entry) => {
-    oneWeekSleepChart.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`;
-  });
-}
+// function displayWeeklySleep(sleep, currentUser, currentDate) {
+//   const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
+//   weeklySleepEntries.forEach((entry) => {
+//     oneWeekSleepChart.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`;
+//   });
+// }
 
 function displaySleepGraphs() {
   oneWeekSleepChart.classList.remove('hidden');
@@ -364,10 +364,10 @@ function displayActivity(activityData, currentUser, currentDate) {
 export {
   displayRandomUser,
   displayDailySleep,
-  displayWeeklySleep,
+  // displayWeeklySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  displayWeeklyHydrationData,
+  // displayWeeklyHydrationData,
   weeklyHydrationButton,
   displayHydrationGraphs,
   hideHydrationGraphs,
