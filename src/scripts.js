@@ -3,11 +3,11 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
-// import './images/level-one.png';
-// import './images/level-two.png';
-// import './images/level-three.jpeg';
-// import './images/level-four.png';
-// import './images/level-five.jpeg';
+import './images/level-one.png';
+import './images/level-two.png';
+import './images/level-three.jpg';
+import './images/level-four.jpg';
+import './images/level-five.jpg';
 import './images/FitChicks_scene_lg.png';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
@@ -275,7 +275,6 @@ const setMotivationLevel = (level) => {
 motivationDropdown.addEventListener('change', (event) => {
   setMotivationLevel(event.target.value);
 });
-
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
