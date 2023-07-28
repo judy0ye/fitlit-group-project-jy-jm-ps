@@ -1,9 +1,6 @@
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
 
-import {getWeeklyHydration, 
-  getWeeklyInfo, 
-  getWeeklySleep
-}from './domUpdates';
+import {getWeeklyHydration, getWeeklyInfo, getWeeklySleep }from './domUpdates';
 import { Chart, LineController, LinearScale, PointElement, LineElement } from 'chart.js';
 import { currentUser } from './scripts';
 
@@ -66,6 +63,9 @@ document.querySelector('.sleep-button').addEventListener('click', () => {
 });
 
 function createSleepChart(sleepData) {
+
+  console.log("createSleepChart called with data: ", sleepData);
+
   const sleepChartContext = document.getElementById('sleepChart').getContext('2d');
 
   const labels = sleepData.map((entry) => entry.date);
@@ -113,13 +113,15 @@ document.querySelector('.activity-button').addEventListener('click', () => {
   createActivityChart(activityData);
 });
 
-function createActivityChart(activityData) {
+function createActivityChart(activityData, currentUser) {
+  console.log("createActivityChart called with data: ", activityData);
+
   const activityChartContext = document.getElementById('activityChart').getContext('2d');
 
   const labels = activityData.map((entry) => entry.date);
   const data = activityData.map((entry) => entry.numSteps);
   const backgroundColors = activityData.map((entry) =>
-    entry.numSteps >= currentUser.dailyStepGoal ? 'rgba(0, 123, 255, 0.6)' : 'rgba(255, 99, 132, 0.6)' // Blue for goal met, red for goal not met
+    entry.numSteps >= currentUser.dailyStepGoal ? 'rgba(76, 175, 80, 0.6)' : 'rgba(156, 39, 176, 0.6)' // Green for goal met, Purple for goal not met
   );
 
   const activityChart = new Chart(activityChartContext, {
@@ -150,8 +152,10 @@ function createActivityChart(activityData) {
   });
 }
 
+
+
 export { 
   createHydrationChart, 
   createSleepChart, 
-  // createActivityChart 
+  createActivityChart 
 };
