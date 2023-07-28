@@ -28,7 +28,7 @@ import quotes from './data/quotes';
 import { 
   createHydrationChart, 
   createSleepChart, 
-  // createActivityChart 
+  createActivityChart 
 } from './charts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
@@ -309,7 +309,6 @@ function displayAverageSleep(sleep, currentUser) {
 }
 
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
-
 function displayWeeklyStepCount(activityData, currentUser, currentDate) {
   const activityEntries = getWeeklyInfo(activity)
 
@@ -322,6 +321,7 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
       </p> `;
     }
   });
+  createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
 }
 
 function displayActivity(activityData, currentUser, currentDate) {
