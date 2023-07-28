@@ -44,6 +44,7 @@ const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 const weeklyActivityData = document.querySelector(
   '.weekly-activity-from-calendar-data'
 );
+const oneWeekActivityChart = document.querySelector('.weekly-activity-data')
 const dailySteps = document.querySelector('.activity-daily-steps');
 const dailyMinutes = document.querySelector('.activity-daily-minutes');
 const dailyMiles = document.querySelector('.activity-daily-miles');
@@ -154,15 +155,25 @@ const getWeeklyHydration = () => {
 
 const displaySevenDayHydration = () => {
   oneWeekHydrationFromCalendar.classList.remove('hidden');
+  oneWeekHydrationChart.classList.remove('hidden')
   hydrationFromCalendarButton.disabled = true;
   hydrationFromCalendarButton.classList.add('disable-button');
 };
 
+const hideWeeklyHydrationChart = () => {
+  oneWeekHydrationChart.classList.add('hidden');
+};
+
 const displaySevenDayActivity = () => {
   weeklyActivityData.classList.remove('hidden');
+  oneWeekActivityChart.classList.remove('hidden')
   oneWeekActivityDataFromCalendarButton.disabled = true;
   oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
 
+};
+
+const hideWeeklyActivityChart = () => {
+  oneWeekActivityChart.classList.add('hidden');
 };
 
 const getWeeklySleep = () => {
@@ -193,8 +204,13 @@ const getWeeklySleep = () => {
 
 const displaySevenDaySleep = () => {
   oneWeekSleepFromCalendar.classList.remove('hidden');
+  oneWeekSleepChart.classList.remove('hidden')
   sleepFromCalendarButton.disabled = true;
   sleepFromCalendarButton.classList.add('disable-button');
+};
+
+const hideWeeklySleepChart = () => {
+  oneWeekSleepChart.classList.add('hidden');
 };
 
 const activateButtons = () => {
@@ -375,5 +391,8 @@ export {
   displaySevenDayActivity,
   displayRandomQuote,
   form,
-  hydrationInfo
+  hydrationInfo,
+  hideWeeklyHydrationChart,
+  hideWeeklyActivityChart,
+  hideWeeklySleepChart 
 };
