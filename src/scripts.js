@@ -3,20 +3,22 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
-// import './images/boiled-egg.avif';
+// import './images/level-one.png';
+// import './images/level-two.png';
+// import './images/level-three.jpeg';
+// import './images/level-four.png';
+// import './images/level-five.jpeg';
 import './images/FitChicks_scene_lg.png';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
 import './images/sleep.png';
 import './images/activity.png';
-import { fetchApiData, postSavedHydration} from './apiCalls';
+import { fetchApiData, postSavedHydration } from './apiCalls';
 import {
   displayRandomUser,
-  // displayWeeklySleep,
   displayDailySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  // displayWeeklyHydrationData,
   weeklyHydrationButton,
   displayHydrationGraphs,
   hideHydrationGraphs,
@@ -43,7 +45,7 @@ import {
   hydrationInfo,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
-  hideWeeklySleepChart 
+  hideWeeklySleepChart
 } from './domUpdates';
 
 import {
@@ -113,8 +115,8 @@ const onClickSleep = () => {
   if (oneWeekActivityDataFromCalendarButton.disabled === true) {
     oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
     oneWeekActivityDataFromCalendarButton.disabled = false;
-  }
-}
+  };
+};
 
 const onClickHydration = () => {
   hideChickenImage();
@@ -126,27 +128,27 @@ const onClickHydration = () => {
     sleepFromCalendarButton.classList.remove('disable-button');
     sleepFromCalendarButton.disabled = false;
   }
-if (oneWeekActivityDataFromCalendarButton.disabled === true) {
+  if (oneWeekActivityDataFromCalendarButton.disabled === true) {
     oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
     oneWeekActivityDataFromCalendarButton.disabled = false;
-  }
+  };
 }
 
 const onClickActivity = () => {
   hideChickenImage();
   hideWeeklyHydrationChart();
-  hideWeeklySleepChart ();
+  hideWeeklySleepChart();
   displayWeeklyStepCount(activity, currentUser, currentDate);
   displaySevenDayActivity();
   if (sleepFromCalendarButton.disabled === true) {
     sleepFromCalendarButton.classList.remove('disable-button');
     sleepFromCalendarButton.disabled = false;
-  }
+  };
   if (hydrationFromCalendarButton.disabled === true) {
     hydrationFromCalendarButton.classList.remove('disable-button');
     hydrationFromCalendarButton.disabled = false;
-  }
-}
+  };
+};
 
 
 // const onClickSleep = () => {
@@ -215,7 +217,7 @@ inputField.addEventListener('change', onChangeInputField);
 //   }
 // });
 
-function displayNewHydrationEntry(response) { 
+function displayNewHydrationEntry(response) {
 
   console.log('Response from server:', response);
 
@@ -224,73 +226,55 @@ function displayNewHydrationEntry(response) {
 };
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
-const motivationDropdown = document.getElementById('motivation-levels');
-const motivationCard = document.getElementById('motivation-card');
+
+const motivationLevels = {
+  "level1": { 
+    title: "Not Motivated",
+    description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
+    image: "./images/level-one.png"
+  },
+  "level2": { 
+    title: "Slightly Motivated",
+    description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
+    image: "./images/level-two.png"
+  },
+  "level3": { 
+    title: "Moderately Motivated",
+    description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
+    image: "./images/level-three.jpg" 
+  },
+  "level4": { 
+    title: "Highly Motivated",
+    description: "Cock-a-doodle Can-Do! <br/> <br/> Feeling eggs-cited and energized to progress further.", 
+    image: "./images/level-four.jpg"
+  },
+  "level5": { 
+    title: "Extremely Motivated",
+    description: "Hard-Boiled Dynamo!<br/> <br/> Maximum motivation achieved! Channeling unstoppable energy.",
+    image: "./images/level-five.jpg"
+  },
+};
+
+const motivationDropdown = document.querySelector('.motivation-level-dropdown');
+const motivationImage = document.querySelector('.motivation-image');
+const motivationText = document.querySelector('.motivation-text');
+const motivationTitle = document.querySelector('.motivation-card h4');
+
+
+const setMotivationLevel = (level) => {
+  let motivationLevel = motivationLevels[level];
+  if (motivationLevel) {
+    motivationTitle.textContent = motivationLevel.title; 
+    motivationText.innerHTML = motivationLevel.description;
+    motivationImage.src = motivationLevel.image;
+    motivationImage.alt = motivationLevel.description;
+    motivationDropdown.value = level;
+  }
+};
 
 motivationDropdown.addEventListener('change', (event) => {
-  let motivationLevel = event.target.value;
-  let motivationText;
-  let imageSrc;
-
-  switch(motivationLevel) {
-    case "1":
-      motivationText = "Not Motivated";
-      imageSrc = "./images/level1.png";  // update with actual path
-      break;
-    case "2":
-      motivationText = "Slightly Motivated";
-      imageSrc = "./images/level2.png";  // update with actual path
-      break;
-    case "3":
-      motivationText = "Moderately Motivated";
-      imageSrc = "./images/level3.png";  // update with actual path
-      break;
-    case "4":
-      motivationText = "Highly Motivated";
-      imageSrc = "./images/level4.png";  // update with actual path
-      break;
-    case "5":
-      motivationText = "Extremely Motivated";
-      imageSrc = "./images/level5.png";  // update with actual path
-      break;
-  }
-
-  motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
+  setMotivationLevel(event.target.value);
 });
-
-// const motivationDropdown = document.getElementsByClassName('motivation-level-dropdown')[0];
-// const motivationCard = document.getElementsByClassName('motivation-card')[0];
-
-// motivationDropdown.addEventListener('change', (event) => {
-//   let motivationLevel = event.target.value;
-//   let motivationText;
-//   let imageSrc;
-
-//   switch(motivationLevel) {
-//     case "level1":
-//       motivationText = "Not Motivated";
-//       imageSrc = "./images/level1.png";  
-//       break;
-//     case "level2":
-//       motivationText = "Slightly Motivated";
-//       imageSrc = "./images/level2.png";  
-//       break;
-//     case "level3":
-//       motivationText = "Moderately Motivated";
-//       imageSrc = "./images/level3.png";  
-//       break;
-//     case "level4":
-//       motivationText = "Highly Motivated";
-//       imageSrc = "./images/level4.png";  
-//       break;
-//     case "level5":
-//       motivationText = "Extremely Motivated";
-//       imageSrc = "./images/level5.png";  
-//       break;
-//   }
-
-//   motivationCard.innerHTML = `<h2>${motivationText}</h2><img src="${imageSrc}" alt="${motivationText}">`;
-// });
 
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
@@ -300,42 +284,38 @@ const initializeApp = () => {
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
   displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
-  // displayWeeklyHydrationData(hydration, currentUser);
   displayActivity(activity, currentUser, currentDate);
   displayDailySleep(sleep, currentUser, currentDate);
-  // displayWeeklySleep(sleep, currentUser, currentDate);
   displayAverageSleep(sleep, currentUser, currentDate);
-  //displaySleepChart(sleep, currentUser);
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
-  // getUserDates(currentUser);
   displayWeeklyStepCount(activity, currentUser, currentDate);
   displayRandomQuote()
-  //postSavedHydration()
+  setMotivationLevel("level1");
 
-  const formElement = document.getElementById('form').addEventListener('submit', function(event) {
+  const formElement = document.getElementById('form').addEventListener('submit', function (event) {
     console.log('Form submitted!')
     event.preventDefault();
-  
+
     const formData = new FormData(event.target);
-    
+
     const postUserInput = {
       userID: currentUser.id,
       date: "2023/07/02",
       numOunces: formData.get('waterIntake')
     };
-    
+
     console.log('Form submitted!');
-    
+
     postSavedHydration(postUserInput)
-    .then(json => {
-      displayNewHydrationEntry(json);
-      console.log(json);
-    })
-    .catch(err => console.error(`Error at: ${err}`));
-  
+      .then(json => {
+        displayNewHydrationEntry(json);
+        console.log(json);
+      })
+      .catch(err => console.error(`Error at: ${err}`));
+
     console.log('Data sent in the request:', postUserInput);
-    
+
     event.target.reset();
   });
 };
