@@ -25,8 +25,11 @@ import {
 } from './scripts';
 import quotes from './data/quotes';
 
-import { createHydrationChart, createSleepChart } from './charts';
-import { Chart } from 'chart.js';
+import { 
+  createHydrationChart, 
+  createSleepChart, 
+  // createActivityChart 
+} from './charts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -364,6 +367,7 @@ export {
   sleepFromCalendarButton,
   activateButtons,
   getWeeklyHydration,
+  getWeeklyInfo,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
