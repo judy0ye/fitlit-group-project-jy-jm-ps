@@ -92,13 +92,18 @@ function getAvgQuality(sleepData, userID) {
 function getHoursByDay(sleepData, id, date) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === id);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
-
+  if(!dailyEntry){
+    return 0;
+  }
   return dailyEntry.hoursSlept;
 }
 
 function getQualityByDay(sleepData, userID, date) {
   const sleepEntries = sleepData.filter((entry) => entry.userID === userID);
   const dailyEntry = sleepEntries.find((entry) => entry.date === date);
+  if(!dailyEntry){
+    return 0;
+  }
   return dailyEntry.sleepQuality;
 }
 
@@ -154,6 +159,9 @@ const stepsPerDay = (activityData, currentUser, currentDate) => {
   const dailySteps = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
+  if(!dailySteps){
+    return 0;
+  }
   return dailySteps.numSteps;
 };
 
@@ -164,6 +172,9 @@ const activeMinutesPerDay = (activityData, currentUser, currentDate) => {
   const dailyMinutes = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
+  if(!dailyMinutes){
+    return 0;
+  }
   return dailyMinutes.minutesActive;
 };
 
@@ -191,6 +202,9 @@ const weeklySteps = (activityData, userID, startDate) => {
 };
 
 const calculateMilesUserWalked = (activity, users) => {
+  if(!activity){
+    return 0;
+  };
   const milesWalked = (activity.numSteps * users.strideLength) / 5280;
   return Number(milesWalked.toFixed(2));
 };

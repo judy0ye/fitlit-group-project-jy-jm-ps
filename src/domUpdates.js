@@ -25,8 +25,11 @@ import {
 } from './scripts';
 import quotes from './data/quotes';
 
-import { createHydrationChart, createSleepChart } from './charts';
-import { Chart } from 'chart.js';
+import { 
+  createHydrationChart, 
+  createSleepChart, 
+  // createActivityChart 
+} from './charts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
@@ -205,7 +208,7 @@ const activateButtons = () => {
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
 
-const displayRandomUser = (currentUser) => {
+const displayRandomUser = (activity, currentUser) => {
   const allUserStepGoalAvg = getAvgStepGoal(users);
   const userActivity = activity
     .filter((activityEachDay) => activityEachDay.userID === currentUser.id)
@@ -364,6 +367,7 @@ export {
   sleepFromCalendarButton,
   activateButtons,
   getWeeklyHydration,
+  getWeeklyInfo,
   displaySevenDayHydration,
   hydrationFromCalendarButton,
   oneWeekActivityDataFromCalendarButton,
