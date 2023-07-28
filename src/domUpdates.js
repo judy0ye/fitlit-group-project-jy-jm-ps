@@ -106,29 +106,6 @@ const getWeeklyInfo = (wellnessInfo) => {
   return entries
 };
 
-//goof working function before chart implementation.
-
-// const getWeeklyHydration = () => {
-//   const waterEntries = getWeeklyInfo(hydration)
-
-//   let numOz = waterEntries.reduce((acc, entry) => {
-//     return acc + entry.numOunces;
-//   }, 0);
-
-//   if (waterEntries.length === 0) {
-//     return 0;
-//   }
-
-//   let avg = Math.round(numOz / waterEntries.length);
-
-//   waterEntries.forEach((entry) => {
-//     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
-//   });
-//   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
-// };
-
-//modifyed function for chart.
-
 const getWeeklyHydration = () => {
   const waterEntries = getWeeklyInfo(hydration);
   console.log('About to call createHydrationChart...');
@@ -143,7 +120,7 @@ const getWeeklyHydration = () => {
 
   let avg = Math.round(numOz / waterEntries.length);
 
-  oneWeekHydrationFromCalendar.innerHTML = ''; // clear previous entries for chart part
+  oneWeekHydrationFromCalendar.innerHTML = ''; 
 
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
@@ -267,15 +244,6 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
 }
 
-/* WE MIGHT NOT NEED THIS */
-// function displayWeeklyHydrationData(hydration, currentUser) {
-//   const weeklyHydrationEntries = getWeeklyFluid(hydration, currentUser.id);
-
-//   // weeklyHydrationEntries.forEach((entry) => {
-//   //   oneWeekHydrationChart.innerHTML += `<p>${entry.date}: ${entry.numOunces} ounces</p>`;
-//   // });
-// }
-
 function displayHydrationGraphs() {
   oneWeekHydrationChart.classList.remove('hidden');
   weeklyHydrationButton.disabled = true;
@@ -298,13 +266,6 @@ function displayDailySleep(sleep, currentUser, currentDate) {
   }
 }
 
-// function displayWeeklySleep(sleep, currentUser, currentDate) {
-//   const weeklySleepEntries = getWeekSleep(sleep, currentUser.id, currentDate);
-//   weeklySleepEntries.forEach((entry) => {
-//     oneWeekSleepChart.innerHTML += `${entry.date}: ${entry.hoursSlept} @ ${entry.sleepQuality}`;
-//   });
-// }
-
 function displaySleepGraphs() {
   oneWeekSleepChart.classList.remove('hidden');
   sleepButton.disabled = true;
@@ -326,6 +287,7 @@ function displayAverageSleep(sleep, currentUser) {
 }
 
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
+
 function displayWeeklyStepCount(activityData, currentUser, currentDate) {
   const activityEntries = getWeeklyInfo(activity)
 
@@ -364,10 +326,8 @@ function displayActivity(activityData, currentUser, currentDate) {
 export {
   displayRandomUser,
   displayDailySleep,
-  // displayWeeklySleep,
   displayAverageSleep,
   displayFluidConsumedToday,
-  // displayWeeklyHydrationData,
   weeklyHydrationButton,
   displayHydrationGraphs,
   hideHydrationGraphs,

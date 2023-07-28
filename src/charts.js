@@ -1,25 +1,22 @@
-/* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
+/* ~~~~~~~~~~ CHARTS FUNCTIONS ~~~~~~~~~~*/
 
-import {getWeeklyHydration, getWeeklyInfo, getWeeklySleep }from './domUpdates';
+import { getWeeklyHydration, getWeeklyInfo, getWeeklySleep } from './domUpdates';
 import { Chart, LineController, LinearScale, PointElement, LineElement } from 'chart.js';
 import { currentUser } from './scripts';
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 
-/* ~~~~~~~~~~ CHART FUNCTIONS ~~~~~~~~~~*/
-
-
 document.querySelector('.hydration-button').addEventListener('click', () => {
- 
-  let hydrationData = getWeeklyHydration(); 
+
+  let hydrationData = getWeeklyHydration();
   createHydrationChart(hydrationData);
 });
 
-let hydrationChart; 
+let hydrationChart;
 
 document.querySelector('.hydration-button').addEventListener('click', () => {
-  let hydrationData = getWeeklyHydration(); 
+  let hydrationData = getWeeklyHydration();
   createHydrationChart(hydrationData);
 });
 
@@ -43,10 +40,10 @@ function createHydrationChart(hydrationData) {
         {
           label: 'Hydration (ounces)',
           data: data,
-          borderColor: 'rgba(0, 123, 255, 1)', 
-          pointBackgroundColor: 'rgba(0, 255, 0, 1)', 
-          pointRadius: 3, 
-          borderWidth: 1, 
+          borderColor: 'rgba(0, 123, 255, 1)',
+          pointBackgroundColor: 'rgba(0, 255, 0, 1)',
+          pointRadius: 3,
+          borderWidth: 1,
           fill: false,
         },
       ],
@@ -63,13 +60,13 @@ function createHydrationChart(hydrationData) {
       },
     },
   });
-}
+};
 
 let sleepChart;
 
 function createSleepChart(sleepData) {
 
-   console.log("createSleepChart called with data: ", sleepData);
+  console.log("createSleepChart called with data: ", sleepData);
 
   const sleepChartContext = document.getElementById('sleepChart').getContext('2d');
 
@@ -78,7 +75,7 @@ function createSleepChart(sleepData) {
   const sleepQuality = sleepData.map((entry) => entry.sleepQuality);
 
   if (sleepChart) {
-    sleepChart.destroy(); 
+    sleepChart.destroy();
   }
 
   sleepChart = new Chart(sleepChartContext, {
@@ -89,7 +86,7 @@ function createSleepChart(sleepData) {
         {
           label: 'Hours Slept',
           data: hoursSlept,
-          backgroundColor: 'rgba(255, 99, 132, 0.6)', 
+          backgroundColor: 'rgba(255, 99, 132, 0.6)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 2,
         },
@@ -114,20 +111,20 @@ function createSleepChart(sleepData) {
       },
     },
   });
-}
+};
 
 document.querySelector('.sleep-button').addEventListener('click', () => {
-  let sleepData = getWeeklySleep(); 
+  let sleepData = getWeeklySleep();
   console.log("Sleep data: ", sleepData);
   createSleepChart(sleepData);
 });
 
 document.querySelector('.activity-button').addEventListener('click', () => {
-  let activityData = getWeeklyInfo('activity'); 
+  let activityData = getWeeklyInfo('activity');
   createActivityChart(activityData);
 });
 
-let activityChart; 
+let activityChart;
 
 function createActivityChart(activityData, currentUser) {
 
@@ -138,13 +135,13 @@ function createActivityChart(activityData, currentUser) {
   const labels = activityData.map((entry) => entry.date);
   const data = activityData.map((entry) => entry.numSteps);
   const backgroundColors = activityData.map((entry) =>
-    entry.numSteps >= currentUser.dailyStepGoal ? 'rgba(76, 175, 80, 0.6)' : 'rgba(156, 39, 176, 0.6)' 
+    entry.numSteps >= currentUser.dailyStepGoal ? 'rgba(76, 175, 80, 0.6)' : 'rgba(156, 39, 176, 0.6)'
     // Green for goal met, Purple for goal not met
   );
 
   if (activityChart) {
     activityChart.destroy();
-  }
+  };
 
   activityChart = new Chart(activityChartContext, {
     type: 'bar',
@@ -155,7 +152,7 @@ function createActivityChart(activityData, currentUser) {
           label: 'Steps',
           data: data,
           backgroundColor: backgroundColors,
-          borderColor: backgroundColors.map((color) => color.replace('0.6', '1')), 
+          borderColor: backgroundColors.map((color) => color.replace('0.6', '1')),
           borderWidth: 2,
         },
       ],
@@ -172,10 +169,10 @@ function createActivityChart(activityData, currentUser) {
       },
     },
   });
-}
+};
 
-export { 
-  createHydrationChart, 
-  createSleepChart, 
-  createActivityChart 
+export {
+  createHydrationChart,
+  createSleepChart,
+  createActivityChart
 };
