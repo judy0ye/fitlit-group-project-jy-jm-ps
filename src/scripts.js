@@ -3,9 +3,9 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
-import './images/level-one.png';
-import './images/level-two.png';
-import './images/level-three.jpg';
+import './images/level-one.jpg';
+import './images/level-two.jpg';
+import './images/level-three.png';
 import './images/level-four.jpg';
 import './images/level-five.jpg';
 import './images/FitChicks_scene_lg.png';
@@ -231,17 +231,17 @@ const motivationLevels = {
   "level1": { 
     title: "Not Motivated",
     description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
-    image: "./images/level-one.png"
+    image: "./images/level-one.jpg"
   },
   "level2": { 
     title: "Slightly Motivated",
     description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
-    image: "./images/level-two.png"
+    image: "./images/level-two.jpg"
   },
   "level3": { 
     title: "Moderately Motivated",
     description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
-    image: "./images/level-three.jpg" 
+    image: "./images/level-three.png" 
   },
   "level4": { 
     title: "Highly Motivated",
