@@ -3,6 +3,8 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
+import './images/lazychicken.png';
+import './images/happyrooster.jpg';
 import './images/level-one.jpg';
 import './images/level-two.jpg';
 import './images/level-three.png';
@@ -217,13 +219,8 @@ inputField.addEventListener('change', onChangeInputField);
 //   }
 // });
 
-// function displayNewHydrationEntry(response) {
 
-//   console.log('Response from server:', response);
-
-//   const hydrationInfo = document.getElementById('hydrationInfo');
-//   hydrationInfo.innerHTML += `<p>Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!</p>`;
-// };
+let totalWaterIntake = 0;
 
 function displayNewHydrationEntry(response) {
   console.log('Response from server:', response);
@@ -235,69 +232,85 @@ function displayNewHydrationEntry(response) {
     hydrationInfo.removeChild(existingMessage);
   }
 
+  totalWaterIntake += parseInt(response.numOunces);
+
   const newMessage = document.createElement('p');
 
   if (response.numOunces < 100) {
-    newMessage.textContent = `You've consumed ${response.numOunces} ounces of water. Remember to drink more water to stay hydrated! 🍒 Daily recommendations: ~3.7L (125 oz) for men, ~2.7L (91 oz) for women, from all sources.`;
+    newMessage.innerHTML = `Oops! You've consumed <strong> ${response.numOunces} </strong>ounces of water. 🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
   } else {
-    newMessage.textContent = `Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!`;
-  };
+    newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
+  }
 
-  // Append the new message to the container
   hydrationInfo.appendChild(newMessage);
 }
 
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
 
-const motivationLevels = {
-  "level1": { 
-    title: "Not Motivated",
-    description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
-    image: "./images/level-one.jpg"
-  },
-  "level2": { 
-    title: "Slightly Motivated",
-    description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
-    image: "./images/level-two.jpg"
-  },
-  "level3": { 
-    title: "Moderately Motivated",
-    description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
-    image: "./images/level-three.png" 
-  },
-  "level4": { 
-    title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do! <br/> <br/> Feeling eggs-cited and energized to progress further.", 
-    image: "./images/level-four.jpg"
-  },
-  "level5": { 
-    title: "Extremely Motivated",
-    description: "Hard-Boiled Dynamo!<br/> <br/> Maximum motivation achieved! Channeling unstoppable energy.",
-    image: "./images/level-five.jpg"
-  },
-};
-
 const motivationDropdown = document.querySelector('.motivation-level-dropdown');
 const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
 const motivationTitle = document.querySelector('.motivation-card h4');
+const motivationAdvice = document.querySelector('.motivation-advice');
 
+const motivationLevels = {
+  "level1": { 
+    title: "Not Motivated",
+    description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
+    image: "./images/level-one.jpg",
+    advice: "Prioritize self-care. Uncover and conquer burnout's root causes."
+  },
+  "level2": { 
+    title: "Slightly Motivated",
+    description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
+    image: "./images/level-two.jpg",
+    advice: "Celebrate the small wins and continue to build momentum."
+  },
+  "level3": { 
+    title: "Moderately Motivated",
+    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
+    image: "./images/happyrooster.jpg",
+    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
+  },
+  "level4": { 
+    title: "Highly Motivated",
+    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
+    image: "./images/level-four.jpg",
+    advice: "Embrace challenges and maintain a can-do attitude."
+  },
+  "level5": { 
+    title: "Extremely Motivated",
+    description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
+    image: "./images/level-five.jpg",
+    advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
+  },
+};
 
 const setMotivationLevel = (level) => {
   let motivationLevel = motivationLevels[level];
   if (motivationLevel) {
-    motivationTitle.textContent = motivationLevel.title; 
+    motivationTitle.textContent = motivationLevel.title;
     motivationText.innerHTML = motivationLevel.description;
     motivationImage.src = motivationLevel.image;
     motivationImage.alt = motivationLevel.description;
+    motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
+  } else {
+   
+    motivationTitle.textContent = "How Motivated Are You Feeling to be 'Beak'-tastic!";
+    motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
+    motivationImage.src = "./images/level-two.png";
+    motivationImage.alt = "Motivation Image";
+    motivationAdvice.innerHTML = "";
+    motivationDropdown.value = "";
   }
 };
 
 motivationDropdown.addEventListener('change', (event) => {
   setMotivationLevel(event.target.value);
 });
+
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -313,7 +326,7 @@ const initializeApp = () => {
   activeMinutesPerDay(activity, currentUser, currentDate);
   displayWeeklyStepCount(activity, currentUser, currentDate);
   displayRandomQuote()
-  setMotivationLevel("level1");
+  setMotivationLevel("level");
 
   const formElement = document.getElementById('form').addEventListener('submit', function (event) {
     console.log('Form submitted!')
