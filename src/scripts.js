@@ -283,7 +283,7 @@ const motivationLevels = {
     title: "Extremely Motivated",
     description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
     image: "./images/level-five.jpg",
-    advice: "Use this unstoppable motivation my friend!. Keep pushing your limits and inspiring others."
+    advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
   },
 };
 
