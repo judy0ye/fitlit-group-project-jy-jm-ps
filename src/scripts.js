@@ -22,15 +22,15 @@ import {
   displayAverageSleep,
   displayFluidConsumedToday,
   weeklyHydrationButton,
-  displayHydrationGraphs,
-  hideHydrationGraphs,
+  // displayHydrationGraphs,
+  // hideHydrationGraphs,
   sleepButton,
-  displaySleepGraphs,
+  // displaySleepGraphs,
   displayActivity,
   displayWeeklyStepCount,
   hideChickenImage,
-  showChickenImage,
-  hideSleepGraphs,
+  // showChickenImage,
+  // hideSleepGraphs,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,
@@ -104,67 +104,36 @@ window.addEventListener('load', function () {
   });
 });
 
-const onClickSleep = () => {
+/* ~~~~ Helper Functions ~~~~*/
+const handleOnClicks = (hideChartOne, hideChartTwo, getData, displaySevenDayData, buttonOne, buttonTwo) => {
   hideChickenImage();
-  hideWeeklyHydrationChart();
-  hideWeeklyActivityChart();
-  getWeeklySleep();
-  displaySevenDaySleep();
-  if (hydrationFromCalendarButton.disabled === true) {
-    hydrationFromCalendarButton.classList.remove('disable-button');
-    hydrationFromCalendarButton.disabled = false;
+  hideChartOne();
+  hideChartTwo();
+  getData();
+  displaySevenDayData();
+  if (buttonOne.disabled === true) {
+    buttonOne.classList.remove('disable-button');
+    buttonOne.disabled = false;
   }
-  if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-    oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-    oneWeekActivityDataFromCalendarButton.disabled = false;
-  };
+  if (buttonTwo.disabled === true) {
+    buttonTwo.classList.remove('disable-button');
+    buttonTwo.disabled = false;
+  }
+}
+
+const onClickSleep = () => {
+  handleOnClicks(hideWeeklyHydrationChart, hideWeeklyActivityChart, getWeeklySleep, displaySevenDaySleep, hydrationFromCalendarButton, oneWeekActivityDataFromCalendarButton)
 };
 
 const onClickHydration = () => {
-  hideChickenImage();
-  hideWeeklyActivityChart();
-  hideWeeklySleepChart();
-  getWeeklyHydration();
-  displaySevenDayHydration();
-  if (sleepFromCalendarButton.disabled === true) {
-    sleepFromCalendarButton.classList.remove('disable-button');
-    sleepFromCalendarButton.disabled = false;
-  }
-  if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-    oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-    oneWeekActivityDataFromCalendarButton.disabled = false;
-  };
+  handleOnClicks(hideWeeklyActivityChart, hideWeeklySleepChart, getWeeklyHydration, displaySevenDayHydration, sleepFromCalendarButton, oneWeekActivityDataFromCalendarButton)
 }
 
 const onClickActivity = () => {
-  hideChickenImage();
-  hideWeeklyHydrationChart();
-  hideWeeklySleepChart();
-  displayWeeklyStepCount(activity, currentUser, currentDate);
-  displaySevenDayActivity();
-  if (sleepFromCalendarButton.disabled === true) {
-    sleepFromCalendarButton.classList.remove('disable-button');
-    sleepFromCalendarButton.disabled = false;
-  };
-  if (hydrationFromCalendarButton.disabled === true) {
-    hydrationFromCalendarButton.classList.remove('disable-button');
-    hydrationFromCalendarButton.disabled = false;
-  };
+  handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(currentUser), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
+ 
 };
 
-
-// const onClickSleep = () => {
-//   hideChickenImage();
-//   hideHydrationGraphs();
-//   displaySleepGraphs();
-//   if (hydrationFromCalendarButton.disabled === true) {
-//     hydrationFromCalendarButton.classList.remove('disable-button');
-//     hydrationFromCalendarButton.disabled = false;
-//   }
-// };
-
-weeklyHydrationButton.addEventListener('click', onClickHydration);
-// sleepButton.addEventListener('click', onClickSleep);
 
 const onChangeInputField = () => {
   activateButtons();
@@ -174,50 +143,8 @@ weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepFromCalendarButton.addEventListener('click', onClickSleep);
 hydrationFromCalendarButton.addEventListener('click', onClickHydration);
 oneWeekActivityDataFromCalendarButton.addEventListener('click', onClickActivity)
-
 inputField.addEventListener('change', onChangeInputField);
 
-// dataField.addEventListener('click', function (e) {
-//   if (e.target.classList.contains('sleep-from-calendar-button')) {
-//     hideChickenImage();
-//     getWeeklySleep();
-//     displaySevenDaySleep();
-//     if (hydrationFromCalendarButton.disabled === true) {
-//       hydrationFromCalendarButton.classList.remove('disable-button');
-//       hydrationFromCalendarButton.disabled = false;
-//     }
-//     if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-//       oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-//       oneWeekActivityDataFromCalendarButton.disabled = false;
-//     }
-//   }
-//   if (e.target.classList.contains('hydration-from-calendar-button')) {
-//     hideChickenImage();
-//     getWeeklyHydration();
-//     displaySevenDayHydration();
-//     if (sleepFromCalendarButton.disabled === true) {
-//       sleepFromCalendarButton.classList.remove('disable-button');
-//       sleepFromCalendarButton.disabled = false;
-//     }
-//   if (oneWeekActivityDataFromCalendarButton.disabled === true) {
-//       oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
-//       oneWeekActivityDataFromCalendarButton.disabled = false;
-//     }
-//   }
-//   if (e.target.classList.contains('activity-from-calendar-button')) {
-//     hideChickenImage();
-//     displayWeeklyStepCount(activity, currentUser, currentDate);
-//     displaySevenDayActivity();
-//     if (sleepFromCalendarButton.disabled === true) {
-//       sleepFromCalendarButton.classList.remove('disable-button');
-//       sleepFromCalendarButton.disabled = false;
-//     }
-//     if (hydrationFromCalendarButton.disabled === true) {
-//       hydrationFromCalendarButton.classList.remove('disable-button');
-//       hydrationFromCalendarButton.disabled = false;
-//     }
-//   }
-// });
 
 
 let totalWaterIntake = 0;

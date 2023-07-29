@@ -1,6 +1,6 @@
 /* ~~~~~~~~~~ CHARTS FUNCTIONS ~~~~~~~~~~*/
 
-import { getWeeklyHydration, getWeeklyInfo, getWeeklySleep } from './domUpdates';
+import { getWeeklyHydration, getWeeklySleep, displayWeeklyStepCount } from './domUpdates';
 import { Chart, LineController, LinearScale, PointElement, LineElement } from 'chart.js';
 import { currentUser } from './scripts';
 
@@ -120,8 +120,8 @@ document.querySelector('.sleep-button').addEventListener('click', () => {
 
 
 document.querySelector('.activity-button').addEventListener('click', () => {
-  let activityData = getWeeklyInfo('activity');
-  createActivityChart(activityData);
+  let activityData = displayWeeklyStepCount(currentUser);
+  createActivityChart(activityData, currentUser);
 });
 
 let activityChart;

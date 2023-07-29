@@ -258,12 +258,9 @@ body, html {
 
 /* ~~~~~ BUTTON STYLES ~~~~~ */
 
-.hydration-button.disable-button,
 .sleep-button.disable-button,
-.activity-button.disable-button,
-.sleep-from-calendar-button.disable-button,
-.hydration-from-calendar-button.disable-button,
-.activity-from-calendar-button.disable-button {
+.hydration-button.disable-button,
+.activity-button.disable-button {
   background-color: #EAEAF4;
   cursor:not-allowed;
 }
