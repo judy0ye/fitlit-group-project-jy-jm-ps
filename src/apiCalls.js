@@ -1,10 +1,12 @@
-/* ~~~~~ Fetch Requests ~~~~~*/
+/* ~~~~~ part1.Fetch Requests ~~~~~*/
 
 // const fetchApiData = data => {
 //   return fetch(`https://fitlit-api.herokuapp.com/api/v1/${data}`)
 //     .then(response => response.json())
 //     .catch(error => console.error('Error:', error));
 // }
+
+/* ~~~~~ part2.Fetch Requests ~~~~~*/
 
 const fetchApiData = data => {
   return fetch(`http://localhost:3001/api/v1/${data}`)
