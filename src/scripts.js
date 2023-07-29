@@ -3,6 +3,7 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
+import './images/janjudyparvin.png';
 import './images/level-one.jpg';
 import './images/level-two.jpg';
 import './images/level-three.png';
@@ -246,54 +247,98 @@ function displayNewHydrationEntry(response) {
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
 
-const motivationLevels = {
-  "level1": { 
-    title: "Not Motivated",
-    description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
-    image: "./images/level-one.jpg"
-  },
-  "level2": { 
-    title: "Slightly Motivated",
-    description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
-    image: "./images/level-two.jpg"
-  },
-  "level3": { 
-    title: "Moderately Motivated",
-    description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
-    image: "./images/level-three.png" 
-  },
-  "level4": { 
-    title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do! <br/> <br/> Feeling eggs-cited and energized to progress further.", 
-    image: "./images/level-four.jpg"
-  },
-  "level5": { 
-    title: "Extremely Motivated",
-    description: "Hard-Boiled Dynamo!<br/> <br/> Maximum motivation achieved! Channeling unstoppable energy.",
-    image: "./images/level-five.jpg"
-  },
-};
+// const motivationLevels = {
+//   "level1": { 
+//     title: "Not Motivated",
+//     description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
+//     image: "./images/level-one.jpg"
+//   },
+//   "level2": { 
+//     title: "Slightly Motivated",
+//     description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
+//     image: "./images/level-two.jpg"
+//   },
+//   "level3": { 
+//     title: "Moderately Motivated",
+//     description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
+//     image: "./images/level-three.png" 
+//   },
+//   "level4": { 
+//     title: "Highly Motivated",
+//     description: "Cock-a-doodle Can-Do! <br/> <br/> Feeling eggs-cited and energized to progress further.", 
+//     image: "./images/level-four.jpg"
+//   },
+//   "level5": { 
+//     title: "Extremely Motivated",
+//     description: "Hard-Boiled Dynamo!<br/> <br/> Maximum motivation achieved! Channeling unstoppable energy.",
+//     image: "./images/level-five.jpg"
+//   },
+// };
+
 
 const motivationDropdown = document.querySelector('.motivation-level-dropdown');
 const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
 const motivationTitle = document.querySelector('.motivation-card h4');
+const motivationAdvice = document.querySelector('.motivation-advice');
 
+const motivationLevels = {
+  "level1": { 
+    title: "Not Motivated",
+    description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
+    image: "./images/level-one.jpg",
+    advice: "Take some time for self-care and relaxation. Try to identify the root causes of your burnout and address them gradually."
+  },
+  "level2": { 
+    title: "Slightly Motivated",
+    description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
+    image: "./images/level-two.jpg",
+    advice: "Celebrate the small wins and continue to build momentum. Set achievable goals to keep the motivation going."
+  },
+  "level3": { 
+    title: "Moderately Motivated",
+    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
+    image: "./images/level-three.png",
+    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences and keep pushing forward."
+  },
+  "level4": { 
+    title: "Highly Motivated",
+    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
+    image: "./images/level-four.jpg",
+    advice: "Channel your enthusiasm into tackling more significant tasks. Embrace challenges and maintain a can-do attitude."
+  },
+  "level5": { 
+    title: "Extremely Motivated",
+    description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
+    image: "./images/level-five.jpg",
+    advice: "Use this unstoppable motivation to pursue your biggest goals and dreams. Keep pushing your limits and inspiring others."
+  },
+};
 
 const setMotivationLevel = (level) => {
   let motivationLevel = motivationLevels[level];
   if (motivationLevel) {
-    motivationTitle.textContent = motivationLevel.title; 
+    motivationTitle.textContent = motivationLevel.title;
     motivationText.innerHTML = motivationLevel.description;
     motivationImage.src = motivationLevel.image;
     motivationImage.alt = motivationLevel.description;
+    motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
+  } else {
+   
+    motivationTitle.textContent = "How Motivated Are You Feeling to be 'Beak'-tastic!";
+    motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
+    motivationImage.src = "./images/level-two.png";
+    motivationImage.alt = "Motivation Image";
+    motivationAdvice.innerHTML = "";
+    motivationDropdown.value = "";
   }
 };
 
 motivationDropdown.addEventListener('change', (event) => {
   setMotivationLevel(event.target.value);
 });
+
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -309,7 +354,7 @@ const initializeApp = () => {
   activeMinutesPerDay(activity, currentUser, currentDate);
   displayWeeklyStepCount(activity, currentUser, currentDate);
   displayRandomQuote()
-  setMotivationLevel("level1");
+  setMotivationLevel("level");
 
   const formElement = document.getElementById('form').addEventListener('submit', function (event) {
     console.log('Form submitted!')
