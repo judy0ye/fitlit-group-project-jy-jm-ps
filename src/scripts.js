@@ -3,7 +3,8 @@
 import './css/normalize.css';
 import './css/styles.css';
 import './images/FitChicks_title.png';
-import './images/janjudyparvin.png';
+import './images/lazychicken.png';
+import './images/happyrooster.jpg';
 import './images/level-one.jpg';
 import './images/level-two.jpg';
 import './images/level-three.png';
@@ -247,35 +248,6 @@ function displayNewHydrationEntry(response) {
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
 
-// const motivationLevels = {
-//   "level1": { 
-//     title: "Not Motivated",
-//     description: "Fried!<br/> <br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
-//     image: "./images/level-one.jpg"
-//   },
-//   "level2": { 
-//     title: "Slightly Motivated",
-//     description: "Fluttering Feathers.<br/> <br/> Starting to feel some motivation, with small bursts of enthusiasm.",
-//     image: "./images/level-two.jpg"
-//   },
-//   "level3": { 
-//     title: "Moderately Motivated",
-//     description: "Cluck and Strut!<br/> <br/> Stepping up to the challenge.", 
-//     image: "./images/level-three.png" 
-//   },
-//   "level4": { 
-//     title: "Highly Motivated",
-//     description: "Cock-a-doodle Can-Do! <br/> <br/> Feeling eggs-cited and energized to progress further.", 
-//     image: "./images/level-four.jpg"
-//   },
-//   "level5": { 
-//     title: "Extremely Motivated",
-//     description: "Hard-Boiled Dynamo!<br/> <br/> Maximum motivation achieved! Channeling unstoppable energy.",
-//     image: "./images/level-five.jpg"
-//   },
-// };
-
-
 const motivationDropdown = document.querySelector('.motivation-level-dropdown');
 const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
@@ -287,7 +259,7 @@ const motivationLevels = {
     title: "Not Motivated",
     description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
     image: "./images/level-one.jpg",
-    advice: "Take some time for self-care and relaxation. Try to identify the root causes of your burnout and address them gradually."
+    advice: "Prioritize self-care. Uncover and conquer burnout's root causes."
   },
   "level2": { 
     title: "Slightly Motivated",
@@ -298,7 +270,7 @@ const motivationLevels = {
   "level3": { 
     title: "Moderately Motivated",
     description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
-    image: "./images/level-three.png",
+    image: "./images/happyrooster.jpg",
     advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences and keep pushing forward."
   },
   "level4": { 
