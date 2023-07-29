@@ -50,6 +50,7 @@ function createHydrationChart(hydrationData) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: true, 
       scales: {
         x: {
           display: true,
@@ -61,6 +62,7 @@ function createHydrationChart(hydrationData) {
     },
   });
 };
+
 
 let sleepChart;
 
@@ -101,6 +103,7 @@ function createSleepChart(sleepData) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: true, 
       scales: {
         x: {
           display: true,
@@ -159,6 +162,7 @@ function createActivityChart(activityData, currentUser) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: true, 
       scales: {
         x: {
           display: true,
