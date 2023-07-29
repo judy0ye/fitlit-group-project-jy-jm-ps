@@ -152,8 +152,8 @@ body, html {
 .motivation-image {
   display: block;
   margin: auto;
-  width: 80px;   
-  height: 80px;   
+  width: 90px;   
+  height: 50px;   
   object-fit: contain;
 }
 
@@ -175,6 +175,8 @@ body, html {
   justify-content: center; 
   text-align: center; 
   height: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .motivation-card h4 {
@@ -185,6 +187,10 @@ body, html {
   display: block;
   margin: auto;
   max-width: 100%; 
+}
+
+.motivation-advice .motivation-text {
+  margin-top: 20px;
 }
 
 

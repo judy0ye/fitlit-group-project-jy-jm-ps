@@ -265,25 +265,25 @@ const motivationLevels = {
     title: "Slightly Motivated",
     description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
     image: "./images/level-two.jpg",
-    advice: "Celebrate the small wins and continue to build momentum. Set achievable goals to keep the motivation going."
+    advice: "Celebrate the small wins and continue to build momentum."
   },
   "level3": { 
     title: "Moderately Motivated",
     description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
     image: "./images/happyrooster.jpg",
-    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences and keep pushing forward."
+    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
   },
   "level4": { 
     title: "Highly Motivated",
     description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
     image: "./images/level-four.jpg",
-    advice: "Channel your enthusiasm into tackling more significant tasks. Embrace challenges and maintain a can-do attitude."
+    advice: "Embrace challenges and maintain a can-do attitude."
   },
   "level5": { 
     title: "Extremely Motivated",
     description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
     image: "./images/level-five.jpg",
-    advice: "Use this unstoppable motivation to pursue your biggest goals and dreams. Keep pushing your limits and inspiring others."
+    advice: "Use this unstoppable motivation my friend!. Keep pushing your limits and inspiring others."
   },
 };
 
