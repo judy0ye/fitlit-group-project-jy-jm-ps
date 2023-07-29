@@ -296,6 +296,8 @@ function displayWeeklyStepCount(currentUser) {
     }
   });
   createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
+
+  return activityEntries
 }
 
 function displayActivity(activityData, currentUser, currentDate) {

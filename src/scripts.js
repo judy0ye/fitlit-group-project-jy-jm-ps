@@ -130,7 +130,7 @@ const onClickHydration = () => {
 }
 
 const onClickActivity = () => {
-  handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(activity, currentUser, currentDate), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
+  handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(currentUser), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
  
 };
 
