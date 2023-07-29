@@ -150,45 +150,6 @@ const hideWeeklyHydrationChart = () => {
   oneWeekHydrationChart.classList.add('hidden');
 };
 
-
-
-const getWeeklySleep = () => {
-  const sleepHourEntries = getWeeklyInfo(sleep)
-  let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
-    return acc + entry.hoursSlept;
-  }, 0);
-
-  let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
-    return acc + entry.sleepQuality;
-  }, 0);
-
-  if (sleepHourEntries.length === 0) {
-    return 0;
-  }
-
-  let avgHoursSlept = Math.round(hoursSlept / sleepHourEntries.length);
-  let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
-
-  sleepHourEntries.forEach((entry) => {
-    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
-  });
-  oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
-  oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
-
-  createSleepChart(sleepHourEntries); // create the chart with the fetched data
-};
-
-const displaySevenDaySleep = () => {
-  oneWeekSleepFromCalendar.classList.remove('hidden');
-  oneWeekSleepChart.classList.remove('hidden')
-  sleepFromCalendarButton.disabled = true;
-  sleepFromCalendarButton.classList.add('disable-button');
-};
-
-const hideWeeklySleepChart = () => {
-  oneWeekSleepChart.classList.add('hidden');
-};
-
 const activateButtons = () => {
   sleepFromCalendarButton.disabled = false;
   sleepFromCalendarButton.classList.remove('disable-button');
@@ -285,6 +246,39 @@ function displayAverageSleep(sleep, currentUser) {
   ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
 }
 
+const getWeeklySleep = () => {
+  const sleepHourEntries = getWeeklyInfo(sleep)
+  let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
+    return acc + entry.hoursSlept;
+  }, 0);
+
+  let sleepQuality = sleepHourEntries.reduce((acc, entry) => {
+    return acc + entry.sleepQuality;
+  }, 0);
+
+  if (sleepHourEntries.length === 0) {
+    return 0;
+  }
+
+  let avgHoursSlept = Math.round(hoursSlept / sleepHourEntries.length);
+  let avgSleepQuality = Math.round(sleepQuality / sleepHourEntries.length);
+
+  sleepHourEntries.forEach((entry) => {
+    oneWeekSleepFromCalendar.innerHTML += `<p>On ${entry.date}, you slept ${entry.hoursSlept} hours and your sleep quality was rated: ${entry.sleepQuality}</p>`;
+  });
+  oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
+  oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
+
+  createSleepChart(sleepHourEntries); // create the chart with the fetched data
+};
+
+const displaySevenDaySleep = () => {
+  displaySevenDayData(oneWeekSleepFromCalendar, oneWeekSleepChart, sleepFromCalendarButton, 'disable-button')
+};
+
+const hideWeeklySleepChart = () => {
+  oneWeekSleepChart.classList.add('hidden');
+};
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
 function displayWeeklyStepCount(activityData, currentUser, currentDate) {
