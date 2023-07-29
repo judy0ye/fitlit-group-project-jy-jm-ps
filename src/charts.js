@@ -7,16 +7,16 @@ import { currentUser } from './scripts';
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 
-document.querySelector('.hydration-button').addEventListener('click', () => {
+// document.querySelector('.hydration-button').addEventListener('click', () => {
 
-  let hydrationData = getWeeklyHydration();
-  createHydrationChart(hydrationData);
-});
+//   let hydrationData = getWeeklyHydration();
+//   createHydrationChart(hydrationData);
+// });
 
 let hydrationChart;
 
 document.querySelector('.hydration-button').addEventListener('click', () => {
-  let hydrationData = getWeeklyHydration();
+  hydrationData = getWeeklyHydration();
   createHydrationChart(hydrationData);
 });
 
@@ -124,6 +124,8 @@ document.querySelector('.sleep-button').addEventListener('click', () => {
   createSleepChart(sleepData);
 });
 
+
+
 document.querySelector('.activity-button').addEventListener('click', () => {
   let activityData = getWeeklyInfo('activity');
   createActivityChart(activityData);
@@ -156,6 +158,7 @@ function createActivityChart(activityData, currentUser) {
       datasets: [
         {
           label: 'Steps',
+          note: "blue for goal met, orange for goal not met",
           data: data,
           backgroundColor: backgroundColors,
           borderColor: backgroundColors.map((color) => color.replace('0.6', '1')),

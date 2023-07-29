@@ -123,9 +123,9 @@ const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML = ''; 
 
   waterEntries.forEach((entry) => {
-    oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank ${entry.numOunces} ounces of water</p></p>`;
+    oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank <strong> ${entry.numOunces} </strong> ounces of water</p></p>`;
   });
-  oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
+  oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was <strong> ${avg} <strong> ounces</p>`;
 
   createHydrationChart(waterEntries); // create the chart with the fetched data
 };
