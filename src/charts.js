@@ -6,13 +6,6 @@ import { currentUser } from './scripts';
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
-
-// document.querySelector('.hydration-button').addEventListener('click', () => {
-
-//   let hydrationData = getWeeklyHydration();
-//   createHydrationChart(hydrationData);
-// });
-
 let hydrationChart;
 
 document.querySelector('.hydration-button').addEventListener('click', () => {
