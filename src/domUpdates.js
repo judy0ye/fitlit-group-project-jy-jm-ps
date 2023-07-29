@@ -79,6 +79,8 @@ function displayRandomQuote() {
 };
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
+
+/* ~~~~ Helper FUNCTIONS ~~~~*/
 const getWeeklyInfo = (wellnessInfo) => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
