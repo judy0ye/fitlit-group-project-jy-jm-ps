@@ -58,17 +58,17 @@ const chickenImage = document.querySelector('.graphs-bg-img');
 const inputField = document.getElementById('start-date-input');
 const dataField = document.querySelector('.data-view');
 const sleepFromCalendarButton = document.querySelector(
-  '.sleep-from-calendar-button'
+  '.sleep-button'
 );
 const oneWeekHydrationFromCalendar = document.querySelector(
   '.weekly-hydration-from-calendar-data'
 );
 const hydrationFromCalendarButton = document.querySelector(
-  '.hydration-from-calendar-button'
+  '.hydration-button'
 );
 const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton = document.querySelector(
-  '.activity-from-calendar-button'
+  '.activity-button'
 );
 const form = document.querySelector('#form');
 const formInput = document.querySelector('.water-intake')
@@ -142,7 +142,7 @@ const getWeeklyHydration = () => {
   }, 0);
 
   if (waterEntries.length === 0) {
-    return 0;
+    return waterEntries;
   }
 
   let avg = Math.round(numOz / waterEntries.length);
@@ -155,6 +155,8 @@ const getWeeklyHydration = () => {
   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was ${avg} ounces</p>`;
 
   createHydrationChart(waterEntries); // create the chart with the fetched data
+
+  return waterEntries
 };
 
 const displaySevenDayHydration = () => {
@@ -255,7 +257,7 @@ const getWeeklySleep = () => {
   }, 0);
 
   if (sleepHourEntries.length === 0) {
-    return 0;
+    return sleepHourEntries;
   }
 
   let avgHoursSlept = Math.round(hoursSlept / sleepHourEntries.length);
@@ -268,6 +270,8 @@ const getWeeklySleep = () => {
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
 
   createSleepChart(sleepHourEntries); // create the chart with the fetched data
+
+  return sleepHourEntries
 };
 
 const displaySevenDaySleep = () => {
@@ -279,7 +283,7 @@ const hideWeeklySleepChart = () => {
 };
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
-function displayWeeklyStepCount(activityData, currentUser, currentDate) {
+function displayWeeklyStepCount(currentUser) {
   const activityEntries = getWeeklyInfo(activity)
 
   activityEntries.forEach((entry) => {
@@ -292,6 +296,8 @@ function displayWeeklyStepCount(activityData, currentUser, currentDate) {
     }
   });
   createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
+
+  return activityEntries
 }
 
 function displayActivity(activityData, currentUser, currentDate) {

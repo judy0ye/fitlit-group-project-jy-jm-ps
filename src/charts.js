@@ -1,17 +1,10 @@
 /* ~~~~~~~~~~ CHARTS FUNCTIONS ~~~~~~~~~~*/
 
-import { getWeeklyHydration, getWeeklyInfo, getWeeklySleep } from './domUpdates';
+import { getWeeklyHydration, getWeeklySleep, displayWeeklyStepCount } from './domUpdates';
 import { Chart, LineController, LinearScale, PointElement, LineElement } from 'chart.js';
 import { currentUser } from './scripts';
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
-
-
-document.querySelector('.hydration-button').addEventListener('click', () => {
-
-  let hydrationData = getWeeklyHydration();
-  createHydrationChart(hydrationData);
-});
 
 let hydrationChart;
 
@@ -125,8 +118,8 @@ document.querySelector('.sleep-button').addEventListener('click', () => {
 });
 
 document.querySelector('.activity-button').addEventListener('click', () => {
-  let activityData = getWeeklyInfo('activity');
-  createActivityChart(activityData);
+  let activityData = displayWeeklyStepCount(currentUser);
+  createActivityChart(activityData, currentUser);
 });
 
 let activityChart;
@@ -156,6 +149,7 @@ function createActivityChart(activityData, currentUser) {
       datasets: [
         {
           label: 'Steps',
+          note: "blue for goal met, orange for goal not met",
           data: data,
           backgroundColor: backgroundColors,
           borderColor: backgroundColors.map((color) => color.replace('0.6', '1')),
