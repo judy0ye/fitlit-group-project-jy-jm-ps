@@ -108,6 +108,15 @@ const getWeeklyInfo = (wellnessInfo) => {
   return entries
 };
 
+const displaySevenDayData= (displayData, chartData, button, buttonClass) => {
+  displayData.classList.remove('hidden');
+  chartData.classList.remove('hidden')
+  button.disabled = true;
+  button.classList.add(buttonClass);
+};
+
+/* ~~~~~ Display Hydration Data Functions ~~~~~*/
+
 const getWeeklyHydration = () => {
   const waterEntries = getWeeklyInfo(hydration);
   console.log('About to call createHydrationChart...');
@@ -133,27 +142,15 @@ const getWeeklyHydration = () => {
 };
 
 const displaySevenDayHydration = () => {
-  oneWeekHydrationFromCalendar.classList.remove('hidden');
-  oneWeekHydrationChart.classList.remove('hidden')
-  hydrationFromCalendarButton.disabled = true;
-  hydrationFromCalendarButton.classList.add('disable-button');
+  displaySevenDayData(oneWeekHydrationChart, oneWeekHydrationChart, hydrationFromCalendarButton, 'disable-button')
+
 };
 
 const hideWeeklyHydrationChart = () => {
   oneWeekHydrationChart.classList.add('hidden');
 };
 
-const displaySevenDayActivity = () => {
-  weeklyActivityData.classList.remove('hidden');
-  oneWeekActivityChart.classList.remove('hidden')
-  oneWeekActivityDataFromCalendarButton.disabled = true;
-  oneWeekActivityDataFromCalendarButton.classList.add('disable-button');
 
-};
-
-const hideWeeklyActivityChart = () => {
-  oneWeekActivityChart.classList.add('hidden');
-};
 
 const getWeeklySleep = () => {
   const sleepHourEntries = getWeeklyInfo(sleep)
@@ -323,6 +320,13 @@ function displayActivity(activityData, currentUser, currentDate) {
   )} minutes today!`;
 }
 
+const displaySevenDayActivity = () => {
+  displaySevenDayData(weeklyActivityData, oneWeekActivityChart, oneWeekActivityDataFromCalendarButton, 'disable-button' )
+};
+
+const hideWeeklyActivityChart = () => {
+  oneWeekActivityChart.classList.add('hidden');
+};
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
