@@ -217,13 +217,8 @@ inputField.addEventListener('change', onChangeInputField);
 //   }
 // });
 
-// function displayNewHydrationEntry(response) {
 
-//   console.log('Response from server:', response);
-
-//   const hydrationInfo = document.getElementById('hydrationInfo');
-//   hydrationInfo.innerHTML += `<p>Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!</p>`;
-// };
+let totalWaterIntake = 0;
 
 function displayNewHydrationEntry(response) {
   console.log('Response from server:', response);
@@ -235,15 +230,16 @@ function displayNewHydrationEntry(response) {
     hydrationInfo.removeChild(existingMessage);
   }
 
+  totalWaterIntake += parseInt(response.numOunces);
+
   const newMessage = document.createElement('p');
 
   if (response.numOunces < 100) {
-    newMessage.textContent = `You've consumed ${response.numOunces} ounces of water. Remember to drink more water to stay hydrated! 🍒 Daily recommendations: ~3.7L (125 oz) for men, ~2.7L (91 oz) for women, from all sources.`;
+    newMessage.innerHTML = `Oops! You've consumed <strong> ${response.numOunces} </strong>ounces of water. 🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
   } else {
-    newMessage.textContent = `Your submission of ${response.numOunces} ounces consumed has been recorded. Great job on your hydration efforts!`;
-  };
+    newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
+  }
 
-  // Append the new message to the container
   hydrationInfo.appendChild(newMessage);
 }
 
