@@ -79,8 +79,24 @@ function displayRandomQuote() {
 };
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
+const hideChickenImage = () => {
+  chickenImage.classList.remove('graphs-bg-img');
+};
 
-/* ~~~~ Helper FUNCTIONS ~~~~*/
+// const showChickenImage = () => {
+//   chickenImage.classList.add('graphs-bg-img');
+// };
+
+const activateButtons = () => {
+  sleepFromCalendarButton.disabled = false;
+  sleepFromCalendarButton.classList.remove('disable-button');
+  hydrationFromCalendarButton.disabled = false;
+  hydrationFromCalendarButton.classList.remove('disable-button');
+  oneWeekActivityDataFromCalendarButton.disabled = false;
+  oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
+};
+
+/* ~~~~ Helper Functions ~~~~*/
 const getWeeklyInfo = (wellnessInfo) => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
@@ -143,20 +159,10 @@ const getWeeklyHydration = () => {
 
 const displaySevenDayHydration = () => {
   displaySevenDayData(oneWeekHydrationChart, oneWeekHydrationChart, hydrationFromCalendarButton, 'disable-button')
-
 };
 
 const hideWeeklyHydrationChart = () => {
   oneWeekHydrationChart.classList.add('hidden');
-};
-
-const activateButtons = () => {
-  sleepFromCalendarButton.disabled = false;
-  sleepFromCalendarButton.classList.remove('disable-button');
-  hydrationFromCalendarButton.disabled = false;
-  hydrationFromCalendarButton.classList.remove('disable-button');
-  oneWeekActivityDataFromCalendarButton.disabled = false;
-  oneWeekActivityDataFromCalendarButton.classList.remove('disable-button');
 };
 
 /* ~~~~~ Display Random User Data Functions ~~~~~*/
@@ -185,15 +191,6 @@ const displayRandomUser = (activity, currentUser) => {
   <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
 };
 
-
-const hideChickenImage = () => {
-  chickenImage.classList.remove('graphs-bg-img');
-};
-
-const showChickenImage = () => {
-  chickenImage.classList.add('graphs-bg-img');
-};
-
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(
     hydration,
@@ -204,16 +201,17 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
 }
 
-function displayHydrationGraphs() {
-  oneWeekHydrationChart.classList.remove('hidden');
-  weeklyHydrationButton.disabled = true;
-  weeklyHydrationButton.classList.add('disable-button');
-}
-function hideHydrationGraphs() {
-  oneWeekHydrationChart.classList.add('hidden');
-  weeklyHydrationButton.disabled = false;
-  weeklyHydrationButton.classList.remove('disable-button');
-}
+// function displayHydrationGraphs() {
+//   oneWeekHydrationChart.classList.remove('hidden');
+//   weeklyHydrationButton.disabled = true;
+//   weeklyHydrationButton.classList.add('disable-button');
+// }
+
+// function hideHydrationGraphs() {
+//   oneWeekHydrationChart.classList.add('hidden');
+//   weeklyHydrationButton.disabled = false;
+//   weeklyHydrationButton.classList.remove('disable-button');
+// }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
@@ -226,17 +224,17 @@ function displayDailySleep(sleep, currentUser, currentDate) {
   }
 }
 
-function displaySleepGraphs() {
-  oneWeekSleepChart.classList.remove('hidden');
-  sleepButton.disabled = true;
-  sleepButton.classList.add('disable-button');
-}
+// function displaySleepGraphs() {
+//   oneWeekSleepChart.classList.remove('hidden');
+//   sleepButton.disabled = true;
+//   sleepButton.classList.add('disable-button');
+// }
 
-function hideSleepGraphs() {
-  oneWeekSleepChart.classList.add('hidden');
-  sleepButton.disabled = false;
-  sleepButton.classList.remove('disable-button');
-}
+// function hideSleepGraphs() {
+//   oneWeekSleepChart.classList.add('hidden');
+//   sleepButton.disabled = false;
+//   sleepButton.classList.remove('disable-button');
+// }
 
 function displayAverageSleep(sleep, currentUser) {
   averageSleep.innerText += `You average ${getAvgSleep(
@@ -329,18 +327,18 @@ export {
   displayAverageSleep,
   displayFluidConsumedToday,
   weeklyHydrationButton,
-  displayHydrationGraphs,
-  hideHydrationGraphs,
+  // displayHydrationGraphs,
+  // hideHydrationGraphs,
   sleepButton,
   displayWeeklyStepCount,
-  hideSleepGraphs,
+  // hideSleepGraphs,
   hideChickenImage,
-  showChickenImage,
+  // showChickenImage,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,
   dataField,
-  displaySleepGraphs,
+  // displaySleepGraphs,
   sleepFromCalendarButton,
   activateButtons,
   getWeeklyHydration,
