@@ -9,7 +9,7 @@ Chart.register(LineController, LinearScale, PointElement, LineElement);
 let hydrationChart;
 
 document.querySelector('.hydration-button').addEventListener('click', () => {
-  hydrationData = getWeeklyHydration();
+  let hydrationData = getWeeklyHydration();
   createHydrationChart(hydrationData);
 });
 
