@@ -235,11 +235,11 @@ motivationDropdown.addEventListener('change', (event) => {
 const initializeApp = () => {
   currentUser = getRandomUser(users);
 
-  // Find current dates for sleep and activity within the desired date range
+  // using below to find current dates for sleep and activity within the desired date range
   sleepCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
   activityCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
 
-  // Use the original findCurrentDate for hydration data
+  // using the original findCurrentDate for Hydration data
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
 
   console.log('BEFORE POST. Hydration current date:', currentDate);
