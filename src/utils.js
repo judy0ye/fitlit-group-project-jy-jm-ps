@@ -43,7 +43,7 @@ function getAvgFluidForAllTime(hydrationData, id) {
     return (acc += user.numOunces);
   }, 0);
   return Math.round(avgHydration / hydrationEntries.length);
-}
+};
 
 function getFluidDrankForSpecificDay(hydrationData, id, date) {
   if (!hydrationData || !id || !date) {

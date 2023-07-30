@@ -145,6 +145,67 @@ body, html {
   width: 100%;
   height: 100%;
 }
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#activityChart {
+  width: 90%;
+  height: 90%;
+}
+
+.activity-legend {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+}
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#activityChart {
+  width: 90%;
+  height: 90%;
+}
+
+.activity-legend {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.activity-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 20px;
+}
+.activity-legend {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.activity-legend-color {
+  width: 20px;
+  height: 20px;
+}
+
+.activity-legend-goal-met {
+  background-color: rgba(0, 0, 255, 0.6);
+}
+
+.activity-legend-goal-not-met {
+  background-color: rgba(255, 165, 0, 0.6);
+}
 
 
 /* ~~~~~ MOTIVATION CARD STYLES ~~~~~ */
