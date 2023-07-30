@@ -27,7 +27,6 @@ import {
   displayWeeklyStepCount,
   hideChickenImage,
   // showChickenImage,
-  // hideSleepGraphs,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,
@@ -40,8 +39,6 @@ import {
   oneWeekActivityDataFromCalendarButton,
   displaySevenDayActivity,
   displayRandomQuote,
-  form,
-  hydrationInfo,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
   hideWeeklySleepChart
@@ -54,6 +51,7 @@ import {
   stepsPerDay,
   activeMinutesPerDay,
   findCurrentDate,
+  findCurrentDateInRange
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -81,7 +79,7 @@ Chart.register(
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-let users, hydration, sleep, activity, currentUser, currentDate;
+let users, hydration, sleep, activity, currentUser, currentDate, activityCurrentDate, sleepCurrentDate;
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
@@ -133,7 +131,6 @@ const onClickActivity = () => {
   handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(currentUser), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
  
 };
-
 
 const onChangeInputField = () => {
   activateButtons();
@@ -237,7 +234,18 @@ motivationDropdown.addEventListener('change', (event) => {
 
 const initializeApp = () => {
   currentUser = getRandomUser(users);
+
+  // Find current dates for sleep and activity within the desired date range
+  sleepCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
+  activityCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
+
+  // Use the original findCurrentDate for hydration data
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
+
+  console.log('BEFORE POST. Hydration current date:', currentDate);
+  console.log('Sleep current date:', sleepCurrentDate);
+  console.log('Activity current date:', activityCurrentDate);
+
   displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
   displayActivity(activity, currentUser, currentDate);
@@ -246,7 +254,7 @@ const initializeApp = () => {
   stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, currentDate);
   displayWeeklyStepCount(activity, currentUser, currentDate);
-  displayRandomQuote()
+  displayRandomQuote();
   setMotivationLevel("level");
 
   const formElement = document.getElementById('form').addEventListener('submit', function (event) {
@@ -271,10 +279,57 @@ const initializeApp = () => {
       .catch(err => console.error(`Error at: ${err}`));
 
     console.log('Data sent in the request:', postUserInput);
+    
+    console.log('AFTER POST. Hydration current', postUserInput);
 
     event.target.reset();
   });
 };
+
+
+
+// original function
+
+// const initializeApp = () => {
+//   currentUser = getRandomUser(users);
+//   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
+//   displayRandomUser(activity, currentUser);
+//   displayFluidConsumedToday(hydration, currentUser, currentDate);
+//   displayActivity(activity, currentUser, currentDate);
+//   displayDailySleep(sleep, currentUser, currentDate);
+//   displayAverageSleep(sleep, currentUser, currentDate);
+//   stepsPerDay(activity, currentUser, currentDate);
+//   activeMinutesPerDay(activity, currentUser, currentDate);
+//   displayWeeklyStepCount(activity, currentUser, currentDate);
+//   displayRandomQuote()
+//   setMotivationLevel("level");
+
+//   const formElement = document.getElementById('form').addEventListener('submit', function (event) {
+//     console.log('Form submitted!')
+//     event.preventDefault();
+
+//     const formData = new FormData(event.target);
+
+//     const postUserInput = {
+//       userID: currentUser.id,
+//       date: "2023/07/02",
+//       numOunces: formData.get('waterIntake')
+//     };
+
+//     console.log('Form submitted!');
+
+//     postSavedHydration(postUserInput)
+//       .then(json => {
+//         displayNewHydrationEntry(json);
+//         console.log(json);
+//       })
+//       .catch(err => console.error(`Error at: ${err}`));
+
+//     console.log('Data sent in the request:', postUserInput);
+
+//     event.target.reset();
+//   });
+// };
 
 export {
   currentDate,
@@ -282,5 +337,7 @@ export {
   users,
   hydration,
   currentUser,
-  sleep
+  sleep,
+  sleepCurrentDate,
+  activityCurrentDate
 };
