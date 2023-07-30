@@ -111,7 +111,6 @@ function createSleepChart(sleepData) {
 };
 
 
-
 document.querySelector('.activity-button').addEventListener('click', () => {
   let activityData = displayWeeklyStepCount(currentUser);
   createActivityChart(activityData, currentUser);
