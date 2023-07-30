@@ -184,18 +184,28 @@ const displayRandomUser = (activity, currentUser) => {
     currentUser
   );
 
-  personalGreeting.innerHTML = `<article><h3>Welcome</h3>${currentUser.name}</article>`;
+  personalGreeting.innerHTML = `<article><em><h3>Welcome</h3></em><em>${currentUser.name}</em></article>`;
+  personalData.innerHTML = `<article><em><h4>Name:</h4></em>${currentUser.name};
 
-  personalData.innerHTML = `<article><h3>Name:</h3>${currentUser.name}
-  <h3>Address: </h3>${currentUser.address}
-  <h3>E-mail: </h3>${currentUser.email}
-  <h3>Stride Length: </h3>${currentUser.strideLength}
+  <em><h4>Address:</h4></em>${currentUser.address}
+  <em><h4>E-mail:</h4></em>${currentUser.email}
+  <em><h4>Stride Length:</h4></em>${currentUser.strideLength}
   </article>`;
 
-  personalGoal.innerHTML = `<article><h3>Daily Step Goal:</h3>${currentUser.dailyStepGoal}
-  <h3>Miles Walked Today:</h3>${currentUserMilesWalked}
-  <h3>All User's Average Step Goal:</h3>${allUserStepGoalAvg}</article>`;
+  personalGoal.innerHTML = `<article><em><h4>Daily Step Goal:</h4></em><strong>${currentUser.dailyStepGoal}</strong><em><h4>Miles Walked Today:</h4></em><strong>${currentUserMilesWalked}</strong><em><h4>All User's Average Step Goal:</h4></em><strong>${allUserStepGoalAvg}</strong></article>`;
 };
+  // //personalGreeting.innerHTML = `<article><h3>Welcome</h3><strong>${currentUser.name}</strong></article>`;
+  // personalGreeting.innerHTML = `<article><em><h3>Welcome</h3></em><em>${currentUser.name}</em></article>`;
+
+  // personalData.innerHTML = `<article><h4>Name:</h4>${currentUser.name}
+  // <h4>Address: </h4>${currentUser.address}
+  // <h4>E-mail: </h4>${currentUser.email}
+  // <h4>Stride Length: </h4>${currentUser.strideLength}
+  // </article>`;
+
+  // personalGoal.innerHTML = `<article><h4>Daily Step Goal:</h4><strong>${currentUser.dailyStepGoal}</strong><h4>
+  // Miles Walked Today:</h4><strong>${currentUserMilesWalked}</strong>
+  // <h4>All User's Average Step Goal:</h4><strong>${allUserStepGoalAvg}</strong></article>`;
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(

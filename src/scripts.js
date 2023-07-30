@@ -158,7 +158,7 @@ function displayNewHydrationEntry(response) {
   totalWaterIntake += parseInt(response.numOunces);
 
   const newMessage = document.createElement('p');
-  newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts! 🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
+  newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
 
   hydrationInfo.appendChild(newMessage);
 };
@@ -288,7 +288,7 @@ const initializeApp = () => {
       })
       .catch(err => console.error(`Error at: ${err}`));
 
-    console.log('Data sent in the request:', postUserInput);
+    console.log('Data sent in the POST request:', postUserInput);
     
     console.log('AFTER POST. Hydration current', postUserInput);
 
