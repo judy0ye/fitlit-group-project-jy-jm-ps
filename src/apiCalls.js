@@ -41,28 +41,28 @@ const postSavedHydration = data => {
     });
 };
 
-fetchApiData('hydration')
-  .then(data => {
-    console.log('Hydration data:', data);
-  })
-  .catch(error => {
-    console.error('Error fetching hydration data:', error);
-  });
+// fetchApiData('hydration')
+//   .then(data => {
+//     console.log('Hydration data:', data);
+//   })
+//   .catch(error => {
+//     console.error('Error fetching hydration data:', error);
+//   });
 
-// Example data to be sent in the POST request
-const hydrationData = {
-  userID: 1,
-  date: '2023/07/02',
-  numOunces: 16,
-  name: 'FitChicks',
-  chick1: 'Jan',
-  chick2: 'Judy',
-  chick3: 'Parvin',
-  all: 'Looking Goooood!'
-};
+// // Example data to be sent in the POST request
+// const hydrationData = {
+//   userID: 1,
+//   date: '2023/07/02',
+//   numOunces: 16,
+//   name: 'FitChicks',
+//   chick1: 'Jan',
+//   chick2: 'Judy',
+//   chick3: 'Parvin',
+//   all: 'Looking Goooood!'
+// };
 
-// Send POST request to save hydration data
-postSavedHydration(hydrationData);
+// // Send POST request to save hydration data
+// postSavedHydration(hydrationData);
 
 export {
   fetchApiData,

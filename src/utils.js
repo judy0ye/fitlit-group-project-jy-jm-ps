@@ -153,12 +153,22 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
 /* ~~~~~ Activity ~~~~~*/
 
 const stepsPerDay = (activityData, currentUser, currentDate) => {
+
+  console.log('stepsPerDay called with activityData:', activityData);
+  console.log('stepsPerDay called with currentUser:', currentUser);
+  console.log('stepsPerDay currentDate:', currentDate);
+
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+  console.log('Activity entries:', activityEntries);
+
   const dailySteps = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
+
+  console.log('Daily steps entry:', dailySteps);
+
   if(!dailySteps){
     return 0;
   }
@@ -166,12 +176,25 @@ const stepsPerDay = (activityData, currentUser, currentDate) => {
 };
 
 const activeMinutesPerDay = (activityData, currentUser, currentDate) => {
+
+  console.log('activeMinutesPerDay called with activityData:', activityData);
+  console.log('sactiveMinutesPerDay called with currentUser:', currentUser);
+  console.log('activeMinutesPerDay currentDate:', currentDate);
+  
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+
+  console.log('Activity entries:', activityEntries);
+
+
   const dailyMinutes = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
+
+  console.log('Daily minutes entry:', dailyMinutes);
+
+
   if(!dailyMinutes){
     return 0;
   }
@@ -179,12 +202,23 @@ const activeMinutesPerDay = (activityData, currentUser, currentDate) => {
 };
 
 const milesPerDay = (activityData, currentUser, currentDate) => {
+
+  console.log('milesPerDay called with activityData:', activityData);
+  console.log('milesPerDay called with currentUser:', currentUser);
+  console.log('milesPerDay currentDate:', currentDate);
+
+
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+
   const dailyActivity = activityEntries.find((entry) => {
     return entry.date === currentDate;
   });
+  
+    
+  console.log('Daily activity entry:', dailyActivity);
+
   return calculateMilesUserWalked(dailyActivity, currentUser);
 };
 

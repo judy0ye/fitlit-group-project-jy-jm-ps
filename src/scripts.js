@@ -98,6 +98,9 @@ window.addEventListener('load', function () {
     sleep = data[2].sleepData;
     activity = data[3].activityData;
     initializeApp();
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
   });
 });
 

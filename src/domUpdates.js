@@ -298,9 +298,17 @@ function displayWeeklyStepCount(currentUser) {
   createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
 
   return activityEntries
-}
+};
+
 
 function displayActivity(activityData, currentUser, currentDate) {
+
+  //console.log('displayActivity called with activityData, currentUser, currentDate:', activityData, currentUser, currentDate);
+
+  console.log('displayActivity called with activityData:', activityData);
+  console.log('displayActivity called with currentUser:', currentUser);
+  console.log('displayActivity currentDate:', currentDate);
+
   dailySteps.innerText = `You took ${stepsPerDay(
     activityData,
     currentUser,
@@ -316,6 +324,10 @@ function displayActivity(activityData, currentUser, currentDate) {
     currentUser,
     currentDate
   )} minutes today!`;
+
+  console.log('Steps today:', stepsPerDay(activityData, currentUser, currentDate));
+  console.log('Miles today:', milesPerDay(activityData, currentUser, currentDate));
+  console.log('Minutes today:', activeMinutesPerDay(activityData, currentUser, currentDate));
 }
 
 const displaySevenDayActivity = () => {
