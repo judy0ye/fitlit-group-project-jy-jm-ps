@@ -248,12 +248,22 @@ const initializeApp = () => {
 
   displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
-  displayActivity(activity, currentUser, currentDate);
-  displayDailySleep(sleep, currentUser, currentDate);
-  displayAverageSleep(sleep, currentUser, currentDate);
-  stepsPerDay(activity, currentUser, currentDate);
-  activeMinutesPerDay(activity, currentUser, currentDate);
-  displayWeeklyStepCount(activity, currentUser, currentDate);
+
+  displayDailySleep(sleep, currentUser, sleepCurrentDate);
+  displayAverageSleep(sleep, currentUser, sleepCurrentDate);
+  // displayDailySleep(sleep, currentUser, currentDate);
+  // displayAverageSleep(sleep, currentUser, currentDate);
+ // displayActivity(activity, currentUser, currentDate);
+
+  displayActivity(activity, currentUser, activityCurrentDate);
+  stepsPerDay(activity, currentUser, currentDate); 
+  activeMinutesPerDay(activity, currentUser, activityCurrentDate);
+  displayWeeklyStepCount(activity, currentUser, activityCurrentDate);
+  // displayActivity(activity, currentUser, currentDate);
+  //stepsPerDay(activity, currentUser, currentDate);
+ // activeMinutesPerDay(activity, currentUser, currentDate);
+  //displayWeeklyStepCount(activity, currentUser, currentDate);
+ 
   displayRandomQuote();
   setMotivationLevel("level");
 
