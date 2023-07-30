@@ -143,7 +143,6 @@ oneWeekActivityDataFromCalendarButton.addEventListener('click', onClickActivity)
 inputField.addEventListener('change', onChangeInputField);
 
 
-
 let totalWaterIntake = 0;
 
 function displayNewHydrationEntry(response) {
@@ -159,15 +158,10 @@ function displayNewHydrationEntry(response) {
   totalWaterIntake += parseInt(response.numOunces);
 
   const newMessage = document.createElement('p');
-
-  if (response.numOunces < 100) {
-    newMessage.innerHTML = `Oops! You've consumed <strong> ${response.numOunces} </strong> ounces of water. 🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
-  } else {
-    newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
-  }
+  newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts! 🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
 
   hydrationInfo.appendChild(newMessage);
-}
+};
 
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
