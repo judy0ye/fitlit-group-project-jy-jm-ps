@@ -218,7 +218,7 @@ const setMotivationLevel = (level) => {
    
     motivationTitle.textContent = "How Motivated Are You Feeling to be 'Beak'-tastic!";
     motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
-    motivationImage.src = "./images/level-two.png";
+    motivationImage.src = "./images/level-three.png";
     motivationImage.alt = "Motivation Image";
     motivationAdvice.innerHTML = "";
     motivationDropdown.value = "";
