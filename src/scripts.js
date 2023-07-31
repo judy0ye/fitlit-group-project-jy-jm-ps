@@ -169,6 +169,7 @@ const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
 const motivationTitle = document.querySelector('.motivation-card h2');
 const motivationAdvice = document.querySelector('.motivation-advice');
+// const motivationHeading = document.querySelector('.starting-header')
 
 const motivationLevels = {
   "level1": { 
@@ -209,7 +210,6 @@ const setMotivationLevel = (level) => {
     motivationTitle.textContent = motivationLevel.title;
     motivationText.innerHTML = motivationLevel.description;
     motivationImage.src = motivationLevel.image;
-    // motivationImage.alt = motivationLevel.alt;
     motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
   } else {

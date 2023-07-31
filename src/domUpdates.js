@@ -35,7 +35,6 @@ import {
 
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
-const personalGreeting = document.querySelector('.personal-greeting');
 const userName = document.querySelector('.user-name');
 const hydrationInfo = document.querySelector('.hydration');
 const dailySleep = document.querySelector('#dailySleep');
@@ -199,8 +198,8 @@ const displayRandomUser = (activity, currentUser) => {
   <h3>Stride Length: </h3>
   <p>${currentUser.strideLength}</p>`;
 
-  personalGoal.innerHTML = `
-  <h2>Daily Step Goal:</h2>
+  personalGoal.innerHTML += `
+  <h3>Your Step Goal</h3>
   <p>${currentUser.dailyStepGoal}</p>
   <h3>Miles Walked Today:</h3>
   <p>${currentUserMilesWalked}</p>

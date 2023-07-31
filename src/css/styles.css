@@ -23,7 +23,9 @@ p,
 .data-view,
 .goals,
 .motivation,
-user-data {
+.user-data,
+.motivation-card h2,
+.motivation-card .container {
   text-align: center;
   margin-top: 10px; 
 }
@@ -145,6 +147,7 @@ user-data {
 }
 
 .user-data {
+  padding: .25em;
   grid-area: user-data;
 }
 
@@ -337,6 +340,11 @@ user-data {
   .greeting {
     justify-content: center;
     align-items: center;
+  }
+
+  .welcome {
+    font-size: 1.25rem;
+    margin: 20px 0 0 0;
   }
 
 }
