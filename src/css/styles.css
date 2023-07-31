@@ -7,7 +7,6 @@ body, html {
   align-items: center;
 };
 
-
 h2,
 .welcome {
   font-weight:600;
@@ -112,6 +111,7 @@ p,
 .activity {
   grid-area: activity;
   text-align: center;
+  overflow: scroll visible;
 }
 
 
@@ -136,12 +136,14 @@ p,
   padding: .25em;
   grid-area: hydration;
   text-align: center;
-}
+  overflow: scroll visible;
+};
 
 .sleep {
   padding: .25em;
   grid-area: sleep;
   text-align: center;
+  overflow: scroll visible;
 }
 
 .data-view {
@@ -171,11 +173,13 @@ p,
 .motivation {
   padding: .25em;
   grid-area: motivation;
+  overflow: scroll visible;
 }
 
 .user-data {
   padding: .25em;
   grid-area: user-data;
+  overflow: scroll visible;
 }
 
 .rounded-corner {
