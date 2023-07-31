@@ -2,15 +2,13 @@
 
 import './css/normalize.css';
 import './css/styles.css';
-import './images/FitChicks_title.png';
-import './images/lazychicken.png';
-import './images/happyrooster.jpg';
-import './images/level-one.jpg';
-import './images/level-two.jpg';
-import './images/level-three.png';
-import './images/level-four.jpg';
-import './images/level-five.jpg';
-import './images/FitChicks_scene_lg.png';
+import './images/FitChicks-Title-500.png';
+import './images/default.jpg';
+import './images/L1a.jpg';
+import './images/L2.jpg';
+import './images/L3.jpg';
+import './images/L4.jpg';
+import './images/L5.jpg';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
 import './images/sleep.png';
@@ -169,38 +167,38 @@ function displayNewHydrationEntry(response) {
 const motivationDropdown = document.querySelector('.motivation-level-dropdown');
 const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
-const motivationTitle = document.querySelector('.motivation-card h4');
+const motivationTitle = document.querySelector('.motivation-card h2');
 const motivationAdvice = document.querySelector('.motivation-advice');
 
 const motivationLevels = {
   "level1": { 
     title: "Not Motivated",
-    description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
-    image: "./images/level-one.jpg",
-    advice: "Prioritize self-care. Uncover and conquer burnout's root causes."
+    description: "Fried - feeling overwhelmed", 
+    image: "./images/L1a.jpg",
+    advice: "Prioritize self-care. Spend some time outside."
   },
   "level2": { 
     title: "Slightly Motivated",
     description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
-    image: "./images/level-two.jpg",
+    image: "./images/L2.jpg",
     advice: "Celebrate the small wins and continue to build momentum."
   },
   "level3": { 
     title: "Moderately Motivated",
     description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
-    image: "./images/happyrooster.jpg",
+    image: "./images/L3.jpg",
     advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
   },
   "level4": { 
     title: "Highly Motivated",
     description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
-    image: "./images/level-four.jpg",
+    image: "./images/L4.jpg",
     advice: "Embrace challenges and maintain a can-do attitude."
   },
   "level5": { 
     title: "Extremely Motivated",
     description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
-    image: "./images/level-five.jpg",
+    image: "./images/L5.jpg",
     advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
   },
 };
@@ -211,15 +209,15 @@ const setMotivationLevel = (level) => {
     motivationTitle.textContent = motivationLevel.title;
     motivationText.innerHTML = motivationLevel.description;
     motivationImage.src = motivationLevel.image;
-    motivationImage.alt = motivationLevel.description;
+    // motivationImage.alt = motivationLevel.alt;
     motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
   } else {
    
-    motivationTitle.textContent = "How Motivated Are You Feeling to be 'Beak'-tastic!";
+    motivationTitle.textContent = "Get Motivated!";
     motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
-    motivationImage.src = "./images/level-two.png";
-    motivationImage.alt = "Motivation Image";
+    motivationImage.src = "./images/default.jpg";
+    motivationImage.alt = "";
     motivationAdvice.innerHTML = "";
     motivationDropdown.value = "";
   }

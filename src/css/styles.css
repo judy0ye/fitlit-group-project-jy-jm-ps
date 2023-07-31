@@ -4,14 +4,28 @@ body, html {
   padding: 0;
 }
 
+h2,
+.welcome {
+  font-weight:600;
+  font-size: 24px;
+}
 
-.header-quote {
-  font-family: 'Comic Neue', cursive;
-  font-size: 24px; 
-  color: #333;
-  /* color: #0e0202;  */
+h2,
+p,
+.motivation-level-dropdown
+ {
+  font-family: 'Poppins', sans-serif;
+}
+
+.activity,
+.hydration,
+.sleep,
+.data-view,
+.goals,
+.motivation,
+user-data {
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 10px; 
 }
 
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
@@ -28,7 +42,6 @@ body, html {
   row-gap: 20px;
    }
 
-
 .data-view-grid {
   display: grid;
   height: 100vh;
@@ -39,15 +52,9 @@ body, html {
   grid-template-areas:
     "activity hydration sleep data-view"
     "activity hydration sleep graphs"
-    "user-data goals community graphs";
+    "goals motivation user-data graphs";
   gap: 1% 1%
 }
-
-/* .user-data,
-.activity {
-  padding: .5em;
-  margin-left: 1em;
-} */
 
 .logo {
   grid-area: logo;
@@ -55,25 +62,45 @@ body, html {
   background-color: #25C1E3;
 }
 
+.header-quote {
+  color: black;
+  background-color: #C2FAFF;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  max-width: 70%;
+  margin: 10px 0 0 4%;
+  border: 3px solid white;
+}
+
 .greeting {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   grid-area: greeting;
-  /* font-size: 18px; */
   background-color: #25C1E3;
   padding-top: 20px;
   font-size: 24px;
   padding: 20px;
-  color: #333; 
+  color: #333;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.user-data {
-  font-family: Arial, sans-serif;
+.personal-greeting {
+  color: black;
+  background-color: #C2FAFF;
+  padding: 0 0.75rem;
+  font-size: 1.25rem;
+  min-width: 70%;
+  margin: 30px 4% 0 8%;
+  border: 3px solid white;
 }
 
+.greeting img {
+  margin-top: 10px;
+}
+
+.welcome {
+  font-size: 2rem;
+  margin: 20px 0 0 0;
+}
 
 .activity {
   grid-area: activity;
@@ -89,6 +116,11 @@ body, html {
   grid-area: sleep;
 }
 
+.data-view {
+  padding: .25em;
+  grid-area: data-view;
+}
+
 .graphs {
   position: relative;
   grid-area: graphs;
@@ -102,23 +134,18 @@ body, html {
   background-size: cover;
 }
 
-.user-data {
-  grid-area: user-data;
-}
-
 .goals {
   padding: .25em;
   grid-area: goals;
 }
 
-.community {
+.motivation {
   padding: .25em;
-  grid-area: community;
+  grid-area: motivation;
 }
 
-.data-view {
-  padding: .25em;
-  grid-area: data-view;
+.user-data {
+  grid-area: user-data;
 }
 
 .rounded-corner {
@@ -138,6 +165,12 @@ body, html {
   overflow: hidden;
 }
 
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .chart-container canvas {
   position: absolute;
   top: 0;
@@ -145,11 +178,6 @@ body, html {
   width: 100%;
   height: 100%;
 }
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 #activityChart {
   width: 90%;
@@ -161,23 +189,7 @@ body, html {
   justify-content: center;
   width: 100%;
   padding-top: 10px;
-}
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#activityChart {
-  width: 90%;
-  height: 90%;
-}
-
-.activity-legend {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 .activity-legend-item {
@@ -185,13 +197,6 @@ body, html {
   align-items: center;
   gap: 10px;
   margin: 0 20px;
-}
-.activity-legend {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-top: 10px;
-  margin-bottom: 10px;
 }
 
 .activity-legend-color {
@@ -207,11 +212,9 @@ body, html {
   background-color: rgba(255, 165, 0, 0.6);
 }
 
-
 /* ~~~~~ MOTIVATION CARD STYLES ~~~~~ */
 
 .motivation-image {
-  /* display: block; */
   margin: auto;
   width: 100px;   
   height: 100px;   
@@ -226,7 +229,7 @@ body, html {
   border-radius: 4px;
   border: 1px solid #ccc;
   margin-top: 10px;
-  font-family: 'Comic Neue', cursive;
+  /* font-family: 'Comic Neue', cursive; */
 }
 
 .motivation-card .container {
@@ -240,7 +243,7 @@ body, html {
   padding-top: 10px;
 }
 
-.motivation-card h4 {
+.motivation-card h2 {
   text-align: center;
   margin-top: 10px; 
 }
@@ -254,7 +257,6 @@ body, html {
 .motivation-advice .motivation-text {
   margin-top: 20px;
 }
-
 
 /* ~~~~~ BUTTON STYLES ~~~~~ */
 
@@ -326,7 +328,7 @@ body, html {
     grid-template-areas:
       "activity hydration sleep"
       "data-view graphs graphs"
-      "user-data goals community";
+      "goals motivation user-data ";
     gap: 1% 1%
   }
   .logo img {
