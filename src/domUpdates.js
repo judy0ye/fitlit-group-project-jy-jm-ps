@@ -27,10 +27,10 @@ import {
 } from './scripts';
 import quotes from './data/quotes';
 
-import { 
-  createHydrationChart, 
-  createSleepChart, 
-  createActivityChart 
+import {
+  createHydrationChart,
+  createSleepChart,
+  createActivityChart
 } from './charts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
@@ -128,7 +128,7 @@ const getWeeklyInfo = (wellnessInfo) => {
   return entries
 };
 
-const displaySevenDayData= (displayData, chartData, button, buttonClass) => {
+const displaySevenDayData = (displayData, chartData, button, buttonClass) => {
   displayData.classList.remove('hidden');
   chartData.classList.remove('hidden')
   button.disabled = true;
@@ -151,7 +151,7 @@ const getWeeklyHydration = () => {
 
   let avg = Math.round(numOz / waterEntries.length);
 
-  oneWeekHydrationFromCalendar.innerHTML = ''; 
+  oneWeekHydrationFromCalendar.innerHTML = '';
 
   waterEntries.forEach((entry) => {
     oneWeekHydrationFromCalendar.innerHTML += `<p>On ${entry.date} you drank <strong> ${entry.numOunces} </strong> ounces of water</p></p>`;
@@ -194,18 +194,6 @@ const displayRandomUser = (activity, currentUser) => {
 
   personalGoal.innerHTML = `<article><em><h4>Daily Step Goal:</h4></em><strong>${currentUser.dailyStepGoal}</strong><em><h4>Miles Walked Today:</h4></em><strong>${currentUserMilesWalked}</strong><em><h4>All User's Average Step Goal:</h4></em><strong>${allUserStepGoalAvg}</strong></article>`;
 };
-  // //personalGreeting.innerHTML = `<article><h3>Welcome</h3><strong>${currentUser.name}</strong></article>`;
-  // personalGreeting.innerHTML = `<article><em><h3>Welcome</h3></em><em>${currentUser.name}</em></article>`;
-
-  // personalData.innerHTML = `<article><h4>Name:</h4>${currentUser.name}
-  // <h4>Address: </h4>${currentUser.address}
-  // <h4>E-mail: </h4>${currentUser.email}
-  // <h4>Stride Length: </h4>${currentUser.strideLength}
-  // </article>`;
-
-  // personalGoal.innerHTML = `<article><h4>Daily Step Goal:</h4><strong>${currentUser.dailyStepGoal}</strong><h4>
-  // Miles Walked Today:</h4><strong>${currentUserMilesWalked}</strong>
-  // <h4>All User's Average Step Goal:</h4><strong>${allUserStepGoalAvg}</strong></article>`;
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   const fluidToday = getFluidDrankForSpecificDay(
@@ -213,10 +201,11 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
+  console.log("fluidToday:", fluidToday, currentDate)
 
-  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces yesterday</p>`;
+  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces today!</p>`;
+
 }
-
 // function displayHydrationGraphs() {
 //   oneWeekHydrationChart.classList.remove('hidden');
 //   weeklyHydrationButton.disabled = true;
@@ -231,22 +220,14 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
-//NOTYE: changed currentDate to sleepCurrentDate
 function displayDailySleep(sleep, currentUser, sleepCurrentDate) {
 
   console.log('displayDailySleep sleepCurrentDate:', sleepCurrentDate);
 
   const currentDayEntry = getHoursByDay(sleep, currentUser.id, sleepCurrentDate);
 
-  if (currentDayEntry) {
-    dailySleep.innerHTML = `You slept <strong>${currentDayEntry} </strong> hours last night.`;
-  } else {
-    dailySleep.innerHTML = 'You need to get more sleep!';
-  }
-  
-  console.log('ZZZZZ currentDayEntry:', currentDayEntry);
-
-}
+  dailySleep.innerHTML = `You slept <strong>${currentDayEntry} </strong> hours last night.`;
+};
 
 // function displaySleepGraphs() {
 //   oneWeekSleepChart.classList.remove('hidden');
@@ -318,26 +299,22 @@ function displayWeeklyStepCount(currentUser) {
       weeklyActivityData.innerHTML += `<p>On ${entry.date}, you walked ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
       </p> `;
     }
+
   });
   createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
 
   return activityEntries
 };
 
-// NOTE: replaced the currentDate with activityCurrentDate
-
 function displayActivity(activityData, currentUser, activityCurrentDate) {
 
-  //console.log('displayActivity called with activityData, currentUser, currentDate:', activityData, currentUser, currentDate);
-
-  console.log('displayActivity called with activityData:', activityData);
-  console.log('displayActivity called with currentUser:', currentUser);
+  // console.log('displayActivity called with activityData:', activityData);
+  // console.log('displayActivity called with currentUser:', currentUser);
   console.log('displayActivity currentDate:', activityCurrentDate);
 
   dailySteps.innerHTML = `You took <strong>${stepsPerDay(
     activityData,
     currentUser,
-   // currentDate
     activityCurrentDate
   )}</strong> steps today!`;
   dailyMiles.innerHTML = `You have walked <strong>${milesPerDay(
@@ -354,12 +331,10 @@ function displayActivity(activityData, currentUser, activityCurrentDate) {
   console.log('Steps today:', stepsPerDay(activityData, currentUser, activityCurrentDate));
   console.log('Miles today:', milesPerDay(activityData, currentUser, activityCurrentDate));
   console.log('Minutes today:', activeMinutesPerDay(activityData, currentUser, activityCurrentDate));
-}
-
-
+};
 
 const displaySevenDayActivity = () => {
-  displaySevenDayData(weeklyActivityData, oneWeekActivityChart, oneWeekActivityDataFromCalendarButton, 'disable-button' )
+  displaySevenDayData(weeklyActivityData, oneWeekActivityChart, oneWeekActivityDataFromCalendarButton, 'disable-button')
 };
 
 const hideWeeklyActivityChart = () => {
@@ -395,5 +370,5 @@ export {
   hydrationInfo,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
-  hideWeeklySleepChart 
+  hideWeeklySleepChart
 };

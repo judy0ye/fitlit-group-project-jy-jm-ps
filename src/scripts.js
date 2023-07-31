@@ -97,9 +97,9 @@ window.addEventListener('load', function () {
     activity = data[3].activityData;
     initializeApp();
   })
-  .catch((error) => {
-    console.error('Error fetching data:', error);
-  });
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
 });
 
 /* ~~~~ Helper Functions ~~~~*/
@@ -129,7 +129,7 @@ const onClickHydration = () => {
 
 const onClickActivity = () => {
   handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(currentUser), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
- 
+
 };
 
 const onChangeInputField = () => {
@@ -173,31 +173,31 @@ const motivationTitle = document.querySelector('.motivation-card h4');
 const motivationAdvice = document.querySelector('.motivation-advice');
 
 const motivationLevels = {
-  "level1": { 
+  "level1": {
     title: "Not Motivated",
-    description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck", 
+    description: "Fried!<br/><br/>Feeling completely unmotivated and burned out - lacking energy to even cluck",
     image: "./images/level-one.jpg",
     advice: "Prioritize self-care. Uncover and conquer burnout's root causes."
   },
-  "level2": { 
+  "level2": {
     title: "Slightly Motivated",
     description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
     image: "./images/level-two.jpg",
     advice: "Celebrate the small wins and continue to build momentum."
   },
-  "level3": { 
+  "level3": {
     title: "Moderately Motivated",
-    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
+    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.",
     image: "./images/happyrooster.jpg",
     advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
   },
-  "level4": { 
+  "level4": {
     title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
+    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.",
     image: "./images/level-four.jpg",
     advice: "Embrace challenges and maintain a can-do attitude."
   },
-  "level5": { 
+  "level5": {
     title: "Extremely Motivated",
     description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
     image: "./images/level-five.jpg",
@@ -215,7 +215,7 @@ const setMotivationLevel = (level) => {
     motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
   } else {
-   
+
     motivationTitle.textContent = "How Motivated Are You Feeling to be 'Beak'-tastic!";
     motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
     motivationImage.src = "./images/level-three.png";
@@ -234,36 +234,22 @@ motivationDropdown.addEventListener('change', (event) => {
 
 const initializeApp = () => {
   currentUser = getRandomUser(users);
-
-  // using below to find current dates for sleep and activity within the desired date range
   sleepCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
   activityCurrentDate = findCurrentDateInRange(currentUser.id, sleep, activity);
-
-  // using the original findCurrentDate for Hydration data
   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
 
-  console.log('BEFORE POST. Hydration current date:', currentDate);
-  console.log('Sleep current date:', sleepCurrentDate);
-  console.log('Activity current date:', activityCurrentDate);
+  // console.log('BEFORE POST. Hydration current date:', currentDate);
+  // console.log('Sleep current date:', sleepCurrentDate);
+  // console.log('Activity current date:', activityCurrentDate);
 
   displayRandomUser(activity, currentUser);
   displayFluidConsumedToday(hydration, currentUser, currentDate);
-
   displayDailySleep(sleep, currentUser, sleepCurrentDate);
   displayAverageSleep(sleep, currentUser, sleepCurrentDate);
-  // displayDailySleep(sleep, currentUser, currentDate);
-  // displayAverageSleep(sleep, currentUser, currentDate);
- // displayActivity(activity, currentUser, currentDate);
-
   displayActivity(activity, currentUser, activityCurrentDate);
-  stepsPerDay(activity, currentUser, currentDate); 
+  stepsPerDay(activity, currentUser, currentDate);
   activeMinutesPerDay(activity, currentUser, activityCurrentDate);
   displayWeeklyStepCount(activity, currentUser, activityCurrentDate);
-  // displayActivity(activity, currentUser, currentDate);
-  //stepsPerDay(activity, currentUser, currentDate);
- // activeMinutesPerDay(activity, currentUser, currentDate);
-  //displayWeeklyStepCount(activity, currentUser, currentDate);
- 
   displayRandomQuote();
   setMotivationLevel("level");
 
@@ -288,58 +274,12 @@ const initializeApp = () => {
       })
       .catch(err => console.error(`Error at: ${err}`));
 
-    console.log('Data sent in the POST request:', postUserInput);
-    
-    console.log('AFTER POST. Hydration current', postUserInput);
+    // console.log('Data sent in the POST request:', postUserInput);
+    // console.log('AFTER POST. Hydration current', currentDate);
 
     event.target.reset();
   });
 };
-
-
-
-// original function
-
-// const initializeApp = () => {
-//   currentUser = getRandomUser(users);
-//   currentDate = findCurrentDate(currentUser.id, hydration, sleep, activity);
-//   displayRandomUser(activity, currentUser);
-//   displayFluidConsumedToday(hydration, currentUser, currentDate);
-//   displayActivity(activity, currentUser, currentDate);
-//   displayDailySleep(sleep, currentUser, currentDate);
-//   displayAverageSleep(sleep, currentUser, currentDate);
-//   stepsPerDay(activity, currentUser, currentDate);
-//   activeMinutesPerDay(activity, currentUser, currentDate);
-//   displayWeeklyStepCount(activity, currentUser, currentDate);
-//   displayRandomQuote()
-//   setMotivationLevel("level");
-
-//   const formElement = document.getElementById('form').addEventListener('submit', function (event) {
-//     console.log('Form submitted!')
-//     event.preventDefault();
-
-//     const formData = new FormData(event.target);
-
-//     const postUserInput = {
-//       userID: currentUser.id,
-//       date: "2023/07/02",
-//       numOunces: formData.get('waterIntake')
-//     };
-
-//     console.log('Form submitted!');
-
-//     postSavedHydration(postUserInput)
-//       .then(json => {
-//         displayNewHydrationEntry(json);
-//         console.log(json);
-//       })
-//       .catch(err => console.error(`Error at: ${err}`));
-
-//     console.log('Data sent in the request:', postUserInput);
-
-//     event.target.reset();
-//   });
-// };
 
 export {
   currentDate,
