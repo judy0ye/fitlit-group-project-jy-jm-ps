@@ -39,7 +39,8 @@ import {
   displayRandomQuote,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
-  hideWeeklySleepChart
+  hideWeeklySleepChart,
+  addHydration
 } from './domUpdates';
 
 import {
@@ -146,19 +147,9 @@ let totalWaterIntake = 0;
 function displayNewHydrationEntry(response) {
   console.log('Response from server:', response);
 
-  const hydrationInfo = document.getElementById('hydrationInfo');
-
-  const existingMessage = hydrationInfo.querySelector('p');
-  if (existingMessage) {
-    hydrationInfo.removeChild(existingMessage);
-  }
-
   totalWaterIntake += parseInt(response.numOunces);
 
-  const newMessage = document.createElement('p');
-  newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
-
-  hydrationInfo.appendChild(newMessage);
+  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
 };
 
 

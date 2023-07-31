@@ -70,6 +70,7 @@ const oneWeekActivityDataFromCalendarButton =
 const form = document.querySelector('#form');
 const formInput = document.querySelector('.water-intake');
 const quote = document.querySelector('#headerQuote');
+const addHydration = document.querySelector('.recorded-ounces')
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
@@ -397,4 +398,5 @@ export {
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
+  addHydration
 };
