@@ -2,20 +2,34 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
 
+.greeting {
+  font-family: 'Comic Neue', cursive;
+  font-size: 34px; 
+  color: #0e0202; 
+  text-align: center;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); */
+};
+
+.personal-greeting em {
+  padding: 90px;
+  font-size: smaller;
+}
 
 .header-quote {
   font-family: 'Comic Neue', cursive;
   font-size: 24px; 
   color: #333;
-  /* color: #0e0202;  */
+  color: #0e0202; 
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); */
 }
 
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
-
 .grid-layout {
   display: grid;
   height: 100vh;
@@ -27,7 +41,6 @@ body, html {
     "data-view-grid data-view-grid";
   row-gap: 20px;
    }
-
 
 .data-view-grid {
   display: grid;
@@ -70,6 +83,14 @@ body, html {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* .activity h2,
+.hydration h2,
+.sleep h2,
+.hidden h2 {
+  text-align: center;
+} */
+
+
 .user-data {
   font-family: Arial, sans-serif;
 }
@@ -77,16 +98,37 @@ body, html {
 
 .activity {
   grid-area: activity;
+  text-align: center;
+}
+
+
+.hydration form {
+  display: flex;
+  flex-direction: column;
+}
+
+.hydration label {
+  margin-bottom: 5px;
+}
+
+.hydration input[type="number"] {
+  margin-bottom: 10px;
+}
+
+.hydration input[type="submit"] {
+  margin-top: 10px;
 }
 
 .hydration {
   padding: .25em;
   grid-area: hydration;
+  text-align: center;
 }
 
 .sleep {
   padding: .25em;
   grid-area: sleep;
+  text-align: center;
 }
 
 .graphs {
@@ -104,21 +146,25 @@ body, html {
 
 .user-data {
   grid-area: user-data;
+  text-align: center;
 }
 
 .goals {
   padding: .25em;
   grid-area: goals;
+  text-align: center;
 }
 
 .community {
   padding: .25em;
   grid-area: community;
+  text-align: center;
 }
 
 .data-view {
   padding: .25em;
   grid-area: data-view;
+  text-align: center;
 }
 
 .rounded-corner {
@@ -211,7 +257,6 @@ body, html {
 /* ~~~~~ MOTIVATION CARD STYLES ~~~~~ */
 
 .motivation-image {
-  /* display: block; */
   margin: auto;
   width: 100px;   
   height: 100px;   

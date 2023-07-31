@@ -2,7 +2,6 @@
 
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
-// import { currentUser } from './scripts';
 
 dayjs.extend(calendar);
 
@@ -132,6 +131,35 @@ function findLastEntry(userID, data) {
   return lastDate
 }
 
+/* ~~~~~ NOTE: findCurrentDateInRange function will be responsible for finding the current date within the specified date range for sleep and activity data. ~~~~~*/
+
+function findCurrentDateInRange(userID, sleepData, activityData) {
+  const validStartDate = '2023/03/24';
+  const validEndDate = '2023/07/01';
+
+  const filteredSleep = sleepData.filter((entry) => {
+    const date = entry.date;
+    return date >= validStartDate && date <= validEndDate && entry.userID === userID;
+  });
+
+  const filteredActivity = activityData.filter((entry) => {
+    const date = entry.date;
+    return date >= validStartDate && date <= validEndDate && entry.userID === userID;
+  });
+
+  let dateChoices = [];
+  const lastSleepEntry = findLastEntry(userID, filteredSleep);
+  const lastActivityEntry = findLastEntry(userID, filteredActivity);
+
+  dateChoices.push(lastSleepEntry, lastActivityEntry);
+  dateChoices.sort();
+  let currentDate = dateChoices.slice(-1)[0];
+  // console.log('DATE', currentDate);
+  return currentDate;
+};
+
+
+
 function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   let dateChoices = [];
   const lastHydrationEntry = findLastEntry(userID, hydrationData);
@@ -141,7 +169,7 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   dateChoices.push(lastHydrationEntry, lastSleepEntry, lastActivityEntry);
   dateChoices.sort();
   let currentDate = dateChoices.slice(-1)[0];
-  console.log('DATE', currentDate);
+  // console.log('DATE', currentDate);
   return currentDate;
 }
 
@@ -152,39 +180,73 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
 
 /* ~~~~~ Activity ~~~~~*/
 
-const stepsPerDay = (activityData, currentUser, currentDate) => {
+const stepsPerDay = (activityData, currentUser, activityCurrentDate) => {
+
+  // console.log('stepsPerDay called with activityData:', activityData);
+  // console.log('stepsPerDay called with currentUser:', currentUser);
+  // console.log('stepsPerDay currentDate:', activityCurrentDate);
+
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+  // console.log('Activity entries:', activityEntries);
+
   const dailySteps = activityEntries.find((entry) => {
-    return entry.date === currentDate;
+    return entry.date === activityCurrentDate;
   });
+
+  // console.log('Daily steps entry:', dailySteps);
+
   if(!dailySteps){
     return 0;
   }
   return dailySteps.numSteps;
 };
 
-const activeMinutesPerDay = (activityData, currentUser, currentDate) => {
+const activeMinutesPerDay = (activityData, currentUser, activityCurrentDate) => {
+
+  // console.log('activeMinutesPerDay called with activityData:', activityData);
+  // console.log('sactiveMinutesPerDay called with currentUser:', currentUser);
+  // console.log('activeMinutesPerDay currentDate:', activityCurrentDate);
+  
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+
+  // console.log('Activity entries:', activityEntries);
+
+
   const dailyMinutes = activityEntries.find((entry) => {
-    return entry.date === currentDate;
+    return entry.date === activityCurrentDate;
   });
+
+  // console.log('Daily minutes entry:', dailyMinutes);
+
+
   if(!dailyMinutes){
     return 0;
   }
   return dailyMinutes.minutesActive;
 };
 
-const milesPerDay = (activityData, currentUser, currentDate) => {
+const milesPerDay = (activityData, currentUser, activityCurrentDate) => {
+
+  // console.log('milesPerDay called with activityData:', activityData);
+  // console.log('milesPerDay called with currentUser:', currentUser);
+  // console.log('milesPerDay currentDate:', activityCurrentDate);
+
+
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
+
   const dailyActivity = activityEntries.find((entry) => {
-    return entry.date === currentDate;
+    return entry.date === activityCurrentDate;
   });
+  
+    
+  // console.log('Daily activity entry:', dailyActivity);
+
   return calculateMilesUserWalked(dailyActivity, currentUser);
 };
 
@@ -228,5 +290,6 @@ export {
   findCurrentDate,
   calculateMilesUserWalked,
   milesPerDay,
-  getAvgFluidForAllTime
+  getAvgFluidForAllTime,
+  findCurrentDateInRange
 };

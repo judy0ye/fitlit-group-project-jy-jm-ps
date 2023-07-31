@@ -41,6 +41,9 @@ const postSavedHydration = data => {
     });
 };
 
+
+// just an example code that demonstrates how to use these functions by fetching hydration data using fetchApiData and sending a POST request with hydration data using postSavedHydration.
+
 fetchApiData('hydration')
   .then(data => {
     console.log('Hydration data:', data);
