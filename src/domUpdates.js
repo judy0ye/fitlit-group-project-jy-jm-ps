@@ -220,8 +220,17 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces yesterday!</p>
   <p>How many ounces will you drink today? </p>
   <p>Record them in the field below:</p>`;
-
 }
+
+let totalWaterIntake = 0;
+
+function displayNewHydrationEntry(response) {
+  console.log('Response from server:', response);
+
+  totalWaterIntake += parseInt(response.numOunces);
+
+  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
+};
 // function displayHydrationGraphs() {
 //   oneWeekHydrationChart.classList.remove('hidden');
 //   weeklyHydrationButton.disabled = true;
@@ -398,5 +407,6 @@ export {
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
-  addHydration
+  // addHydration,
+  displayNewHydrationEntry
 };

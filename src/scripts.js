@@ -40,7 +40,8 @@ import {
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
-  addHydration
+  // addHydration,
+  displayNewHydrationEntry
 } from './domUpdates';
 
 import {
@@ -142,15 +143,15 @@ oneWeekActivityDataFromCalendarButton.addEventListener('click', onClickActivity)
 inputField.addEventListener('change', onChangeInputField);
 
 
-let totalWaterIntake = 0;
+// let totalWaterIntake = 0;
 
-function displayNewHydrationEntry(response) {
-  console.log('Response from server:', response);
+// function displayNewHydrationEntry(response) {
+//   console.log('Response from server:', response);
 
-  totalWaterIntake += parseInt(response.numOunces);
+//   totalWaterIntake += parseInt(response.numOunces);
 
-  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
-};
+//   addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
+// };
 
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
