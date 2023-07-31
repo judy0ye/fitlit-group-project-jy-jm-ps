@@ -30,23 +30,23 @@ import quotes from './data/quotes';
 import {
   createHydrationChart,
   createSleepChart,
-  createActivityChart
+  createActivityChart,
 } from './charts';
 
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
-const personalGreeting = document.querySelector('.greeting');
+const userName = document.querySelector('.user-name');
 const hydrationInfo = document.querySelector('.hydration');
-let dailySleep = document.querySelector('#dailySleep');
-let weeklySleep = document.querySelector('#weeklySleepHours');
-let averageSleep = document.querySelector('#averageSleep');
+const dailySleep = document.querySelector('#dailySleep');
+const weeklySleep = document.querySelector('#weeklySleepHours');
+const averageSleep = document.querySelector('#averageSleep');
 const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 const weeklyActivityData = document.querySelector(
   '.weekly-activity-from-calendar-data'
 );
-const oneWeekActivityChart = document.querySelector('.weekly-activity-data')
+const oneWeekActivityChart = document.querySelector('.weekly-activity-data');
 const dailySteps = document.querySelector('.activity-daily-steps');
 const dailyMinutes = document.querySelector('.activity-daily-minutes');
 const dailyMiles = document.querySelector('.activity-daily-miles');
@@ -59,26 +59,21 @@ const sleepButton = document.querySelector('.sleep-button');
 const chickenImage = document.querySelector('.graphs-bg-img');
 const inputField = document.getElementById('start-date-input');
 const dataField = document.querySelector('.data-view');
-const sleepFromCalendarButton = document.querySelector(
-  '.sleep-button'
-);
+const sleepFromCalendarButton = document.querySelector('.sleep-button');
 const oneWeekHydrationFromCalendar = document.querySelector(
   '.weekly-hydration-from-calendar-data'
 );
-const hydrationFromCalendarButton = document.querySelector(
-  '.hydration-button'
-);
+const hydrationFromCalendarButton = document.querySelector('.hydration-button');
 const dailyActivityData = document.querySelector('.activity');
-const oneWeekActivityDataFromCalendarButton = document.querySelector(
-  '.activity-button'
-);
+const oneWeekActivityDataFromCalendarButton =
+  document.querySelector('.activity-button');
 const form = document.querySelector('#form');
-const formInput = document.querySelector('.water-intake')
+const formInput = document.querySelector('.water-intake');
 const quote = document.querySelector('#headerQuote');
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
-};
+}
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
 
@@ -125,12 +120,12 @@ const getWeeklyInfo = (wellnessInfo) => {
       entries.push(entry);
     }
   }
-  return entries
+  return entries;
 };
 
 const displaySevenDayData = (displayData, chartData, button, buttonClass) => {
   displayData.classList.remove('hidden');
-  chartData.classList.remove('hidden')
+  chartData.classList.remove('hidden');
   button.disabled = true;
   button.classList.add(buttonClass);
 };
@@ -160,11 +155,16 @@ const getWeeklyHydration = () => {
 
   createHydrationChart(waterEntries); // create the chart with the fetched data
 
-  return waterEntries
+  return waterEntries;
 };
 
 const displaySevenDayHydration = () => {
-  displaySevenDayData(oneWeekHydrationChart, oneWeekHydrationChart, hydrationFromCalendarButton, 'disable-button')
+  displaySevenDayData(
+    oneWeekHydrationChart,
+    oneWeekHydrationChart,
+    hydrationFromCalendarButton,
+    'disable-button'
+  );
 };
 
 const hideWeeklyHydrationChart = () => {
@@ -184,15 +184,28 @@ const displayRandomUser = (activity, currentUser) => {
     currentUser
   );
 
-  personalGreeting.innerHTML = `<article><em><h3>Welcome</h3></em><em>${currentUser.name}</em></article>`;
-  personalData.innerHTML = `<article><em><h4>Name:</h4></em>${currentUser.name};
+  userName.innerHTML = `
+  ${currentUser.name}`;
 
-  <em><h4>Address:</h4></em>${currentUser.address}
-  <em><h4>E-mail:</h4></em>${currentUser.email}
-  <em><h4>Stride Length:</h4></em>${currentUser.strideLength}
-  </article>`;
+  personalData.innerHTML = `
+  <h2>Personal Information</h2>
+  <h3>Name:</h3>
+  <p>${currentUser.name}</p>
+  <h3>Address: </h3>
+  <p>${currentUser.address}</p>
+  <h3>E-mail: </h3>
+  <p>${currentUser.email}</p>
+  <h3>Stride Length: </h3>
+  <p>${currentUser.strideLength}</p>`;
 
-  personalGoal.innerHTML = `<article><em><h4>Daily Step Goal:</h4></em><strong>${currentUser.dailyStepGoal}</strong><em><h4>Miles Walked Today:</h4></em><strong>${currentUserMilesWalked}</strong><em><h4>All User's Average Step Goal:</h4></em><strong>${allUserStepGoalAvg}</strong></article>`;
+  personalGoal.innerHTML += `
+  <h3>Your Step Goal</h3>
+  <p>${currentUser.dailyStepGoal}</p>
+  <h3>Miles Walked Today:</h3>
+  <p>${currentUserMilesWalked}</p>
+  <h3>All User's Average Step Goal:</h3>
+  <p>${allUserStepGoalAvg}</p>
+  `;
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
@@ -250,7 +263,7 @@ function displayAverageSleep(sleep, currentUser) {
 }
 
 const getWeeklySleep = () => {
-  const sleepHourEntries = getWeeklyInfo(sleep)
+  const sleepHourEntries = getWeeklyInfo(sleep);
   let hoursSlept = sleepHourEntries.reduce((acc, entry) => {
     return acc + entry.hoursSlept;
   }, 0);
@@ -274,11 +287,16 @@ const getWeeklySleep = () => {
 
   createSleepChart(sleepHourEntries); // create the chart with the fetched data
 
-  return sleepHourEntries
+  return sleepHourEntries;
 };
 
 const displaySevenDaySleep = () => {
-  displaySevenDayData(oneWeekSleepFromCalendar, oneWeekSleepChart, sleepFromCalendarButton, 'disable-button')
+  displaySevenDayData(
+    oneWeekSleepFromCalendar,
+    oneWeekSleepChart,
+    sleepFromCalendarButton,
+    'disable-button'
+  );
 };
 
 const hideWeeklySleepChart = () => {
@@ -289,7 +307,7 @@ const hideWeeklySleepChart = () => {
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
 function displayWeeklyStepCount(currentUser) {
-  const activityEntries = getWeeklyInfo(activity)
+  const activityEntries = getWeeklyInfo(activity);
 
   activityEntries.forEach((entry) => {
     if (entry.numSteps >= currentUser.dailyStepGoal) {
@@ -305,6 +323,7 @@ function displayWeeklyStepCount(currentUser) {
 
   return activityEntries
 };
+
 
 function displayActivity(activityData, currentUser, activityCurrentDate) {
 
@@ -334,7 +353,12 @@ function displayActivity(activityData, currentUser, activityCurrentDate) {
 };
 
 const displaySevenDayActivity = () => {
-  displaySevenDayData(weeklyActivityData, oneWeekActivityChart, oneWeekActivityDataFromCalendarButton, 'disable-button')
+  displaySevenDayData(
+    weeklyActivityData,
+    oneWeekActivityChart,
+    oneWeekActivityDataFromCalendarButton,
+    'disable-button'
+  );
 };
 
 const hideWeeklyActivityChart = () => {
@@ -370,5 +394,5 @@ export {
   hydrationInfo,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
-  hideWeeklySleepChart
+  hideWeeklySleepChart,
 };

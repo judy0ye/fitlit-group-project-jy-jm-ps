@@ -3,20 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <title>FitChicks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <main>
     <div class="grid-layout">
       <header class="logo">
-        <h1>
-          <img src="./images/FitChicks_title.png" alt="Fit Chicks" width="500" />
+        <h1 class="visuallyhidden">
+          Fit Chicks
         </h1>
-        <div class="lower-header">
-          <h2 id="headerQuote" class="header-quote"></h2>
+        <img src="./images/FitChicks-Title-500.png" alt="Fit Chicks Logo" width="500" />
+        <div class="lower-header"> <!--Look for function - delete if this is not targeted-->
+          <p id="headerQuote" class="header-quote rounded-corner"></p>
         </div>
       </header>
-      <div class="greeting"></div>
+      <div class="greeting">
+        <div class="personal-greeting rounded-corner">
+        <p class="welcome">Welcome!</p>
+        <p class="user-name"></p>
+        </div>
+      </div>
       <div class="data-view-grid">
+        <div class="activity rounded-corner">
+          <h2>Activity Data</h2>
+          <img src="./images/activity.png" alt="" width="60" />
+          <section class="activity-daily-steps">
+          </section>
+          <section class="activity-daily-minutes">
+          </section>
+          <section class="activity-daily-miles">
+          </section>
+        </div>
+        <div class="hydration rounded-corner">
+          <h2>Hydration Data</h2>
+          <img src="./images/hydration.png" alt="" width="60" />
+          <div id="hydrationInfo"></div>
+          <form id="form">
+            <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
+            <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1" max="300,000,000"
+              required>
+            <input type="submit" value="Submit Ounces" class="submit">
+          </form>
+        </div>
+        <div class="sleep rounded-corner">
+          <section>
+            <h2>Sleep Data</h2>
+            <img src="./images/sleep.png" alt="" width="60" />
+            <p id="dailySleep"></p>
+            <p id="averageSleep"></p>
+          </section>
+        </div>
         <div class="data-view rounded-corner">
           <h2>View Weekly Averages</h2>
           <p>Choose a start date to view data for one week</p>
@@ -29,38 +67,31 @@
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
           <br />
-          <!-- <p>Select one of the buttons below to see your weekly average for activity, hydration, or sleep. This average
-            is based on your most recent 7 days.</p>
-          <button class="activity-button">Activity</button>
-          <button class="hydration-button">Hydration</button>
-          <button class="sleep-button">Sleep</button> -->
         </div>
-        <div class="activity rounded-corner">
-          <h2>Activity Data</h2>
-          <section class="activity-daily-steps">
-          </section>
-          <section class="activity-daily-minutes">
-          </section>
-          <section class="activity-daily-miles">
-          </section>
+        <div class="goals rounded-corner">
+          <h2>Daily Step Goal</h2>
+          <!-- <img src="./images/L1b.jpg" alt="" width="60" /> -->
         </div>
-        <div class="hydration rounded-corner">
-          <h2>Hydration Data</h2>
-          <div id="hydrationInfo"></div>
-          <form id="form">
-            <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
-            <input type="number" name="waterIntake" class="water-intake" id="hydrationInput" min="1" max="300,000,000"
-              required>
-            <input type="submit" value="Submit Ounces" class="submit">
-          </form>
-        </div>
-        <div class="sleep rounded-corner">
-          <section>
-            <h2>Sleep Data</h2>
-            <p id="dailySleep"></p>
-            <p id="averageSleep"></p>
-          </section>
-        </div>
+        <div class="motivation rounded-corner">
+          <div class="motivation-card">
+            <h2></h2>
+            <img class="motivation-image" src="" alt="">
+            <div class="container">
+              <p class="motivation-text"></p>
+              <div class="motivation-advice"></div>
+              <select class="motivation-level-dropdown">
+                <option value="">Select Motivation Level</option>
+                <option value="level1">Level 1</option>
+                <option value="level2">Level 2</option>
+                <option value="level3">Level 3</option>
+                <option value="level4">Level 4</option>
+                <option value="level5">Level 5</option>
+              </select>
+            </div>
+            </div>
+          </div>
+          <div class="user-data rounded-corner">
+          </div>
         <div class="graphs rounded-corner graphs-bg-img">
           <section class="weekly-hydration-data hidden chart-container" aria-hidden="true">
             <canvas id="hydrationChart"></canvas>
@@ -93,35 +124,8 @@
           <section class="hydration-chart ">
             <canvas id="myChart"></canvas>
           </section>
-          <!-- <section class="main-image">
-            <img src="./images/FitChicks_scene_sm.png" alt="Fit Chicks" />
-          </section> -->
-          <section class="hidden">
-            <h2>Weekly Sleep Info:</h2>
-            <p id="weeklySleepHours">
-            </p>
-          </section>
         </div>
-        <div class="user-data rounded-corner">This is the user's personal data</div>
-        <div class="goals rounded-corner">These are user goals</div>
-        <div class="community rounded-corner">
-          <div class="motivation-card">
-            <img class="motivation-image" src="./images/level-three.png" alt="Motivation Image">
-            <div class="container">
-              <h4><b>How Motivated Are You<br /><br /> Feeling to be 'Beak'-tastic!</b></h4>
-              <p class="motivation-text">The only limit to your greatness is the extent of your determination.</p>
-              <div class="motivation-advice"></div>
-              <select class="motivation-level-dropdown">
-                <option value="">Select Motivation Level</option>
-                <option value="level1">Level 1</option>
-                <option value="level2">Level 2</option>
-                <option value="level3">Level 3</option>
-                <option value="level4">Level 4</option>
-                <option value="level5">Level 5</option>
-              </select>
-            </div>
-          </div>
-        </div>
+      </div>
       </div>
   </main>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
