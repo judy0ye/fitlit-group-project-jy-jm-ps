@@ -22,6 +22,8 @@ import {
   sleep,
   users,
   currentDate,
+  sleepCurrentDate,
+  activityCurrentDate
 } from './scripts';
 import quotes from './data/quotes';
 
@@ -74,6 +76,7 @@ function displayRandomQuote() {
 }
 
 /* ~~~~ DOM MANIPULATION FUNCTIONS ~~~~*/
+
 const hideChickenImage = () => {
   chickenImage.classList.remove('graphs-bg-img');
 };
@@ -92,6 +95,7 @@ const activateButtons = () => {
 };
 
 /* ~~~~ Helper Functions ~~~~*/
+
 const getWeeklyInfo = (wellnessInfo) => {
   oneWeekSleepFromCalendar.innerHTML = '';
   oneWeekHydrationFromCalendar.innerHTML = '';
@@ -180,10 +184,6 @@ const displayRandomUser = (activity, currentUser) => {
     currentUser
   );
 
-  // personalGreeting.innerHTML = `
-  // <p class="welcome">Welcome!</p>
-  // <p>${currentUser.name}</p>`;
-
   userName.innerHTML = `
   ${currentUser.name}`;
 
@@ -214,10 +214,11 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
+  console.log("fluidToday:", fluidToday, currentDate)
 
-  hydrationInfo.innerHTML += `<p>You drank ${fluidToday} ounces today</p>`;
+  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces today!</p>`;
+
 }
-
 // function displayHydrationGraphs() {
 //   oneWeekHydrationChart.classList.remove('hidden');
 //   weeklyHydrationButton.disabled = true;
@@ -232,14 +233,14 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
-function displayDailySleep(sleep, currentUser, currentDate) {
-  const currentDayEntry = getHoursByDay(sleep, currentUser.id, currentDate);
-  if (currentDayEntry) {
-    dailySleep.innerText = `You slept ${currentDayEntry} hours last night.`;
-  } else {
-    dailySleep.innerText = 'You need to get more sleep!';
-  }
-}
+function displayDailySleep(sleep, currentUser, sleepCurrentDate) {
+
+  console.log('displayDailySleep sleepCurrentDate:', sleepCurrentDate);
+
+  const currentDayEntry = getHoursByDay(sleep, currentUser.id, sleepCurrentDate);
+
+  dailySleep.innerHTML = `You slept <strong>${currentDayEntry} </strong> hours last night.`;
+};
 
 // function displaySleepGraphs() {
 //   oneWeekSleepChart.classList.remove('hidden');
@@ -254,11 +255,11 @@ function displayDailySleep(sleep, currentUser, currentDate) {
 // }
 
 function displayAverageSleep(sleep, currentUser) {
-  averageSleep.innerText += `You average ${getAvgSleep(
+  averageSleep.innerHTML += `You average <strong> ${getAvgSleep(
     sleep,
     currentUser.id
-  )} hours of sleep each night and a 
-  ${getAvgQuality(sleep, currentUser.id)} sleep quality rating!`;
+  )}</strong> hours of sleep each night and a 
+  <strong>${getAvgQuality(sleep, currentUser.id)} </strong> sleep quality rating!`;
 }
 
 const getWeeklySleep = () => {
@@ -301,6 +302,8 @@ const displaySevenDaySleep = () => {
 const hideWeeklySleepChart = () => {
   oneWeekSleepChart.classList.add('hidden');
 };
+
+
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
 function displayWeeklyStepCount(currentUser) {
@@ -314,29 +317,40 @@ function displayWeeklyStepCount(currentUser) {
       weeklyActivityData.innerHTML += `<p>On ${entry.date}, you walked ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
       </p> `;
     }
+
   });
   createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
 
-  return activityEntries;
-}
+  return activityEntries
+};
 
-function displayActivity(activityData, currentUser, currentDate) {
-  dailySteps.innerText = `You took ${stepsPerDay(
+
+function displayActivity(activityData, currentUser, activityCurrentDate) {
+
+  // console.log('displayActivity called with activityData:', activityData);
+  // console.log('displayActivity called with currentUser:', currentUser);
+  console.log('displayActivity currentDate:', activityCurrentDate);
+
+  dailySteps.innerHTML = `You took <strong>${stepsPerDay(
     activityData,
     currentUser,
-    currentDate
-  )} steps today!`;
-  dailyMiles.innerText = `You have walked ${milesPerDay(
+    activityCurrentDate
+  )}</strong> steps today!`;
+  dailyMiles.innerHTML = `You have walked <strong>${milesPerDay(
     activityData,
     currentUser,
-    currentDate
-  )} miles today!`;
-  dailyMinutes.innerText = `You were active for ${activeMinutesPerDay(
+    activityCurrentDate
+  )} </strong> miles today!`;
+  dailyMinutes.innerHTML = `You were active for <strong>${activeMinutesPerDay(
     activityData,
     currentUser,
-    currentDate
-  )} minutes today!`;
-}
+    activityCurrentDate
+  )}</strong> minutes today!`;
+
+  console.log('Steps today:', stepsPerDay(activityData, currentUser, activityCurrentDate));
+  console.log('Miles today:', milesPerDay(activityData, currentUser, activityCurrentDate));
+  console.log('Minutes today:', activeMinutesPerDay(activityData, currentUser, activityCurrentDate));
+};
 
 const displaySevenDayActivity = () => {
   displaySevenDayData(
@@ -350,6 +364,7 @@ const displaySevenDayActivity = () => {
 const hideWeeklyActivityChart = () => {
   oneWeekActivityChart.classList.add('hidden');
 };
+
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
@@ -358,18 +373,13 @@ export {
   displayAverageSleep,
   displayFluidConsumedToday,
   weeklyHydrationButton,
-  // displayHydrationGraphs,
-  // hideHydrationGraphs,
   sleepButton,
   displayWeeklyStepCount,
-  // hideSleepGraphs,
   hideChickenImage,
-  // showChickenImage,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,
   dataField,
-  // displaySleepGraphs,
   sleepFromCalendarButton,
   activateButtons,
   getWeeklyHydration,
