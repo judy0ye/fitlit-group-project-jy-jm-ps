@@ -38,7 +38,7 @@ import {
 const personalData = document.querySelector('.user-data');
 const personalGoal = document.querySelector('.goals');
 const userName = document.querySelector('.user-name');
-const hydrationInfo = document.querySelector('.hydration');
+const hydrationInfo = document.querySelector('.hydration-message');
 const dailySleep = document.querySelector('#dailySleep');
 const weeklySleep = document.querySelector('#weeklySleepHours');
 const averageSleep = document.querySelector('#averageSleep');
@@ -216,7 +216,9 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   );
   console.log("fluidToday:", fluidToday, currentDate)
 
-  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces today!</p>`;
+  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces yesterday!</p>
+  <p>How many ounces will you drink today? </p>
+  <p>Record them in the field below:</p>`;
 
 }
 // function displayHydrationGraphs() {
