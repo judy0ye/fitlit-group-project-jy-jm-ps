@@ -1,35 +1,28 @@
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-};
+}
 
+;
 
 h2,
 .welcome {
-  font-weight:600;
+  font-weight: 600;
   font-size: 24px;
 }
 
 h2,
 p,
-.motivation-level-dropdown,
-.activity,
-.hydration,
-.sleep,
-.goals,
-.motivation,
-.user-data,
-.data-view
- {
+.motivation-level-dropdown {
   font-family: 'Poppins', sans-serif;
-  margin-top: 10px; 
 }
 
-/* .activity,
+.activity,
 .hydration,
 .sleep,
 .data-view,
@@ -39,16 +32,7 @@ p,
 .motivation-card h2,
 .motivation-card .container {
   text-align: center;
-  margin-top: 10px; 
-} */
-
-.activity,
-.hydration,
-.sleep,
-.goals,
-.motivation,
-.user-data {
-  overflow: scroll visible;
+  margin-top: 10px;
 }
 
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
@@ -62,7 +46,7 @@ p,
     "logo greeting"
     "data-view-grid data-view-grid";
   row-gap: 20px;
-   }
+}
 
 .data-view-grid {
   display: grid;
@@ -126,50 +110,10 @@ p,
   margin: 20px 0 0 0;
 }
 
-
-
-.activity,
-.hydration,
-.sleep,
-.data-view,
-.goals {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.activity {
   grid-area: activity;
   text-align: center;
-}
-
-.activity h2,
-.hydration h2,
-.sleep h2,
-.data-view h2,
-.goals h2 {
-  align-self: center;
-  margin-top: 20px;
-  position: sticky;
-}
-
-.activity-daily-steps,
-.activity-daily-minutes,
-.activity-daily-miles,
-#hydrationInfo,
-.hydration-message,
-#dailySleep,
-#averageSleep,
-#start-date-input
- {
-  margin-top: 20px;
-}
-
-.averages-buttons {
-  align-self: space-around;
-}
-
-.activity-button,
-.hydration-button,
-.sleep-button {
-  margin: .5rem .5rem
+  overflow: scroll visible;
 }
 
 .hydration form {
@@ -193,12 +137,16 @@ p,
   padding: .25em;
   grid-area: hydration;
   text-align: center;
+  overflow: scroll visible;
 }
+
+;
 
 .sleep {
   padding: .25em;
   grid-area: sleep;
   text-align: center;
+  overflow: scroll visible;
 }
 
 .data-view {
@@ -228,18 +176,20 @@ p,
 .motivation {
   padding: .25em;
   grid-area: motivation;
+  overflow: scroll visible;
 }
 
 .user-data {
   padding: .25em;
   grid-area: user-data;
+  overflow: scroll visible;
 }
 
 .rounded-corner {
   border-radius: 12px;
-  -webkit-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
-  -moz-box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
-  box-shadow: 0px 0px 2px 2px rgba(51,51,51,1);
+  -webkit-box-shadow: 0px 0px 2px 2px rgba(51, 51, 51, 1);
+  -moz-box-shadow: 0px 0px 2px 2px rgba(51, 51, 51, 1);
+  box-shadow: 0px 0px 2px 2px rgba(51, 51, 51, 1);
 }
 
 /* ~~~~~ charts ~~~~~ */
@@ -248,7 +198,8 @@ p,
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
   overflow: hidden;
 }
 
@@ -303,8 +254,8 @@ p,
 
 .motivation-image {
   margin: auto;
-  width: 100px;   
-  height: 100px;   
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 
@@ -323,8 +274,8 @@ p,
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  text-align: center; 
+  justify-content: center;
+  text-align: center;
   height: 100%;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -332,13 +283,13 @@ p,
 
 .motivation-card h2 {
   text-align: center;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .motivation-card .motivation-image {
   display: block;
   margin: auto;
-  max-width: 100%; 
+  max-width: 100%;
 }
 
 .motivation-advice .motivation-text {
@@ -350,14 +301,14 @@ p,
 .sleep-button.disable-button,
 .hydration-button.disable-button,
 .activity-button.disable-button {
-background-color: #EAEAF4;
-cursor:not-allowed;
+  background-color: #EAEAF4;
+  cursor: not-allowed;
 }
 
 .activity-button,
 .hydration-button,
 .sleep-button {
-/* border: 0;
+  /* border: 0;
 border-radius: 0.25rem;
 font-family: -system-ui, sans-serif;
 font-size: 1rem;
@@ -367,29 +318,29 @@ text-decoration: none;
 padding: 0.25rem 0.5rem;
 margin: 0.25rem;
 cursor: pointer; */
-box-shadow: 2px 2px 0px 0px #899599;
-border-radius:21px;
-border:2px solid #bdb7bd;
-display:inline-block;
-cursor:pointer;
-color:#333333;
-font-family:Arial;
-font-size:17px;
-padding:13px 32px;
-text-decoration:none;
+  box-shadow: 2px 2px 0px 0px #899599;
+  border-radius: 21px;
+  border: 2px solid #bdb7bd;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 13px 32px;
+  text-decoration: none;
 }
 
 .activity-button {
-/* background: #fbac92;
+  /* background: #fbac92;
 color: #151515; */
-background:linear-gradient(to bottom, #fbac92 5%, #dfcae3 100%);
-background-color:#fbac92;
-text-shadow:0px 0px 0px #e1e2ed;
+  background: linear-gradient(to bottom, #fbac92 5%, #dfcae3 100%);
+  background-color: #fbac92;
+  text-shadow: 0px 0px 0px #e1e2ed;
 }
 
 .activity-button:hover {
-background:linear-gradient(to bottom, #dfcae3 5%, #fbac92 100%);
-background-color:#dfcae3;
+  background: linear-gradient(to bottom, #dfcae3 5%, #fbac92 100%);
+  background-color: #dfcae3;
 }
 
 /* .activity-button:active {
@@ -398,17 +349,17 @@ top:1px;
 } */
 
 .hydration-button {
-/* background: #9ce6f7; */
-background:linear-gradient(to bottom, #9ce6f7 5%, #9ea1ab 100%);
-background-color:#9ce6f7;
-text-shadow:0px 0px 0px #e1e2ed;
-/* color: #151515; */
+  /* background: #9ce6f7; */
+  background: linear-gradient(to bottom, #9ce6f7 5%, #9ea1ab 100%);
+  background-color: #9ce6f7;
+  text-shadow: 0px 0px 0px #e1e2ed;
+  /* color: #151515; */
 }
 
 
 .hydration-button:hover {
-background:linear-gradient(to bottom, #9ea1ab 5%, #9ce6f7 100%);
-background-color:#9ea1ab;
+  background: linear-gradient(to bottom, #9ea1ab 5%, #9ce6f7 100%);
+  background-color: #9ea1ab;
 }
 
 
@@ -418,17 +369,17 @@ top:1px;
 } */
 
 .sleep-button {
-/* background: #9dfae9;
+  /* background: #9dfae9;
 color: #151515; */
-background:linear-gradient(to bottom, #9dfae9 5%, #c6d5e6 100%);
-background-color:#9dfae9;
-text-shadow:0px 0px 0px #e1e2ed;
+  background: linear-gradient(to bottom, #9dfae9 5%, #c6d5e6 100%);
+  background-color: #9dfae9;
+  text-shadow: 0px 0px 0px #e1e2ed;
 }
 
 
 .sleep-button:hover {
-background:linear-gradient(to bottom, #c6d5e6 5%, #9dfae9 100%);
-background-color:#c6d5e6;
+  background: linear-gradient(to bottom, #c6d5e6 5%, #9dfae9 100%);
+  background-color: #c6d5e6;
 }
 
 
@@ -439,7 +390,7 @@ top:1px;
 
 
 .hidden {
-display: none!important;
+  display: none !important;
 }
 
 
@@ -458,8 +409,8 @@ display: none!important;
       "logo greeting"
       "data-view-grid data-view-grid";
     row-gap: 20px;
-     }
-  
+  }
+
   .data-view-grid {
     display: grid;
     height: 100vh;
@@ -473,9 +424,11 @@ display: none!important;
       "goals motivation user-data ";
     gap: 1% 1%
   }
+
   .logo img {
     max-width: 80%
   }
+
   .greeting {
     justify-content: center;
     align-items: center;
@@ -489,14 +442,10 @@ display: none!important;
 }
 
 /* Large Mobile Phone */
-@media only screen and (max-width: 425px) {
-  
-}
+@media only screen and (max-width: 425px) {}
 
 /* Small Mobile Phone */
-@media only screen and (max-width: 320px) {
-  
-}
+@media only screen and (max-width: 320px) {}
 
 .visuallyhidden {
   border: 0;
