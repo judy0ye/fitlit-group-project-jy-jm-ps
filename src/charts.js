@@ -14,7 +14,6 @@ document.querySelector('.hydration-button').addEventListener('click', () => {
 });
 
 function createHydrationChart(hydrationData) {
-  console.log("createHydrationChart called with data: ", hydrationData);
 
   const hydrationChartContext = document.getElementById('hydrationChart').getContext('2d');
 
@@ -61,8 +60,6 @@ function createHydrationChart(hydrationData) {
 let sleepChart;
 
 function createSleepChart(sleepData) {
-
-  console.log("createSleepChart called with data: ", sleepData);
 
   const sleepChartContext = document.getElementById('sleepChart').getContext('2d');
 
@@ -119,8 +116,6 @@ let activityChart;
 
 function createActivityChart(activityData, currentUser) {
 
-  console.log("createActivityChart called with data: ", activityData);
-
   const activityChartContext = document.getElementById('activityChart').getContext('2d');
 
   const labels = activityData.map((entry) => entry.date);
@@ -139,14 +134,14 @@ function createActivityChart(activityData, currentUser) {
         {
           label: 'Steps (goal met)',
           data: dataGoalMet,
-          backgroundColor: 'rgba(0, 0, 255, 0.6)',  // Always blue for goal met
+          backgroundColor: 'rgba(0, 0, 255, 0.6)', 
           borderColor: '#333333',
           borderWidth: 2,
         },
         {
           label: 'Steps (goal not met)',
           data: dataGoalNotMet,
-          backgroundColor: 'rgba(255, 165, 0, 0.6)',  // Always orange for goal not met
+          backgroundColor: 'rgba(255, 165, 0, 0.6)', 
           borderColor: '#333333',
           borderWidth: 2,
         },

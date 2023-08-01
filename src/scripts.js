@@ -99,7 +99,6 @@ window.addEventListener('load', function () {
     fetchApiData('activity'),
   ])
     .then((data) => {
-      console.log('onload from fetch data:', data);
       users = data[0].users;
       hydration = data[1].hydrationData;
       sleep = data[2].sleepData;

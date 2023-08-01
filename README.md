@@ -9,9 +9,9 @@ FitLit operates on a local server environment and interacts with dedicated API e
 
 ## Setup
 Fork and clone this [repo](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps) 
-<!-- and then in a different folder, fork and clone this [local server repo](https://github.com/turingschool-examples/fitlit-api). -->
+and then in a different folder, fork and clone this [local server repo](https://github.com/turingschool-examples/fitlit-api). -->
 
-<!-- Do the following steps for both repos. Both repos need to be running in order for the app to work correctly. -->
+Do the following steps for both repos. Both repos need to be running in order for the app to work correctly.
 
 In your forked GitHub repository, click the code drop-down menu and copy the SSH key. 
 Open the terminal on your machine and navigate to the containing directory you’d like - to clone the repository folder and its contents to. On the command line, run “git clone” + the SSH key you copied earlier. A new folder will be created containing a local copy of the repository linked to the forked repository you created - enter the new directory.
