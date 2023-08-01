@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
   <meta charset="UTF-8" />
   <title>FitChicks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <main>
     <div class="grid-layout">
@@ -15,12 +18,12 @@
           Fit Chicks
         </h1>
         <img src="./images/FitChicks-Title-500.png" alt="Fit Chicks Logo" width="500" />
-          <p id="headerQuote" class="header-quote rounded-corner"></p>
+        <p id="headerQuote" class="header-quote rounded-corner"></p>
       </header>
       <div class="greeting">
         <div class="personal-greeting rounded-corner">
-        <p class="welcome">Welcome!</p>
-        <p class="user-name"></p>
+          <p class="welcome">Welcome!</p>
+          <p class="user-name"></p>
         </div>
       </div>
       <div class="data-view-grid">
@@ -65,10 +68,10 @@
           <br />
           <br />
           <div class="averages-buttons">
-          <button class="activity-button">Activity</button>
-          <button class="hydration-button">Hydration</button>
-          <button class="sleep-button">Sleep</button>
-        </div>
+            <button class="activity-button">Activity</button>
+            <button class="hydration-button">Hydration</button>
+            <button class="sleep-button">Sleep</button>
+          </div>
         </div>
         <div class="goals rounded-corner">
           <h2>Daily Step Goal</h2>
@@ -83,32 +86,32 @@
         <div class="motivation rounded-corner">
           <div class="motivation-card">
             <h2></h2>
-            <img class="motivation-image" src="" alt="" width="100"/>
-              <h3 class="motivation-description"></h3>
-              <p class="motivation-text"></p>
-              <select class="motivation-level-dropdown">
-                <option value="">Select Motivation Level</option>
-                <option value="level1">Level 1</option>
-                <option value="level2">Level 2</option>
-                <option value="level3">Level 3</option>
-                <option value="level4">Level 4</option>
-                <option value="level5">Level 5</option>
-              </select>
-              <p class="motivation-advice"></p>
-            </div>
+            <img class="motivation-image" src="" alt="" width="100" />
+            <h3 class="motivation-description"></h3>
+            <p class="motivation-text"></p>
+            <select class="motivation-level-dropdown">
+              <option value="">Select Motivation Level</option>
+              <option value="level1">Level 1</option>
+              <option value="level2">Level 2</option>
+              <option value="level3">Level 3</option>
+              <option value="level4">Level 4</option>
+              <option value="level5">Level 5</option>
+            </select>
+            <p class="motivation-advice"></p>
           </div>
-          <div class="user-data rounded-corner">
-            <h2>Personal Information</h2>
-            <img src="./images/User-info.jpg" alt="" width="80" />
-            <h3>Name:</h3>
-            <p class="personal-name"></p>
-            <h3>Address:</h3>
-            <p class="personal-address"></p>
-            <h3>Email:</h3>
-            <p class="personal-email"></p>
-            <h3>Stride Length:</h3>
-            <p class="personal-stride-length"></p>
-          </div>
+        </div>
+        <div class="user-data rounded-corner">
+          <h2>Personal Information</h2>
+          <img src="./images/User-info.jpg" alt="" width="80" />
+          <h3>Name:</h3>
+          <p class="personal-name"></p>
+          <h3>Address:</h3>
+          <p class="personal-address"></p>
+          <h3>Email:</h3>
+          <p class="personal-email"></p>
+          <h3>Stride Length:</h3>
+          <p class="personal-stride-length"></p>
+        </div>
         <div class="graphs rounded-corner graphs-bg-img">
           <section class="weekly-hydration-data hidden chart-container" aria-hidden="true">
             <canvas id="hydrationChart"></canvas>
@@ -133,7 +136,7 @@
           </section>
         </div>
       </div>
-      </div>
+    </div>
   </main>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
