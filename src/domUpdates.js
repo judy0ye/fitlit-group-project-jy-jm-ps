@@ -36,9 +36,12 @@ import {
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
-const personalGoal = document.querySelector('.goals');
+// const personalGoal = document.querySelector('.goals');
+const stepGoal = document.querySelector('.step-goal')
+const milesWalked = document.querySelector('.miles-walked')
+const allUserAvg = document.querySelector('.all-user-average')
 const userName = document.querySelector('.user-name');
-const hydrationInfo = document.querySelector('.hydration');
+const hydrationInfo = document.querySelector('.hydration-message');
 const dailySleep = document.querySelector('#dailySleep');
 const weeklySleep = document.querySelector('#weeklySleepHours');
 const averageSleep = document.querySelector('#averageSleep');
@@ -70,6 +73,15 @@ const oneWeekActivityDataFromCalendarButton =
 const form = document.querySelector('#form');
 const formInput = document.querySelector('.water-intake');
 const quote = document.querySelector('#headerQuote');
+const addHydration = document.querySelector('.recorded-ounces')
+
+/* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
+
+const motivationDropdown = document.querySelector('.motivation-level-dropdown');
+const motivationImage = document.querySelector('.motivation-image');
+const motivationText = document.querySelector('.motivation-text');
+const motivationTitle = document.querySelector('.motivation-card h2');
+const motivationAdvice = document.querySelector('.motivation-advice');
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
@@ -198,14 +210,12 @@ const displayRandomUser = (activity, currentUser) => {
   <h3>Stride Length: </h3>
   <p>${currentUser.strideLength}</p>`;
 
-  personalGoal.innerHTML += `
-  <h3>Your Step Goal</h3>
-  <p>${currentUser.dailyStepGoal}</p>
-  <h3>Miles Walked Today:</h3>
-  <p>${currentUserMilesWalked}</p>
-  <h3>All User's Average Step Goal:</h3>
-  <p>${allUserStepGoalAvg}</p>
-  `;
+
+stepGoal.innerText = `${currentUser.dailyStepGoal}`
+milesWalked.innerText = `${currentUserMilesWalked}`
+allUserAvg.innerText = `${allUserStepGoalAvg}`
+ 
+ 
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
@@ -216,9 +226,20 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
   );
   console.log("fluidToday:", fluidToday, currentDate)
 
-  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces today!</p>`;
-
+  hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces yesterday!</p>
+  <p>How many ounces will you drink today? </p>
+  <p>Record them in the field below:</p>`;
 }
+
+let totalWaterIntake = 0;
+
+function displayNewHydrationEntry(response) {
+  console.log('Response from server:', response);
+
+  totalWaterIntake += parseInt(response.numOunces);
+
+  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
+};
 // function displayHydrationGraphs() {
 //   oneWeekHydrationChart.classList.remove('hidden');
 //   weeklyHydrationButton.disabled = true;
@@ -365,6 +386,65 @@ const hideWeeklyActivityChart = () => {
   oneWeekActivityChart.classList.add('hidden');
 };
 
+
+
+
+const motivationLevels = {
+  "level1": {
+    title: "Not Motivated",
+    description: "Fried - feeling overwhelmed", 
+    image: "./images/L1a.jpg",
+    advice: "Prioritize self-care. Spend some time outside."
+  },
+  "level2": {
+    title: "Slightly Motivated",
+    description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
+    image: "./images/L2.jpg",
+    advice: "Celebrate the small wins and continue to build momentum."
+  },
+  "level3": {
+    title: "Moderately Motivated",
+    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
+    image: "./images/L3.jpg",
+    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
+  },
+  "level4": {
+    title: "Highly Motivated",
+    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
+    image: "./images/L4.jpg",
+    advice: "Embrace challenges and maintain a can-do attitude."
+  },
+  "level5": {
+    title: "Extremely Motivated",
+    description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
+    image: "./images/L5.jpg",
+    advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
+  },
+};
+
+const setMotivationLevel = (level) => {
+  let motivationLevel = motivationLevels[level];
+  if (motivationLevel) {
+    motivationTitle.textContent = motivationLevel.title;
+    motivationText.innerHTML = motivationLevel.description;
+    motivationImage.src = motivationLevel.image;
+    motivationAdvice.innerHTML = motivationLevel.advice;
+    motivationDropdown.value = level;
+  } else {
+    motivationTitle.textContent = "Get Motivated!";
+    motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
+    motivationImage.src = "./images/default.jpg";
+    motivationImage.alt = "";
+    motivationAdvice.innerHTML = "";
+    motivationDropdown.value = "";
+  }
+};
+
+motivationDropdown.addEventListener('change', (event) => {
+  setMotivationLevel(event.target.value);
+});
+
+
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
 export {
@@ -395,4 +475,6 @@ export {
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
+  displayNewHydrationEntry,
+  setMotivationLevel
 };

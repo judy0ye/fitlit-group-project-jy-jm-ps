@@ -39,7 +39,9 @@ import {
   displayRandomQuote,
   hideWeeklyHydrationChart,
   hideWeeklyActivityChart,
-  hideWeeklySleepChart
+  hideWeeklySleepChart,
+  displayNewHydrationEntry,
+  setMotivationLevel
 } from './domUpdates';
 
 import {
@@ -139,92 +141,6 @@ sleepFromCalendarButton.addEventListener('click', onClickSleep);
 hydrationFromCalendarButton.addEventListener('click', onClickHydration);
 oneWeekActivityDataFromCalendarButton.addEventListener('click', onClickActivity)
 inputField.addEventListener('change', onChangeInputField);
-
-
-let totalWaterIntake = 0;
-
-function displayNewHydrationEntry(response) {
-  console.log('Response from server:', response);
-
-  const hydrationInfo = document.getElementById('hydrationInfo');
-
-  const existingMessage = hydrationInfo.querySelector('p');
-  if (existingMessage) {
-    hydrationInfo.removeChild(existingMessage);
-  }
-
-  totalWaterIntake += parseInt(response.numOunces);
-
-  const newMessage = document.createElement('p');
-  newMessage.innerHTML = `Your submission of <strong>${response.numOunces}</strong> ounces consumed has been recorded. Great job on your hydration efforts!<br/>🍒 Aim for approximately 3.7L (125 oz) for men and 2.7L (91 oz) for women daily from all sources. <br/>Total water intake entered: <strong>${totalWaterIntake}</strong> ounces`;
-
-  hydrationInfo.appendChild(newMessage);
-};
-
-
-/* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
-
-const motivationDropdown = document.querySelector('.motivation-level-dropdown');
-const motivationImage = document.querySelector('.motivation-image');
-const motivationText = document.querySelector('.motivation-text');
-const motivationTitle = document.querySelector('.motivation-card h2');
-const motivationAdvice = document.querySelector('.motivation-advice');
-// const motivationHeading = document.querySelector('.starting-header')
-
-const motivationLevels = {
-  "level1": {
-    title: "Not Motivated",
-    description: "Fried - feeling overwhelmed", 
-    image: "./images/L1a.jpg",
-    advice: "Prioritize self-care. Spend some time outside."
-  },
-  "level2": {
-    title: "Slightly Motivated",
-    description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
-    image: "./images/L2.jpg",
-    advice: "Celebrate the small wins and continue to build momentum."
-  },
-  "level3": {
-    title: "Moderately Motivated",
-    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
-    image: "./images/L3.jpg",
-    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
-  },
-  "level4": {
-    title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
-    image: "./images/L4.jpg",
-    advice: "Embrace challenges and maintain a can-do attitude."
-  },
-  "level5": {
-    title: "Extremely Motivated",
-    description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
-    image: "./images/L5.jpg",
-    advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
-  },
-};
-
-const setMotivationLevel = (level) => {
-  let motivationLevel = motivationLevels[level];
-  if (motivationLevel) {
-    motivationTitle.textContent = motivationLevel.title;
-    motivationText.innerHTML = motivationLevel.description;
-    motivationImage.src = motivationLevel.image;
-    motivationAdvice.innerHTML = motivationLevel.advice;
-    motivationDropdown.value = level;
-  } else {
-    motivationTitle.textContent = "Get Motivated!";
-    motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
-    motivationImage.src = "./images/default.jpg";
-    motivationImage.alt = "";
-    motivationAdvice.innerHTML = "";
-    motivationDropdown.value = "";
-  }
-};
-
-motivationDropdown.addEventListener('change', (event) => {
-  setMotivationLevel(event.target.value);
-});
 
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
