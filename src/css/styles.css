@@ -7,7 +7,6 @@ body, html {
   align-items: center;
 };
 
-
 h2,
 .welcome {
   font-weight:600;
@@ -29,18 +28,9 @@ p,
   margin-top: 10px; 
 }
 
-/* .activity,
-.hydration,
-.sleep,
-.data-view,
-.goals,
-.motivation,
-.user-data,
-.motivation-card h2,
-.motivation-card .container {
-  text-align: center;
-  margin-top: 10px; 
-} */
+h3 {
+  margin: 0;
+}
 
 .activity,
 .hydration,
@@ -62,7 +52,7 @@ p,
     "logo greeting"
     "data-view-grid data-view-grid";
   row-gap: 20px;
-   }
+}
 
 .data-view-grid {
   display: grid;
@@ -126,13 +116,13 @@ p,
   margin: 20px 0 0 0;
 }
 
-
-
 .activity,
 .hydration,
 .sleep,
 .data-view,
-.goals {
+.goals,
+.motivation,
+.user-data {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,7 +134,8 @@ p,
 .hydration h2,
 .sleep h2,
 .data-view h2,
-.goals h2 {
+.goals h2,
+.motivation h2 {
   align-self: center;
   margin-top: 20px;
   position: sticky;
@@ -154,7 +145,6 @@ p,
 .activity-daily-minutes,
 .activity-daily-miles,
 #hydrationInfo,
-.hydration-message,
 #dailySleep,
 #averageSleep,
 #start-date-input
