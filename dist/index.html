@@ -15,9 +15,7 @@
           Fit Chicks
         </h1>
         <img src="./images/FitChicks-Title-500.png" alt="Fit Chicks Logo" width="500" />
-        <!-- <div class="lower-header"> Look for function - delete if this is not targeted -->
           <p id="headerQuote" class="header-quote rounded-corner"></p>
-        <!-- </div> -->
       </header>
       <div class="greeting">
         <div class="personal-greeting rounded-corner">
@@ -55,6 +53,7 @@
             <img src="./images/sleep.png" alt="" width="60" />
             <p id="dailySleep"></p>
             <p id="averageSleep"></p>
+            <p id="sleepQuality"></p>
           </section>
         </div>
         <div class="data-view rounded-corner">
@@ -73,6 +72,7 @@
         </div>
         <div class="goals rounded-corner">
           <h2>Daily Step Goal</h2>
+          <img src="./images/L1b.jpg" alt="" width="60" />
           <h3>Your Step Goal Is:</h3>
           <p class="step-goal"></p>
           <h3>Miles Walked Today</h3>
@@ -83,10 +83,9 @@
         <div class="motivation rounded-corner">
           <div class="motivation-card">
             <h2></h2>
-            <img class="motivation-image" src="" alt="">
-            <div class="container">
+            <img class="motivation-image" src="" alt="" width="100"/>
+              <h3 class="motivation-description"></h3>
               <p class="motivation-text"></p>
-              <div class="motivation-advice"></div>
               <select class="motivation-level-dropdown">
                 <option value="">Select Motivation Level</option>
                 <option value="level1">Level 1</option>
@@ -95,10 +94,20 @@
                 <option value="level4">Level 4</option>
                 <option value="level5">Level 5</option>
               </select>
-            </div>
+              <p class="motivation-advice"></p>
             </div>
           </div>
           <div class="user-data rounded-corner">
+            <h2>Personal Information</h2>
+            <img src="./images/User-info.jpg" alt="" width="80" />
+            <h3>Name:</h3>
+            <p class="personal-name"></p>
+            <h3>Address:</h3>
+            <p class="personal-address"></p>
+            <h3>Email:</h3>
+            <p class="personal-email"></p>
+            <h3>Stride Length:</h3>
+            <p class="personal-stride-length"></p>
           </div>
         <div class="graphs rounded-corner graphs-bg-img">
           <section class="weekly-hydration-data hidden chart-container" aria-hidden="true">
@@ -106,16 +115,6 @@
           </section>
           <section class="weekly-activity-data hidden chart-container" aria-hidden="true">
             <canvas id="activityChart"></canvas>
-            <div class="activity-legend">
-              <div class="activity-legend-item">
-                <div class="activity-legend-color activity-legend-goal-met"></div>
-                <p>Goal met</p>
-              </div>
-              <div class="activity-legend-item">
-                <div class="activity-legend-color activity-legend-goal-not-met"></div>
-                <p>Goal not met</p>
-              </div>
-            </div>
           </section>
           <section class="weekly-sleep-data hidden chart-container" aria-hidden="true">
             <canvas id="sleepChart"></canvas>

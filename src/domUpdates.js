@@ -23,7 +23,7 @@ import {
   users,
   currentDate,
   sleepCurrentDate,
-  activityCurrentDate
+  activityCurrentDate,
 } from './scripts';
 import quotes from './data/quotes';
 
@@ -36,15 +36,15 @@ import {
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
-const stepGoal = document.querySelector('.step-goal')
-const milesWalked = document.querySelector('.miles-walked')
-const allUserAvg = document.querySelector('.all-user-average')
+const stepGoal = document.querySelector('.step-goal');
+const milesWalked = document.querySelector('.miles-walked');
+const allUserAvg = document.querySelector('.all-user-average');
 const userName = document.querySelector('.user-name');
 const hydrationInfo = document.querySelector('.hydration-message');
 const dailySleep = document.querySelector('#dailySleep');
 const weeklySleep = document.querySelector('#weeklySleepHours');
 const averageSleep = document.querySelector('#averageSleep');
-const sleepQuality = document.querySelector('#sleepQuality')
+const sleepQuality = document.querySelector('#sleepQuality');
 const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 const weeklyActivityData = document.querySelector(
   '.weekly-activity-from-calendar-data'
@@ -67,17 +67,17 @@ const oneWeekHydrationFromCalendar = document.querySelector(
   '.weekly-hydration-from-calendar-data'
 );
 const hydrationFromCalendarButton = document.querySelector('.hydration-button');
-const dailyActivityData = document.querySelector('.activity');
+// const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton =
   document.querySelector('.activity-button');
 const form = document.querySelector('#form');
 const formInput = document.querySelector('.water-intake');
 const quote = document.querySelector('#headerQuote');
-const addHydration = document.querySelector('.recorded-ounces')
-const personalUserName = document.querySelector('.personal-name')
-const personalAddress = document.querySelector('.personal-address')
-const personalEmail = document.querySelector('.personal-email')
-const personalStrideLength = document.querySelector('.personal-stride-length')
+const addHydration = document.querySelector('.recorded-ounces');
+const personalUserName = document.querySelector('.personal-name');
+const personalAddress = document.querySelector('.personal-address');
+const personalEmail = document.querySelector('.personal-email');
+const personalStrideLength = document.querySelector('.personal-stride-length');
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
 
@@ -86,7 +86,7 @@ const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
 const motivationTitle = document.querySelector('.motivation-card h2');
 const motivationAdvice = document.querySelector('.motivation-advice');
-const motivationDescription = document.querySelector('.motivation-description')
+const motivationDescription = document.querySelector('.motivation-description');
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
@@ -199,14 +199,13 @@ const displayRandomUser = (activity, currentUser) => {
   userName.innerHTML = `
   ${currentUser.name}`;
 
-  personalUserName.innerText = `${currentUser.name}`
-  personalAddress.innerText = `${currentUser.address}`
-  personalEmail.innerText = `${currentUser.email}`
-  personalStrideLength.innerText = `$${currentUser.strideLength}`
- 
-  stepGoal.innerText = `${currentUser.dailyStepGoal}`
-  milesWalked.innerText = `${currentUserMilesWalked}`
-  allUserAvg.innerText = `${allUserStepGoalAvg}` 
+  personalUserName.innerText = `${currentUser.name}`;
+  personalAddress.innerText = `${currentUser.address}`;
+  personalEmail.innerText = `${currentUser.email}`;
+  personalStrideLength.innerText = `${currentUser.strideLength}`;
+  stepGoal.innerText = `${currentUser.dailyStepGoal}`;
+  milesWalked.innerText = `${currentUserMilesWalked}`;
+  allUserAvg.innerText = `${allUserStepGoalAvg}`;
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
@@ -224,25 +223,28 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
 let totalWaterIntake = 0;
 
 function displayNewHydrationEntry(response) {
-
   totalWaterIntake += parseInt(response.numOunces);
 
-  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces has been recorded. Great job!</p> ` 
-};
+  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces has been recorded. Great job!</p> `;
+}
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
 function displayDailySleep(sleep, currentUser, sleepCurrentDate) {
-  const currentDayEntry = getHoursByDay(sleep, currentUser.id, sleepCurrentDate);
+  const currentDayEntry = getHoursByDay(
+    sleep,
+    currentUser.id,
+    sleepCurrentDate
+  );
 
   dailySleep.innerHTML = `You slept <strong>${currentDayEntry} </strong> hours last night.`;
-};
+}
 
 function displayAverageSleep(sleep, currentUser) {
   averageSleep.innerHTML = `You average <strong> ${getAvgSleep(
     sleep,
     currentUser.id
-  )}</strong> hours of sleep each night.` 
+  )}</strong> hours of sleep each night.`;
   sleepQuality.innerHTML = `You have a sleep quality rating of
   <strong>${getAvgQuality(sleep, currentUser.id)} </strong>.`;
 }
@@ -288,7 +290,6 @@ const hideWeeklySleepChart = () => {
   oneWeekSleepChart.classList.add('hidden');
 };
 
-
 /* ~~~~~ Display Activity Data Functions ~~~~~*/
 
 function displayWeeklyStepCount(currentUser) {
@@ -302,13 +303,11 @@ function displayWeeklyStepCount(currentUser) {
       weeklyActivityData.innerHTML += `<p>On ${entry.date}, you walked ${entry.numSteps} steps. You have not met your goal.  STEP IT UP!
       </p> `;
     }
-
   });
   createActivityChart(activityEntries, currentUser);
 
-  return activityEntries
-};
-
+  return activityEntries;
+}
 
 function displayActivity(activityData, currentUser, activityCurrentDate) {
   dailySteps.innerHTML = `You took <strong>${stepsPerDay(
@@ -326,7 +325,7 @@ function displayActivity(activityData, currentUser, activityCurrentDate) {
     currentUser,
     activityCurrentDate
   )}</strong> minutes today!`;
-};
+}
 
 const displaySevenDayActivity = () => {
   displaySevenDayData(
@@ -342,40 +341,40 @@ const hideWeeklyActivityChart = () => {
 };
 
 const motivationLevels = {
-  "level1": {
-    title: "Not Motivated",
-    description: "Fried",
-    descriptionText: "Feeling overwhelmed",
-    image: "./images/L1a.jpg",
-    advice: "Prioritize self-care. Spend some time outside."
+  level1: {
+    title: 'Not Motivated',
+    description: 'Fried',
+    descriptionText: 'Feeling overwhelmed',
+    image: './images/L1a.jpg',
+    advice: 'Prioritize self-care. Spend some time outside.',
   },
-  "level2": {
-    title: "Slightly Motivated",
-    description: "Fluttering Feathers.",
-    descriptionText: "Starting to feel motivated.",
-    image: "./images/L2.jpg",
-    advice: "Celebrate the small wins!"
+  level2: {
+    title: 'Slightly Motivated',
+    description: 'Fluttering Feathers.',
+    descriptionText: 'Starting to feel motivated.',
+    image: './images/L2.jpg',
+    advice: 'Celebrate the small wins!',
   },
-  "level3": {
-    title: "Moderately Motivated",
-    description: "Cluck and Strut!", 
-    descriptionText: "Stepping up to the challenge.",
-    image: "./images/L3.jpg",
-    advice: "Stay focused and surround yourself with positive influences!"
+  level3: {
+    title: 'Moderately Motivated',
+    description: 'Cluck and Strut!',
+    descriptionText: 'Stepping up to the challenge.',
+    image: './images/L3.jpg',
+    advice: 'Stay focused and surround yourself with positive influences!',
   },
-  "level4": {
-    title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do!", 
-    descriptionText: "Feeling eggs-cited and energized!",
-    image: "./images/L4.jpg",
-    advice: "Embrace challenges and maintain a can-do attitude."
+  level4: {
+    title: 'Highly Motivated',
+    description: 'Cock-a-doodle Can-Do!',
+    descriptionText: 'Feeling eggs-cited and energized!',
+    image: './images/L4.jpg',
+    advice: 'Embrace challenges and maintain a can-do attitude.',
   },
-  "level5": {
-    title: "Extremely Motivated",
-    description: "Hard-Boiled Dynamo!",
-    descriptionText: "Congratulations! Maximum motivation achieved!",
-    image: "./images/L5.jpg",
-    advice: "Keep pushing your limits and inspiring others!"
+  level5: {
+    title: 'Extremely Motivated',
+    description: 'Hard-Boiled Dynamo!',
+    descriptionText: 'Congratulations! Maximum motivation achieved!',
+    image: './images/L5.jpg',
+    advice: 'Keep pushing your limits and inspiring others!',
   },
 };
 
@@ -389,20 +388,20 @@ const setMotivationLevel = (level) => {
     motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
   } else {
-    motivationTitle.innerText = "Get Motivated!";
-    motivationDescription.innerText = "Choose your level";
-    motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
-    motivationImage.src = "./images/default.jpg";
-    motivationImage.alt = "";
-    motivationAdvice.innerHTML = "";
-    motivationDropdown.value = "";
+    motivationTitle.innerText = 'Get Motivated!';
+    motivationDescription.innerText = 'Choose your level';
+    motivationText.innerHTML =
+      'The only limit to your greatness is the extent of your determination.';
+    motivationImage.src = './images/default.jpg';
+    motivationImage.alt = '';
+    motivationAdvice.innerHTML = '';
+    motivationDropdown.value = '';
   }
 };
 
 motivationDropdown.addEventListener('change', (event) => {
   setMotivationLevel(event.target.value);
 });
-
 
 /* ~~~~~~~~~~ EXPORTS ~~~~~~~~~~*/
 
@@ -435,5 +434,5 @@ export {
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
   displayNewHydrationEntry,
-  setMotivationLevel
+  setMotivationLevel,
 };

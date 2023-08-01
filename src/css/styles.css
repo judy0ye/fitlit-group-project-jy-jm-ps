@@ -1,15 +1,11 @@
-body,
-html {
+body, html {
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-;
-
+};
 h2,
 .welcome {
   font-weight: 600;
@@ -18,21 +14,30 @@ h2,
 
 h2,
 p,
-.motivation-level-dropdown {
-  font-family: 'Poppins', sans-serif;
+.motivation-level-dropdown,
+.activity,
+.hydration,
+.sleep,
+.goals,
+.motivation,
+.user-data,
+.data-view
+ {
+  font-family: 'Poppins', sans-serif; 
+}
+
+h3 {
+  margin: 0;
 }
 
 .activity,
 .hydration,
 .sleep,
-.data-view,
 .goals,
 .motivation,
-.user-data,
-.motivation-card h2,
-.motivation-card .container {
-  text-align: center;
-  margin-top: 10px;
+.user-data {
+  overflow: scroll visible;
+  padding: .25em;
 }
 
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
@@ -46,7 +51,7 @@ p,
     "logo greeting"
     "data-view-grid data-view-grid";
   row-gap: 20px;
-}
+   }
 
 .data-view-grid {
   display: grid;
@@ -89,7 +94,6 @@ p,
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-
 .personal-greeting {
   color: black;
   background-color: #C2FAFF;
@@ -100,7 +104,6 @@ p,
   border: 3px solid white;
 }
 
-
 .greeting img {
   margin-top: 10px;
 }
@@ -110,15 +113,47 @@ p,
   margin: 20px 0 0 0;
 }
 
-.activity {
-  grid-area: activity;
-  text-align: center;
-  overflow: scroll visible;
-}
-
-.hydration form {
+.activity,
+.hydration,
+.sleep,
+.data-view,
+.goals,
+.motivation,
+.user-data {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.activity h2,
+.hydration h2,
+.sleep h2,
+.data-view h2,
+.goals h2,
+.motivation-card h2{
+  align-self: center;
+  margin-top: 20px;
+  position: sticky;
+}
+
+.activity-daily-steps,
+.activity-daily-minutes,
+.activity-daily-miles,
+#hydrationInfo,
+#dailySleep,
+#averageSleep,
+#start-date-input
+ {
+  margin-top: 20px;
+}
+
+.activity {
+  grid-area: activity;
+}
+
+.hydration {
+  grid-area: hydration;
 }
 
 .hydration label {
@@ -133,24 +168,11 @@ p,
   margin-top: 10px;
 }
 
-.hydration {
-  padding: .25em;
-  grid-area: hydration;
-  text-align: center;
-  overflow: scroll visible;
-}
-
-;
-
 .sleep {
-  padding: .25em;
   grid-area: sleep;
-  text-align: center;
-  overflow: scroll visible;
 }
 
 .data-view {
-  padding: .25em;
   grid-area: data-view;
 }
 
@@ -168,19 +190,19 @@ p,
 }
 
 .goals {
-  padding: .25em;
   grid-area: goals;
-  text-align: center;
 }
 
 .motivation {
-  padding: .25em;
   grid-area: motivation;
-  overflow: scroll visible;
+}
+
+.motivation-image {
+  margin: 0;
+  padding: 0;
 }
 
 .user-data {
-  padding: .25em;
   grid-area: user-data;
   overflow: scroll visible;
 }
@@ -192,72 +214,7 @@ p,
   box-shadow: 0px 0px 2px 2px rgba(51, 51, 51, 1);
 }
 
-/* ~~~~~ charts ~~~~~ */
-
-.chart-container {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  /* 16:9 aspect ratio */
-  overflow: hidden;
-}
-
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.chart-container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#activityChart {
-  width: 90%;
-  height: 90%;
-}
-
-.activity-legend {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-top: 10px;
-  margin-bottom: 10px;
-}
-
-.activity-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 20px;
-}
-
-.activity-legend-color {
-  width: 20px;
-  height: 20px;
-}
-
-.activity-legend-goal-met {
-  background-color: rgba(0, 0, 255, 0.6);
-}
-
-.activity-legend-goal-not-met {
-  background-color: rgba(255, 165, 0, 0.6);
-}
-
 /* ~~~~~ MOTIVATION CARD STYLES ~~~~~ */
-
-.motivation-image {
-  margin: auto;
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
 
 .motivation-level-dropdown {
   width: 100%;
@@ -265,134 +222,91 @@ p,
   font-size: 18px;
   text-align: center;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 3px solid #333333;
   margin-top: 10px;
-  /* font-family: 'Comic Neue', cursive; */
-}
-
-.motivation-card .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
-.motivation-card h2 {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.motivation-card .motivation-image {
-  display: block;
-  margin: auto;
-  max-width: 100%;
-}
-
-.motivation-advice .motivation-text {
-  margin-top: 20px;
 }
 
 /* ~~~~~ BUTTON STYLES ~~~~~ */
 
-.sleep-button.disable-button,
-.hydration-button.disable-button,
-.activity-button.disable-button {
-  background-color: #EAEAF4;
-  cursor: not-allowed;
+.averages-buttons {
+  align-self: space-around;
 }
 
 .activity-button,
 .hydration-button,
 .sleep-button {
-  /* border: 0;
-border-radius: 0.25rem;
-font-family: -system-ui, sans-serif;
-font-size: 1rem;
-line-height: 1.2;
-white-space: nowrap;
-text-decoration: none;
-padding: 0.25rem 0.5rem;
-margin: 0.25rem;
-cursor: pointer; */
+  margin: .5rem .5rem
+}
+
+.sleep-button.disable-button,
+.hydration-button.disable-button,
+.activity-button.disable-button {
+  background-color: #EAEAF4;
+  cursor:not-allowed;
+}
+
+.activity-button,
+.hydration-button,
+.sleep-button {
   box-shadow: 2px 2px 0px 0px #899599;
-  border-radius: 21px;
-  border: 2px solid #bdb7bd;
-  display: inline-block;
-  cursor: pointer;
-  color: #333333;
-  font-family: Arial;
-  font-size: 17px;
-  padding: 13px 32px;
-  text-decoration: none;
+  border-radius:21px;
+  border:2px solid #bdb7bd;
+  display:inline-block;
+  cursor:pointer;
+  color:#333333;
+  font-family:Arial;
+  font-size:17px;
+  padding:13px 32px;
+  text-decoration:none;
 }
 
 .activity-button {
-  /* background: #fbac92;
-color: #151515; */
-  background: linear-gradient(to bottom, #fbac92 5%, #dfcae3 100%);
-  background-color: #fbac92;
-  text-shadow: 0px 0px 0px #e1e2ed;
+  background:linear-gradient(to bottom, #fbac92 5%, #dfcae3 100%);
+  background-color:#fbac92;
+  text-shadow:0px 0px 0px #e1e2ed;
 }
 
 .activity-button:hover {
-  background: linear-gradient(to bottom, #dfcae3 5%, #fbac92 100%);
-  background-color: #dfcae3;
+  background:linear-gradient(to bottom, #dfcae3 5%, #fbac92 100%);
+  background-color:#dfcae3;
 }
-
-/* .activity-button:active {
-position:relative;
-top:1px;
-} */
 
 .hydration-button {
-  /* background: #9ce6f7; */
-  background: linear-gradient(to bottom, #9ce6f7 5%, #9ea1ab 100%);
-  background-color: #9ce6f7;
-  text-shadow: 0px 0px 0px #e1e2ed;
-  /* color: #151515; */
+  background:linear-gradient(to bottom, #9ce6f7 5%, #9ea1ab 100%);
+  background-color:#9ce6f7;
+  text-shadow:0px 0px 0px #e1e2ed;
 }
-
 
 .hydration-button:hover {
-  background: linear-gradient(to bottom, #9ea1ab 5%, #9ce6f7 100%);
-  background-color: #9ea1ab;
+  background:linear-gradient(to bottom, #9ea1ab 5%, #9ce6f7 100%);
+  background-color:#9ea1ab;
 }
-
-
-/* .hydration-button:active {
-position:relative;
-top:1px;
-} */
 
 .sleep-button {
-  /* background: #9dfae9;
-color: #151515; */
-  background: linear-gradient(to bottom, #9dfae9 5%, #c6d5e6 100%);
-  background-color: #9dfae9;
-  text-shadow: 0px 0px 0px #e1e2ed;
+  background:linear-gradient(to bottom, #9dfae9 5%, #c6d5e6 100%);
+  background-color:#9dfae9;
+  text-shadow:0px 0px 0px #e1e2ed;
 }
-
 
 .sleep-button:hover {
-  background: linear-gradient(to bottom, #c6d5e6 5%, #9dfae9 100%);
-  background-color: #c6d5e6;
+  background:linear-gradient(to bottom, #c6d5e6 5%, #9dfae9 100%);
+  background-color:#c6d5e6;
 }
 
-
-/* .sleep-button:active {
-position:relative;
-top:1px;
-} */
-
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 
 .hidden {
   display: none !important;
 }
-
 
 /* ~~~~~ MEDIA QUERIES ~~~~~ */
 
@@ -439,21 +353,4 @@ top:1px;
     margin: 20px 0 0 0;
   }
 
-}
-
-/* Large Mobile Phone */
-@media only screen and (max-width: 425px) {}
-
-/* Small Mobile Phone */
-@media only screen and (max-width: 320px) {}
-
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
 }

@@ -5,10 +5,12 @@ import './css/styles.css';
 import './images/FitChicks-Title-500.png';
 import './images/default.jpg';
 import './images/L1a.jpg';
+import './images/L1b.jpg';
 import './images/L2.jpg';
 import './images/L3.jpg';
 import './images/L4.jpg';
 import './images/L5.jpg';
+import './images/User-info.jpg';
 import './images/FitChicks_scene_sm.png';
 import './images/hydration.png';
 import './images/sleep.png';
@@ -40,7 +42,7 @@ import {
   hideWeeklyActivityChart,
   hideWeeklySleepChart,
   displayNewHydrationEntry,
-  setMotivationLevel
+  setMotivationLevel,
 } from './domUpdates';
 
 import {
@@ -50,7 +52,7 @@ import {
   stepsPerDay,
   activeMinutesPerDay,
   findCurrentDate,
-  findCurrentDateInRange
+  findCurrentDateInRange,
 } from './utils';
 
 /* ~~~~~~~~~~ CHARTS ~~~~~~~~~~*/
@@ -78,7 +80,14 @@ Chart.register(
 
 /* ~~~~~~~~~~ DATA MODEL ~~~~~~~~~~*/
 
-let users, hydration, sleep, activity, currentUser, currentDate, activityCurrentDate, sleepCurrentDate;
+let users,
+  hydration,
+  sleep,
+  activity,
+  currentUser,
+  currentDate,
+  activityCurrentDate,
+  sleepCurrentDate;
 
 /* ~~~~~~~~~~ EVENT LISTENERS ~~~~~~~~~~*/
 
@@ -88,21 +97,29 @@ window.addEventListener('load', function () {
     fetchApiData('hydration'),
     fetchApiData('sleep'),
     fetchApiData('activity'),
-  ]).then((data) => {
-    console.log('onload from fetch data:', data);
-    users = data[0].users;
-    hydration = data[1].hydrationData;
-    sleep = data[2].sleepData;
-    activity = data[3].activityData;
-    initializeApp();
-  })
+  ])
+    .then((data) => {
+      console.log('onload from fetch data:', data);
+      users = data[0].users;
+      hydration = data[1].hydrationData;
+      sleep = data[2].sleepData;
+      activity = data[3].activityData;
+      initializeApp();
+    })
     .catch((error) => {
       console.error('Error fetching data:', error);
     });
 });
 
 /* ~~~~ Helper Functions ~~~~*/
-const handleOnClicks = (hideChartOne, hideChartTwo, getData, displaySevenDayData, buttonOne, buttonTwo) => {
+const handleOnClicks = (
+  hideChartOne,
+  hideChartTwo,
+  getData,
+  displaySevenDayData,
+  buttonOne,
+  buttonTwo
+) => {
   hideChickenImage();
   hideChartOne();
   hideChartTwo();
@@ -116,19 +133,39 @@ const handleOnClicks = (hideChartOne, hideChartTwo, getData, displaySevenDayData
     buttonTwo.classList.remove('disable-button');
     buttonTwo.disabled = false;
   }
-}
+};
 
 const onClickSleep = () => {
-  handleOnClicks(hideWeeklyHydrationChart, hideWeeklyActivityChart, getWeeklySleep, displaySevenDaySleep, hydrationFromCalendarButton, oneWeekActivityDataFromCalendarButton)
+  handleOnClicks(
+    hideWeeklyHydrationChart,
+    hideWeeklyActivityChart,
+    getWeeklySleep,
+    displaySevenDaySleep,
+    hydrationFromCalendarButton,
+    oneWeekActivityDataFromCalendarButton
+  );
 };
 
 const onClickHydration = () => {
-  handleOnClicks(hideWeeklyActivityChart, hideWeeklySleepChart, getWeeklyHydration, displaySevenDayHydration, sleepFromCalendarButton, oneWeekActivityDataFromCalendarButton)
-}
+  handleOnClicks(
+    hideWeeklyActivityChart,
+    hideWeeklySleepChart,
+    getWeeklyHydration,
+    displaySevenDayHydration,
+    sleepFromCalendarButton,
+    oneWeekActivityDataFromCalendarButton
+  );
+};
 
 const onClickActivity = () => {
-  handleOnClicks(hideWeeklyHydrationChart, hideWeeklySleepChart, () => displayWeeklyStepCount(currentUser), displaySevenDayActivity, sleepFromCalendarButton, hydrationFromCalendarButton)
-
+  handleOnClicks(
+    hideWeeklyHydrationChart,
+    hideWeeklySleepChart,
+    () => displayWeeklyStepCount(currentUser),
+    displaySevenDayActivity,
+    sleepFromCalendarButton,
+    hydrationFromCalendarButton
+  );
 };
 
 const onChangeInputField = () => {
@@ -138,9 +175,11 @@ const onChangeInputField = () => {
 weeklyHydrationButton.addEventListener('click', onClickHydration);
 sleepFromCalendarButton.addEventListener('click', onClickSleep);
 hydrationFromCalendarButton.addEventListener('click', onClickHydration);
-oneWeekActivityDataFromCalendarButton.addEventListener('click', onClickActivity)
+oneWeekActivityDataFromCalendarButton.addEventListener(
+  'click',
+  onClickActivity
+);
 inputField.addEventListener('change', onChangeInputField);
-
 
 /* ~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~*/
 
@@ -158,31 +197,33 @@ const initializeApp = () => {
   activeMinutesPerDay(activity, currentUser, activityCurrentDate);
   displayWeeklyStepCount(activity, currentUser, activityCurrentDate);
   displayRandomQuote();
-  setMotivationLevel("level");
+  setMotivationLevel('level');
 
-  const formElement = document.getElementById('form').addEventListener('submit', function (event) {
-    console.log('Form submitted!')
-    event.preventDefault();
+  const formElement = document
+    .getElementById('form')
+    .addEventListener('submit', function (event) {
+      console.log('Form submitted!');
+      event.preventDefault();
 
-    const formData = new FormData(event.target);
+      const formData = new FormData(event.target);
 
-    const postUserInput = {
-      userID: currentUser.id,
-      date: "2023/07/02",
-      numOunces: formData.get('waterIntake')
-    };
+      const postUserInput = {
+        userID: currentUser.id,
+        date: '2023/07/02',
+        numOunces: formData.get('waterIntake'),
+      };
 
-    console.log('Form submitted!');
+      console.log('Form submitted!');
 
-    postSavedHydration(postUserInput)
-      .then(json => {
-        displayNewHydrationEntry(json);
-        console.log(json);
-      })
-      .catch(err => console.error(`Error at: ${err}`));
+      postSavedHydration(postUserInput)
+        .then((json) => {
+          displayNewHydrationEntry(json);
+          console.log(json);
+        })
+        .catch((err) => console.error(`Error at: ${err}`));
 
-    event.target.reset();
-  });
+      event.target.reset();
+    });
 };
 
 export {
@@ -193,5 +234,5 @@ export {
   currentUser,
   sleep,
   sleepCurrentDate,
-  activityCurrentDate
+  activityCurrentDate,
 };
