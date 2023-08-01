@@ -36,7 +36,10 @@ import {
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
-const personalGoal = document.querySelector('.goals');
+// const personalGoal = document.querySelector('.goals');
+const stepGoal = document.querySelector('.step-goal')
+const milesWalked = document.querySelector('.miles-walked')
+const allUserAvg = document.querySelector('.all-user-average')
 const userName = document.querySelector('.user-name');
 const hydrationInfo = document.querySelector('.hydration-message');
 const dailySleep = document.querySelector('#dailySleep');
@@ -207,14 +210,12 @@ const displayRandomUser = (activity, currentUser) => {
   <h3>Stride Length: </h3>
   <p>${currentUser.strideLength}</p>`;
 
-  personalGoal.innerHTML += `
-  <h3>Your Step Goal</h3>
-  <p>${currentUser.dailyStepGoal}</p>
-  <h3>Miles Walked Today:</h3>
-  <p>${currentUserMilesWalked}</p>
-  <h3>All User's Average Step Goal:</h3>
-  <p>${allUserStepGoalAvg}</p>
-  `;
+
+stepGoal.innerText = `${currentUser.dailyStepGoal}`
+milesWalked.innerText = `${currentUserMilesWalked}`
+allUserAvg.innerText = `${allUserStepGoalAvg}`
+ 
+ 
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
