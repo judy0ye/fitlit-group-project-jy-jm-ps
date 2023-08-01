@@ -24,7 +24,6 @@ import {
   displayActivity,
   displayWeeklyStepCount,
   hideChickenImage,
-  // showChickenImage,
   getWeeklySleep,
   inputField,
   displaySevenDaySleep,

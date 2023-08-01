@@ -36,7 +36,6 @@ import {
 /* ~~~~~~~~~~ QUERY SELECTORS ~~~~~~~~~~*/
 
 const personalData = document.querySelector('.user-data');
-// const personalGoal = document.querySelector('.goals');
 const stepGoal = document.querySelector('.step-goal')
 const milesWalked = document.querySelector('.miles-walked')
 const allUserAvg = document.querySelector('.all-user-average')
@@ -99,10 +98,6 @@ const hideChickenImage = () => {
   chickenImage.classList.remove('graphs-bg-img');
 };
 
-// const showChickenImage = () => {
-//   chickenImage.classList.add('graphs-bg-img');
-// };
-
 const activateButtons = () => {
   sleepFromCalendarButton.disabled = false;
   sleepFromCalendarButton.classList.remove('disable-button');
@@ -152,7 +147,6 @@ const displaySevenDayData = (displayData, chartData, button, buttonClass) => {
 
 const getWeeklyHydration = () => {
   const waterEntries = getWeeklyInfo(hydration);
-  console.log('About to call createHydrationChart...');
 
   let numOz = waterEntries.reduce((acc, entry) => {
     return acc + entry.numOunces;
@@ -205,8 +199,6 @@ const displayRandomUser = (activity, currentUser) => {
   userName.innerHTML = `
   ${currentUser.name}`;
 
-
-
   personalUserName.innerText = `${currentUser.name}`
   personalAddress.innerText = `${currentUser.address}`
   personalEmail.innerText = `${currentUser.email}`
@@ -223,7 +215,6 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
     currentUser.id,
     currentDate
   );
-  console.log("fluidToday:", fluidToday, currentDate)
 
   hydrationInfo.innerHTML += `<p>You drank <strong>${fluidToday}</strong> ounces yesterday!</p>
   <p>How many ounces will you drink today? </p>
@@ -233,46 +224,19 @@ function displayFluidConsumedToday(hydration, currentUser, currentDate) {
 let totalWaterIntake = 0;
 
 function displayNewHydrationEntry(response) {
-  console.log('Response from server:', response);
 
   totalWaterIntake += parseInt(response.numOunces);
 
   addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces has been recorded. Great job!</p> ` 
 };
-// function displayHydrationGraphs() {
-//   oneWeekHydrationChart.classList.remove('hidden');
-//   weeklyHydrationButton.disabled = true;
-//   weeklyHydrationButton.classList.add('disable-button');
-// }
-
-// function hideHydrationGraphs() {
-//   oneWeekHydrationChart.classList.add('hidden');
-//   weeklyHydrationButton.disabled = false;
-//   weeklyHydrationButton.classList.remove('disable-button');
-// }
 
 /* ~~~~~ Display Sleep Data Functions ~~~~~*/
 
 function displayDailySleep(sleep, currentUser, sleepCurrentDate) {
-
-  console.log('displayDailySleep sleepCurrentDate:', sleepCurrentDate);
-
   const currentDayEntry = getHoursByDay(sleep, currentUser.id, sleepCurrentDate);
 
   dailySleep.innerHTML = `You slept <strong>${currentDayEntry} </strong> hours last night.`;
 };
-
-// function displaySleepGraphs() {
-//   oneWeekSleepChart.classList.remove('hidden');
-//   sleepButton.disabled = true;
-//   sleepButton.classList.add('disable-button');
-// }
-
-// function hideSleepGraphs() {
-//   oneWeekSleepChart.classList.add('hidden');
-//   sleepButton.disabled = false;
-//   sleepButton.classList.remove('disable-button');
-// }
 
 function displayAverageSleep(sleep, currentUser) {
   averageSleep.innerHTML = `You average <strong> ${getAvgSleep(
@@ -306,7 +270,7 @@ const getWeeklySleep = () => {
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average hours slept was ${avgHoursSlept} hours</p>`;
   oneWeekSleepFromCalendar.innerHTML += `<p>Your average sleep quality has a rating of ${avgSleepQuality}</p>`;
 
-  createSleepChart(sleepHourEntries); // create the chart with the fetched data
+  createSleepChart(sleepHourEntries);
 
   return sleepHourEntries;
 };
@@ -340,7 +304,7 @@ function displayWeeklyStepCount(currentUser) {
     }
 
   });
-  createActivityChart(activityEntries, currentUser); // call chart creation after displaying weekly data
+  createActivityChart(activityEntries, currentUser);
 
   return activityEntries
 };
