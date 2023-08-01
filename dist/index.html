@@ -15,9 +15,9 @@
           Fit Chicks
         </h1>
         <img src="./images/FitChicks-Title-500.png" alt="Fit Chicks Logo" width="500" />
-        <div class="lower-header"> <!--Look for function - delete if this is not targeted-->
+        <!-- <div class="lower-header"> Look for function - delete if this is not targeted -->
           <p id="headerQuote" class="header-quote rounded-corner"></p>
-        </div>
+        <!-- </div> -->
       </header>
       <div class="greeting">
         <div class="personal-greeting rounded-corner">
@@ -39,6 +39,7 @@
         <div class="hydration rounded-corner">
           <h2>Hydration Data</h2>
           <img src="./images/hydration.png" alt="" width="60" />
+          <p class="hydration-message"></p>
           <div id="hydrationInfo"></div>
           <form id="form">
             <label for="hydrationInput" class="form-water-intake" id="waterIntakeLabel">Ounces Drank</label>
@@ -46,6 +47,7 @@
               required>
             <input type="submit" value="Submit Ounces" class="submit">
           </form>
+          <p class="recorded-ounces"></p>
         </div>
         <div class="sleep rounded-corner">
           <section>
@@ -63,14 +65,20 @@
             max="2023-07-01" />
           <br />
           <br />
+          <div class="averages-buttons">
           <button class="activity-button">Activity</button>
           <button class="hydration-button">Hydration</button>
           <button class="sleep-button">Sleep</button>
-          <br />
+        </div>
         </div>
         <div class="goals rounded-corner">
           <h2>Daily Step Goal</h2>
-          <!-- <img src="./images/L1b.jpg" alt="" width="60" /> -->
+          <h3>Your Step Goal Is:</h3>
+          <p class="step-goal"></p>
+          <h3>Miles Walked Today</h3>
+          <p class="miles-walked"></p>
+          <h3>Average Step Goal for All Users</h3>
+          <p class="all-user-average"></p>
         </div>
         <div class="motivation rounded-corner">
           <div class="motivation-card">

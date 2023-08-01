@@ -15,12 +15,20 @@ h2,
 
 h2,
 p,
-.motivation-level-dropdown
+.motivation-level-dropdown,
+.activity,
+.hydration,
+.sleep,
+.goals,
+.motivation,
+.user-data,
+.data-view
  {
   font-family: 'Poppins', sans-serif;
+  margin-top: 10px; 
 }
 
-.activity,
+/* .activity,
 .hydration,
 .sleep,
 .data-view,
@@ -31,6 +39,15 @@ p,
 .motivation-card .container {
   text-align: center;
   margin-top: 10px; 
+} */
+
+.activity,
+.hydration,
+.sleep,
+.goals,
+.motivation,
+.user-data {
+  overflow: scroll visible;
 }
 
 /* ~~~~~ GRID COMPONENTS ~~~~~ */
@@ -108,12 +125,52 @@ p,
   margin: 20px 0 0 0;
 }
 
-.activity {
+
+
+.activity,
+.hydration,
+.sleep,
+.data-view,
+.goals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   grid-area: activity;
   text-align: center;
   overflow: scroll visible;
 }
 
+.activity h2,
+.hydration h2,
+.sleep h2,
+.data-view h2,
+.goals h2 {
+  align-self: center;
+  margin-top: 20px;
+  position: sticky;
+}
+
+.activity-daily-steps,
+.activity-daily-minutes,
+.activity-daily-miles,
+#hydrationInfo,
+.hydration-message,
+#dailySleep,
+#averageSleep,
+#start-date-input
+ {
+  margin-top: 20px;
+}
+
+.averages-buttons {
+  align-self: space-around;
+}
+
+.activity-button,
+.hydration-button,
+.sleep-button {
+  margin: .5rem .5rem
+}
 
 .hydration form {
   display: flex;
