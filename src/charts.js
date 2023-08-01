@@ -44,7 +44,7 @@ function createHydrationChart(hydrationData) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,
@@ -91,13 +91,13 @@ function createSleepChart(sleepData) {
           data: sleepQuality,
           backgroundColor: 'rgba(128, 128, 128, 0.6)',
           borderColor: '#333333',
-          borderWidth: 2, 
+          borderWidth: 2,
         },
       ],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,
@@ -110,12 +110,10 @@ function createSleepChart(sleepData) {
   });
 };
 
-
 document.querySelector('.activity-button').addEventListener('click', () => {
   let activityData = displayWeeklyStepCount(currentUser);
   createActivityChart(activityData, currentUser);
 });
-
 
 let activityChart;
 
@@ -126,10 +124,8 @@ function createActivityChart(activityData, currentUser) {
   const activityChartContext = document.getElementById('activityChart').getContext('2d');
 
   const labels = activityData.map((entry) => entry.date);
-  const data = activityData.map((entry) => entry.numSteps);
-  const backgroundColors = activityData.map((entry) =>
-    entry.numSteps >= currentUser.dailyStepGoal ? 'rgba(0, 0, 255, 0.6)' : 'rgba(255, 165, 0, 0.6)'
-  );
+  const dataGoalMet = activityData.map((entry) => entry.numSteps >= currentUser.dailyStepGoal ? entry.numSteps : 0);
+  const dataGoalNotMet = activityData.map((entry) => entry.numSteps < currentUser.dailyStepGoal ? entry.numSteps : 0);
 
   if (activityChart) {
     activityChart.destroy();
@@ -141,10 +137,16 @@ function createActivityChart(activityData, currentUser) {
       labels: labels,
       datasets: [
         {
-          label: 'Steps',
-          note: "blue for goal met, orange for goal not met",
-          data: data,
-          backgroundColor: backgroundColors,
+          label: 'Steps (goal met)',
+          data: dataGoalMet,
+          backgroundColor: 'rgba(0, 0, 255, 0.6)',  // Always blue for goal met
+          borderColor: '#333333',
+          borderWidth: 2,
+        },
+        {
+          label: 'Steps (goal not met)',
+          data: dataGoalNotMet,
+          backgroundColor: 'rgba(255, 165, 0, 0.6)',  // Always orange for goal not met
           borderColor: '#333333',
           borderWidth: 2,
         },
@@ -152,7 +154,7 @@ function createActivityChart(activityData, currentUser) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,
@@ -164,6 +166,7 @@ function createActivityChart(activityData, currentUser) {
     },
   });
 };
+
 
 export {
   createHydrationChart,
