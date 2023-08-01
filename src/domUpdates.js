@@ -67,7 +67,6 @@ const oneWeekHydrationFromCalendar = document.querySelector(
   '.weekly-hydration-from-calendar-data'
 );
 const hydrationFromCalendarButton = document.querySelector('.hydration-button');
-// const dailyActivityData = document.querySelector('.activity');
 const oneWeekActivityDataFromCalendarButton =
   document.querySelector('.activity-button');
 const form = document.querySelector('#form');
@@ -165,7 +164,7 @@ const getWeeklyHydration = () => {
   });
   oneWeekHydrationFromCalendar.innerHTML += `<p>Your average water consumption was <strong> ${avg} <strong> ounces</p>`;
 
-  createHydrationChart(waterEntries); // create the chart with the fetched data
+  createHydrationChart(waterEntries);
 
   return waterEntries;
 };

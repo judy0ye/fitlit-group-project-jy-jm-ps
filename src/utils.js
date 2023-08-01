@@ -154,7 +154,6 @@ function findCurrentDateInRange(userID, sleepData, activityData) {
   dateChoices.push(lastSleepEntry, lastActivityEntry);
   dateChoices.sort();
   let currentDate = dateChoices.slice(-1)[0];
-  // console.log('DATE', currentDate);
   return currentDate;
 };
 
@@ -169,33 +168,20 @@ function findCurrentDate(userID, hydrationData, sleepData, activityData) {
   dateChoices.push(lastHydrationEntry, lastSleepEntry, lastActivityEntry);
   dateChoices.sort();
   let currentDate = dateChoices.slice(-1)[0];
-  // console.log('DATE', currentDate);
   return currentDate;
 }
-
-// pass in one data for hydration, sleep (find current date )
-// anything repeated- take out
-// lastHydrationDate, lastSleepDate, lastActivityDate
-// filter data by user, 
 
 /* ~~~~~ Activity ~~~~~*/
 
 const stepsPerDay = (activityData, currentUser, activityCurrentDate) => {
 
-  // console.log('stepsPerDay called with activityData:', activityData);
-  // console.log('stepsPerDay called with currentUser:', currentUser);
-  // console.log('stepsPerDay currentDate:', activityCurrentDate);
-
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
-  // console.log('Activity entries:', activityEntries);
 
   const dailySteps = activityEntries.find((entry) => {
     return entry.date === activityCurrentDate;
   });
-
-  // console.log('Daily steps entry:', dailySteps);
 
   if(!dailySteps){
     return 0;
@@ -204,23 +190,15 @@ const stepsPerDay = (activityData, currentUser, activityCurrentDate) => {
 };
 
 const activeMinutesPerDay = (activityData, currentUser, activityCurrentDate) => {
-
-  // console.log('activeMinutesPerDay called with activityData:', activityData);
-  // console.log('sactiveMinutesPerDay called with currentUser:', currentUser);
-  // console.log('activeMinutesPerDay currentDate:', activityCurrentDate);
   
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
 
-  // console.log('Activity entries:', activityEntries);
-
 
   const dailyMinutes = activityEntries.find((entry) => {
     return entry.date === activityCurrentDate;
   });
-
-  // console.log('Daily minutes entry:', dailyMinutes);
 
 
   if(!dailyMinutes){
@@ -231,11 +209,6 @@ const activeMinutesPerDay = (activityData, currentUser, activityCurrentDate) => 
 
 const milesPerDay = (activityData, currentUser, activityCurrentDate) => {
 
-  // console.log('milesPerDay called with activityData:', activityData);
-  // console.log('milesPerDay called with currentUser:', currentUser);
-  // console.log('milesPerDay currentDate:', activityCurrentDate);
-
-
   const activityEntries = activityData.filter(
     (entry) => entry.userID === currentUser.id
   );
@@ -244,9 +217,6 @@ const milesPerDay = (activityData, currentUser, activityCurrentDate) => {
     return entry.date === activityCurrentDate;
   });
   
-    
-  // console.log('Daily activity entry:', dailyActivity);
-
   return calculateMilesUserWalked(dailyActivity, currentUser);
 };
 
