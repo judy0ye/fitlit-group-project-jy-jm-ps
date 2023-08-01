@@ -44,7 +44,7 @@ function createHydrationChart(hydrationData) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,
@@ -91,13 +91,13 @@ function createSleepChart(sleepData) {
           data: sleepQuality,
           backgroundColor: 'rgba(128, 128, 128, 0.6)',
           borderColor: '#333333',
-          borderWidth: 2, 
+          borderWidth: 2,
         },
       ],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,
@@ -141,8 +141,7 @@ function createActivityChart(activityData, currentUser) {
       labels: labels,
       datasets: [
         {
-          label: 'Steps',
-          note: "blue for goal met, orange for goal not met",
+          label: 'Steps (blue: goal met, orange: goal not met)',
           data: data,
           backgroundColor: backgroundColors,
           borderColor: '#333333',
@@ -150,9 +149,10 @@ function createActivityChart(activityData, currentUser) {
         },
       ],
     },
+
     options: {
       responsive: true,
-      maintainAspectRatio: true, 
+      maintainAspectRatio: true,
       scales: {
         x: {
           display: true,

@@ -1,12 +1,4 @@
-/* ~~~~~ part1.Fetch Requests ~~~~~*/
-
-// const fetchApiData = data => {
-//   return fetch(`https://fitlit-api.herokuapp.com/api/v1/${data}`)
-//     .then(response => response.json())
-//     .catch(error => console.error('Error:', error));
-// }
-
-/* ~~~~~ part2.Fetch Requests ~~~~~*/
+/* ~~~~~ Fetch Requests ~~~~~*/
 
 const fetchApiData = data => {
   return fetch(`http://localhost:3001/api/v1/${data}`)
@@ -41,31 +33,6 @@ const postSavedHydration = data => {
     });
 };
 
-
-// just an example code that demonstrates how to use these functions by fetching hydration data using fetchApiData and sending a POST request with hydration data using postSavedHydration.
-
-fetchApiData('hydration')
-  .then(data => {
-    console.log('Hydration data:', data);
-  })
-  .catch(error => {
-    console.error('Error fetching hydration data:', error);
-  });
-
-// Example data to be sent in the POST request
-const hydrationData = {
-  userID: 1,
-  date: '2023/07/02',
-  numOunces: 16,
-  name: 'FitChicks',
-  chick1: 'Jan',
-  chick2: 'Judy',
-  chick3: 'Parvin',
-  all: 'Looking Goooood!'
-};
-
-// Send POST request to save hydration data
-postSavedHydration(hydrationData);
 
 export {
   fetchApiData,
