@@ -82,6 +82,7 @@ const motivationImage = document.querySelector('.motivation-image');
 const motivationText = document.querySelector('.motivation-text');
 const motivationTitle = document.querySelector('.motivation-card h2');
 const motivationAdvice = document.querySelector('.motivation-advice');
+const motivationDescription = document.querySelector('.motivation-description')
 
 function displayRandomQuote() {
   quote.innerText = quotes[Math.floor(Math.random() * quotes.length)];
@@ -238,7 +239,7 @@ function displayNewHydrationEntry(response) {
 
   totalWaterIntake += parseInt(response.numOunces);
 
-  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces consumed has been recorded.</p> <p>Great job on hydrating your inner chicken!</p>` 
+  addHydration.innerHTML = `<p>Your submission of <strong>${totalWaterIntake}</strong> ounces has been recorded. Great job!</p> ` 
 };
 // function displayHydrationGraphs() {
 //   oneWeekHydrationChart.classList.remove('hidden');
@@ -392,46 +393,53 @@ const hideWeeklyActivityChart = () => {
 const motivationLevels = {
   "level1": {
     title: "Not Motivated",
-    description: "Fried - feeling overwhelmed", 
+    description: "Fried",
+    descriptionText: "Feeling overwhelmed",
     image: "./images/L1a.jpg",
     advice: "Prioritize self-care. Spend some time outside."
   },
   "level2": {
     title: "Slightly Motivated",
-    description: "Fluttering Feathers.<br/><br/>Starting to feel some motivation, with small bursts of enthusiasm.",
+    description: "Fluttering Feathers.",
+    descriptionText: "Starting to feel motivated.",
     image: "./images/L2.jpg",
-    advice: "Celebrate the small wins and continue to build momentum."
+    advice: "Celebrate the small wins!"
   },
   "level3": {
     title: "Moderately Motivated",
-    description: "Cluck and Strut!<br/><br/>Stepping up to the challenge.", 
+    description: "Cluck and Strut!", 
+    descriptionText: "Stepping up to the challenge.",
     image: "./images/L3.jpg",
-    advice: "Stay focused and consistent in your efforts. Surround yourself with positive influences!"
+    advice: "Stay focused and surround yourself with positive influences!"
   },
   "level4": {
     title: "Highly Motivated",
-    description: "Cock-a-doodle Can-Do!<br/><br/>Feeling eggs-cited and energized to progress further.", 
+    description: "Cock-a-doodle Can-Do!", 
+    descriptionText: "Feeling eggs-cited and energized!",
     image: "./images/L4.jpg",
     advice: "Embrace challenges and maintain a can-do attitude."
   },
   "level5": {
     title: "Extremely Motivated",
-    description: "Hard-Boiled Dynamo!<br/><br/>Maximum motivation achieved! Channeling unstoppable energy.",
+    description: "Hard-Boiled Dynamo!",
+    descriptionText: "Congratulations! Maximum motivation achieved!",
     image: "./images/L5.jpg",
-    advice: "Use this unstoppable motivation my friend! Keep pushing your limits and inspiring others."
+    advice: "Keep pushing your limits and inspiring others!"
   },
 };
 
 const setMotivationLevel = (level) => {
   let motivationLevel = motivationLevels[level];
   if (motivationLevel) {
-    motivationTitle.textContent = motivationLevel.title;
-    motivationText.innerHTML = motivationLevel.description;
+    motivationTitle.innerText = motivationLevel.title;
+    motivationDescription.innerText = motivationLevel.description;
+    motivationText.innerHTML = motivationLevel.descriptionText;
     motivationImage.src = motivationLevel.image;
     motivationAdvice.innerHTML = motivationLevel.advice;
     motivationDropdown.value = level;
   } else {
-    motivationTitle.textContent = "Get Motivated!";
+    motivationTitle.innerText = "Get Motivated!";
+    motivationDescription.innerText = "Choose your level";
     motivationText.innerHTML = "The only limit to your greatness is the extent of your determination.";
     motivationImage.src = "./images/default.jpg";
     motivationImage.alt = "";
