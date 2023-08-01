@@ -45,6 +45,7 @@ const hydrationInfo = document.querySelector('.hydration-message');
 const dailySleep = document.querySelector('#dailySleep');
 const weeklySleep = document.querySelector('#weeklySleepHours');
 const averageSleep = document.querySelector('#averageSleep');
+const sleepQuality = document.querySelector('#sleepQuality')
 const oneWeekHydrationChart = document.querySelector('.weekly-hydration-data');
 const weeklyActivityData = document.querySelector(
   '.weekly-activity-from-calendar-data'
@@ -74,6 +75,10 @@ const form = document.querySelector('#form');
 const formInput = document.querySelector('.water-intake');
 const quote = document.querySelector('#headerQuote');
 const addHydration = document.querySelector('.recorded-ounces')
+const personalUserName = document.querySelector('.personal-name')
+const personalAddress = document.querySelector('.personal-address')
+const personalEmail = document.querySelector('.personal-email')
+const personalStrideLength = document.querySelector('.personal-stride-length')
 
 /* ~~~~~~~~~~ Motivation Track ~~~~~~~~~~*/
 
@@ -200,23 +205,16 @@ const displayRandomUser = (activity, currentUser) => {
   userName.innerHTML = `
   ${currentUser.name}`;
 
-  personalData.innerHTML = `
-  <h2>Personal Information</h2>
-  <h3>Name:</h3>
-  <p>${currentUser.name}</p>
-  <h3>Address: </h3>
-  <p>${currentUser.address}</p>
-  <h3>E-mail: </h3>
-  <p>${currentUser.email}</p>
-  <h3>Stride Length: </h3>
-  <p>${currentUser.strideLength}</p>`;
 
 
-stepGoal.innerText = `${currentUser.dailyStepGoal}`
-milesWalked.innerText = `${currentUserMilesWalked}`
-allUserAvg.innerText = `${allUserStepGoalAvg}`
+  personalUserName.innerText = `${currentUser.name}`
+  personalAddress.innerText = `${currentUser.address}`
+  personalEmail.innerText = `${currentUser.email}`
+  personalStrideLength.innerText = `$${currentUser.strideLength}`
  
- 
+  stepGoal.innerText = `${currentUser.dailyStepGoal}`
+  milesWalked.innerText = `${currentUserMilesWalked}`
+  allUserAvg.innerText = `${allUserStepGoalAvg}` 
 };
 
 function displayFluidConsumedToday(hydration, currentUser, currentDate) {
@@ -277,11 +275,12 @@ function displayDailySleep(sleep, currentUser, sleepCurrentDate) {
 // }
 
 function displayAverageSleep(sleep, currentUser) {
-  averageSleep.innerHTML += `You average <strong> ${getAvgSleep(
+  averageSleep.innerHTML = `You average <strong> ${getAvgSleep(
     sleep,
     currentUser.id
-  )}</strong> hours of sleep each night and a 
-  <strong>${getAvgQuality(sleep, currentUser.id)} </strong> sleep quality rating!`;
+  )}</strong> hours of sleep each night.` 
+  sleepQuality.innerHTML = `You have a sleep quality rating of
+  <strong>${getAvgQuality(sleep, currentUser.id)} </strong>.`;
 }
 
 const getWeeklySleep = () => {
@@ -348,11 +347,6 @@ function displayWeeklyStepCount(currentUser) {
 
 
 function displayActivity(activityData, currentUser, activityCurrentDate) {
-
-  // console.log('displayActivity called with activityData:', activityData);
-  // console.log('displayActivity called with currentUser:', currentUser);
-  console.log('displayActivity currentDate:', activityCurrentDate);
-
   dailySteps.innerHTML = `You took <strong>${stepsPerDay(
     activityData,
     currentUser,
@@ -368,10 +362,6 @@ function displayActivity(activityData, currentUser, activityCurrentDate) {
     currentUser,
     activityCurrentDate
   )}</strong> minutes today!`;
-
-  console.log('Steps today:', stepsPerDay(activityData, currentUser, activityCurrentDate));
-  console.log('Miles today:', milesPerDay(activityData, currentUser, activityCurrentDate));
-  console.log('Minutes today:', activeMinutesPerDay(activityData, currentUser, activityCurrentDate));
 };
 
 const displaySevenDayActivity = () => {
@@ -386,9 +376,6 @@ const displaySevenDayActivity = () => {
 const hideWeeklyActivityChart = () => {
   oneWeekActivityChart.classList.add('hidden');
 };
-
-
-
 
 const motivationLevels = {
   "level1": {
