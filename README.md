@@ -25,7 +25,7 @@ Next: ```npm start``` in the terminal to see the HTML page
 
 ## Preview of App
 
-![ezgif com-video-to-gif](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps/assets/129805348/75020245-8935-4674-b013-f7ab2c8d4be2)
+![fitlit_part2](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps/assets/129805348/28ce64e1-dfa8-44de-8b16-9868076c8b4b)
 
 ## Functionality in Progress
 There will be several accessibility enhancements during phase 2 of this project. Also the colored buttons are part of the design and functionality we are considering for part 2.
