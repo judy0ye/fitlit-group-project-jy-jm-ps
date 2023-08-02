@@ -52,6 +52,18 @@ Challenges:
  - In our DTR document we were committed to ensuring that we would all understand everything that went into the development of the project. We did as much paired programming as we could and did our best to teach each other along the way, but the scope of the project meant that we had to divide our research efforts and there are pieces of the project that had to be managed by just one person. We will try to go over those pieces before the second part of the project begins.
 
 Wins: 
+Part 1.
  - Working collaboratively within a group 3 developers.
  - Effectively Fetching data from an API.
  - Effective use of iterators.
+Part 2.
+ - Accessibility
+ - Took in user input on the form for POSTing
+ - Incorporating Promise.all() for the fetch calls
+ - Adding beforeEach to the tests
+ - Understanding all parts of the project
+ - Supporting each other’s learning
+ - Utilizing GitHub Projects to make issue tickets that we could assign to ourselves or others.
+ - Implementing Charts
+ - Created Helper Functions in JavaScript to DRY our code
+
