@@ -27,11 +27,8 @@ Next: ```npm start``` in the terminal to see the HTML page
 
 ![fitlit_part2](https://github.com/judy0ye/fitlit-group-project-jy-jm-ps/assets/129805348/28ce64e1-dfa8-44de-8b16-9868076c8b4b)
 
-## Functionality in Progress
-There will be several accessibility enhancements during phase 2 of this project. Also the colored buttons are part of the design and functionality we are considering for part 2.
-
 ## Project Progress: 
-We have successfully completed the first phase of this two-part group project. As part of Module Two of the Turing School of Software and Design Front End Web Development program, we've joined forces to drive this project forward. This intensive seven-month program focuses on equipping students with the necessary skills to thrive as web developers, offering proficiency in JavaScript, HTML, CSS, and the React framework.
+We have successfully completed the first and second phase of this two-part group project. As part of Module Two of the Turing School of Software and Design Front End Web Development program, we've joined forces to drive this project forward. This intensive seven-month program focuses on equipping students with the necessary skills to thrive as web developers, offering proficiency in JavaScript, HTML, CSS, and the React framework.
 
 The project was carried out over two intensive week-long sprints, conforming to the project specifications and evaluation rubric as detailed in [part 1](https://frontend.turing.edu/projects/module-2/fitlit-part-one-agile.html) and [part 2](https://frontend.turing.edu/projects/module-2/fitlit-part-two-agile.html). This project allowed us to continue growing our cooperative learning skills, teammwork, communication, and our software development skills. We're excited to keep evolving and advancing these skills as we navigate through the remainder of this program and beyond.
 
